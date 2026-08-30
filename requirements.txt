@@ -6,7 +6,6 @@
 # Notes:
 #   - Cross-encoder reranker (optional): already included via sentence-transformers
 #   - Evaluation deps (RAGAS, Garak): see requirements-eval.txt / requirements-redteam.txt
-#   - MCP server: install mcp package if MCP_ENABLED=true
 # ============================================================
 
 # LangChain ecosystem
@@ -46,6 +45,3 @@ pydantic>=2.0.0
 
 # Numerical operations
 numpy>=1.26.0
-
-# Model Context Protocol (MCP)
-mcp>=1.0.0

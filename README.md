@@ -4,10 +4,9 @@
 [![FastAPI](https://img.shields.io/badge/FastAPI-1.0.0-009688.svg)](https://fastapi.tiangolo.com/)
 [![LangGraph](https://img.shields.io/badge/LangGraph-Agentic%20RAG-orange.svg)](https://github.com/langchain-ai/langgraph)
 [![ChromaDB](https://img.shields.io/badge/ChromaDB-VectorStore-purple.svg)](https://www.trychroma.com/)
-[![MCP](https://img.shields.io/badge/MCP-Model%20Context%20Protocol-green.svg)](https://modelcontextprotocol.io/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-An enterprise-grade, production-quality **Agentic Retrieval-Augmented Generation (RAG)** assistant and **MCP Server** for **e& Egypt (اتصالات مصر)** telecom packages, products, tariff pricing, and customer inquiries.
+An enterprise-grade, production-quality **Agentic Retrieval-Augmented Generation (RAG)** assistant with a deterministic structured-tools layer for **e& Egypt (اتصالات مصر)** telecom packages, products, tariff pricing, and customer inquiries.
 
 ---
 
@@ -18,7 +17,7 @@ An enterprise-grade, production-quality **Agentic Retrieval-Augmented Generation
 3. [Retrieval Architecture (Dense + BM25 + Cross-Encoder)](#-retrieval-architecture)
 4. [Structure-Aware Chunking](#-structure-aware-chunking)
 5. [Persistent Conversation Memory](#-persistent-conversation-memory)
-6. [MCP Server & Tools](#-mcp-server--tools)
+6. [Structured Telecom Tools](#-structured-telecom-tools)
 7. [Security & Guardrails](#-security--guardrails)
 8. [Evaluation Framework (Custom, RAGAS, Garak)](#-evaluation-framework)
 9. [Installation & Setup](#-installation--setup)
@@ -143,21 +142,27 @@ Moving beyond basic character splitting, the `TelecomStructureChunker` (`app/ing
 
 ---
 
-## 🛠️ MCP Server & Tools
+## 🛠️ Structured Telecom Tools
 
-The system provides Model Context Protocol (MCP) tool integration (`app/mcp/`):
+The system routes structured, factual questions (exact package specs, USSD codes,
+tax math, budget-constrained recommendations) to deterministic tools (`app/tools/`)
+instead of the RAG pipeline, so those answers are grounded in an authoritative
+in-process registry rather than generated/retrieved text:
 
 | Tool | Purpose | Parameters |
 | :--- | :--- | :--- |
-| `search_knowledge_base` | Hybrid search over the indexed KB | `query` (str), `service` (str), `top_k` (int) |
 | `get_package_details` | Structured lookup of known packages | `package_name` (str) |
-| `calculate_total_price` | Deterministic tax-inclusive calculator (42.86%) | `pretax_price` (float), `tax_type` (str) |
+| `calculate_price` | Deterministic tax calculator (prepaid 42.86%; postpaid/Emerald 22% + flat fee, see source PDF) | `base_price` (float), `tax_type` (str) |
 | `get_activation_code` | Verified USSD activation code lookup | `service` (str), `package` (str) |
+| `recommendation_engine` | Budget/constraint-filtered package recommendation | called internally from the agent graph |
 
-Run the standalone MCP server:
-```bash
-python -m app.mcp.server
-```
+These are plain Python functions called directly by the agent graph
+(`app/agent/nodes/mcp_tool_node.py`) — there is no separate server process or
+client/server protocol; an earlier MCP (Model Context Protocol) client/server
+layer was removed because everything runs in-process and the protocol boundary
+added indirection without a real cross-process or cross-language need. The
+`MCP_ENABLED` setting and the "MCP" naming in a few internal state fields/strategy
+labels (`mcp_evidence`, `MCP_EXACT`, ...) are kept for historical continuity.
 
 ---
 

@@ -1,5 +1,5 @@
 """
-app/agent/recommendation_engine.py
+app/tools/recommendation_engine.py
 -----------------------------------
 Structured recommendation constraint extraction, candidate filtering, ranking,
 and post-selection validation for e& Egypt Agentic RAG assistant.
@@ -10,7 +10,7 @@ REAL + RELEVANT TO REQUEST + WITHIN BUDGET + EVIDENCE-BACKED + VALIDATED.
 """
 import re
 from typing import Any, Dict, List, Optional, Tuple
-from app.mcp.tools.get_package_details import PACKAGE_REGISTRY
+from app.tools.get_package_details import PACKAGE_REGISTRY
 from app.guardrails.security_utils import is_arabic_text
 
 
@@ -145,28 +145,28 @@ def extract_recommendation_constraints(
             fallback_categories.append("VOICE")
 
     # ── 2. Budget and Tax Semantics Extraction ────────────────────────────────
-    budget: Optional[float] = None
-    # Extract numbers associated with currency or budget context
-    budget_matches = re.findall(
-        r"(?:بـ?|في حدود|أقل من|اقل من|حد أقصى|بحد أقصى|ميزانية|ميزانيتي|معايا|budget of|under|less than|up to|max)?\s*(\d+(?:\.\d+)?)\s*(?:ج|جنيه|egp|le|pounds)?",
-        q,
-        re.IGNORECASE,
-    )
-    # Find any standalone number if explicit keyword was used
-    all_numbers = re.findall(r"\b\d+(?:\.\d+)?\b", q)
-    if all_numbers:
-        # Avoid tier numbers like 111 (support) or USSD codes
-        valid_nums = [float(n) for n in all_numbers if float(n) not in [111, 319, 566, 811, 130, 807]]
-        if valid_nums:
-            budget = valid_nums[0]
+    # A number is a USSD/short-code reference (not a budget) if it is structurally
+    # part of one in the text — adjacent to '*'/'#' (e.g. "*130#"), or immediately
+    # followed by "code"/"كود" — rather than merely matching a blacklist of specific
+    # values. A blacklist silently drops real budgets that happen to equal a known
+    # code (e.g. a genuine 130 EGP budget was previously always discarded because
+    # *130# is also a real USSD code).
+    def _extract_budget(text: str) -> Optional[float]:
+        for m in re.finditer(r"\b\d+(?:\.\d+)?\b", text):
+            start, end = m.span()
+            window = text[max(0, start - 6):min(len(text), end + 6)].lower()
+            if "*" in window or "#" in window or "code" in window or "كود" in window:
+                continue
+            return float(m.group(0))
+        return None
+
+    budget: Optional[float] = _extract_budget(q)
 
     # Inherit budget from history if not present in current question
     if budget is None and history:
         for turn in reversed(history[-4:]):
-            t_nums = re.findall(r"\b\d+(?:\.\d+)?\b", turn.get("content", ""))
-            valid_hist = [float(n) for n in t_nums if float(n) not in [111, 319, 566, 811, 130, 807]]
-            if valid_hist:
-                budget = valid_hist[0]
+            budget = _extract_budget(turn.get("content", ""))
+            if budget is not None:
                 break
 
     # Budget Type

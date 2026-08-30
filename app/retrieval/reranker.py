@@ -167,9 +167,15 @@ class CandidateReranker:
 
             return score
 
+        # score_doc() is a deterministic pure function of `doc`, so filtering and
+        # sorting used to each call it fresh (once in the list comprehension, again
+        # per element inside sorted()'s key=) — same result, but every candidate's
+        # score (several regex/string scans) was computed twice for no reason.
+        # Compute once and reuse.
         scored_docs = [(score_doc(d), d) for d in documents]
-        valid_docs = [d for score, d in scored_docs if score > -50.0]
-        ranked_docs = sorted(valid_docs, key=lambda d: score_doc(d), reverse=True)
+        valid_scored = [(score, d) for score, d in scored_docs if score > -50.0]
+        valid_scored.sort(key=lambda sd: sd[0], reverse=True)
+        ranked_docs = [d for _, d in valid_scored]
 
         # Symmetrical Dual-Entity Slotting for Comparisons
         if is_comparison and len(query_entities) >= 2:

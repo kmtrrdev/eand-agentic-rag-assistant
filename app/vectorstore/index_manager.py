@@ -7,13 +7,24 @@ from app.vectorstore.chroma_client import get_chroma_client, get_collection
 from app.config import settings
 
 
-def generate_deterministic_chunk_id(doc: Document, fallback_index: int = 0) -> str:
-    """Generate a stable, deterministic ID for a chunk based on its content and source."""
+def generate_deterministic_chunk_id(doc: Document) -> str:
+    """
+    Generate a stable, deterministic ID for a chunk based on its content and source.
+
+    Deliberately does NOT use metadata["chunk_id"] (TelecomStructureChunker assigns
+    that as a running index over the ENTIRE corpus, not per source file) — re-ingesting
+    a subset of PDFs, adding a new PDF, or any change in glob() ordering shifts every
+    later file's chunk_id, so IDs built from it changed across ingestion runs even when
+    the actual chunk content didn't, defeating idempotent upsert (stale duplicate/orphaned
+    rows accumulate in Chroma instead of being cleanly replaced). source_file + page +
+    content_hash alone is already deterministic and stable regardless of ingestion
+    order — two chunks colliding here would mean genuinely identical content on the
+    same page, which is correct to treat as one chunk.
+    """
     source = doc.metadata.get("source_file", "unknown")
     page = doc.metadata.get("page", 0)
-    chunk_id = doc.metadata.get("chunk_id", fallback_index)
-    content_hash = hashlib.sha256(doc.page_content.strip().encode("utf-8")).hexdigest()[:8]
-    return f"{source}_p{page}_c{chunk_id}_{content_hash}"
+    content_hash = hashlib.sha256(doc.page_content.strip().encode("utf-8")).hexdigest()[:16]
+    return f"{source}_p{page}_{content_hash}"
 
 
 class IndexManager:
@@ -50,10 +61,7 @@ class IndexManager:
             texts = [doc.page_content for doc in batch]
             embeddings = self.embedding_service.embed_documents(batch)
 
-            ids = [
-                generate_deterministic_chunk_id(doc, fallback_index=i + idx)
-                for idx, doc in enumerate(batch)
-            ]
+            ids = [generate_deterministic_chunk_id(doc) for doc in batch]
 
             metadatas = []
             for doc in batch:

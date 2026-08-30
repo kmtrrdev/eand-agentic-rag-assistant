@@ -12,7 +12,7 @@ from pydantic import BaseModel, Field, field_validator
 
 from app.agent.graph import get_agent
 from app.config import settings
-from app.guardrails.output_guard import sanitize_output
+from app.memory.session_id import resolve_conversation_id
 from app.observability import get_request_logger, log_request_summary
 
 # Configure safe structured logger
@@ -34,7 +34,7 @@ app = FastAPI(
 app.add_middleware(
     CORSMiddleware,
     allow_origins=settings.cors_origin_list,
-    allow_credentials=True,
+    allow_credentials=settings.cors_allow_credentials,
     allow_methods=["*"],
     allow_headers=["*"],
 )
@@ -121,7 +121,10 @@ def health():
 @app.post("/chat", response_model=ChatResponse)
 def chat(req: ChatRequest):
     request_id = str(uuid.uuid4())[:8]
-    conversation_id = req.conversation_id or str(uuid.uuid4())
+    # Client-supplied conversation_id is only trusted if it verifies against the
+    # server's signature — an unsigned/forged/guessed ID gets a fresh session
+    # instead of silently loading whatever history happens to sit under that key.
+    conversation_id = resolve_conversation_id(req.conversation_id)
     req_logger = get_request_logger(request_id=request_id, conversation_id=conversation_id)
 
     from app.llm.client import set_current_model_choice
@@ -186,11 +189,13 @@ def chat(req: ChatRequest):
 
     latency_ms = int((time.perf_counter() - t_start) * 1000)
 
-    raw_answer = result.get(
+    # output_guard_node already sanitized this inside the graph (it's the terminal
+    # node on every path) — re-running sanitize_output() here was a redundant
+    # second regex pass over the same already-clean text on every request.
+    final_answer = result.get(
         "answer",
         "I could not answer that question. Could you please rephrase it?"
     )
-    final_answer = sanitize_output(raw_answer)
 
     # ── Persist conversation turn ─────────────────────────────────────────────
     if settings.PERSISTENT_MEMORY_ENABLED:
@@ -239,9 +244,22 @@ def chat(req: ChatRequest):
                 err.get("node"), err.get("error_type"), err.get("error_message"), err.get("latency_ms"),
             )
 
+    # Report what actually answered, not just what was requested — a "cloud" request
+    # can be silently served by the local model when LLM_API_KEY is missing
+    # (see app/llm/client.py), and the response must not misreport that.
+    from app.llm.client import get_actual_backend_used
+    actual_backend = get_actual_backend_used()
+    if actual_backend is None:
+        # No LLM call happened this request (e.g. a blocked/guard-refused turn);
+        # fall back to describing what was requested.
+        actual_backend = (
+            "local"
+            if selected_choice in ("local", "ollama", "qwen", "qwen2.5", "qwen2.5:3b", "local-gpu", "gpu")
+            else "cloud"
+        )
     model_display = (
         f"Local GPU ({settings.LOCAL_LLM_MODEL})"
-        if selected_choice in ("local", "ollama", "qwen", "qwen2.5", "qwen2.5:3b", "local-gpu", "gpu")
+        if actual_backend == "local"
         else f"Cloud ({settings.LLM_MODEL})"
     )
 

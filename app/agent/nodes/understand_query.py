@@ -8,8 +8,21 @@ from langchain_core.output_parsers import JsonOutputParser
 from app.llm.client import get_llm
 from app.llm.prompts import QUERY_UNDERSTANDING_PROMPT
 from app.retrieval.keyword_retriever import tokenize
+from app.tools.get_package_details import PACKAGE_REGISTRY
 
 logger = logging.getLogger("etisalat_kb.node.understand")
+
+# Package/tier names for history-based entity inheritance ("what's its code?" after
+# discussing "Emerald 780"), derived from the single product catalog instead of
+# hand-typed here. This used to be two separately hand-maintained lists (one here,
+# a smaller one in deterministic_fallback_analysis) that had drifted apart and both
+# contained tiers that don't actually exist in the registry (e.g. "hekaya mixat 105",
+# "hekaya mixat 70", "aqwa card 25") — silent dead entries nobody noticed because a
+# non-matching entry just never fires, it doesn't error. Restricted to keys with a
+# digit (excludes bare family names like "ahlan", which is also common
+# code-switched English-Arabic chat for "hi" and would false-positive on any prior
+# greeting, not just a genuine package reference).
+_KNOWN_PACKAGE_KEYS = [k for k in PACKAGE_REGISTRY.keys() if any(c.isdigit() for c in k)]
 
 
 class QueryProfiling(BaseModel):
@@ -151,16 +164,19 @@ def deterministic_fallback_analysis(
     if history:
         for msg in reversed(history):
             content_lower = (msg.get("content") or "").lower()
-            # Extract previous entities
-            if "aqwa card 5" in content_lower or "أقوى كارت 5" in content_lower or "أقوى 5" in content_lower:
+            # Extract previous entities — derived from the product catalog
+            # (_KNOWN_PACKAGE_KEYS, module-level) plus a few Arabic numeral-phrase
+            # aliases the catalog's English keys don't capture on their own.
+            for pkg_key in _KNOWN_PACKAGE_KEYS:
+                if pkg_key in content_lower:
+                    pkg_name = PACKAGE_REGISTRY[pkg_key].get("type", pkg_key.title())
+                    if pkg_name not in inherited_entities:
+                        inherited_entities.append(pkg_name)
+            if ("أقوى كارت 5" in content_lower or "أقوى 5" in content_lower) and "Aqwa Card 5" not in inherited_entities:
                 inherited_entities.append("Aqwa Card 5")
-            if "aqwa card 19" in content_lower or "أقوى كارت 19" in content_lower:
+            if "أقوى كارت 19" in content_lower and "Aqwa Card 19" not in inherited_entities:
                 inherited_entities.append("Aqwa Card 19")
-            if "hekaya internet 105" in content_lower:
-                inherited_entities.append("Hekaya Internet 105")
-            if "hekaya internet 132" in content_lower:
-                inherited_entities.append("Hekaya Internet 132")
-            if "hekaya mixat 52" in content_lower or "حكاية مكسات 52" in content_lower:
+            if "حكاية مكسات 52" in content_lower and "Hekaya Mixat 52" not in inherited_entities:
                 inherited_entities.append("Hekaya Mixat 52")
 
             if "مكسات" in content_lower or "mixat" in content_lower:
@@ -316,7 +332,7 @@ def deterministic_fallback_analysis(
     }
 
 
-from app.agent.nodes.intent_node import (
+from app.agent.text_signals import (
     is_greeting,
     is_pure_thanks,
     OUT_OF_SCOPE_TERMS,
@@ -344,16 +360,9 @@ def _build_understand_output(state: Dict[str, Any], data: Dict[str, Any]) -> Dic
     if not entities and history:
         for msg in reversed(history):
             content_lower = (msg.get("content") or "").lower()
-            for pkg in [
-                "emerald 3450", "emerald 1725", "emerald 1120", "emerald 780", "emerald 430",
-                "hekaya internet 132", "hekaya internet 105", "hekaya internet 75", "hekaya internet 50", "hekaya internet 35",
-                "hekaya mixat 270", "hekaya mixat 180", "hekaya mixat 120", "hekaya mixat 105", "hekaya mixat 70", "hekaya mixat 52",
-                "dataline 72gb", "dataline 45gb", "dataline 25gb", "dataline 14gb", "dataline 8gb", "dataline 7gb", "dataline 3.5gb", "dataline 2.5gb", "dataline 1.8gb",
-                "super connect 165", "super connect 105", "super connect 80", "super connect 50", "super connect 32", "super connect 20", "super connect 9",
-                "aqwa card 75", "aqwa card 50", "aqwa card 30", "aqwa card 25", "aqwa card 20", "aqwa card 15", "aqwa card 10", "aqwa card 5"
-            ]:
-                if pkg in content_lower:
-                    entities = [pkg.title()]
+            for pkg_key in _KNOWN_PACKAGE_KEYS:
+                if pkg_key in content_lower:
+                    entities = [PACKAGE_REGISTRY[pkg_key].get("type", pkg_key.title())]
                     data["entities"] = entities
                     break
             if entities:
@@ -382,7 +391,7 @@ def _build_understand_output(state: Dict[str, Any], data: Dict[str, Any]) -> Dic
     question_orig = state.get("question", "")
     budget = data.get("budget_egp")
     budget_str = f" | ميزانية: {budget} ج.م" if budget else ""
-    from app.agent.recommendation_engine import extract_recommendation_constraints
+    from app.tools.recommendation_engine import extract_recommendation_constraints
     rec_constraints = extract_recommendation_constraints(question_orig, history)
 
     # If the user asks for a recommendation but leaves service_type unknown and has no active track in history

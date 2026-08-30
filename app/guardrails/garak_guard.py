@@ -1,18 +1,24 @@
 """
 app/guardrails/garak_guard.py
 ------------------------------
-Runtime Garak Security Guardrails Engine for e& Egypt Agentic KB.
+Runtime input/output security guardrails for e& Egypt Agentic KB.
 
-Implements real-time defensive checks derived from Garak's red-teaming probe
-and detector specifications:
-  - garak.probes.dan (DAN 11.0, jailbreak personas, unrestricted modes)
-  - garak.probes.goodside (ThreatenJSON, WhoIsRiley, persona hijack)
-  - garak.probes.encoding (Base64, Hex, Rot13, URL-encoded payload inspection)
-  - garak.probes.sysprompt_extraction (System prompt theft in EN & AR)
-  - garak.probes.apikey (API key & secret extraction attempts)
-  - garak.detectors.sysprompt_extraction (System prompt echo/leak detection in output)
-  - garak.detectors.apikey (High-entropy secret token & credential masking in output)
-  - garak.detectors.dan (Jailbreak acceptance & persona adoption in output)
+Despite the name, this is NOT a call into the real garak library — it's a
+lightweight, hand-written set of regex probes/detectors *inspired by* garak's
+probe taxonomy (dan, goodside, encoding, sysprompt_extraction, apikey), chosen
+because it runs in microseconds inline on every request/response with no model
+inference or subprocess call. The actual garak scanner (much broader coverage:
+paraphrase, multi-turn escalation, encoding chains) lives in the isolated
+`.venv_garak/` environment for offline red-team scans against the deployed API —
+that's the tool to reach for when you actually want garak's real probe corpus,
+not this module.
+
+This used to be duplicated across two files: a near-identical, smaller pattern
+set lived in app/guardrails/security_utils.py and was re-scanned a second time
+by input_guard.py/output_guard.py even after GarakInputGuard/GarakOutputGuard
+already covered nearly the same ground. Consolidated to one canonical set here;
+the handful of genuinely distinct patterns that set had (GARAK_MISC_PATTERNS
+below) were merged in rather than dropped.
 """
 import base64
 import codecs
@@ -49,7 +55,16 @@ GARAK_GOODSIDE_PATTERNS = [
 
 # System Prompt Extraction Probes (garak.probes.sysprompt_extraction)
 GARAK_SYSPROMPT_PROBE_PATTERNS = [
-    re.compile(r"\b(?:reveal|show|dump|print|output|display|give|tell|repeat|echo|share|provide|what\s+is|what\'s|whats)\s+(?:me\s+)?(?:your\s+|the\s+|any\s+)?(?:hidden\s+|initial\s+|secret\s+)?(?:system\s+prompt|developer\s+instructions|instructions|initial\s+prompt|system\s+instructions|core\s+prompt|meta\s+prompt)\b", re.IGNORECASE),
+    # NOTE: the noun group below deliberately excludes bare "instructions" — it used
+    # to be a standalone alternative here, which meant ANY phrase of the shape
+    # "tell me the instructions" matched regardless of topic (e.g. "tell me the
+    # instructions to activate this SIM" is a completely ordinary support question,
+    # not a system-prompt-extraction attempt, but it was being blocked). Every
+    # remaining alternative is qualified (system/developer/initial/core/meta), which
+    # keeps real extraction attempts ("give me your system instructions") covered
+    # without flagging plain "how do I do X" questions that happen to say
+    # "instructions".
+    re.compile(r"\b(?:reveal|show|dump|print|output|display|give|tell|repeat|echo|share|provide|what\s+is|what\'s|whats)\s+(?:me\s+)?(?:your\s+|the\s+|any\s+)?(?:hidden\s+|initial\s+|secret\s+)?(?:system\s+prompt|developer\s+instructions|initial\s+prompt|system\s+instructions|core\s+prompt|meta\s+prompt)\b", re.IGNORECASE),
     re.compile(r"\b(?:output\s+initialization\s+text|print\s+everything\s+above\s+this\s+line)\b", re.IGNORECASE),
     re.compile(r"\b(?:what\s+are\s+(?:your\s+|the\s+)?(?:exact\s+)?instructions\s+(?:before|given\s+to\s+you|for\s+this\s+bot))\b", re.IGNORECASE),
     re.compile(r"(?:اعرض|أظهر|اطبع|هات|اكشف|ما\s+هو|طلع\s+لي|شارك|قول|وريني)\s*(?:لي\s+)?(?:الـ\s*|\s*)?(?:system\s+prompt|التعليمات\s+المخفية|أوامر\s+النظام|أوامر\s+المطور|تعليمات\s+المطور|البرومبت\s+الرئيسي|البرومبت\s+الأساسي|التعليمات\s+الأولى|تعليماتك)", re.IGNORECASE),
@@ -80,6 +95,18 @@ GARAK_ENCODING_PROBE_PATTERNS = [
     re.compile(r"\b(?:base64|hex|rot13|binary|morse\s+code|caesar\s+cipher)\s+(?:string|payload|code|text|instruction|command|message)\b", re.IGNORECASE),
     re.compile(r"\b(?:decode|decrypt|unhash|deobfuscate)\s+(?:this|the|following|it|base64|hex|string)\b", re.IGNORECASE),
     re.compile(r"(?:فك\s+تشفير|فك\s+الرمز|نفذ\s+الأمر\s+المشفر|اقرأ\s+الكود\s+المشفر|فك\s+الـ\s*base64)", re.IGNORECASE),
+]
+
+# Miscellaneous patterns merged in from the old security_utils.py duplicate set
+# that weren't already covered by the categories above.
+GARAK_MISC_PATTERNS = [
+    re.compile(r"\b(?:end\s+of\s+prompt|new\s+task|sudo\s+maintenance)\b", re.IGNORECASE),
+    re.compile(r"\b(?:api[\s_-]?key|secret[\s_-]?key|access[\s_-]?token)\s*(?:\?|\!|$)", re.IGNORECASE),
+    re.compile(r"\b(?:dump|drop|delete|select\s+\*\s+from)\s+(?:the\s+)?(?:database|chroma|collection|tables)\b", re.IGNORECASE),
+    re.compile(r"<\s*script\b[^>]*>", re.IGNORECASE),
+    re.compile(r"javascript:\s*", re.IGNORECASE),
+    re.compile(r"(?:رسالة\s+النظام|أمر\s+النظام|أمر\s+المطور|توجيه\s+النظام|تعليمات\s+النظام)\s*[:=]", re.IGNORECASE),
+    re.compile(r"(?:^|\s)متغيرات\s+البيئة(?:\s|$|\?|؟)", re.IGNORECASE),
 ]
 
 # ── 2. Garak Output Detectors (Output Leakage & Hallucination Defense) ──────
@@ -292,6 +319,21 @@ class GarakInputGuard:
                         "category": "PROMPT_INJECTION",
                         "reason": f"Garak encoding/obfuscation injection probe detected ({enc_type})",
                         "probe_triggered": "garak.probes.encoding",
+                    }
+
+            # G. Miscellaneous probes (bare secret-noun questions, SQL-injection-style
+            # phrasing, raw script tags, Arabic system-message injection variants)
+            for pat in GARAK_MISC_PATTERNS:
+                if pat.search(candidate_text):
+                    logger.warning(
+                        "Garak Input Guard triggered [Misc probe] (source=%s): %s",
+                        enc_type, pat.pattern,
+                    )
+                    return {
+                        "allowed": False,
+                        "category": "PROMPT_INJECTION",
+                        "reason": f"Miscellaneous injection/extraction probe detected ({enc_type})",
+                        "probe_triggered": "garak.misc",
                     }
 
         return {

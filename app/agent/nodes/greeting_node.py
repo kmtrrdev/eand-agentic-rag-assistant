@@ -126,7 +126,13 @@ def greeting_node(state: Dict[str, Any]) -> Dict[str, Any]:
             ("human", "Conversation History:\n{history_context}\n\nCustomer Message: {question}")
         ])
         history_context = _build_greeting_history(history)
-        llm = get_llm(timeout=4.0, max_tokens=150)
+        # temperature=0.3, not the global default 0.0: GREETING_LLM_PROMPT explicitly
+        # asks for "varied, fresh" phrasing, which is structurally unachievable at
+        # temperature 0 (near-identical output every call). Greetings carry no
+        # grounding/hallucination risk (validate_answer's Level 0 auto-support skips
+        # claim-checking on them entirely), so a small amount of sampling temperature
+        # here has no correctness cost — unlike generate_answer_node, which stays at 0.
+        llm = get_llm(timeout=4.0, max_tokens=150, temperature=0.3)
         chain = prompt | llm
         res = chain.invoke({
             "history_context": history_context,

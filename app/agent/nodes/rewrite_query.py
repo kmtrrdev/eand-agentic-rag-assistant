@@ -48,7 +48,11 @@ def rewrite_query_node(state: Dict[str, Any]) -> Dict[str, Any]:
     rewrite_error: Optional[str] = None
     try:
         prompt = ChatPromptTemplate.from_template(QUERY_REWRITE_PROMPT)
-        chain = prompt | get_llm(timeout=5.0, max_tokens=150)
+        # 5.0s was tight enough to spuriously hit the exception fallback (silent
+        # no-op rewrite) under ordinary latency variance for a call this cheap
+        # (150 max_tokens); 10s gives real headroom without materially changing
+        # worst-case latency since this only runs on the retry path.
+        chain = prompt | get_llm(timeout=10.0, max_tokens=150)
 
         response = chain.invoke({
             "question": question,
@@ -97,6 +101,11 @@ def rewrite_query_node(state: Dict[str, Any]) -> Dict[str, Any]:
     return {
         "rewritten_query": rewritten,
         "rewrite_attempts": rewrite_attempts,
+        # Read by route_after_rewrite (edges.py): a no-op rewrite (LLM returned the
+        # same text, or the call failed and fell back to the original question)
+        # means re-running retrieval would just search the identical query again —
+        # skip straight to generation instead of burning the one retry on nothing.
+        "rewrite_is_identical": is_identical,
         "workflow_trace": [step_info],
     }
 

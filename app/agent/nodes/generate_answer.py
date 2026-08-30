@@ -17,10 +17,10 @@ from typing import Any, Dict, List, Optional
 from langchain_core.documents import Document
 from langchain_core.prompts import ChatPromptTemplate
 
-from app.guardrails.output_guard import sanitize_output
 from app.guardrails.security_utils import is_arabic_text
 from app.llm.client import get_llm
 from app.llm.prompts import ANSWER_HUMAN_PROMPT, ANSWER_SYSTEM_PROMPT
+from app.tools.get_package_details import PACKAGE_REGISTRY
 
 logger = logging.getLogger("etisalat_kb.node.generate")
 
@@ -104,6 +104,35 @@ def _build_history_context(history: List[Dict[str, Any]], detected_lang: str) ->
     return block
 
 
+def _registry_fallback_lines(key_prefix: str, lang: str) -> List[str]:
+    """
+    Bullet-point summary of every PACKAGE_REGISTRY entry whose key starts with
+    `key_prefix` (e.g. "dataline", "emerald"), for the extractive fallback path.
+
+    This used to be hand-typed price tables baked directly into this file —
+    for Emerald, the hardcoded fallback listed "Emerald 250/450/650/1000" at
+    prices that don't match any real tier (the actual tiers are 430/780/1120/
+    1725/3450, confirmed against both the source PDF and PACKAGE_REGISTRY) —
+    a fabricated-facts bug hiding in the one path meant to activate specifically
+    when the LLM is unavailable and grounding matters most. Pulling from the
+    single product registry means this can't drift from what MCP/validate_answer
+    treat as ground truth.
+    """
+    lines = []
+    for key, pkg in sorted(PACKAGE_REGISTRY.items()):
+        if not key.startswith(key_prefix):
+            continue
+        name = pkg.get("type", key.title())
+        pretax = pkg.get("pretax_price_egp")
+        total = pkg.get("total_price_egp")
+        quota = pkg.get("quota", "")
+        if lang == "ar":
+            lines.append(f"• **{name}**: {pretax} جنيه قبل الضريبة (الإجمالي {total} جنيه شامل الضريبة) — {quota}.")
+        else:
+            lines.append(f"• **{name}**: {pretax} EGP pre-tax (Total {total} EGP with tax) — {quota}.")
+    return lines
+
+
 def extractive_fallback_answer(
     question: str,
     documents: List[Document],
@@ -171,30 +200,19 @@ def extractive_fallback_answer(
                 )
                 # If it's DataLine specifically
                 if "dataline" in full_doc_text.lower() or "data line" in full_doc_text.lower() or "dataline" in question.lower() or "data line" in question.lower():
+                    table = "\n".join(_registry_fallback_lines("dataline", "ar"))
                     return (
                         "بناءً على معلومات اتصالات مصر الرسمية، باقات داتا لاين (Data Line) المخصصة لأجهزة الماي فاي والمودم تشمل:\n\n"
-                        "• **باقة 1.8 جيجابايت**: 46 جنيه شهرياً (تصبح 3.6 جيجا مع عرض الضعف لأول شحنة).\n"
-                        "• **باقة 2.5 جيجابايت**: 60 جنيه شهرياً (تصبح 5 جيجا مع عرض الضعف).\n"
-                        "• **باقة 3.5 جيجابايت**: 69 جنيه شهرياً (تصبح 7 جيجا مع عرض الضعف).\n"
-                        "• **باقة 7 جيجابايت**: 115 جنيه شهرياً (تصبح 14 جيجا مع عرض الضعف).\n"
-                        "• **باقة 8 جيجابايت**: 75 جنيه شهرياً (تصبح 16 جيجا مع عرض الضعف).\n"
-                        "• **باقة 14 جيجابايت**: 172.5 جنيه شهرياً (تصبح 28 جيجا مع عرض الضعف).\n"
-                        "• **باقة 25 جيجابايت**: 200 جنيه شهرياً (أو 375 جنيه لـ 3 شهور).\n"
-                        "• **باقة 45 جيجابايت**: 600 جنيه لمدة 3 شهور.\n"
-                        "• **باقة 50 جيجابايت**: 150 جنيه شهرياً.\n"
-                        "• **باقة 72 جيجابايت**: 500 جنيه شهرياً (أو 1,000 جنيه لـ 3 شهور).\n"
-                        "• **باقة 100 جيجابايت**: 250 جنيه شهرياً.\n\n"
+                        f"{table}\n\n"
                         "💡 **كود التجديد والاشتراك**: اطلب `#130*` أو عبر تطبيق My e& Egypt."
                     )
                 # If it's Emerald
                 elif "emerald" in full_doc_text.lower() or "إمرالد" in question or "امرالد" in question:
+                    table = "\n".join(_registry_fallback_lines("emerald", "ar"))
                     return (
                         "بناءً على معلومات اتصالات مصر الرسمية لباقات إمرالد (Emerald):\n\n"
-                        "• **Emerald 250**: 250 جنيه شهرياً (12,000 ميجا إنترنت + 2,500 دقيقة لكل الشبكات).\n"
-                        "• **Emerald 450**: 450 جنيه شهرياً (25,000 ميجا إنترنت + 4,500 دقيقة لكل الشبكات).\n"
-                        "• **Emerald 650**: 650 جنيه شهرياً (40,000 ميجا إنترنت + 6,500 دقيقة لكل الشبكات).\n"
-                        "• **Emerald 1000**: 1,000 جنيه شهرياً (70,000 ميجا إنترنت + دقائق بلا حدود).\n\n"
-                        "💡 الأسعار غير شاملة الضريبة، وللاشتراك يرجى الاتصال بـ 111 أو زيارة أقرب فرع."
+                        f"{table}\n\n"
+                        "💡 الأسعار قبل الضريبة (8% ضريبة جدول + 14% ضريبة قيمة مضافة + 10 جنيه رسوم تنمية الموارد)، وللاشتراك يرجى الاتصال بـ 111 أو زيارة أقرب فرع."
                     )
 
             lines = [l.strip() for l in documents[0].page_content.split("\n") if l.strip()]

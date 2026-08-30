@@ -1,9 +1,15 @@
 """
 app/agent/nodes/mcp_tool_node.py
 ---------------------------------
-LangGraph Node for MCP Tool Selection, Dynamic Dispatch, and Execution.
-Integrates MCP tools directly into the Agent workflow:
-  USER -> AGENT -> MCP DECISION -> MCP CLIENT -> MCP SERVER/TOOL -> VERIFIED CONTEXT -> GENERATION
+LangGraph node that calls the structured, deterministic telecom tools directly:
+  USER -> AGENT -> STRATEGY DECISION -> TOOL CALL -> VERIFIED CONTEXT -> GENERATION
+
+These are plain Python functions over an in-process product registry, not a
+protocol boundary — there used to be a client/server "MCP" indirection wrapping
+them, but everything ran in one process with no real IPC, schema validation, or
+cross-language boundary to justify it, so it was removed. The "mcp_tool" node
+name, "mcp_evidence"/"mcp_tools_called" state fields, and "MCP_*" strategy labels
+are kept as-is (internal identifiers, not user-facing) to avoid unrelated churn.
 
 Authoritative source of truth for:
   - Exact package details & specifications
@@ -16,9 +22,17 @@ import re
 from typing import Any, Dict, List, Optional, Set
 
 from app.config import settings
-from app.mcp.client import mcp_client
+from app.tools.get_package_details import get_package_details_tool
+from app.tools.get_activation_code import get_activation_code_tool
+from app.tools.calculate_price import calculate_price_tool
 
 logger = logging.getLogger("agent.mcp_node")
+
+_TOOL_HANDLERS = {
+    "get_package_details": get_package_details_tool,
+    "get_activation_code": get_activation_code_tool,
+    "calculate_price": calculate_price_tool,
+}
 
 
 def mcp_tool_node(state: Dict[str, Any]) -> Dict[str, Any]:
@@ -32,12 +46,10 @@ def mcp_tool_node(state: Dict[str, Any]) -> Dict[str, Any]:
             "mcp_tools_called": [],
             "mcp_tool_results": [],
             "mcp_evidence": [],
-            "mcp_attempts": state.get("mcp_attempts", 0) + 1,
         }
 
     question = state.get("question", "")
     q_lower = question.lower()
-    intent = state.get("intent", "")
     strategy = state.get("strategy", "")
     service = state.get("service", "")
     sub_track = state.get("sub_track", "")
@@ -46,7 +58,6 @@ def mcp_tool_node(state: Dict[str, Any]) -> Dict[str, Any]:
     entities = state.get("entities", [])
     history = state.get("history", [])
 
-    mcp_attempts = state.get("mcp_attempts", 0) + 1
     tools_called: List[str] = list(state.get("mcp_tools_called", []))
     tool_results: List[Dict[str, Any]] = list(state.get("mcp_tool_results", []))
     mcp_evidence: List[Dict[str, Any]] = list(state.get("mcp_evidence", []))
@@ -80,7 +91,20 @@ def mcp_tool_node(state: Dict[str, Any]) -> Dict[str, Any]:
                 if item.get("tool") == tool_name and item.get("args") == clean_args:
                     return item.get("result", {})
         executed_call_keys.add(key)
-        res = mcp_client.call_tool(tool_name, clean_args)
+
+        handler = _TOOL_HANDLERS.get(tool_name)
+        if not handler:
+            res = {"error": f"Tool '{tool_name}' not found.", "found": False}
+        else:
+            try:
+                res = handler(**clean_args)
+            except TypeError as te:
+                logger.error(f"Invalid arguments for tool '{tool_name}': {te}")
+                res = {"error": f"Invalid arguments for tool '{tool_name}': {te}", "found": False}
+            except Exception as exc:
+                logger.error(f"Exception executing tool '{tool_name}': {exc}", exc_info=True)
+                res = {"error": f"Exception executing tool '{tool_name}': {exc}", "found": False}
+
         if tool_name not in tools_called:
             tools_called.append(tool_name)
         tool_results.append({"tool": tool_name, "args": clean_args, "result": res})
@@ -167,7 +191,7 @@ def mcp_tool_node(state: Dict[str, Any]) -> Dict[str, Any]:
 
     # ── 3. USSD Activation Code Lookup ───────────────────────────────────────
     activation_keywords = ["كود", "تفعيل", "اشتراك", "اشترك", "شحن", "تجديد", "ussd", "code", "activate", "activation", "subscribe", "dial"]
-    if any(k in q_lower for k in activation_keywords) or intent == "activation_code" or strategy == "MCP_ACTIVATION":
+    if any(k in q_lower for k in activation_keywords) or strategy == "MCP_ACTIVATION":
         svc_target = service or "Hekaya"
         tier_match = re.findall(r"\d+", question)
         pkg_tier = tier_match[0] if tier_match else None
@@ -213,7 +237,7 @@ def mcp_tool_node(state: Dict[str, Any]) -> Dict[str, Any]:
     if (budget_egp is not None and budget_egp > 0 and not found_packages) or strategy == "MCP_RECOMMENDATION":
         needs_clarification = False
         clarification_hint = None
-        from app.agent.recommendation_engine import (
+        from app.tools.recommendation_engine import (
             extract_recommendation_constraints,
             filter_and_rank_candidates,
             validate_candidate_package
@@ -315,7 +339,6 @@ def mcp_tool_node(state: Dict[str, Any]) -> Dict[str, Any]:
         "mcp_tool_results": tool_results,
         "mcp_evidence": mcp_evidence,
         "context": updated_context,
-        "mcp_attempts": mcp_attempts,
         "workflow_trace": [trace_step],
     }
     if needs_clarification:

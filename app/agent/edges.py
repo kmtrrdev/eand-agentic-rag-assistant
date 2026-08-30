@@ -8,6 +8,14 @@ Implements explicit business decisions and independent retry budgets.
 from typing import Any, Dict
 from app.config import settings
 
+# Single source of truth for the repair-loop ceiling — shared with validate_answer_node,
+# which does the actual PASS/REPAIR/REFUSE decision. These used to be two independently
+# hardcoded `max_repairs = 1` constants using different comparison operators (`<=` here,
+# `<` in validate_answer.py) for the same budget; harmless today only because
+# validate_answer.py's stricter internal check already prevents a second REPAIR result
+# from ever being emitted, but a latent bug if either were changed independently.
+MAX_GENERATION_REPAIRS = 1
+
 
 def route_after_input_guard(state: Dict[str, Any]) -> str:
     """Route blocked prompt injections to output_guard; allowed queries to understand."""
@@ -19,6 +27,10 @@ def route_after_input_guard(state: Dict[str, Any]) -> str:
 
 def route_after_understand(state: Dict[str, Any]) -> str:
     """Route to strategy_router unless understanding identified greeting, safe refusal or clarification."""
+    # `intent` only ever takes the three values below or the default "package_inquiry"
+    # — understand_query_node's LLM schema has no field for a richer taxonomy, so a
+    # check like `intent == "clarification"` would always be dead weight; use
+    # `needs_clarification` directly instead.
     intent = state.get("intent", "package_inquiry")
     is_out_of_scope = state.get("is_out_of_scope", False)
     is_unsupported = state.get("is_unsupported_service", False)
@@ -27,17 +39,13 @@ def route_after_understand(state: Dict[str, Any]) -> str:
     if intent == "greeting":
         return "greeting"
 
-    if is_out_of_scope or is_unsupported or intent in {"out_of_scope", "unsupported_service"}:
+    if is_out_of_scope or is_unsupported:
         return "safe_response"
 
-    if needs_clarification or intent == "clarification":
+    if needs_clarification:
         return "safe_response"
 
     return "strategy_router"
-
-
-# Backwards compatibility alias
-route_after_intent = route_after_understand
 
 
 def route_after_strategy(state: Dict[str, Any]) -> str:
@@ -111,6 +119,18 @@ def route_after_retrieval(state: Dict[str, Any]) -> str:
     return "generate"
 
 
+def route_after_rewrite(state: Dict[str, Any]) -> str:
+    """
+    A rewrite that produced the identical query (LLM returned the same text, or
+    the call failed and fell back to the original) gains nothing from searching
+    again — go straight to generation instead of a guaranteed-redundant retrieval
+    pass (the retry budget is already spent either way; only the wasted work differs).
+    """
+    if state.get("rewrite_is_identical", False):
+        return "generate"
+    return "retrieve"
+
+
 def route_after_validate(state: Dict[str, Any]) -> str:
     """
     Evaluates 3-outcome validation result:
@@ -120,12 +140,11 @@ def route_after_validate(state: Dict[str, Any]) -> str:
     """
     val_result = state.get("validation_result", "PASS")
     generation_repairs = state.get("generation_repairs", 0)
-    max_repairs = 1
 
     if val_result in {"PASS", "SUPPORTED"}:
         return "output_guard"
 
-    if val_result == "REPAIR" and generation_repairs <= max_repairs:
+    if val_result == "REPAIR" and generation_repairs < MAX_GENERATION_REPAIRS:
         return "generate"
 
     return "safe_response"

@@ -2,13 +2,7 @@ from typing import Optional
 from app.config import settings
 from app.guardrails.policies import GuardrailCategory, GuardrailResult
 from app.guardrails.garak_guard import GarakInputGuard
-from app.guardrails.security_utils import (
-    ARABIC_INJECTION_PATTERNS,
-    PROMPT_INJECTION_PATTERNS,
-    SECRET_REQUEST_PATTERNS,
-    SYSTEM_PROMPT_PATTERNS,
-    is_arabic_text,
-)
+from app.guardrails.security_utils import is_arabic_text
 
 
 def get_safe_refusal_message(category: GuardrailCategory, is_arabic: bool) -> str:
@@ -81,43 +75,11 @@ def validate_input(text: Optional[str]) -> GuardrailResult:
             safe_message=get_safe_refusal_message(cat_enum, is_ar)
         )
 
-    # 3. Secondary regex fallback patterns
-    for pattern in SECRET_REQUEST_PATTERNS:
-        if pattern.search(raw_text):
-            return GuardrailResult(
-                allowed=False,
-                category=GuardrailCategory.SECRET_REQUEST,
-                reason="Attempted secret or API key extraction",
-                safe_message=get_safe_refusal_message(GuardrailCategory.SECRET_REQUEST, is_ar)
-            )
-
-    for pattern in SYSTEM_PROMPT_PATTERNS:
-        if pattern.search(raw_text):
-            return GuardrailResult(
-                allowed=False,
-                category=GuardrailCategory.SYSTEM_PROMPT_REQUEST,
-                reason="Attempted system prompt extraction",
-                safe_message=get_safe_refusal_message(GuardrailCategory.SYSTEM_PROMPT_REQUEST, is_ar)
-            )
-
-    for pattern in PROMPT_INJECTION_PATTERNS:
-        if pattern.search(raw_text):
-            return GuardrailResult(
-                allowed=False,
-                category=GuardrailCategory.PROMPT_INJECTION,
-                reason="Prompt injection pattern detected",
-                safe_message=get_safe_refusal_message(GuardrailCategory.PROMPT_INJECTION, is_ar)
-            )
-
-    for pattern in ARABIC_INJECTION_PATTERNS:
-        if pattern.search(raw_text):
-            return GuardrailResult(
-                allowed=False,
-                category=GuardrailCategory.PROMPT_INJECTION,
-                reason="Arabic prompt injection pattern detected",
-                safe_message=get_safe_refusal_message(GuardrailCategory.PROMPT_INJECTION, is_ar)
-            )
-
+    # GarakInputGuard.evaluate() above already covers secret/system-prompt/injection
+    # patterns (EN + AR) — this used to be followed by a second regex pass over four
+    # more pattern lists in security_utils.py that were ~90% duplicates of the ones
+    # just checked. The handful of patterns that were genuinely distinct got merged
+    # into garak_guard.py's GARAK_MISC_PATTERNS instead of being re-scanned separately.
     return GuardrailResult(
         allowed=True,
         category=GuardrailCategory.SAFE,

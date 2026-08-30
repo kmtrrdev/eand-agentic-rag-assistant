@@ -1,6 +1,5 @@
 import re
 from app.guardrails.garak_guard import GarakOutputGuard
-from app.guardrails.security_utils import redact_secrets, sanitize_raw_html
 from app.text_cleanup import clean_customer_text
 
 
@@ -60,9 +59,9 @@ def sanitize_output(text: str) -> str:
 
     cleaned = cleaned.replace("<think>", "").replace("</think>", "").strip()
 
-    # 3. Secondary secret & HTML scrub
-    cleaned = redact_secrets(cleaned)
-    cleaned = sanitize_raw_html(cleaned)
+    # GarakOutputGuard.sanitize() above already redacts secrets (OUTPUT_SECRET_PATTERNS,
+    # a strict superset of the old security_utils.SECRET_PATTERNS) and strips HTML/script
+    # tags — a second identical pass here was pure redundant work on every request.
 
     # 4. Clean customer text formatting
     cleaned = clean_customer_text(cleaned)

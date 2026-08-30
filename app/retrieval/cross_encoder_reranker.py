@@ -67,6 +67,16 @@ class CrossEncoderReranker:
         docs = reranker.rerank(candidates, query=q, final_k=5)
     """
 
+    def __init__(self) -> None:
+        # Set on every rerank() call so callers can tell whether this pass actually
+        # used the cross-encoder model or silently degraded to heuristic order —
+        # previously that distinction only reached a log line, invisible to the
+        # response/eval harness (a production deployment where sentence-transformers
+        # fails to install, or the ~80MB model download fails at cold-start, would
+        # silently run heuristic-only reranking with no observable signal anywhere
+        # downstream of the log file).
+        self.last_call_used_model: bool = False
+
     def rerank(
         self,
         documents: List[Document],
@@ -77,7 +87,8 @@ class CrossEncoderReranker:
         Rerank documents using cross-encoder semantic scoring.
 
         Falls back gracefully to the input document order (already heuristic-ranked)
-        if cross-encoder is unavailable.
+        if cross-encoder is unavailable. Check `self.last_call_used_model` after
+        calling this to know whether the fallback actually fired.
 
         Args:
             documents: Candidate documents (already heuristic-ranked, deduplicated).
@@ -87,6 +98,7 @@ class CrossEncoderReranker:
         Returns:
             Top final_k documents sorted by cross-encoder score descending.
         """
+        self.last_call_used_model = False
         if not documents:
             return []
 
@@ -99,6 +111,7 @@ class CrossEncoderReranker:
         try:
             pairs = [(query, doc.page_content[:512]) for doc in documents]
             scores = encoder.predict(pairs)
+            self.last_call_used_model = True
 
             # Boost cross-encoder score if document contains exact query entities
             from app.retrieval.reranker import _extract_query_entities

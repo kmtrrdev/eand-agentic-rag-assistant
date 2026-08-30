@@ -1,8 +1,12 @@
+import logging
 import os
+import secrets
 from typing import List, Optional
 from dotenv import load_dotenv
 
 load_dotenv()
+
+logger = logging.getLogger("app.config")
 
 
 class Settings:
@@ -96,10 +100,22 @@ class Settings:
         os.getenv("MAX_HISTORY_MESSAGES", "20")
     )
 
+    # Default is an explicit, safe local-dev allowlist — NOT "*". The API is served
+    # with allow_credentials=True (see api.py), and browsers reject that combined
+    # with a wildcard origin anyway, so a wildcard default bought no real flexibility
+    # while defaulting a customer-facing API wide open. Operators deploying to a real
+    # domain must set CORS_ORIGINS explicitly.
     CORS_ORIGINS: str = os.getenv(
         "CORS_ORIGINS",
-        "*"
+        "http://localhost:3000,http://127.0.0.1:3000,http://localhost:8000,http://127.0.0.1:8000"
     )
+
+    # Secret used to sign server-issued conversation IDs (app/memory/session_id.py)
+    # so a client can't forge/guess another session's ID and pull its history.
+    # Auto-generated per-process if unset — fine for a single dev instance, but any
+    # multi-worker or multi-restart deployment MUST set this explicitly in .env,
+    # otherwise signed IDs minted by one worker won't verify on another.
+    SESSION_SECRET: str = os.getenv("SESSION_SECRET", "")
 
     # Evaluation / LLM-as-a-Judge settings
     EVAL_LLM_API_KEY: Optional[str] = (
@@ -140,13 +156,14 @@ class Settings:
 
     RERANKER_TOP_N: int = int(os.getenv("RERANKER_TOP_N", "20"))
 
-    # ── MCP Integration (Phase 5) ─────────────────────────────────────────────
+    # ── Structured Telecom Tools (app/tools/) ─────────────────────────────────
+    # Toggles the deterministic tool-call layer (exact package lookup, USSD codes,
+    # tax calculation, recommendations). When off, the graph falls back to RAG-only
+    # for everything (see strategy_router.py). No MCP_HOST/MCP_PORT — these tools
+    # are plain in-process function calls, not a client/server protocol.
     MCP_ENABLED: bool = os.getenv(
         "MCP_ENABLED", "true"
     ).lower() in ("true", "1", "yes")
-
-    MCP_HOST: str = os.getenv("MCP_HOST", "127.0.0.1")
-    MCP_PORT: int = int(os.getenv("MCP_PORT", "8001"))
 
     @property
     def cors_origin_list(self) -> List[str]:
@@ -154,5 +171,19 @@ class Settings:
             return ["*"]
         return [origin.strip() for origin in self.CORS_ORIGINS.split(",") if origin.strip()]
 
+    @property
+    def cors_allow_credentials(self) -> bool:
+        # Browsers refuse allow_credentials with a wildcard origin anyway; don't
+        # request a combination that's both meaningless and looks permissive in logs.
+        return self.cors_origin_list != ["*"]
+
 
 settings = Settings()
+
+if not settings.SESSION_SECRET:
+    settings.SESSION_SECRET = secrets.token_hex(32)
+    logger.warning(
+        "SESSION_SECRET not set — generated a random one for this process. "
+        "Conversation IDs signed now will stop verifying after a restart or on any "
+        "other worker process. Set SESSION_SECRET in .env for real deployments."
+    )

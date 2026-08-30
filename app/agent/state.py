@@ -45,7 +45,6 @@ class AgentState(TypedDict, total=False):
     rejected_candidates: List[Dict[str, Any]]
     selected_package: Optional[Dict[str, Any]]
     recommendation_validation: Optional[Dict[str, Any]]
-    recommendation_attempts: int      # Default ceiling: 2
 
     # ── MCP Ground Truth State & Cache ────────────────────────────────────────
     mcp_tools_called: List[str]
@@ -66,11 +65,14 @@ class AgentState(TypedDict, total=False):
     retrieval_diagnostics: Dict[str, Any]
 
     # ── Subsystem Independent Retry Budgets ────────────────────────────────────
-    retrieval_attempts: int           # Default ceiling: 2
-    rewrite_attempts: int             # Default ceiling: 1
-    generation_repairs: int           # Default ceiling: 1
-    validation_attempts: int          # Default ceiling: 1
-    mcp_attempts: int                 # Default ceiling: 1
+    # Only counters that actually gate a real retry loop belong here.
+    # (validation_attempts, mcp_attempts, and recommendation_attempts used to be
+    # tracked too, but nothing ever read them — no edge function branched on them —
+    # so they were pure write-only overhead, not real retry budgets. Removed rather
+    # than wired into new retry logic that isn't otherwise needed.)
+    retrieval_attempts: int           # Default ceiling: 2 (route_after_retrieval)
+    rewrite_attempts: int             # Default ceiling: 1 (route_after_retrieval)
+    generation_repairs: int           # Default ceiling: 1 (route_after_validate)
     last_retry_reason: Optional[str]
     last_failure_type: Optional[str]
     repair_strategy: Optional[str]    # REGENERATE_FROM_MCP | FIX_PRICE | FIX_USSD | RETRIEVE_MISSING

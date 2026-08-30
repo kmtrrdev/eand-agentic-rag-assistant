@@ -103,8 +103,14 @@ def evaluate_retrieval_node(state: Dict[str, Any]) -> Dict[str, Any]:
         # 2. RRF score signal
         rrf = float(doc.metadata.get("rrf_score", 0.0))
 
-        # 3. Dense semantic similarity signal
-        dense_sim = float(doc.metadata.get("semantic_similarity", 0.5))
+        # 3. Dense semantic similarity signal — only SemanticRetriever attaches this
+        # metadata key; a BM25-only hit genuinely has no dense signal at all. This
+        # used to default to 0.5 (a fabricated "moderate match") for any chunk
+        # missing the key, which silently rewarded pure-keyword hits with credit
+        # for a semantic signal they never had. Default to 0.0 (no signal, no
+        # credit) instead — a chunk with strong lexical/entity/service overlap can
+        # still score RETRIEVAL_GOOD via those other terms.
+        dense_sim = float(doc.metadata.get("semantic_similarity", 0.0))
 
         # 4. Entity coverage
         has_entity = any(str(ent).lower() in content_lower for ent in entities if ent)

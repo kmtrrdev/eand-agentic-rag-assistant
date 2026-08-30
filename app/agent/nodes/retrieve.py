@@ -28,14 +28,23 @@ _LEGACY_TIER_PATTERN = re.compile(
 _CURRENT_MIXAT_TIERS = {"52", "69", "92", "120", "180", "270"}
 
 
-def _is_legacy_mixat_chunk(content: str, src: str) -> bool:
+def _is_legacy_mixat_chunk(content: str, src: str, metadata: Optional[Dict[str, Any]] = None) -> bool:
     """
-    Returns True when a Hekaya Mixat chunk appears to describe the old naming
-    system (tiers 35/50/65/100/150/200) rather than the current active tiers
-    (52/69/92/120/180/270). Only fires on Hekaya Mixat source documents to
-    avoid false positives on other plan documents that happen to mention those
-    numbers in unrelated contexts (e.g. prices in EGP for other services).
+    Returns True when a chunk describes the old Hekaya Mixat naming system
+    (tiers 35/50/65/100/150/200) rather than the current active tiers
+    (52/69/92/120/180/270).
+
+    `plan_status` is stamped once, authoritatively, at ingestion time
+    (app/ingestion/chunker.py::_tag_legacy_status) using the same signals this
+    function used to re-derive independently at every retrieval — two separately
+    maintained phrase lists that could (and did) drift apart. Trust that metadata
+    field first; only fall back to the regex re-derivation below for chunks
+    ingested before plan_status existed, so old indexes don't silently lose the
+    legacy warning until they're re-ingested.
     """
+    if metadata and "plan_status" in metadata:
+        return metadata.get("plan_status") == "legacy"
+
     if "mixat" not in src.lower() and "هكايا مكسات" not in content and "حكاية مكسات" not in content:
         return False
     c_lower = content.lower()
@@ -95,7 +104,16 @@ def retrieve_node(state: Dict[str, Any]) -> Dict[str, Any]:
     budget_egp = state.get("budget_egp")
 
     is_affirmative = question.strip().lower() in ["yes", "نعم", "ايوه", "تمام", "اه", "sure", "ok", "yep", "ايوة"]
-    queries_to_search = [] if is_affirmative else [question]
+
+    # On a retry (rewritten_query present from rewrite_query_node), search with the
+    # rewritten query as the PRIMARY term — it exists specifically to fix whatever
+    # made the first attempt weak/failed. The original question is still searched
+    # too (kept as a secondary term below) so a bad rewrite can't lose ground, but
+    # it no longer crowds out the rewrite by going first in every sub-query fan-out.
+    primary_query = rewritten.strip() if (rewritten and rewritten.strip()) else question
+    queries_to_search = [] if is_affirmative else [primary_query]
+    if primary_query != question and not is_affirmative and question not in queries_to_search:
+        queries_to_search.append(question)
 
     # Context inheritance for follow-ups (e.g. "yes", "ماشي", "تمام", "مكسات", "النت", "الخطط الاعلى", "الباقات الأكبر")
     follow_up_terms = ["اعلي", "أعلى", "اعلى", "أعلي", "اكبر", "أكبر", "باقي", "كلهم", "الكل", "تانية", "تانيين", "تاني", "higher", "more", "rest", "all", "first", "second", "code"]
@@ -238,7 +256,13 @@ def retrieve_node(state: Dict[str, Any]) -> Dict[str, Any]:
         data_usage=data_usage,
         voice_usage=voice_usage,
         budget_egp=budget_egp,
-        final_k=max(settings.FINAL_K * 3, settings.RERANKER_TOP_N),  # Keep wider pool for Stage 2
+        # RERANKER_TOP_N is the intended, documented control for Stage-1 pool size
+        # feeding Stage-2 cross-encoder reranking. It used to be shadowed by
+        # `max(FINAL_K * 3, RERANKER_TOP_N)` — with the default FINAL_K=10, FINAL_K*3
+        # (30) always won over RERANKER_TOP_N (20), so the setting was configurable
+        # but had zero actual effect. `max(..., FINAL_K)` here is just a safety floor
+        # so the pool can never end up smaller than what Stage 2 needs to select from.
+        final_k=max(settings.RERANKER_TOP_N, settings.FINAL_K),
     )
 
     # Stage 2: Cross-encoder semantic reranking (if enabled)
@@ -257,8 +281,10 @@ def retrieve_node(state: Dict[str, Any]) -> Dict[str, Any]:
             query=question,
             final_k=12 if is_enumeration else settings.FINAL_K,
         )
+        cross_encoder_active = cross_encoder.last_call_used_model
     else:
         selected_documents = heuristic_top[:settings.FINAL_K]
+        cross_encoder_active = False
 
     context_parts = []
     sources = []
@@ -269,7 +295,7 @@ def retrieve_node(state: Dict[str, Any]) -> Dict[str, Any]:
         content = doc.page_content
 
         # Stamp legacy chunks with an unambiguous warning banner
-        if _is_legacy_mixat_chunk(content, src_name):
+        if _is_legacy_mixat_chunk(content, src_name, doc.metadata):
             chunk_header = (
                 f"--- ⛔ LEGACY CHUNK — DO NOT USE FOR CURRENT PLANS ⛔ ---\n"
                 f"--- Document: {src_name} (Page {pg}) [LEGACY NAMING SYSTEM] ---\n"
@@ -343,6 +369,7 @@ def retrieve_node(state: Dict[str, Any]) -> Dict[str, Any]:
             "selected_count": len(selected_documents),
             "sources": [s["source"] for s in sources],
             "queries_searched": queries_to_search,
+            "cross_encoder_active": cross_encoder_active,
             # Per-chunk traceability for debugging retrieval vs hallucination origin
             "retrieved_chunks": [
                 {

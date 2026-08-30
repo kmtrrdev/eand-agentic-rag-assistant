@@ -24,6 +24,7 @@ import re
 from typing import Any, Dict, List, Optional, Set, Tuple
 
 from app.retrieval.keyword_retriever import tokenize
+from app.agent.edges import MAX_GENERATION_REPAIRS
 
 logger = logging.getLogger("etisalat_kb.node.validate")
 
@@ -181,8 +182,6 @@ def validate_answer_node(state: Dict[str, Any]) -> Dict[str, Any]:
     strategy = state.get("strategy", "RAG_ONLY")
     mcp_evidence = state.get("mcp_evidence", [])
     generation_repairs = state.get("generation_repairs", 0)
-    validation_attempts = state.get("validation_attempts", 0) + 1
-    max_repairs = 1
 
     claims = extract_claims(answer)
     claim_verification: List[Dict[str, Any]] = []
@@ -212,7 +211,6 @@ def validate_answer_node(state: Dict[str, Any]) -> Dict[str, Any]:
             "unsupported_claims": ["EMPTY_OUTPUT"],
             "contradictions": [],
             "missing_evidence": [],
-            "validation_attempts": validation_attempts,
             "workflow_trace": [step_info],
         }
 
@@ -235,7 +233,6 @@ def validate_answer_node(state: Dict[str, Any]) -> Dict[str, Any]:
             "unsupported_claims": [],
             "contradictions": [],
             "missing_evidence": [],
-            "validation_attempts": validation_attempts,
             "workflow_trace": [step_info],
         }
 
@@ -250,10 +247,21 @@ def validate_answer_node(state: Dict[str, Any]) -> Dict[str, Any]:
                 failure_type = "SERVICE_TYPE_MISMATCH"
                 repair_strategy = "REGENERATE_FROM_MCP"
                 unsupported_claims.append("ServiceType:VOICE_REQUESTED_BUT_INTERNET_RECOMMENDED")
+        elif st == "INTERNET":
+            # Symmetric check: recommendation_engine.py's pre-selection filter already
+            # treats both directions equally (a voice-only candidate is rejected for an
+            # INTERNET request just as an internet-only candidate is rejected for a
+            # VOICE request), but this post-generation safety net previously only
+            # caught the VOICE-requested direction. If user explicitly requested
+            # INTERNET/DATA, answer must NOT recommend a voice-only package.
+            if ("ahlan" in ans_lower or "أهلاً" in ans_lower or "اهلا" in ans_lower or "per-minute" in ans_lower or "دقيقة بدقيقة" in ans_lower) and not ("gb" in ans_lower or "mb" in ans_lower or "نت" in ans_lower or "إنترنت" in ans_lower or "انترنت" in ans_lower or "data" in ans_lower or "internet" in ans_lower or "مكس" in ans_lower or "mix" in ans_lower):
+                failure_type = "SERVICE_TYPE_MISMATCH"
+                repair_strategy = "REGENERATE_FROM_MCP"
+                unsupported_claims.append("ServiceType:INTERNET_REQUESTED_BUT_VOICE_RECOMMENDED")
 
     # ── Level 1: Atomic Claim Extraction & Verification ────────────────────────────────
     ctx_clean = context.replace(" ", "").replace(",", "").lower()
-    from app.mcp.tools.get_package_details import PACKAGE_REGISTRY
+    from app.tools.get_package_details import PACKAGE_REGISTRY
 
     registry_prices: Set[float] = set()
     registry_quotas: Set[float] = set()
@@ -420,7 +428,7 @@ def validate_answer_node(state: Dict[str, Any]) -> Dict[str, Any]:
         confidence = 0.96 if mcp_evidence else min(0.95, 0.80 + grounding_ratio * 0.2)
         badge = "🛡️ Claim-Verified PASS"
         reason = "All extracted telecom claims (prices, quotas, minutes, USSD) are strictly verified."
-    elif has_critical_failure and generation_repairs < max_repairs:
+    elif has_critical_failure and generation_repairs < MAX_GENERATION_REPAIRS:
         validation_result = "REPAIR"
         confidence = 0.40
         badge = "🔧 Targeted REPAIR"
@@ -449,7 +457,6 @@ def validate_answer_node(state: Dict[str, Any]) -> Dict[str, Any]:
             "repair_strategy": repair_strategy,
             "grounding_ratio": round(grounding_ratio, 3),
             "generation_repairs": generation_repairs,
-            "validation_attempts": validation_attempts,
         },
     }
 
@@ -463,6 +470,5 @@ def validate_answer_node(state: Dict[str, Any]) -> Dict[str, Any]:
         "missing_evidence": missing_evidence,
         "last_failure_type": failure_type,
         "repair_strategy": repair_strategy,
-        "validation_attempts": validation_attempts,
         "workflow_trace": [step_info],
     }
