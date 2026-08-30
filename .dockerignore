@@ -1,0 +1,37 @@
+# Development files
+.venv/
+.venv_garak/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+build/
+dist/
+*.egg-info/
+
+# Environment secrets - NEVER bake into image
+.env
+
+# Test artifacts
+tests/
+evaluation/results/
+*.log
+*.json.bak
+
+# Version control
+.git/
+.gitignore
+
+# IDE
+.vscode/
+.idea/
+*.swp
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Temp
+scratch/
+*.tmp

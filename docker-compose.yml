@@ -1,0 +1,45 @@
+# ============================================================
+# e& Egypt Agentic Knowledge Base - Docker Compose
+# ============================================================
+# Usage:
+#   docker-compose up --build
+#   docker-compose down
+#
+# For production, replace env_file with environment secrets manager.
+# ============================================================
+
+version: "3.9"
+
+services:
+  etisalat-kb:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: runtime
+    image: etisalat-kb:latest
+    container_name: etisalat-kb
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    env_file:
+      - .env
+    volumes:
+      # Mount live python application code
+      - ./app:/app/app
+      # Persist ChromaDB data between restarts
+      - ./chroma_db:/app/chroma_db
+      # Persist conversation memory between restarts
+      - ./memory.db:/app/memory.db
+      # Sync static site files live
+      - ./site:/app/site
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 15s
+      start_period: 120s
+      retries: 5
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "50m"
+        max-file: "5"

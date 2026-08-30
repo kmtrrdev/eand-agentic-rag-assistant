@@ -1,0 +1,51 @@
+# ============================================================
+# e& Egypt Agentic Knowledge Base - Core Dependencies
+# ============================================================
+# Install: pip install -r requirements.txt
+#
+# Notes:
+#   - Cross-encoder reranker (optional): already included via sentence-transformers
+#   - Evaluation deps (RAGAS, Garak): see requirements-eval.txt / requirements-redteam.txt
+#   - MCP server: install mcp package if MCP_ENABLED=true
+# ============================================================
+
+# LangChain ecosystem
+langgraph>=0.2.0
+langchain>=0.3.0
+langchain-openai>=0.2.0
+langchain-huggingface>=0.1.0
+langchain-community>=0.3.0
+langchain-text-splitters>=0.3.0
+langchain-chroma>=0.1.0
+langchain-core>=0.3.0
+
+# Vector store
+chromadb>=0.5.0
+
+# OpenAI SDK (used by langchain-openai)
+openai>=1.40.0
+
+# Embeddings + Cross-Encoder Reranker
+sentence-transformers>=3.0.0
+
+# Sparse retrieval
+rank_bm25>=0.2.2
+
+# PDF loading
+pypdf>=4.0.0
+
+# Web framework
+fastapi>=0.115.0
+uvicorn[standard]>=0.30.0
+
+# Config
+python-dotenv>=1.0.0
+
+# Data validation
+pydantic>=2.0.0
+
+# Numerical operations
+numpy>=1.26.0
+
+# Model Context Protocol (MCP)
+mcp>=1.0.0

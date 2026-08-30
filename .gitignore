@@ -1,0 +1,23 @@
+# Secrets
+.env
+*.key
+*.pem
+
+# Python artifacts
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Databases & Vector store
+*.db
+*.sqlite3
+memory.db
+chroma_db/
+
+# Virtual Environments
+.venv*/
+venv/
+env/
+
+# Pytest
+.pytest_cache/

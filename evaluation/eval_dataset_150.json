@@ -1,0 +1,3076 @@
+{
+  "version": "3.0",
+  "description": "e& Egypt Agentic Telecom Production Evaluation Dataset (150 Cases)",
+  "total_cases": 150,
+  "cases": [
+    {
+      "id": "TC-001",
+      "category": "factual",
+      "language": "en",
+      "question": "What is the price of Aqwa Card 19 and what does it include?",
+      "expected_behavior": "answer_from_knowledge_base",
+      "reference_answer": "Aqwa Card 19 costs 19 EGP. It includes 425 Mixes (megabytes or minutes to all networks), 300 video/entertainment/social minutes, and an embedded Hekaya Mini recharge worth 400 Mixes + Facebook & WhatsApp. It is valid for 6 days and uses USSD activation code *811#.",
+      "expected_sources": [
+        "PrepaidSystems.pdf"
+      ],
+      "expected_entities": [
+        "Aqwa Card 19",
+        "19",
+        "425",
+        "300",
+        "400",
+        "6",
+        "*811#",
+        "Hekaya Mini"
+      ],
+      "expected_codes": [
+        "*811#"
+      ],
+      "must_not_contain": [
+        "Aqwa Card 15",
+        "Aqwa Card 30"
+      ],
+      "required_facts": [
+        "19 EGP",
+        "425 Mixes",
+        "300 minutes",
+        "Hekaya Mini 400 Mixes",
+        "6 days",
+        "*811#"
+      ]
+    },
+    {
+      "id": "TC-002",
+      "category": "factual",
+      "language": "en",
+      "question": "Does Aqwa Card 5 include a Hekaya Mini recharge?",
+      "expected_behavior": "explicit_rejection_or_suggestion",
+      "reference_answer": "No, Aqwa Card 5 does not include a Hekaya Mini recharge. (Embedded Hekaya Mini recharges are only included with Aqwa Card 19, 22.5, and 30).",
+      "expected_sources": [
+        "PrepaidSystems.pdf"
+      ],
+      "expected_entities": [
+        "Aqwa Card 5",
+        "No",
+        "Hekaya Mini"
+      ],
+      "expected_codes": [],
+      "must_not_contain": [
+        "includes Hekaya Mini",
+        "comes with Hekaya Mini",
+        "Ahlan Super Yes"
+      ],
+      "required_facts": [
+        "No",
+        "does not include Hekaya Mini"
+      ]
+    },
+    {
+      "id": "TC-003",
+      "category": "comparison",
+      "language": "en",
+      "question": "Compare Aqwa Card 15 and Aqwa Card 19.",
+      "expected_behavior": "balanced_comparison",
+      "reference_answer": "Aqwa Card 15 costs 15 EGP, provides 300 Mixes/minutes, 210 video/entertainment/social minutes, is valid for 2 days, and does not include Hekaya Mini. In comparison, Aqwa Card 19 costs 19 EGP, provides 425 Mixes/minutes, 300 video/entertainment/social minutes, includes an embedded 400-Mix Hekaya Mini recharge with Facebook & WhatsApp, and is valid for 6 days. Both use recharge code *811#.",
+      "expected_sources": [
+        "PrepaidSystems.pdf"
+      ],
+      "expected_entities": [
+        "Aqwa Card 15",
+        "Aqwa Card 19",
+        "15",
+        "19",
+        "300",
+        "425",
+        "210",
+        "2 days",
+        "6 days",
+        "*811#"
+      ],
+      "expected_codes": [
+        "*811#"
+      ],
+      "must_not_contain": [
+        "Aqwa Card 22.5 only",
+        "Aqwa Card 30 only"
+      ],
+      "required_facts": [
+        "15 EGP",
+        "300 Mixes",
+        "2 days",
+        "no Hekaya Mini",
+        "19 EGP",
+        "425 Mixes",
+        "6 days",
+        "Hekaya Mini 400"
+      ]
+    },
+    {
+      "id": "TC-004",
+      "category": "exact_code",
+      "language": "en",
+      "question": "What is the subscription code for Hekaya Mixat 52?",
+      "expected_behavior": "answer_from_knowledge_base",
+      "reference_answer": "The subscription code for Hekaya Mixat 52 is *319*45# (or master menu *319#).",
+      "expected_sources": [
+        "HekayaMixat.pdf"
+      ],
+      "expected_entities": [
+        "Hekaya Mixat 52",
+        "*319*45#",
+        "*319#"
+      ],
+      "expected_codes": [
+        "*319*45#",
+        "*319#"
+      ],
+      "must_not_contain": [
+        "*319*52#",
+        "*811#",
+        "*566#"
+      ],
+      "required_facts": [
+        "*319*45#"
+      ]
+    },
+    {
+      "id": "TC-005",
+      "category": "exact_code",
+      "language": "en",
+      "question": "What is the subscription code for Hekaya Mixat 120?",
+      "expected_behavior": "answer_from_knowledge_base",
+      "reference_answer": "The subscription code for Hekaya Mixat 120 is *319*105# (or master code *319#).",
+      "expected_sources": [
+        "HekayaMixat.pdf"
+      ],
+      "expected_entities": [
+        "Hekaya Mixat 120",
+        "*319*105#",
+        "*319#"
+      ],
+      "expected_codes": [
+        "*319*105#",
+        "*319#"
+      ],
+      "must_not_contain": [
+        "*319*120#",
+        "*811#"
+      ],
+      "required_facts": [
+        "*319*105#"
+      ]
+    },
+    {
+      "id": "TC-006",
+      "category": "factual",
+      "language": "en",
+      "question": "How many family lines can be added to Hekaya Mixat 270?",
+      "expected_behavior": "answer_from_knowledge_base",
+      "reference_answer": "Hekaya Mixat 270 allows up to 3 additional family lines.",
+      "expected_sources": [
+        "HekayaMixat.pdf"
+      ],
+      "expected_entities": [
+        "Hekaya Mixat 270",
+        "3",
+        "family lines"
+      ],
+      "expected_codes": [],
+      "must_not_contain": [
+        "1 family line",
+        "2 family lines",
+        "4 family lines",
+        "Emerald"
+      ],
+      "required_facts": [
+        "3 additional family lines"
+      ]
+    },
+    {
+      "id": "TC-007",
+      "category": "wrong_entity",
+      "language": "en",
+      "question": "What is the price and internet quota of Hekaya Internet 270?",
+      "expected_behavior": "answer_from_knowledge_base",
+      "reference_answer": "Hekaya Internet 270 costs 270 EGP (before tax) and provides 15,000 MB (15 GB) of basic internet quota (up to 20,000 MB upon renewal). Do not confuse it with Hekaya Mixat 270.",
+      "expected_sources": [
+        "HekayaInternet.pdf"
+      ],
+      "expected_entities": [
+        "Hekaya Internet 270",
+        "270",
+        "15,000 MB"
+      ],
+      "expected_codes": [],
+      "must_not_contain": [
+        "15,400 Mixes",
+        "calls and mixes",
+        "385.72 EGP"
+      ],
+      "required_facts": [
+        "270 EGP",
+        "15,000 MB"
+      ]
+    },
+    {
+      "id": "TC-008",
+      "category": "wrong_entity",
+      "language": "en",
+      "question": "What is the price and Mix count of Hekaya Mixat 270?",
+      "expected_behavior": "answer_from_knowledge_base",
+      "reference_answer": "Hekaya Mixat 270 costs 270 EGP pre-tax (385.71 or 385.72 EGP including tax) and provides 15,400 Mixes. Do not confuse it with Hekaya Internet 270.",
+      "expected_sources": [
+        "HekayaMixat.pdf"
+      ],
+      "expected_entities": [
+        "Hekaya Mixat 270",
+        "270",
+        "385.71",
+        "15,400 Mixes"
+      ],
+      "expected_codes": [],
+      "must_not_contain": [
+        "15,000 MB only",
+        "Hekaya Internet"
+      ],
+      "required_facts": [
+        "15,400 | 15400",
+        "270 | 385.71 | 385.72"
+      ]
+    },
+    {
+      "id": "TC-009",
+      "category": "factual",
+      "language": "en",
+      "question": "How many family lines does Emerald 1120 allow?",
+      "expected_behavior": "answer_from_knowledge_base",
+      "reference_answer": "Emerald 1120 allows 4 extra family lines (5 lines in total) on the same account.",
+      "expected_sources": [
+        "Emerald (2).pdf"
+      ],
+      "expected_entities": [
+        "Emerald 1120",
+        "4",
+        "family lines"
+      ],
+      "expected_codes": [],
+      "must_not_contain": [
+        "1 family line",
+        "2 family lines",
+        "3 family lines"
+      ],
+      "required_facts": [
+        "4 extra family lines / 4 family lines / 5 family lines"
+      ]
+    },
+    {
+      "id": "TC-010",
+      "category": "factual",
+      "language": "en",
+      "question": "What is the price and validity of Data Line 25 GB?",
+      "expected_behavior": "answer_from_knowledge_base",
+      "reference_answer": "Data Line 25 GB costs 375 EGP before tax and has a validity of 3 months.",
+      "expected_sources": [
+        "DataLine.pdf"
+      ],
+      "expected_entities": [
+        "Data Line 25 GB",
+        "375",
+        "3 months"
+      ],
+      "expected_codes": [],
+      "must_not_contain": [
+        "1 month",
+        "6 months",
+        "Hekaya"
+      ],
+      "required_facts": [
+        "375 EGP",
+        "3 months"
+      ]
+    },
+    {
+      "id": "TC-011",
+      "category": "enumeration",
+      "language": "en",
+      "question": "What are all monthly Hekaya Mixat packages?",
+      "expected_behavior": "answer_from_knowledge_base",
+      "reference_answer": "The monthly Hekaya Mixat packages are 52, 69, 92, 120, 180, and 270.",
+      "expected_sources": [
+        "HekayaMixat.pdf"
+      ],
+      "expected_entities": [
+        "Hekaya Mixat 52",
+        "69",
+        "92",
+        "120",
+        "180",
+        "270"
+      ],
+      "expected_codes": [],
+      "must_not_contain": [
+        "Hekaya Mixat 100",
+        "Hekaya Mixat 150"
+      ],
+      "required_facts": [
+        "52",
+        "69",
+        "92",
+        "120",
+        "180",
+        "270"
+      ]
+    },
+    {
+      "id": "TC-012",
+      "category": "enumeration",
+      "language": "en",
+      "question": "What are all Hekaya Mini recharge tiers?",
+      "expected_behavior": "answer_from_knowledge_base",
+      "reference_answer": "The Hekaya Mini recharge tiers are 19, 22.5, and 30.",
+      "expected_sources": [
+        "HekayaMixat.pdf"
+      ],
+      "expected_entities": [
+        "Hekaya Mini 19",
+        "22.5",
+        "30"
+      ],
+      "expected_codes": [],
+      "must_not_contain": [
+        "Hekaya Mini 25",
+        "Mini 25"
+      ],
+      "required_facts": [
+        "19",
+        "22.5",
+        "30"
+      ]
+    },
+    {
+      "id": "TC-013",
+      "category": "enumeration",
+      "language": "en",
+      "question": "What are all exclusive Super Connect tiers for Hekaya Mixat?",
+      "expected_behavior": "complete_enumeration",
+      "reference_answer": "The 10 exclusive Super Connect tiers for Hekaya Mixat are: Super Connect 9, 20, 32, 50, 80, 105, 165, 260, 390, and 520.",
+      "expected_sources": [
+        "HekayaMixat.pdf"
+      ],
+      "expected_entities": [
+        "9",
+        "20",
+        "32",
+        "50",
+        "80",
+        "105",
+        "165",
+        "260",
+        "390",
+        "520"
+      ],
+      "expected_codes": [],
+      "must_not_contain": [
+        "Super Connect 100"
+      ],
+      "required_facts": [
+        "9",
+        "20",
+        "32",
+        "50",
+        "80",
+        "105",
+        "165",
+        "260",
+        "390",
+        "520"
+      ]
+    },
+    {
+      "id": "TC-014",
+      "category": "enumeration",
+      "language": "en",
+      "question": "What are all Data Line core packages?",
+      "expected_behavior": "complete_enumeration",
+      "reference_answer": "The 8 core Data Line packages are: 1.8 GB, 2.5 GB, 3.5 GB, 8 GB, 14 GB, 25 GB, 45 GB, and 72 GB.",
+      "expected_sources": [
+        "DataLine.pdf"
+      ],
+      "expected_entities": [
+        "1.8 GB",
+        "2.5 GB",
+        "3.5 GB",
+        "8 GB",
+        "14 GB",
+        "25 GB",
+        "45 GB",
+        "72 GB"
+      ],
+      "expected_codes": [],
+      "must_not_contain": [
+        "100 GB"
+      ],
+      "required_facts": [
+        "1.8",
+        "2.5",
+        "3.5",
+        "8",
+        "14",
+        "25",
+        "45",
+        "72"
+      ]
+    },
+    {
+      "id": "TC-015",
+      "category": "enumeration",
+      "language": "en",
+      "question": "What are all Emerald packages?",
+      "expected_behavior": "complete_enumeration",
+      "reference_answer": "The 5 Emerald postpaid packages are: Emerald 430, Emerald 780, Emerald 1120, Emerald 1725, and Emerald 3450.",
+      "expected_sources": [
+        "Emerald (2).pdf"
+      ],
+      "expected_entities": [
+        "430",
+        "780",
+        "1120",
+        "1725",
+        "3450"
+      ],
+      "expected_codes": [],
+      "must_not_contain": [
+        "Emerald 900",
+        "Emerald 500"
+      ],
+      "required_facts": [
+        "430",
+        "780",
+        "1120",
+        "1725",
+        "3450"
+      ]
+    },
+    {
+      "id": "TC-016",
+      "category": "enumeration",
+      "language": "en",
+      "question": "What are all simple prepaid options covered by the source?",
+      "expected_behavior": "complete_enumeration",
+      "reference_answer": "The source covers simple prepaid options: Aqwa Card recharges, Ahlan Pay As You Go plans, Daily Bundles, and Menu El Geneh micro-bundles.",
+      "expected_sources": [
+        "PrepaidSystems.pdf"
+      ],
+      "expected_entities": [
+        "Aqwa Card",
+        "Ahlan",
+        "Daily Plans",
+        "Menu El Geneh"
+      ],
+      "expected_codes": [],
+      "must_not_contain": [
+        "Emerald",
+        "DataLine"
+      ],
+      "required_facts": [
+        "Aqwa Card",
+        "Ahlan",
+        "Daily | Menu El Geneh"
+      ]
+    },
+    {
+      "id": "TC-017",
+      "category": "non_existent",
+      "language": "en",
+      "question": "What is the price of Hekaya Internet 100?",
+      "expected_behavior": "explicit_rejection_or_suggestion",
+      "reference_answer": "Hekaya Internet 100 is not listed in official plans. The closest valid plan is Hekaya Internet 105 (105 EGP pre-tax).",
+      "expected_sources": [
+        "HekayaInternet.pdf"
+      ],
+      "expected_entities": [
+        "not listed",
+        "not found",
+        "Hekaya Internet 105"
+      ],
+      "expected_codes": [],
+      "must_not_contain": [
+        "price of Hekaya Internet 100 is 100 EGP",
+        "costs 100 EGP"
+      ],
+      "required_facts": [
+        "not listed | does not exist | not available"
+      ]
+    },
+    {
+      "id": "TC-018",
+      "category": "non_existent",
+      "language": "en",
+      "question": "What is the price of Hekaya Internet 110?",
+      "expected_behavior": "explicit_rejection_or_suggestion",
+      "reference_answer": "Hekaya Internet 110 is not listed in the official source packages. (Nearest available packages are 105 EGP or 132 EGP).",
+      "expected_sources": [
+        "HekayaInternet.pdf"
+      ],
+      "expected_entities": [
+        "not listed",
+        "not available"
+      ],
+      "expected_codes": [],
+      "must_not_contain": [
+        "Hekaya Internet 110 costs",
+        "price of Hekaya Internet 110 is 110"
+      ],
+      "required_facts": [
+        "not listed | does not exist | not available"
+      ]
+    },
+    {
+      "id": "TC-019",
+      "category": "non_existent",
+      "language": "en",
+      "question": "What is the code for Hekaya Mixat 100?",
+      "expected_behavior": "explicit_rejection_or_suggestion",
+      "reference_answer": "Hekaya Mixat 100 is not a current monthly Hekaya Mixat package in the source, so there is no subscription code for it. Valid tiers are 52, 69, 92, 120, 180, and 270.",
+      "expected_sources": [
+        "HekayaMixat.pdf"
+      ],
+      "expected_entities": [
+        "not a current",
+        "not listed",
+        "no code"
+      ],
+      "expected_codes": [],
+      "must_not_contain": [
+        "*319*100#",
+        "code is *319*100#"
+      ],
+      "required_facts": [
+        "not listed | does not exist | not available | no code | not a current"
+      ]
+    },
+    {
+      "id": "TC-020",
+      "category": "non_existent",
+      "language": "en",
+      "question": "What is Data Line 100 GB?",
+      "expected_behavior": "explicit_rejection_or_suggestion",
+      "reference_answer": "Data Line 100 GB is not listed as a core Data Line package in the source data. Core tiers range up to 72 GB.",
+      "expected_sources": [
+        "DataLine.pdf"
+      ],
+      "expected_entities": [
+        "not listed",
+        "not available"
+      ],
+      "expected_codes": [],
+      "must_not_contain": [
+        "Data Line 100 GB is a package",
+        "costs 1000 EGP for 100 GB"
+      ],
+      "required_facts": [
+        "not listed"
+      ]
+    },
+    {
+      "id": "TC-021",
+      "category": "non_existent",
+      "language": "en",
+      "question": "What is Emerald 900?",
+      "expected_behavior": "explicit_rejection_or_suggestion",
+      "reference_answer": "Emerald 900 is not listed among the official Emerald postpaid packages. Valid Emerald packages are 430, 780, 1120, 1725, and 3450.",
+      "expected_sources": [
+        "Emerald (2).pdf"
+      ],
+      "expected_entities": [
+        "not listed",
+        "not found"
+      ],
+      "expected_codes": [],
+      "must_not_contain": [
+        "Emerald 900 costs",
+        "Emerald 900 includes"
+      ],
+      "required_facts": [
+        "not listed"
+      ]
+    },
+    {
+      "id": "TC-022",
+      "category": "non_existent",
+      "language": "en",
+      "question": "What is Hekaya Mini Recharge 25?",
+      "expected_behavior": "explicit_rejection_or_suggestion",
+      "reference_answer": "Hekaya Mini Recharge 25 is not listed. Valid official Hekaya Mini recharge tiers are 19, 22.5, and 30.",
+      "expected_sources": [
+        "HekayaMixat.pdf"
+      ],
+      "expected_entities": [
+        "not listed",
+        "valid tiers are 19, 22.5 and 30"
+      ],
+      "expected_codes": [],
+      "must_not_contain": [
+        "Hekaya Mini 25 costs 25"
+      ],
+      "required_facts": [
+        "not listed"
+      ]
+    },
+    {
+      "id": "TC-023",
+      "category": "non_existent",
+      "language": "en",
+      "question": "What is Super Connect 100?",
+      "expected_behavior": "explicit_rejection_or_suggestion",
+      "reference_answer": "Super Connect 100 is not listed among the exclusive Hekaya Mixat Super Connect tiers (the available tiers are 9, 20, 32, 50, 80, 105, 165, 260, 390, 520).",
+      "expected_sources": [
+        "HekayaMixat.pdf"
+      ],
+      "expected_entities": [
+        "not listed",
+        "not found"
+      ],
+      "expected_codes": [],
+      "must_not_contain": [
+        "Super Connect 100 costs 100"
+      ],
+      "required_facts": [
+        "not listed"
+      ]
+    },
+    {
+      "id": "TC-024",
+      "category": "comparison",
+      "language": "en",
+      "question": "What is the difference between Aqwa Card 44 and Aqwa Card 45?",
+      "expected_behavior": "balanced_comparison",
+      "reference_answer": "Aqwa Card 44 costs 44 EGP, provides 1,100 Mixes/minutes, is valid for 14 days, and does not include Hekaya Mini. Aqwa Card 45 costs 45 EGP, provides 700 Mixes/minutes, has a longer validity of 28 days, and does not include Hekaya Mini.",
+      "expected_sources": [
+        "PrepaidSystems.pdf"
+      ],
+      "expected_entities": [
+        "Aqwa Card 44",
+        "Aqwa Card 45",
+        "44",
+        "45",
+        "1,100",
+        "700",
+        "14 days",
+        "28 days"
+      ],
+      "expected_codes": [],
+      "must_not_contain": [
+        "Hekaya Mixat 45"
+      ],
+      "required_facts": [
+        "44 EGP",
+        "1,100 Mixes",
+        "14 days",
+        "45 EGP",
+        "700 Mixes",
+        "28 days"
+      ]
+    },
+    {
+      "id": "TC-025",
+      "category": "factual",
+      "language": "en",
+      "question": "How much data does Data Line 72 GB provide on the first recharge with Double the Package?",
+      "expected_behavior": "answer_from_knowledge_base",
+      "reference_answer": "Data Line 72 GB provides 144 GB on the first recharge under the Double the Package offer.",
+      "expected_sources": [
+        "DataLine.pdf"
+      ],
+      "expected_entities": [
+        "Data Line 72 GB",
+        "144 GB",
+        "Double the Package"
+      ],
+      "expected_codes": [],
+      "must_not_contain": [
+        "72 GB only",
+        "200 GB"
+      ],
+      "required_facts": [
+        "144 GB"
+      ]
+    },
+    {
+      "id": "TC-026",
+      "category": "factual",
+      "language": "en",
+      "question": "What is the Double the Package offer on Data Line?",
+      "expected_behavior": "answer_from_knowledge_base",
+      "reference_answer": "The Double the Package offer on Data Line doubles the basic internet quota on the first recharge only and does not repeat upon renewal.",
+      "expected_sources": [
+        "DataLine.pdf"
+      ],
+      "expected_entities": [
+        "Double the Package",
+        "first recharge only",
+        "does not repeat"
+      ],
+      "expected_codes": [],
+      "must_not_contain": [
+        "repeats every month",
+        "permanent double"
+      ],
+      "required_facts": [
+        "first recharge | first time | first recharge only",
+        "doubles | double | 2x"
+      ]
+    },
+    {
+      "id": "TC-027",
+      "category": "factual",
+      "language": "en",
+      "question": "How many Mixes are in Hekaya Mixat 92?",
+      "expected_behavior": "answer_from_knowledge_base",
+      "reference_answer": "Hekaya Mixat 92 includes 3,750 Mixes.",
+      "expected_sources": [
+        "HekayaMixat.pdf"
+      ],
+      "expected_entities": [
+        "Hekaya Mixat 92",
+        "3,750",
+        "3750"
+      ],
+      "expected_codes": [],
+      "must_not_contain": [
+        "5,375",
+        "1,900"
+      ],
+      "required_facts": [
+        "3,750 | 3750"
+      ]
+    },
+    {
+      "id": "TC-028",
+      "category": "factual",
+      "language": "en",
+      "question": "How many family lines does Hekaya Mixat 180 have?",
+      "expected_behavior": "answer_from_knowledge_base",
+      "reference_answer": "Hekaya Mixat 180 includes 2 additional family lines.",
+      "expected_sources": [
+        "HekayaMixat.pdf"
+      ],
+      "expected_entities": [
+        "Hekaya Mixat 180",
+        "2",
+        "family lines"
+      ],
+      "expected_codes": [],
+      "must_not_contain": [
+        "1 family line",
+        "3 family lines"
+      ],
+      "required_facts": [
+        "2 | two"
+      ]
+    },
+    {
+      "id": "TC-029",
+      "category": "factual",
+      "language": "en",
+      "question": "What are the Hekaya Mixat Extra add-ons and their units?",
+      "expected_behavior": "answer_from_knowledge_base",
+      "reference_answer": "The Hekaya Mixat Extra add-ons are: Extra 4.5 gives 60 Mixes, Extra 7.5 gives 120 Mixes, and Extra 15 gives 300 Mixes. Subscription code is *626#.",
+      "expected_sources": [
+        "HekayaMixat.pdf"
+      ],
+      "expected_entities": [
+        "Extra 4.5",
+        "Extra 7.5",
+        "Extra 15",
+        "60",
+        "120",
+        "300",
+        "*626#"
+      ],
+      "expected_codes": [
+        "*626#"
+      ],
+      "must_not_contain": [
+        "Extra 20",
+        "*319*626#"
+      ],
+      "required_facts": [
+        "4.5",
+        "60",
+        "7.5",
+        "120",
+        "15",
+        "300",
+        "*626#"
+      ]
+    },
+    {
+      "id": "TC-030",
+      "category": "factual",
+      "language": "en",
+      "question": "Which Hekaya Mixat packages can redeem Home Internet?",
+      "expected_behavior": "answer_from_knowledge_base",
+      "reference_answer": "Only Hekaya Mixat 180 and Hekaya Mixat 270 can redeem Home Internet. Home Internet 100 GB requires 5,800 Mixes (available on both 180 and 270); Home Internet 150 GB requires 7,000 Mixes (available exclusively on 270).",
+      "expected_sources": [
+        "HekayaMixat.pdf"
+      ],
+      "expected_entities": [
+        "180",
+        "270",
+        "5,800",
+        "7,000",
+        "100 GB",
+        "150 GB"
+      ],
+      "expected_codes": [],
+      "must_not_contain": [
+        "Hekaya Mixat 52",
+        "Hekaya Mixat 69",
+        "Hekaya Mixat 92",
+        "Hekaya Mixat 120"
+      ],
+      "required_facts": [
+        "180",
+        "270",
+        "5,800 | 5800",
+        "7,000 | 7000"
+      ]
+    },
+    {
+      "id": "TC-031",
+      "category": "arabic",
+      "language": "ar",
+      "question": "سعر كارت أقوى 19 كام وبيشمل إيه؟",
+      "expected_behavior": "answer_from_knowledge_base",
+      "reference_answer": "سعر كارت أقوى 19 هو 19 جنيه، ويشمل 425 ميكس (ميجابايت أو دقائق لكل الشبكات)، و300 دقيقة فيديو وترفيه وسوشيال، بالإضافة إلى شحنة Hekaya Mini بقيمة 400 ميكس مع فيسبوك وواتساب، وصلاحيته 6 أيام وكود الشحن *811#.",
+      "expected_sources": [
+        "PrepaidSystems.pdf"
+      ],
+      "expected_entities": [
+        "19",
+        "425",
+        "300",
+        "400",
+        "6",
+        "*811#",
+        "Hekaya Mini"
+      ],
+      "expected_codes": [
+        "*811#"
+      ],
+      "must_not_contain": [
+        "كارت 15",
+        "كارت 30"
+      ],
+      "required_facts": [
+        "19",
+        "425",
+        "300",
+        "*811#"
+      ]
+    },
+    {
+      "id": "TC-032",
+      "category": "arabic",
+      "language": "ar",
+      "question": "حكاية مكسات 180 فيها كام خط عيلة؟",
+      "expected_behavior": "answer_from_knowledge_base",
+      "reference_answer": "باقة حكاية مكسات 180 تتيح إضافة خطين عائليين إضافيين (2 خط عيلة).",
+      "expected_sources": [
+        "HekayaMixat.pdf"
+      ],
+      "expected_entities": [
+        "حكاية مكسات 180",
+        "2",
+        "خطين"
+      ],
+      "expected_codes": [],
+      "must_not_contain": [
+        "1 خط",
+        "3 خطوط"
+      ],
+      "required_facts": [
+        "خطين | 2 | خطين عيلة | 2 خط عيلة"
+      ]
+    },
+    {
+      "id": "TC-033",
+      "category": "arabic",
+      "language": "ar",
+      "question": "كود الاشتراك في حكاية مكسات 120 إيه؟",
+      "expected_behavior": "answer_from_knowledge_base",
+      "reference_answer": "كود الاشتراك في باقة حكاية مكسات 120 هو *319*105# أو عبر الكود الموحد *319#.",
+      "expected_sources": [
+        "HekayaMixat.pdf"
+      ],
+      "expected_entities": [
+        "*319*105#",
+        "*319#"
+      ],
+      "expected_codes": [
+        "*319*105#",
+        "*319#"
+      ],
+      "must_not_contain": [
+        "*319*120#"
+      ],
+      "required_facts": [
+        "*319*105# | *319#"
+      ]
+    },
+    {
+      "id": "TC-034",
+      "category": "arabic",
+      "language": "ar",
+      "question": "حكاية إنترنت 270 فيها كام ميجا؟",
+      "expected_behavior": "answer_from_knowledge_base",
+      "reference_answer": "باقة حكاية إنترنت 270 تمنح 15,000 ميجابايت (15 جيجا) كباقة أساسية (وتصل إلى 20,000 ميجابايت عند التجديد).",
+      "expected_sources": [
+        "HekayaInternet.pdf"
+      ],
+      "expected_entities": [
+        "15,000",
+        "15000",
+        "270"
+      ],
+      "expected_codes": [],
+      "must_not_contain": [
+        "15,400 ميكس"
+      ],
+      "required_facts": [
+        "15,000 | 15000 | 15 جيجا"
+      ]
+    },
+    {
+      "id": "TC-035",
+      "category": "arabic",
+      "language": "ar",
+      "question": "Data Line 72 جيجا بتديني كام في أول شحنة مع Double the Package؟",
+      "expected_behavior": "answer_from_knowledge_base",
+      "reference_answer": "باقة Data Line 72 جيجابايت تمنحك 144 جيجابايت في أول شحنة مع عرض ضعف الباقة (Double the Package).",
+      "expected_sources": [
+        "DataLine.pdf"
+      ],
+      "expected_entities": [
+        "144",
+        "Double the Package"
+      ],
+      "expected_codes": [],
+      "must_not_contain": [
+        "72 جيجا فقط",
+        "200 جيجا"
+      ],
+      "required_facts": [
+        "144"
+      ]
+    },
+    {
+      "id": "TC-036",
+      "category": "arabic",
+      "language": "ar",
+      "question": "هل كارت أقوى 5 فيه Hekaya Mini؟",
+      "expected_behavior": "explicit_rejection_or_suggestion",
+      "reference_answer": "لا، كارت أقوى 5 لا يتضمن شحنة Hekaya Mini.",
+      "expected_sources": [
+        "PrepaidSystems.pdf"
+      ],
+      "expected_entities": [
+        "لا",
+        "أقوى كارت 5"
+      ],
+      "expected_codes": [],
+      "must_not_contain": [
+        "نعم",
+        "يتضمن حكاية ميني"
+      ],
+      "required_facts": [
+        "لا | لا يتضمن | ليس"
+      ]
+    },
+    {
+      "id": "TC-037",
+      "category": "arabic",
+      "language": "ar",
+      "question": "هل Data Line فيها Family Lines؟",
+      "expected_behavior": "explicit_rejection_or_suggestion",
+      "reference_answer": "لا تتيح باقات Data Line خطوط عائلة (Family Lines)؛ فهي مخصصة لأجهزة الراوتر وUSB Modem.",
+      "expected_sources": [
+        "DataLine.pdf"
+      ],
+      "expected_entities": [
+        "لا",
+        "MiFi",
+        "USB Modem"
+      ],
+      "expected_codes": [],
+      "must_not_contain": [
+        "3 خطوط عائلة",
+        "خطوط عائلية متاحة"
+      ],
+      "required_facts": [
+        "لا | لا تتيح | لا تدعم | غير متاحة"
+      ]
+    },
+    {
+      "id": "TC-038",
+      "category": "mixed_language",
+      "language": "mixed",
+      "question": "كام family lines في Hekaya Mixat 270؟",
+      "expected_behavior": "answer_from_knowledge_base",
+      "reference_answer": "باقة Hekaya Mixat 270 تتيح 3 خطوط عائلة إضافية (3 additional family lines).",
+      "expected_sources": [
+        "HekayaMixat.pdf"
+      ],
+      "expected_entities": [
+        "3",
+        "Hekaya Mixat 270",
+        "family lines"
+      ],
+      "expected_codes": [],
+      "must_not_contain": [
+        "1 family line",
+        "2 family lines",
+        "4 family lines",
+        "1 extra line",
+        "2 extra lines",
+        "4 extra lines",
+        "خط واحد",
+        "خطين",
+        "4 خطوط"
+      ],
+      "required_facts": [
+        "3"
+      ]
+    },
+    {
+      "id": "TC-039",
+      "category": "mixed_language",
+      "language": "mixed",
+      "question": "كود Hekaya Mixat 92 إيه؟",
+      "expected_behavior": "answer_from_knowledge_base",
+      "reference_answer": "كود الاشتراك في Hekaya Mixat 92 هو *319*80# (أو الكود العام *319#).",
+      "expected_sources": [
+        "HekayaMixat.pdf"
+      ],
+      "expected_entities": [
+        "*319*80#",
+        "*319#"
+      ],
+      "expected_codes": [
+        "*319*80#",
+        "*319#"
+      ],
+      "must_not_contain": [
+        "*319*92#"
+      ],
+      "required_facts": [
+        "*319*80# | *319#"
+      ]
+    },
+    {
+      "id": "TC-040",
+      "category": "mixed_language",
+      "language": "mixed",
+      "question": "What is سعر Hekaya Internet 105؟",
+      "expected_behavior": "answer_from_knowledge_base",
+      "reference_answer": "سعر Hekaya Internet 105 هو 105 جنيه قبل الضريبة (150 جنيه شامل الضريبة).",
+      "expected_sources": [
+        "HekayaInternet.pdf"
+      ],
+      "expected_entities": [
+        "105",
+        "150"
+      ],
+      "expected_codes": [],
+      "must_not_contain": [
+        "Hekaya Mixat 105"
+      ],
+      "required_facts": [
+        "105"
+      ]
+    },
+    {
+      "id": "TC-041",
+      "category": "conversation",
+      "language": "en",
+      "question": "yes",
+      "history": [
+        {
+          "role": "user",
+          "content": "Does Aqwa Card 5 include Hekaya Mini?"
+        },
+        {
+          "role": "assistant",
+          "content": "No, Aqwa Card 5 does not include a Hekaya Mini recharge."
+        }
+      ],
+      "expected_behavior": "preserve_entity_state",
+      "reference_answer": "Understood. As confirmed, Aqwa Card 5 provides 80 Mixes for 1 day at 5 EGP and does not include a Hekaya Mini recharge.",
+      "expected_sources": [
+        "PrepaidSystems.pdf"
+      ],
+      "expected_entities": [
+        "Aqwa Card 5",
+        "5",
+        "80 Mixes"
+      ],
+      "expected_codes": [],
+      "must_not_contain": [
+        "Ahlan Super Yes",
+        "Super Yes plan"
+      ],
+      "required_facts": [
+        "Aqwa Card 5 | 5 | 80"
+      ]
+    },
+    {
+      "id": "TC-042",
+      "category": "conversation",
+      "language": "en",
+      "question": "What about the first one's code?",
+      "history": [
+        {
+          "role": "user",
+          "content": "Compare Hekaya Internet 105 and 132."
+        },
+        {
+          "role": "assistant",
+          "content": "Hekaya Internet 105 costs 105 EGP (6,000 MB), while Hekaya Internet 132 costs 132 EGP (8,000 MB)."
+        }
+      ],
+      "expected_behavior": "preserve_entity_state",
+      "reference_answer": "The subscription code for Hekaya Internet 105 (the first one) is *319# (or *319*105# / *566#).",
+      "expected_sources": [
+        "HekayaInternet.pdf"
+      ],
+      "expected_entities": [
+        "Hekaya Internet 105",
+        "*319#",
+        "*566#"
+      ],
+      "expected_codes": [
+        "*319#",
+        "*566#",
+        "*319*105#"
+      ],
+      "must_not_contain": [
+        "Hekaya Mixat 105",
+        "Hekaya Mixat code"
+      ],
+      "required_facts": [
+        "*319# | *566# | *319*105#"
+      ]
+    },
+    {
+      "id": "TC-043",
+      "category": "complex_agent",
+      "language": "en",
+      "question": "Which current Hekaya Mixat packages support family lines?",
+      "expected_behavior": "complete_enumeration",
+      "reference_answer": "Hekaya Mixat packages supporting family lines are: Hekaya Mixat 92 (1 family line), Hekaya Mixat 120 (1 family line), Hekaya Mixat 180 (2 family lines), and Hekaya Mixat 270 (3 family lines). Hekaya Mixat 52 and 69 do not allow additional family lines.",
+      "expected_sources": [
+        "HekayaMixat.pdf"
+      ],
+      "expected_entities": [
+        "92",
+        "120",
+        "180",
+        "270",
+        "52",
+        "69"
+      ],
+      "expected_codes": [],
+      "must_not_contain": [
+        "52 supports family lines",
+        "69 supports family lines"
+      ],
+      "required_facts": [
+        "92",
+        "120",
+        "180",
+        "270"
+      ]
+    },
+    {
+      "id": "TC-044",
+      "category": "complex_agent",
+      "language": "en",
+      "question": "What is the subscription code for Hekaya Internet 345?",
+      "expected_behavior": "answer_from_knowledge_base",
+      "reference_answer": "The subscription code for Hekaya Internet 345 is *319# (or *566# / My e& Egypt app). It gives 22,500 MB (up to 30,000 MB on renewal).",
+      "expected_sources": [
+        "HekayaInternet.pdf"
+      ],
+      "expected_entities": [
+        "Hekaya Internet 345",
+        "*319#",
+        "*566#"
+      ],
+      "expected_codes": [
+        "*319#",
+        "*566#"
+      ],
+      "must_not_contain": [
+        "*319*345# as a Mixat code"
+      ],
+      "required_facts": [
+        "*319# | *566#"
+      ]
+    },
+    {
+      "id": "TC-045",
+      "category": "complex_agent",
+      "language": "en",
+      "question": "What is the difference between renewed and non-renewed Super Connect 105?",
+      "expected_behavior": "answer_from_knowledge_base",
+      "reference_answer": "For Super Connect 105 (exclusive for Hekaya Mixat): if the base bundle is renewed on time, the quota is 7,500 MB; if not renewed on time, the quota is 6,000 MB.",
+      "expected_sources": [
+        "HekayaMixat.pdf"
+      ],
+      "expected_entities": [
+        "Super Connect 105",
+        "7,500 MB",
+        "6,000 MB",
+        "renewed",
+        "non-renewed"
+      ],
+      "expected_codes": [],
+      "must_not_contain": [
+        "10,000 MB"
+      ],
+      "required_facts": [
+        "7,500 | 7500",
+        "6,000 | 6000"
+      ]
+    },
+    {
+      "id": "TC-046",
+      "category": "complex_agent",
+      "language": "en",
+      "question": "How many Coins are earned on renewal for Hekaya Mixat 52, 69, 92, 120, 180 and 270?",
+      "expected_behavior": "complete_enumeration",
+      "reference_answer": "Upon timely renewal, customers earn: Hekaya Mixat 52 -> 104 Coins; Hekaya Mixat 69 -> 138 Coins; Hekaya Mixat 92 -> 184 Coins; Hekaya Mixat 120 -> 240 Coins; Hekaya Mixat 180 -> 360 Coins; and Hekaya Mixat 270 -> 540 Coins.",
+      "expected_sources": [
+        "HekayaMixat.pdf"
+      ],
+      "expected_entities": [
+        "104",
+        "138",
+        "184",
+        "240",
+        "360",
+        "540",
+        "Coins"
+      ],
+      "expected_codes": [],
+      "must_not_contain": [
+        "100 Coins for 52",
+        "200 Coins for 92"
+      ],
+      "required_facts": [
+        "104",
+        "138",
+        "184",
+        "240",
+        "360",
+        "540"
+      ]
+    },
+    {
+      "id": "TC-047",
+      "category": "complex_agent",
+      "language": "en",
+      "question": "What is the master USSD code for Hekaya Mixat and what does it manage?",
+      "expected_behavior": "answer_from_knowledge_base",
+      "reference_answer": "The master USSD code for Hekaya Mixat is *319#. It manages adding and removing family lines, checking balance/mixes, transferring on-demand mixes, plan renewals, and plan switching.",
+      "expected_sources": [
+        "HekayaMixat.pdf"
+      ],
+      "expected_entities": [
+        "*319#",
+        "family lines",
+        "renewals",
+        "transfers",
+        "balance"
+      ],
+      "expected_codes": [
+        "*319#"
+      ],
+      "must_not_contain": [
+        "*811#",
+        "*101#"
+      ],
+      "required_facts": [
+        "*319#"
+      ]
+    },
+    {
+      "id": "TC-048",
+      "category": "complex_agent",
+      "language": "en",
+      "question": "What are the Data Line add-ons?",
+      "expected_behavior": "complete_enumeration",
+      "reference_answer": "The Data Line add-ons are: Extra 500 MB for 15 EGP and Extra 1 GB for 29 EGP (or via code *130#).",
+      "expected_sources": [
+        "DataLine.pdf"
+      ],
+      "expected_entities": [
+        "Extra 500 MB",
+        "15 EGP",
+        "Extra 1 GB",
+        "29 EGP"
+      ],
+      "expected_codes": [],
+      "must_not_contain": [
+        "Extra 10 GB"
+      ],
+      "required_facts": [
+        "500",
+        "15",
+        "1",
+        "29"
+      ]
+    },
+    {
+      "category": "exact_package_mcp",
+      "language": "ar",
+      "question": "ما هي تفاصيل باقة إمرالد 430 الشهرية؟",
+      "expected_behavior": "answer_from_mcp",
+      "expected_entities": [
+        "إمرالد 430",
+        "430",
+        "1500",
+        "20 GB"
+      ],
+      "expected_codes": [
+        "111"
+      ],
+      "required_facts": [
+        "430 جنيه",
+        "1500 دقيقة",
+        "20 جيجابايت"
+      ],
+      "id": "TC-049"
+    },
+    {
+      "category": "exact_package_mcp",
+      "language": "ar",
+      "question": "كم سعر باقة إمرالد 780 وما هي مميزاتها؟",
+      "expected_behavior": "answer_from_mcp",
+      "expected_entities": [
+        "إمرالد 780",
+        "780",
+        "45 GB",
+        "3000"
+      ],
+      "expected_codes": [
+        "111"
+      ],
+      "required_facts": [
+        "780 جنيه",
+        "45 جيجابايت",
+        "3000 دقيقة"
+      ],
+      "id": "TC-050"
+    },
+    {
+      "category": "exact_package_mcp",
+      "language": "en",
+      "question": "What are the full specifications for Emerald 1120?",
+      "expected_behavior": "answer_from_mcp",
+      "expected_entities": [
+        "Emerald 1120",
+        "1120",
+        "70 GB",
+        "5000"
+      ],
+      "expected_codes": [
+        "111"
+      ],
+      "required_facts": [
+        "1120 EGP",
+        "70 GB",
+        "5000 minutes"
+      ],
+      "id": "TC-051"
+    },
+    {
+      "category": "exact_package_mcp",
+      "language": "en",
+      "question": "Give me the specs of Emerald 1725 package.",
+      "expected_behavior": "answer_from_mcp",
+      "expected_entities": [
+        "Emerald 1725",
+        "1725",
+        "100 GB",
+        "7000"
+      ],
+      "expected_codes": [
+        "111"
+      ],
+      "required_facts": [
+        "1725 EGP",
+        "100 GB",
+        "7000 minutes"
+      ],
+      "id": "TC-052"
+    },
+    {
+      "category": "exact_package_mcp",
+      "language": "ar",
+      "question": "تفاصيل باقة حكاية مكسات 69",
+      "expected_behavior": "answer_from_mcp",
+      "expected_entities": [
+        "حكاية مكسات 69",
+        "69",
+        "2000",
+        "*319*69#"
+      ],
+      "expected_codes": [
+        "*319*69#",
+        "*319#"
+      ],
+      "required_facts": [
+        "69 جنيه",
+        "2000 مكس",
+        "*319*69#"
+      ],
+      "id": "TC-053"
+    },
+    {
+      "category": "exact_package_mcp",
+      "language": "ar",
+      "question": "تفاصيل باقة حكاية مكسات 120",
+      "expected_behavior": "answer_from_mcp",
+      "expected_entities": [
+        "حكاية مكسات 120",
+        "120",
+        "4500",
+        "*319*120#"
+      ],
+      "expected_codes": [
+        "*319*120#",
+        "*319#"
+      ],
+      "required_facts": [
+        "120 جنيه",
+        "4500 مكس"
+      ],
+      "id": "TC-054"
+    },
+    {
+      "category": "exact_package_mcp",
+      "language": "ar",
+      "question": "تفاصيل باقة حكاية مكسات 180",
+      "expected_behavior": "answer_from_mcp",
+      "expected_entities": [
+        "حكاية مكسات 180",
+        "180",
+        "8000",
+        "*319*180#"
+      ],
+      "expected_codes": [
+        "*319*180#",
+        "*319#"
+      ],
+      "required_facts": [
+        "180 جنيه",
+        "8000 مكس"
+      ],
+      "id": "TC-055"
+    },
+    {
+      "category": "exact_package_mcp",
+      "language": "en",
+      "question": "Tell me about Hekaya Internet 46 package.",
+      "expected_behavior": "answer_from_mcp",
+      "expected_entities": [
+        "Hekaya Internet 46",
+        "46",
+        "1250 MB",
+        "*319#"
+      ],
+      "expected_codes": [
+        "*319#"
+      ],
+      "required_facts": [
+        "46 EGP",
+        "1250 MB"
+      ],
+      "id": "TC-056"
+    },
+    {
+      "category": "exact_package_mcp",
+      "language": "en",
+      "question": "What are the specs for Hekaya Internet 58?",
+      "expected_behavior": "answer_from_mcp",
+      "expected_entities": [
+        "Hekaya Internet 58",
+        "58",
+        "2500 MB",
+        "*319#"
+      ],
+      "expected_codes": [
+        "*319#"
+      ],
+      "required_facts": [
+        "58 EGP",
+        "2500 MB"
+      ],
+      "id": "TC-057"
+    },
+    {
+      "category": "exact_package_mcp",
+      "language": "ar",
+      "question": "ما هي سعة وسعر باقة حكاية إنترنت 80؟",
+      "expected_behavior": "answer_from_mcp",
+      "expected_entities": [
+        "حكاية إنترنت 80",
+        "80",
+        "4000 MB",
+        "*319#"
+      ],
+      "expected_codes": [
+        "*319#"
+      ],
+      "required_facts": [
+        "80 جنيه",
+        "4000 ميجا"
+      ],
+      "id": "TC-058"
+    },
+    {
+      "category": "exact_package_mcp",
+      "language": "ar",
+      "question": "تفاصيل حكاية إنترنت 132",
+      "expected_behavior": "answer_from_mcp",
+      "expected_entities": [
+        "حكاية إنترنت 132",
+        "132",
+        "8000 MB",
+        "*319#"
+      ],
+      "expected_codes": [
+        "*319#"
+      ],
+      "required_facts": [
+        "132 جنيه",
+        "8000 ميجا"
+      ],
+      "id": "TC-059"
+    },
+    {
+      "category": "exact_package_mcp",
+      "language": "ar",
+      "question": "تفاصيل حكاية إنترنت 165",
+      "expected_behavior": "answer_from_mcp",
+      "expected_entities": [
+        "حكاية إنترنت 165",
+        "165",
+        "12000 MB",
+        "*319#"
+      ],
+      "expected_codes": [
+        "*319#"
+      ],
+      "required_facts": [
+        "165 جنيه",
+        "12000 ميجا"
+      ],
+      "id": "TC-060"
+    },
+    {
+      "category": "exact_package_mcp",
+      "language": "en",
+      "question": "What does Hekaya Internet 205 offer?",
+      "expected_behavior": "answer_from_mcp",
+      "expected_entities": [
+        "Hekaya Internet 205",
+        "205",
+        "16000 MB",
+        "*319#"
+      ],
+      "expected_codes": [
+        "*319#"
+      ],
+      "required_facts": [
+        "205 EGP",
+        "16000 MB"
+      ],
+      "id": "TC-061"
+    },
+    {
+      "category": "exact_package_mcp",
+      "language": "en",
+      "question": "What is the quota of Hekaya Internet 270?",
+      "expected_behavior": "answer_from_mcp",
+      "expected_entities": [
+        "Hekaya Internet 270",
+        "270",
+        "20000 MB",
+        "*319#"
+      ],
+      "expected_codes": [
+        "*319#"
+      ],
+      "required_facts": [
+        "270 EGP",
+        "20000 MB"
+      ],
+      "id": "TC-062"
+    },
+    {
+      "category": "exact_package_mcp",
+      "language": "ar",
+      "question": "تفاصيل باقة حكاية إنترنت 345",
+      "expected_behavior": "answer_from_mcp",
+      "expected_entities": [
+        "حكاية إنترنت 345",
+        "345",
+        "28000 MB",
+        "*319#"
+      ],
+      "expected_codes": [
+        "*319#"
+      ],
+      "required_facts": [
+        "345 جنيه",
+        "28000 ميجا"
+      ],
+      "id": "TC-063"
+    },
+    {
+      "category": "exact_package_mcp",
+      "language": "ar",
+      "question": "تفاصيل باقة حكاية إنترنت 415",
+      "expected_behavior": "answer_from_mcp",
+      "expected_entities": [
+        "حكاية إنترنت 415",
+        "415",
+        "35000 MB",
+        "*319#"
+      ],
+      "expected_codes": [
+        "*319#"
+      ],
+      "required_facts": [
+        "415 جنيه",
+        "35000 ميجا"
+      ],
+      "id": "TC-064"
+    },
+    {
+      "category": "exact_package_mcp",
+      "language": "en",
+      "question": "Tell me about Hekaya Internet 480 package.",
+      "expected_behavior": "answer_from_mcp",
+      "expected_entities": [
+        "Hekaya Internet 480",
+        "480",
+        "42000 MB",
+        "*319#"
+      ],
+      "expected_codes": [
+        "*319#"
+      ],
+      "required_facts": [
+        "480 EGP",
+        "42000 MB"
+      ],
+      "id": "TC-065"
+    },
+    {
+      "category": "exact_package_mcp",
+      "language": "en",
+      "question": "What is the highest Hekaya Internet package and its price?",
+      "expected_behavior": "answer_from_mcp",
+      "expected_entities": [
+        "Hekaya Internet 600",
+        "600",
+        "50000 MB",
+        "*319#"
+      ],
+      "expected_codes": [
+        "*319#"
+      ],
+      "required_facts": [
+        "600 EGP",
+        "50000 MB"
+      ],
+      "id": "TC-066"
+    },
+    {
+      "category": "exact_package_mcp",
+      "language": "ar",
+      "question": "ما هي باقة داتا لاين 1.8 جيجا للراوتر؟",
+      "expected_behavior": "answer_from_mcp",
+      "expected_entities": [
+        "DataLine",
+        "1.8",
+        "25",
+        "*130#"
+      ],
+      "expected_codes": [
+        "*130#"
+      ],
+      "required_facts": [
+        "1.8 جيجابايت",
+        "25 جنيه",
+        "*130#"
+      ],
+      "id": "TC-067"
+    },
+    {
+      "category": "exact_package_mcp",
+      "language": "ar",
+      "question": "تفاصيل باقة داتا لاين 8 جيجابايت",
+      "expected_behavior": "answer_from_mcp",
+      "expected_entities": [
+        "DataLine",
+        "8",
+        "75",
+        "*130#"
+      ],
+      "expected_codes": [
+        "*130#"
+      ],
+      "required_facts": [
+        "8 جيجابايت",
+        "75 جنيه",
+        "*130#"
+      ],
+      "id": "TC-068"
+    },
+    {
+      "category": "exact_package_mcp",
+      "language": "en",
+      "question": "What are the specs for DataLine 25 GB package?",
+      "expected_behavior": "answer_from_mcp",
+      "expected_entities": [
+        "DataLine",
+        "25 GB",
+        "200",
+        "*130#"
+      ],
+      "expected_codes": [
+        "*130#"
+      ],
+      "required_facts": [
+        "25 GB",
+        "200 EGP",
+        "*130#"
+      ],
+      "id": "TC-069"
+    },
+    {
+      "category": "exact_package_mcp",
+      "language": "en",
+      "question": "What are the specs for DataLine 72 GB package?",
+      "expected_behavior": "answer_from_mcp",
+      "expected_entities": [
+        "DataLine",
+        "72 GB",
+        "500",
+        "*130#"
+      ],
+      "expected_codes": [
+        "*130#"
+      ],
+      "required_facts": [
+        "72 GB",
+        "500 EGP",
+        "*130#"
+      ],
+      "id": "TC-070"
+    },
+    {
+      "category": "exact_package_mcp",
+      "language": "ar",
+      "question": "تفاصيل كارت أقوى كارت 10 جنيه",
+      "expected_behavior": "answer_from_mcp",
+      "expected_entities": [
+        "Aqwa Card 10",
+        "10",
+        "175",
+        "*811#"
+      ],
+      "expected_codes": [
+        "*811#"
+      ],
+      "required_facts": [
+        "10 جنيه",
+        "175 مكس"
+      ],
+      "id": "TC-071"
+    },
+    {
+      "category": "exact_package_mcp",
+      "language": "ar",
+      "question": "تفاصيل كارت أقوى كارت 22.5 جنيه",
+      "expected_behavior": "answer_from_mcp",
+      "expected_entities": [
+        "Aqwa Card 22.5",
+        "22.5",
+        "550",
+        "*811#"
+      ],
+      "expected_codes": [
+        "*811#"
+      ],
+      "required_facts": [
+        "22.5 جنيه",
+        "550 مكس",
+        "Hekaya Mini"
+      ],
+      "id": "TC-072"
+    },
+    {
+      "category": "exact_package_mcp",
+      "language": "en",
+      "question": "Tell me about Aqwa Card 30 EGP recharge.",
+      "expected_behavior": "answer_from_mcp",
+      "expected_entities": [
+        "Aqwa Card 30",
+        "30",
+        "700",
+        "*811#"
+      ],
+      "expected_codes": [
+        "*811#"
+      ],
+      "required_facts": [
+        "30 EGP",
+        "700 Mixes",
+        "Hekaya Mini"
+      ],
+      "id": "TC-073"
+    },
+    {
+      "category": "exact_package_mcp",
+      "language": "ar",
+      "question": "تفاصيل كارت أقوى كارت 50 جنيه",
+      "expected_behavior": "answer_from_mcp",
+      "expected_entities": [
+        "Aqwa Card 50",
+        "50",
+        "1400",
+        "*811#"
+      ],
+      "expected_codes": [
+        "*811#"
+      ],
+      "required_facts": [
+        "50 جنيه",
+        "1400 مكس"
+      ],
+      "id": "TC-074"
+    },
+    {
+      "category": "exact_package_mcp",
+      "language": "en",
+      "question": "Tell me about Aqwa Card 75 EGP.",
+      "expected_behavior": "answer_from_mcp",
+      "expected_entities": [
+        "Aqwa Card 75",
+        "75",
+        "2200",
+        "*811#"
+      ],
+      "expected_codes": [
+        "*811#"
+      ],
+      "required_facts": [
+        "75 EGP",
+        "2200 Mixes"
+      ],
+      "id": "TC-075"
+    },
+    {
+      "category": "exact_package_mcp",
+      "language": "ar",
+      "question": "ما هي باقة سوبر كونكت 80 جنيه؟",
+      "expected_behavior": "answer_from_mcp",
+      "expected_entities": [
+        "سوبر كونكت 80",
+        "80",
+        "8000 MB",
+        "*566#"
+      ],
+      "expected_codes": [
+        "*566#"
+      ],
+      "required_facts": [
+        "80 جنيه",
+        "8000 ميجا",
+        "*566#"
+      ],
+      "id": "TC-076"
+    },
+    {
+      "category": "exact_package_mcp",
+      "language": "en",
+      "question": "Tell me about Super Connect 165 package.",
+      "expected_behavior": "answer_from_mcp",
+      "expected_entities": [
+        "Super Connect 165",
+        "165",
+        "20000 MB",
+        "*566#"
+      ],
+      "expected_codes": [
+        "*566#"
+      ],
+      "required_facts": [
+        "165 EGP",
+        "20000 MB",
+        "*566#"
+      ],
+      "id": "TC-077"
+    },
+    {
+      "category": "exact_package_mcp",
+      "language": "ar",
+      "question": "تفاصيل نظام أهلاً للدفع حسب الاستخدام",
+      "expected_behavior": "answer_from_mcp",
+      "expected_entities": [
+        "Ahlan",
+        "19",
+        "*339#"
+      ],
+      "expected_codes": [
+        "*339#"
+      ],
+      "required_facts": [
+        "19 قرش للدقيقة",
+        "*339#"
+      ],
+      "id": "TC-078"
+    },
+    {
+      "category": "price_and_tax_calculations",
+      "language": "ar",
+      "question": "احسب لي تكلفة شحن رصيد صافي 50 جنيه شامل الضريبة",
+      "expected_behavior": "deterministic_calculation",
+      "expected_entities": [
+        "50",
+        "71.43"
+      ],
+      "required_facts": [
+        "50 جنيه",
+        "71.43 جنيه إجمالي الشحن"
+      ],
+      "id": "TC-079"
+    },
+    {
+      "category": "price_and_tax_calculations",
+      "language": "ar",
+      "question": "كم أدفع لشحن باقة سعرها 120 جنيه قبل الضريبة؟",
+      "expected_behavior": "deterministic_calculation",
+      "expected_entities": [
+        "120",
+        "171.43"
+      ],
+      "required_facts": [
+        "120 جنيه",
+        "171.43 جنيه"
+      ],
+      "id": "TC-080"
+    },
+    {
+      "category": "price_and_tax_calculations",
+      "language": "en",
+      "question": "How much do I need to recharge to get 180 EGP net balance for Hekaya 180?",
+      "expected_behavior": "deterministic_calculation",
+      "expected_entities": [
+        "180",
+        "257.14"
+      ],
+      "required_facts": [
+        "180 EGP",
+        "257.14 EGP"
+      ],
+      "id": "TC-081"
+    },
+    {
+      "category": "price_and_tax_calculations",
+      "language": "ar",
+      "question": "احسب السعر الإجمالي لباقة حكاية مكسات 270 بعد إضافة الضريبة",
+      "expected_behavior": "deterministic_calculation",
+      "expected_entities": [
+        "270",
+        "385.71"
+      ],
+      "required_facts": [
+        "270 جنيه",
+        "385.71 جنيه"
+      ],
+      "id": "TC-082"
+    },
+    {
+      "category": "price_and_tax_calculations",
+      "language": "en",
+      "question": "Calculate the total postpaid monthly bill for Emerald 430 including VAT.",
+      "expected_behavior": "deterministic_calculation",
+      "expected_entities": [
+        "430",
+        "614.29"
+      ],
+      "required_facts": [
+        "430 EGP",
+        "614.29 EGP total"
+      ],
+      "id": "TC-083"
+    },
+    {
+      "category": "price_and_tax_calculations",
+      "language": "ar",
+      "question": "احسب الفاتورة الإجمالية لباقة إمرالد 780 بعد الضريبة",
+      "expected_behavior": "deterministic_calculation",
+      "expected_entities": [
+        "780",
+        "1114.29"
+      ],
+      "required_facts": [
+        "780 جنيه",
+        "1114.29 جنيه"
+      ],
+      "id": "TC-084"
+    },
+    {
+      "category": "price_and_tax_calculations",
+      "language": "en",
+      "question": "What is the total monthly payment for Emerald 1120 including all taxes?",
+      "expected_behavior": "deterministic_calculation",
+      "expected_entities": [
+        "1120",
+        "1600.00"
+      ],
+      "required_facts": [
+        "1120 EGP",
+        "1600.00 EGP"
+      ],
+      "id": "TC-085"
+    },
+    {
+      "category": "price_and_tax_calculations",
+      "language": "ar",
+      "question": "احسب السعر الإجمالي لباقة إمرالد 1725 شامل الضرائب",
+      "expected_behavior": "deterministic_calculation",
+      "expected_entities": [
+        "1725",
+        "2464.29"
+      ],
+      "required_facts": [
+        "1725 جنيه",
+        "2464.29 جنيه"
+      ],
+      "id": "TC-086"
+    },
+    {
+      "category": "price_and_tax_calculations",
+      "language": "en",
+      "question": "If I buy a recharge scratch card of 100 EGP face value, how much net balance do I get?",
+      "expected_behavior": "deterministic_calculation",
+      "expected_entities": [
+        "100",
+        "70"
+      ],
+      "required_facts": [
+        "100 EGP",
+        "70 EGP net balance"
+      ],
+      "id": "TC-087"
+    },
+    {
+      "category": "price_and_tax_calculations",
+      "language": "ar",
+      "question": "كارت شحن بـ 20 جنيه يعطيني رصيد صافي كام؟",
+      "expected_behavior": "deterministic_calculation",
+      "expected_entities": [
+        "20",
+        "14"
+      ],
+      "required_facts": [
+        "20 جنيه",
+        "14 جنيه رصيد صافي"
+      ],
+      "id": "TC-088"
+    },
+    {
+      "category": "price_and_tax_calculations",
+      "language": "ar",
+      "question": "كارت شحن 50 جنيه يعطي رصيد صافي كام؟",
+      "expected_behavior": "deterministic_calculation",
+      "expected_entities": [
+        "50",
+        "35"
+      ],
+      "required_facts": [
+        "50 جنيه",
+        "35 جنيه رصيد صافي"
+      ],
+      "id": "TC-089"
+    },
+    {
+      "category": "price_and_tax_calculations",
+      "language": "en",
+      "question": "Calculate the recharge needed to activate DataLine 200 EGP.",
+      "expected_behavior": "deterministic_calculation",
+      "expected_entities": [
+        "200",
+        "285.71"
+      ],
+      "required_facts": [
+        "200 EGP",
+        "285.71 EGP total"
+      ],
+      "id": "TC-090"
+    },
+    {
+      "category": "price_and_tax_calculations",
+      "language": "ar",
+      "question": "احسب شحن باقة داتا لاين 500 جنيه شامل الضريبة",
+      "expected_behavior": "deterministic_calculation",
+      "expected_entities": [
+        "500",
+        "714.29"
+      ],
+      "required_facts": [
+        "500 جنيه",
+        "714.29 جنيه"
+      ],
+      "id": "TC-091"
+    },
+    {
+      "category": "price_and_tax_calculations",
+      "language": "en",
+      "question": "How is the 42.86% prepaid telecom tax multiplier calculated in Egypt?",
+      "expected_behavior": "deterministic_calculation",
+      "expected_entities": [
+        "14%",
+        "8%",
+        "70%"
+      ],
+      "required_facts": [
+        "14% VAT",
+        "8% development fee",
+        "70% net balance factor"
+      ],
+      "id": "TC-092"
+    },
+    {
+      "category": "price_and_tax_calculations",
+      "language": "ar",
+      "question": "كم يكلفني شحن باقة حكاية مكسات 52 الإجمالي؟",
+      "expected_behavior": "deterministic_calculation",
+      "expected_entities": [
+        "52",
+        "74.29"
+      ],
+      "required_facts": [
+        "52 جنيه",
+        "74.29 جنيه إجمالي الشحن"
+      ],
+      "id": "TC-093"
+    },
+    {
+      "category": "activation_and_ussd_codes",
+      "language": "ar",
+      "question": "ما هو كود تجديد باقة حكاية مكسات في أي وقت؟",
+      "expected_behavior": "answer_from_mcp",
+      "expected_entities": [
+        "*319#",
+        "*319*2#"
+      ],
+      "expected_codes": [
+        "*319#",
+        "*319*2#"
+      ],
+      "required_facts": [
+        "*319#"
+      ],
+      "id": "TC-094"
+    },
+    {
+      "category": "activation_and_ussd_codes",
+      "language": "ar",
+      "question": "كود الاشتراك في حكاية مكسات 69",
+      "expected_behavior": "answer_from_mcp",
+      "expected_entities": [
+        "*319*69#"
+      ],
+      "expected_codes": [
+        "*319*69#"
+      ],
+      "required_facts": [
+        "*319*69#"
+      ],
+      "id": "TC-095"
+    },
+    {
+      "category": "activation_and_ussd_codes",
+      "language": "en",
+      "question": "What is the USSD activation code for Hekaya Mixat 92?",
+      "expected_behavior": "answer_from_mcp",
+      "expected_entities": [
+        "*319*80#"
+      ],
+      "expected_codes": [
+        "*319*80#"
+      ],
+      "required_facts": [
+        "*319*80#"
+      ],
+      "id": "TC-096"
+    },
+    {
+      "category": "activation_and_ussd_codes",
+      "language": "ar",
+      "question": "كود الاشتراك في حكاية مكسات 120",
+      "expected_behavior": "answer_from_mcp",
+      "expected_entities": [
+        "*319*105#"
+      ],
+      "expected_codes": [
+        "*319*105#"
+      ],
+      "required_facts": [
+        "*319*105#"
+      ],
+      "id": "TC-097"
+    },
+    {
+      "category": "activation_and_ussd_codes",
+      "language": "ar",
+      "question": "كود الاشتراك في حكاية مكسات 180",
+      "expected_behavior": "answer_from_mcp",
+      "expected_entities": [
+        "*319*155#"
+      ],
+      "expected_codes": [
+        "*319*155#"
+      ],
+      "required_facts": [
+        "*319*155#"
+      ],
+      "id": "TC-098"
+    },
+    {
+      "category": "activation_and_ussd_codes",
+      "language": "en",
+      "question": "What code do I dial to subscribe to Hekaya Mixat 270?",
+      "expected_behavior": "answer_from_mcp",
+      "expected_entities": [
+        "*319*235#"
+      ],
+      "expected_codes": [
+        "*319*235#"
+      ],
+      "required_facts": [
+        "*319*235#"
+      ],
+      "id": "TC-099"
+    },
+    {
+      "category": "activation_and_ussd_codes",
+      "language": "ar",
+      "question": "ما هو كود شحن كروت أقوى كارت؟",
+      "expected_behavior": "answer_from_mcp",
+      "expected_entities": [
+        "*811#"
+      ],
+      "expected_codes": [
+        "*811#"
+      ],
+      "required_facts": [
+        "*811#"
+      ],
+      "id": "TC-100"
+    },
+    {
+      "category": "activation_and_ussd_codes",
+      "language": "en",
+      "question": "What is the code to activate DataLine internet SIM packages?",
+      "expected_behavior": "answer_from_mcp",
+      "expected_entities": [
+        "*130#"
+      ],
+      "expected_codes": [
+        "*130#"
+      ],
+      "required_facts": [
+        "*130#"
+      ],
+      "id": "TC-101"
+    },
+    {
+      "category": "activation_and_ussd_codes",
+      "language": "ar",
+      "question": "كود باقات سوبر كونكت للإنترنت",
+      "expected_behavior": "answer_from_mcp",
+      "expected_entities": [
+        "*566#"
+      ],
+      "expected_codes": [
+        "*566#"
+      ],
+      "required_facts": [
+        "*566#"
+      ],
+      "id": "TC-102"
+    },
+    {
+      "category": "activation_and_ussd_codes",
+      "language": "en",
+      "question": "What is the USSD code for Menu El Geneh daily offers?",
+      "expected_behavior": "answer_from_mcp",
+      "expected_entities": [
+        "*101#"
+      ],
+      "expected_codes": [
+        "*101#"
+      ],
+      "required_facts": [
+        "*101#"
+      ],
+      "id": "TC-103"
+    },
+    {
+      "category": "activation_and_ussd_codes",
+      "language": "ar",
+      "question": "كود الاستعلام عن الرصيد في اتصالات مصر",
+      "expected_behavior": "answer_from_mcp",
+      "expected_entities": [
+        "*888#",
+        "*555#"
+      ],
+      "expected_codes": [
+        "*888#",
+        "*555#"
+      ],
+      "required_facts": [
+        "*888#"
+      ],
+      "id": "TC-104"
+    },
+    {
+      "category": "activation_and_ussd_codes",
+      "language": "ar",
+      "question": "كود تحويل الرصيد من اتصالات لرقم اتصالات آخر",
+      "expected_behavior": "answer_from_mcp",
+      "expected_entities": [
+        "*770#"
+      ],
+      "expected_codes": [
+        "*770#"
+      ],
+      "required_facts": [
+        "*770#"
+      ],
+      "id": "TC-105"
+    },
+    {
+      "category": "activation_and_ussd_codes",
+      "language": "en",
+      "question": "What is the customer support hotline number for mobile subscribers?",
+      "expected_behavior": "answer_from_mcp",
+      "expected_entities": [
+        "111",
+        "16511"
+      ],
+      "expected_codes": [
+        "111",
+        "16511"
+      ],
+      "required_facts": [
+        "111"
+      ],
+      "id": "TC-106"
+    },
+    {
+      "category": "activation_and_ussd_codes",
+      "language": "ar",
+      "question": "كود خدمة سلفني شكراً من اتصالات",
+      "expected_behavior": "answer_from_mcp",
+      "expected_entities": [
+        "*911#"
+      ],
+      "expected_codes": [
+        "*911#"
+      ],
+      "required_facts": [
+        "*911#"
+      ],
+      "id": "TC-107"
+    },
+    {
+      "category": "activation_and_ussd_codes",
+      "language": "en",
+      "question": "What is the code for 'Call Me Thank You' (كلمني شكراً)?",
+      "expected_behavior": "answer_from_mcp",
+      "expected_entities": [
+        "*111*"
+      ],
+      "expected_codes": [
+        "*111*"
+      ],
+      "required_facts": [
+        "*111*"
+      ],
+      "id": "TC-108"
+    },
+    {
+      "category": "activation_and_ussd_codes",
+      "language": "ar",
+      "question": "كود إضافة خطوط العائلة في باقات حكاية مكسات",
+      "expected_behavior": "answer_from_mcp",
+      "expected_entities": [
+        "*319*"
+      ],
+      "expected_codes": [
+        "*319#"
+      ],
+      "required_facts": [
+        "*319#"
+      ],
+      "id": "TC-109"
+    },
+    {
+      "category": "activation_and_ussd_codes",
+      "language": "en",
+      "question": "What is the code to subscribe to Hekaya Internet 105?",
+      "expected_behavior": "answer_from_mcp",
+      "expected_entities": [
+        "*319#"
+      ],
+      "expected_codes": [
+        "*319#"
+      ],
+      "required_facts": [
+        "*319#"
+      ],
+      "id": "TC-110"
+    },
+    {
+      "category": "activation_and_ussd_codes",
+      "language": "ar",
+      "question": "كود باقات التجوال والإنترنت خارج مصر",
+      "expected_behavior": "answer_from_mcp",
+      "expected_entities": [
+        "*202#",
+        "*808#"
+      ],
+      "expected_codes": [
+        "*202#",
+        "*808#"
+      ],
+      "required_facts": [
+        "*202#"
+      ],
+      "id": "TC-111"
+    },
+    {
+      "category": "activation_and_ussd_codes",
+      "language": "en",
+      "question": "What is the USSD code for Ahlan Prepaid plans?",
+      "expected_behavior": "answer_from_mcp",
+      "expected_entities": [
+        "*339#"
+      ],
+      "expected_codes": [
+        "*339#"
+      ],
+      "required_facts": [
+        "*339#"
+      ],
+      "id": "TC-112"
+    },
+    {
+      "category": "activation_and_ussd_codes",
+      "language": "ar",
+      "question": "كود معرفة رقم خط اتصالات الخاص بي",
+      "expected_behavior": "answer_from_mcp",
+      "expected_entities": [
+        "*947#"
+      ],
+      "expected_codes": [
+        "*947#"
+      ],
+      "required_facts": [
+        "*947#"
+      ],
+      "id": "TC-113"
+    },
+    {
+      "category": "budget_recommendations",
+      "language": "ar",
+      "question": "معايا 100 جنيه شامل الضريبة شهرياً ومحتاج باقة مكالمات ونت، ترشحلي إيه؟",
+      "expected_behavior": "answer_from_mcp",
+      "expected_entities": [
+        "حكاية مكسات 69",
+        "69"
+      ],
+      "required_facts": [
+        "حكاية مكسات 69",
+        "69 جنيه"
+      ],
+      "id": "TC-114"
+    },
+    {
+      "category": "budget_recommendations",
+      "language": "ar",
+      "question": "ميزانيتي 150 جنيه شامل الضريبة وعايز باقة إنترنت فقط للموبايل",
+      "expected_behavior": "answer_from_mcp",
+      "expected_entities": [
+        "حكاية إنترنت 105",
+        "105"
+      ],
+      "required_facts": [
+        "حكاية إنترنت 105",
+        "4,800 ميجابايت"
+      ],
+      "id": "TC-115"
+    },
+    {
+      "category": "budget_recommendations",
+      "language": "en",
+      "question": "I have a budget of 200 EGP total including taxes. Recommend the best mix plan.",
+      "expected_behavior": "answer_from_mcp",
+      "expected_entities": [
+        "Hekaya Mixat 120",
+        "120"
+      ],
+      "required_facts": [
+        "Hekaya Mixat 120",
+        "120 EGP"
+      ],
+      "id": "TC-116"
+    },
+    {
+      "category": "budget_recommendations",
+      "language": "en",
+      "question": "I need a data package for my 4G MiFi router under 300 EGP including tax.",
+      "expected_behavior": "answer_from_mcp",
+      "expected_entities": [
+        "DataLine 25 GB",
+        "200"
+      ],
+      "required_facts": [
+        "DataLine 25 GB",
+        "200 EGP"
+      ],
+      "id": "TC-117"
+    },
+    {
+      "category": "budget_recommendations",
+      "language": "ar",
+      "question": "معايا 500 جنيه شهرياً ومحتاج باقة فاتورة مميزة مع خطوط للعائلة",
+      "expected_behavior": "answer_from_mcp",
+      "expected_entities": [
+        "إمرالد 430",
+        "430"
+      ],
+      "required_facts": [
+        "إمرالد 430",
+        "430 جنيه"
+      ],
+      "id": "TC-118"
+    },
+    {
+      "category": "budget_recommendations",
+      "language": "ar",
+      "question": "معايا 30 جنيه وعايز كارت شحن أسبوعي للنت والمكالمات",
+      "expected_behavior": "answer_from_mcp",
+      "expected_entities": [
+        "أقوى كارت 30",
+        "30"
+      ],
+      "required_facts": [
+        "أقوى كارت 30",
+        "700 مكس"
+      ],
+      "id": "TC-119"
+    },
+    {
+      "category": "budget_recommendations",
+      "language": "en",
+      "question": "Suggest a daily recharge card under 20 EGP for social media and calls.",
+      "expected_behavior": "answer_from_mcp",
+      "expected_entities": [
+        "Aqwa Card 19",
+        "19"
+      ],
+      "required_facts": [
+        "Aqwa Card 19",
+        "425 Mixes"
+      ],
+      "id": "TC-120"
+    },
+    {
+      "category": "budget_recommendations",
+      "language": "ar",
+      "question": "ميزانيتي 300 جنيه قبل الضريبة شهرياً لأعلى باقة مكسات متاحة",
+      "expected_behavior": "answer_from_mcp",
+      "expected_entities": [
+        "حكاية مكسات 270",
+        "270"
+      ],
+      "required_facts": [
+        "حكاية مكسات 270",
+        "15000 مكس"
+      ],
+      "id": "TC-121"
+    },
+    {
+      "category": "budget_recommendations",
+      "language": "en",
+      "question": "Recommend a mobile internet plan under 80 EGP pre-tax.",
+      "expected_behavior": "answer_from_mcp",
+      "expected_entities": [
+        "Hekaya Internet 80",
+        "80"
+      ],
+      "required_facts": [
+        "Hekaya Internet 80",
+        "4000 MB"
+      ],
+      "id": "TC-122"
+    },
+    {
+      "category": "budget_recommendations",
+      "language": "ar",
+      "question": "عايز باقة إنترنت راوتر منزلية ميني واي فاي بحدود 100 جنيه",
+      "expected_behavior": "answer_from_mcp",
+      "expected_entities": [
+        "DataLine 8 GB",
+        "75"
+      ],
+      "required_facts": [
+        "داتا لاين 8 جيجابايت",
+        "75 جنيه"
+      ],
+      "id": "TC-123"
+    },
+    {
+      "category": "budget_recommendations",
+      "language": "en",
+      "question": "I have 1000 EGP monthly for a premium postpaid package. What fits best?",
+      "expected_behavior": "answer_from_mcp",
+      "expected_entities": [
+        "Emerald 780",
+        "780"
+      ],
+      "required_facts": [
+        "Emerald 780",
+        "780 EGP pre-tax"
+      ],
+      "id": "TC-124"
+    },
+    {
+      "category": "budget_recommendations",
+      "language": "ar",
+      "question": "أرخص باقة شهرية للمكالمات والنت في اتصالات مصر",
+      "expected_behavior": "answer_from_mcp",
+      "expected_entities": [
+        "حكاية مكسات 52",
+        "52"
+      ],
+      "required_facts": [
+        "حكاية مكسات 52",
+        "52 جنيه"
+      ],
+      "id": "TC-125"
+    },
+    {
+      "category": "budget_recommendations",
+      "language": "en",
+      "question": "Cheapest mobile internet monthly package in e& Egypt",
+      "expected_behavior": "answer_from_mcp",
+      "expected_entities": [
+        "Hekaya Internet 46",
+        "46"
+      ],
+      "required_facts": [
+        "Hekaya Internet 46",
+        "46 EGP"
+      ],
+      "id": "TC-126"
+    },
+    {
+      "category": "budget_recommendations",
+      "language": "ar",
+      "question": "أرخص كارت شحن أقوى كارت متاح",
+      "expected_behavior": "answer_from_mcp",
+      "expected_entities": [
+        "أقوى كارت 5",
+        "5"
+      ],
+      "required_facts": [
+        "أقوى كارت 5",
+        "5 جنيه",
+        "65 مكس"
+      ],
+      "id": "TC-127"
+    },
+    {
+      "category": "budget_recommendations",
+      "language": "en",
+      "question": "Recommend a prepaid bundle around 70 EGP total budget.",
+      "expected_behavior": "answer_from_mcp",
+      "expected_entities": [
+        "Hekaya Mixat 52",
+        "52"
+      ],
+      "required_facts": [
+        "Hekaya Mixat 52",
+        "74.29 EGP total recharge"
+      ],
+      "id": "TC-128"
+    },
+    {
+      "category": "budget_recommendations",
+      "language": "ar",
+      "question": "باقة إنترنت موبايل شهرية مناسبة لاستخدام اليوتيوب والتصفح بميزانية 250 جنيه",
+      "expected_behavior": "answer_from_mcp",
+      "expected_entities": [
+        "حكاية إنترنت 165",
+        "165"
+      ],
+      "required_facts": [
+        "حكاية إنترنت 165",
+        "12000 ميجابايت"
+      ],
+      "id": "TC-129"
+    },
+    {
+      "category": "budget_recommendations",
+      "language": "en",
+      "question": "Recommend a data plan for heavy downloading on laptop router under 600 EGP.",
+      "expected_behavior": "answer_from_mcp",
+      "expected_entities": [
+        "DataLine 72 GB",
+        "500"
+      ],
+      "required_facts": [
+        "DataLine 72 GB",
+        "500 EGP"
+      ],
+      "id": "TC-130"
+    },
+    {
+      "category": "budget_recommendations",
+      "language": "ar",
+      "question": "عايز كارت شحن مدته 6 أيام بميزانية 20 جنيه",
+      "expected_behavior": "answer_from_mcp",
+      "expected_entities": [
+        "أقوى كارت 19",
+        "19"
+      ],
+      "required_facts": [
+        "أقوى كارت 19",
+        "19 جنيه",
+        "6 أيام"
+      ],
+      "id": "TC-131"
+    },
+    {
+      "category": "budget_recommendations",
+      "language": "en",
+      "question": "What is the best postpaid plan for a family with 4 members under 2000 EGP?",
+      "expected_behavior": "answer_from_mcp",
+      "expected_entities": [
+        "Emerald 1120",
+        "1120"
+      ],
+      "required_facts": [
+        "Emerald 1120",
+        "1120 EGP"
+      ],
+      "id": "TC-132"
+    },
+    {
+      "category": "budget_recommendations",
+      "language": "ar",
+      "question": "أفضل باقة للفيسبوك والواتساب فقط بميزانية صغيرة جداً",
+      "expected_behavior": "answer_from_mcp",
+      "expected_entities": [
+        "سوبر كونكت",
+        "أقوى كارت"
+      ],
+      "required_facts": [
+        "أقوى كارت أو سوبر كونكت"
+      ],
+      "id": "TC-133"
+    },
+    {
+      "category": "comparisons",
+      "language": "ar",
+      "question": "قارن بين باقة حكاية مكسات 92 وحكاية مكسات 120 من حيث السعر والسعة والمميزات",
+      "expected_behavior": "answer_from_mcp",
+      "expected_entities": [
+        "حكاية مكسات 92",
+        "حكاية مكسات 120"
+      ],
+      "required_facts": [
+        "92 جنيه",
+        "3400 مكس",
+        "120 جنيه",
+        "4500 مكس"
+      ],
+      "id": "TC-134"
+    },
+    {
+      "category": "comparisons",
+      "language": "en",
+      "question": "Compare Emerald 430 and Emerald 780 postpaid packages.",
+      "expected_behavior": "answer_from_mcp",
+      "expected_entities": [
+        "Emerald 430",
+        "Emerald 780"
+      ],
+      "required_facts": [
+        "430 EGP",
+        "20 GB",
+        "780 EGP",
+        "45 GB"
+      ],
+      "id": "TC-135"
+    },
+    {
+      "category": "comparisons",
+      "language": "ar",
+      "question": "ما الفرق بين باقة حكاية إنترنت 105 وباقة سوبر كونكت 105؟",
+      "expected_behavior": "answer_from_mcp",
+      "expected_entities": [
+        "حكاية إنترنت 105",
+        "سوبر كونكت 105"
+      ],
+      "required_facts": [
+        "4800 ميجا",
+        "12000 ميجا لسوبر كونكت"
+      ],
+      "id": "TC-136"
+    },
+    {
+      "category": "comparisons",
+      "language": "en",
+      "question": "Compare DataLine router SIM and Hekaya Internet smartphone SIM.",
+      "expected_behavior": "answer_from_mcp",
+      "expected_entities": [
+        "DataLine",
+        "Hekaya Internet"
+      ],
+      "required_facts": [
+        "DataLine exclusively for routers/modems",
+        "Hekaya for smartphones"
+      ],
+      "id": "TC-137"
+    },
+    {
+      "category": "comparisons",
+      "language": "ar",
+      "question": "مقارنة بين أقوى كارت 15 وأقوى كارت 19",
+      "expected_behavior": "answer_from_mcp",
+      "expected_entities": [
+        "أقوى كارت 15",
+        "أقوى كارت 19"
+      ],
+      "required_facts": [
+        "15 جنيه",
+        "300 مكس",
+        "19 جنيه",
+        "425 مكس",
+        "Hekaya Mini"
+      ],
+      "id": "TC-138"
+    },
+    {
+      "category": "comparisons",
+      "language": "en",
+      "question": "What is the difference between Hekaya Mixat 52 and Hekaya Mixat 69?",
+      "expected_behavior": "answer_from_mcp",
+      "expected_entities": [
+        "Hekaya Mixat 52",
+        "Hekaya Mixat 69"
+      ],
+      "required_facts": [
+        "52 EGP",
+        "1400 Mixes",
+        "69 EGP",
+        "2000 Mixes"
+      ],
+      "id": "TC-139"
+    },
+    {
+      "category": "comparisons",
+      "language": "ar",
+      "question": "قارن بين إمرالد 1725 وإمرالد 3450",
+      "expected_behavior": "answer_from_mcp",
+      "expected_entities": [
+        "إمرالد 1725",
+        "إمرالد 3450"
+      ],
+      "required_facts": [
+        "1725 جنيه",
+        "100 جيجا",
+        "3450 جنيه",
+        "200 جيجا"
+      ],
+      "id": "TC-140"
+    },
+    {
+      "category": "comparisons",
+      "language": "en",
+      "question": "Compare Aqwa Card 50 and Aqwa Card 75.",
+      "expected_behavior": "answer_from_mcp",
+      "expected_entities": [
+        "Aqwa Card 50",
+        "Aqwa Card 75"
+      ],
+      "required_facts": [
+        "50 EGP",
+        "1400 Mixes",
+        "75 EGP",
+        "2200 Mixes"
+      ],
+      "id": "TC-141"
+    },
+    {
+      "category": "comparisons",
+      "language": "ar",
+      "question": "ما الفرق بين نظام حكاية مكسات ونظام الكارت أهلاً؟",
+      "expected_behavior": "answer_from_mcp",
+      "expected_entities": [
+        "حكاية مكسات",
+        "أهلاً"
+      ],
+      "required_facts": [
+        "حكاية باقة شهرية بوحدات مكس",
+        "أهلاً محاسبة بالدقيقة 19 قرش"
+      ],
+      "id": "TC-142"
+    },
+    {
+      "category": "comparisons",
+      "language": "en",
+      "question": "Compare Hekaya Internet 270 and Hekaya Internet 345.",
+      "expected_behavior": "answer_from_mcp",
+      "expected_entities": [
+        "Hekaya Internet 270",
+        "Hekaya Internet 345"
+      ],
+      "required_facts": [
+        "270 EGP",
+        "20000 MB",
+        "345 EGP",
+        "28000 MB"
+      ],
+      "id": "TC-143"
+    },
+    {
+      "category": "comparisons",
+      "language": "ar",
+      "question": "قارن بين باقات الداتا لاين وباقات الإنترنت المنزلي VDSL",
+      "expected_behavior": "answer_from_mcp",
+      "expected_entities": [
+        "DataLine 4G",
+        "VDSL"
+      ],
+      "required_facts": [
+        "داتا لاين شريحة 4G هوائية بدون خط أرضي"
+      ],
+      "id": "TC-144"
+    },
+    {
+      "category": "comparisons",
+      "language": "en",
+      "question": "Compare Hekaya Mixat 180 and Hekaya Mixat 270.",
+      "expected_behavior": "answer_from_mcp",
+      "expected_entities": [
+        "Hekaya Mixat 180",
+        "Hekaya Mixat 270"
+      ],
+      "required_facts": [
+        "180 EGP",
+        "8000 Mixes",
+        "270 EGP",
+        "15000 Mixes"
+      ],
+      "id": "TC-145"
+    },
+    {
+      "category": "comparisons",
+      "language": "ar",
+      "question": "أيهما أفضل لمشاهدة الفيديوهات: حكاية مكسات ولا حكاية إنترنت؟",
+      "expected_behavior": "answer_from_mcp",
+      "expected_entities": [
+        "حكاية إنترنت",
+        "حكاية مكسات"
+      ],
+      "required_facts": [
+        "حكاية إنترنت مخصصة لسعات الداتا الكبيرة"
+      ],
+      "id": "TC-146"
+    },
+    {
+      "category": "comparisons",
+      "language": "en",
+      "question": "Compare Aqwa Card 10 and Aqwa Card 15.",
+      "expected_behavior": "answer_from_mcp",
+      "expected_entities": [
+        "Aqwa Card 10",
+        "Aqwa Card 15"
+      ],
+      "required_facts": [
+        "10 EGP",
+        "175 Mixes",
+        "15 EGP",
+        "300 Mixes"
+      ],
+      "id": "TC-147"
+    },
+    {
+      "category": "comparisons",
+      "language": "ar",
+      "question": "الفرق بين كود *319# وكود *811# في الاستخدام",
+      "expected_behavior": "answer_from_mcp",
+      "expected_entities": [
+        "*319#",
+        "*811#"
+      ],
+      "required_facts": [
+        "*319# لباقات حكاية",
+        "*811# لكروت أقوى كارت"
+      ],
+      "id": "TC-148"
+    },
+    {
+      "category": "non_existent_packages_clarification",
+      "language": "ar",
+      "question": "تفاصيل باقة حكاية إنترنت 100",
+      "expected_behavior": "clarification_prompt",
+      "expected_entities": [
+        "حكاية إنترنت 105"
+      ],
+      "required_facts": [
+        "مش لاقي حكاية إنترنت 100",
+        "هل تقصد حكاية إنترنت 105؟"
+      ],
+      "id": "TC-149"
+    },
+    {
+      "category": "non_existent_packages_clarification",
+      "language": "en",
+      "question": "What are the specs of Emerald 3425?",
+      "expected_behavior": "clarification_prompt",
+      "expected_entities": [
+        "Emerald 3450"
+      ],
+      "required_facts": [
+        "Emerald 3450"
+      ],
+      "id": "TC-150"
+    }
+  ]
+}

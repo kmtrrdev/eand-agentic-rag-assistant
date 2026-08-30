@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>e& Egypt | Connecting What Matters</title>
+<link rel="stylesheet" href="assets/style.css?v=10">
+<script src="assets/theme.js?v=10"></script>
+<script src="assets/translations.js?v=10"></script>
+<script src="assets/lang.js?v=10"></script>
+</head>
+
+<body>
+
+<header class="site-header">
+  <div class="container">
+    <a href="index.html" class="brand">
+      <img src="assets/logo.png" alt="e& logo">
+      <span data-i18n="brand.name">e& Egypt</span>
+    </a>
+    <nav class="nav">
+      <a href="index.html" class="active" data-i18n="nav.home">Home</a>
+      <a href="services.html" data-i18n="nav.services">Services</a>
+      <a href="about.html" data-i18n="nav.about">About</a>
+      <a href="contact.html" data-i18n="nav.contact">Contact</a>
+    </nav>
+    <div class="header-actions">
+      <button id="lang-toggle" class="lang-toggle" aria-label="Switch language">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15 15 0 0 1 0 20 15 15 0 0 1 0-20z"></path></svg>
+        <span id="lang-toggle-label">AR</span>
+      </button>
+      <button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode">
+        <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.8A9 9 0 1 1 11.2 3 7 7 0 0 0 21 12.8z"></path></svg>
+        <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"></path></svg>
+      </button>
+      <a href="contact.html" class="btn btn-primary" data-i18n="nav.contactBtn">Contact Us</a>
+    </div>
+  </div>
+</header>
+
+<section class="hero">
+  <svg class="signal-grid" viewBox="0 0 1200 700" preserveAspectRatio="xMidYMid slice">
+    <g fill="#E4002B">
+      <circle cx="1000" cy="120" r="3"></circle>
+      <circle cx="1060" cy="160" r="3"></circle>
+      <circle cx="1120" cy="110" r="3"></circle>
+      <circle cx="980" cy="200" r="3"></circle>
+      <circle cx="1080" cy="230" r="3"></circle>
+      <circle cx="1150" cy="180" r="3"></circle>
+      <circle cx="1020" cy="280" r="3"></circle>
+    </g>
+    <g stroke="#E4002B" stroke-width="1" opacity="0.35">
+      <line x1="1000" y1="120" x2="1060" y2="160"></line>
+      <line x1="1060" y1="160" x2="1120" y2="110"></line>
+      <line x1="1060" y1="160" x2="980" y2="200"></line>
+      <line x1="980" y1="200" x2="1080" y2="230"></line>
+      <line x1="1080" y1="230" x2="1150" y2="180"></line>
+      <line x1="1080" y1="230" x2="1020" y2="280"></line>
+    </g>
+  </svg>
+  <div class="container hero-inner">
+    <div>
+      <div class="eyebrow" data-i18n="home.eyebrow">e& Network — Egypt</div>
+      <h1 data-i18n-html="home.h1">Your connection isn't just a line,<br><em>it's the network that gets you to everything.</em></h1>
+      <p class="lead" data-i18n="home.lead">Home internet, mobile plans, and business solutions — all in one place. And ask the e& chatbot anytime for an instant answer, no waiting required.</p>
+      <div class="hero-cta">
+        <a href="services.html" class="btn btn-primary" data-i18n="home.ctaPrimary">Explore Plans</a>
+        <a href="#chat" class="btn btn-outline open-chat" data-i18n="home.ctaSecondary">Ask the Chatbot</a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat"><b data-i18n="home.stat1n">40M+</b><span data-i18n="home.stat1s">customers in Egypt</span></div>
+        <div class="stat"><b data-i18n="home.stat2n">24/7</b><span data-i18n="home.stat2s">smart support</span></div>
+        <div class="stat"><b data-i18n="home.stat3n">5</b><span data-i18n="home.stat3s">internet plan tiers</span></div>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <img src="assets/logo.png" alt="e& logo" style="width:100%; opacity:.94;">
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="section-head">
+      <div class="eyebrow" data-i18n="home.whyEyebrow">Why e&</div>
+      <h2 data-i18n="home.whyH2">Services built around what you actually need</h2>
+      <p data-i18n="home.whyLead">Whether it's your home, your business, or your personal line — we have a plan that fits.</p>
+    </div>
+    <div class="grid-3">
+      <div class="card">
+        <div class="icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 8.5a15 15 0 0 1 20 0M5.5 12a10 10 0 0 1 13 0M9 15.5a5 5 0 0 1 6 0"></path><circle cx="12" cy="19" r="1" fill="currentColor"></circle></svg>
+        </div>
+        <h3 data-i18n="home.card1h">Home Internet (Hekaya)</h3>
+        <p data-i18n="home.card1p">Speeds up to 1 Gbps, fast installation, and coverage that keeps expanding across the country.</p>
+      </div>
+      <div class="card">
+        <div class="icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="7" y="2" width="10" height="20" rx="2"></rect><line x1="11" y1="18" x2="13" y2="18"></line></svg>
+        </div>
+        <h3 data-i18n="home.card2h">Flexible Mobile Plans</h3>
+        <p data-i18n="home.card2p">Voice, data, and prepaid line options — pick whatever matches how you actually use your phone.</p>
+      </div>
+      <div class="card">
+        <div class="icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 21h18M5 21V7l7-4 7 4v14M9 21v-6h6v6"></path></svg>
+        </div>
+        <h3 data-i18n="home.card3h">Business Solutions</h3>
+        <p data-i18n="home.card3p">Dedicated data lines, enterprise communication systems, and priority technical support.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section-alt" id="faq">
+  <div class="container">
+    <div class="section-head">
+      <div class="eyebrow" data-i18n="home.faqEyebrow">e& Smart Assistant</div>
+      <h2 data-i18n="home.faqH2">Have a question about a plan or service?</h2>
+      <p data-i18n="home.faqLead">Open the chatbot at the bottom of the screen and ask anything about our plans and services — it replies instantly, based on official e& data.</p>
+    </div>
+    <div class="value-row">
+      <span class="n">01</span>
+      <div><h4 data-i18n="home.row1h">Ask however you like</h4><p data-i18n="home.row1p">No need to phrase it a certain way — the chatbot understands what you mean.</p></div>
+    </div>
+    <div class="value-row">
+      <span class="n">02</span>
+      <div><h4 data-i18n="home.row2h">Instant, accurate answers</h4><p data-i18n="home.row2p">Responses are grounded in e&'s official plans and services documentation.</p></div>
+    </div>
+    <div class="value-row">
+      <span class="n">03</span>
+      <div><h4 data-i18n="home.row3h">Available around the clock</h4><p data-i18n="home.row3p">No waiting on hold or standing in line — ask anytime.</p></div>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div>
+      <div class="foot-brand">
+        <img src="assets/logo.png" alt="e& logo">
+        <span data-i18n="brand.name">e& Egypt</span>
+      </div>
+      <p style="color:#B9B5AC; font-size:14px; max-width:280px;" data-i18n="footer.tagline">The network that connects you to everything, from your home to your business.</p>
+    </div>
+    <div>
+      <h4 data-i18n="footer.company">Company</h4>
+      <a href="about.html" data-i18n="footer.about">About e&</a>
+      <a href="services.html" data-i18n="footer.services">Our Services</a>
+      <a href="contact.html" data-i18n="footer.contact">Contact Us</a>
+    </div>
+    <div>
+      <h4 data-i18n="footer.servicesHead">Services</h4>
+      <a href="services.html" data-i18n="footer.home">Home Internet</a>
+      <a href="services.html" data-i18n="footer.mobile">Mobile Plans</a>
+      <a href="services.html" data-i18n="footer.business">Business Solutions</a>
+    </div>
+    <div>
+      <h4 data-i18n="footer.contactHead">Contact</h4>
+      <a href="tel:0100">0100-XXX-XXXX</a>
+      <a href="mailto:support@example.com">support@example.com</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span data-i18n="footer.rights">© 2026 e& Egypt. All rights reserved.</span>
+    <span data-i18n="footer.demo">Demo website</span>
+  </div>
+</footer>
+
+<button id="chat-launcher" aria-label="Open chatbot">
+  <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M21 11.5a8.4 8.4 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.4 8.4 0 0 1-3.8-.9L3 21l1.9-5.7a8.4 8.4 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.4 8.4 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
+</button>
+<div id="chat-panel">
+  <div class="chat-head">
+    <span class="dot"></span>
+    <div><b data-i18n="chat.title">e& Assistant</b><small data-i18n="chat.subtitle">Usually replies in seconds</small></div>
+    <button id="chat-close" aria-label="Close">✕</button>
+  </div>
+  <div class="chat-model-bar">
+    <span class="chat-model-label" data-i18n="chat.modelSelectorLabel">Model:</span>
+    <div class="model-toggle-group">
+      <button type="button" class="model-btn active" data-model="cloud">
+        <span class="icon">☁️</span>
+        <span data-i18n="chat.modelCloud">Cloud (GPT-4o mini)</span>
+      </button>
+      <button type="button" class="model-btn" data-model="local">
+        <span class="icon">⚡</span>
+        <span data-i18n="chat.modelLocal">Local GPU (Qwen 3B)</span>
+      </button>
+    </div>
+  </div>
+  <div class="chat-body" id="chat-body">
+    <div class="msg bot" data-i18n="chat.greeting">Hi! I'm the e& smart assistant 👋 Ask me about any plan or service.</div>
+  </div>
+  <form class="chat-input" id="chat-form">
+    <input type="text" id="chat-input" placeholder="Type your question..." data-i18n-ph="chat.placeholder" autocomplete="off">
+    <button type="submit" aria-label="Send">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+    </button>
+  </form>
+</div>
+
+<script src="assets/chat.js?v=20260830_final_svg_sync"></script>
+</body>
+</html>
+
