@@ -1,0 +1,397 @@
+family: hekaya_internet
+family_name_en: "Hekaya Internet"
+family_name_ar: "حكاية إنترنت"
+category: mobile
+tax_type: prepaid
+default_ussd: "*319#"
+family_description_en: "Hekaya Internet is e& Egypt's data-focused prepaid mobile bundle line: 12 main monthly plans (46 to 600 EGP) plus 4 Extra Unit (call/SMS-only) top-ups and 9 short-term Mini plans. Every monthly plan includes 300 call/SMS units and a choice of free-use apps from a 12-app list (1 app on 46/58, 2 on 80-165, 3 on 205-600), plus bundled Twist Sport/Music/TV, with Starzplay added from 132 EGP up, and a Shahid subscription (Mobile on 46-270, VIP on 345-600). Unused MB at cycle end converts to e& money cashback rather than rolling over as data; on-time renewal also earns cashback that grows with consecutive on-time renewals. NOTE: monthly plans are activated/managed via the My e& Egypt app per the current source PDF, which does not corroborate the *319*<code># per-tier codes below (kept as existing catalog entries pending verification) — Mini plans use *200#."
+family_description_ar: "حكاية إنترنت هي باقات الإنترنت المخصصة من اتصالات مصر لعملاء الدفع المسبق: 12 باقة شهرية رئيسية (من 46 إلى 600 جنيه) بالإضافة إلى 4 إضافات وحدات فقط (مكالمات/رسائل) و9 باقات ميني قصيرة المدى. كل باقة شهرية تتضمن 300 وحدة مكالمات/رسائل واختيار تطبيقات مجانية من قائمة 12 تطبيق (تطبيق واحد على 46/58، تطبيقان على 80-165، 3 تطبيقات على 205-600)، بالإضافة إلى Twist Sport/Music/TV، مع إضافة Starzplay من فئة 132 جنيه فأعلى، واشتراك Shahid (Mobile على 46-270، VIP على 345-600). الميجابايت غير المستخدمة في نهاية الدورة تتحول إلى استرداد نقدي (كاش باك) في محفظة e& money بدلاً من الترحيل كرصيد بيانات؛ التجديد في الموعد يمنح أيضاً كاش باك يزيد مع التجديدات المتتالية في الموعد. ملاحظة: الباقات الشهرية تُفعَّل وتُدار عبر تطبيق My e& Egypt حسب المصدر الحالي، والذي لا يؤكد أكواد *319*<كود># الخاصة بكل باقة أدناه (محتفظ بها كعناصر موجودة في الكتالوج لحين التحقق) — باقات ميني تستخدم *200#."
+
+tiers:
+  - id: hekaya_internet_46
+    name_en: "Hekaya Internet 46"
+    name_ar: "حكاية إنترنت 46"
+    price_egp: 46
+    ussd_code: "*319*46#"
+    quota_mb: 1250
+    quota_label_en: "1,250 MB"
+    quota_label_ar: "1,250 ميجابايت"
+    validity_days: 30
+    description_en: "1,250 MB mobile internet plus 300 call/SMS units, 1 free-use app (from a 12-app list), Twist Sport/Music/TV, and Shahid Mobile."
+    description_ar: "1,250 ميجابايت إنترنت بالإضافة إلى 300 وحدة مكالمات/رسائل، تطبيق مجاني واحد (من قائمة 12 تطبيق)، Twist Sport/Music/TV، واشتراك Shahid Mobile."
+    perks_en: "300 call/SMS units + 1 selected app + Twist Sport/Music/TV + Shahid Mobile + unused MB converts to e& money cashback"
+    perks_ar: "300 وحدة مكالمات/رسائل + تطبيق مختار + Twist Sport/Music/TV + Shahid Mobile + تحويل الميجابايت غير المستخدمة لكاش باك e& money"
+    source: "HekayaInternet.pdf"
+
+  - id: hekaya_internet_58
+    name_en: "Hekaya Internet 58"
+    name_ar: "حكاية إنترنت 58"
+    price_egp: 58
+    ussd_code: "*319*58#"
+    quota_mb: 2100
+    quota_label_en: "2,100 MB"
+    quota_label_ar: "2,100 ميجابايت"
+    validity_days: 30
+    description_en: "2,100 MB mobile internet plus 300 call/SMS units, 1 free-use app (from a 12-app list), Twist Sport/Music/TV, and Shahid Mobile."
+    description_ar: "2,100 ميجابايت إنترنت بالإضافة إلى 300 وحدة مكالمات/رسائل، تطبيق مجاني واحد (من قائمة 12 تطبيق)، Twist Sport/Music/TV، واشتراك Shahid Mobile."
+    perks_en: "300 call/SMS units + 1 selected app + Twist Sport/Music/TV + Shahid Mobile + unused MB converts to e& money cashback"
+    perks_ar: "300 وحدة مكالمات/رسائل + تطبيق مختار + Twist Sport/Music/TV + Shahid Mobile + تحويل الميجابايت غير المستخدمة لكاش باك e& money"
+    source: "HekayaInternet.pdf"
+
+  - id: hekaya_internet_80
+    name_en: "Hekaya Internet 80"
+    name_ar: "حكاية إنترنت 80"
+    price_egp: 80
+    ussd_code: "*319*80#"
+    quota_mb: 3250
+    quota_label_en: "3,250 MB"
+    quota_label_ar: "3,250 ميجابايت"
+    validity_days: 30
+    description_en: "3,250 MB mobile internet plus 300 call/SMS units, 2 free-use apps (from a 12-app list), Twist Sport/Music/TV, and Shahid Mobile."
+    description_ar: "3,250 ميجابايت إنترنت بالإضافة إلى 300 وحدة مكالمات/رسائل، تطبيقان مجانيان (من قائمة 12 تطبيق)، Twist Sport/Music/TV، واشتراك Shahid Mobile."
+    perks_en: "300 call/SMS units + 2 selected apps + Twist Sport/Music/TV + Shahid Mobile + unused MB converts to e& money cashback"
+    perks_ar: "300 وحدة مكالمات/رسائل + تطبيقان مختاران + Twist Sport/Music/TV + Shahid Mobile + تحويل الميجابايت غير المستخدمة لكاش باك e& money"
+    source: "HekayaInternet.pdf"
+
+  - id: hekaya_internet_105
+    name_en: "Hekaya Internet 105"
+    name_ar: "حكاية إنترنت 105"
+    price_egp: 105
+    ussd_code: "*319#"
+    quota_mb: 4750
+    quota_label_en: "4,750 MB"
+    quota_label_ar: "4,750 ميجابايت"
+    validity_days: 30
+    description_en: "4,750 MB mobile internet plus 300 call/SMS units, 2 free-use apps chosen from a 12-app list, Twist Sport/Music/TV, and Shahid Mobile (VIU also included as a bundled entertainment perk, separate from the 2 selected apps)."
+    description_ar: "4,750 ميجابايت إنترنت بالإضافة إلى 300 وحدة مكالمات/رسائل، تطبيقان مجانيان مختاران من قائمة 12 تطبيق، Twist Sport/Music/TV، واشتراك Shahid Mobile (بالإضافة إلى VIU كمزية ترفيهية تلقائية منفصلة عن التطبيقين المختارين)."
+    perks_en: "300 call/SMS units + 2 selected apps + Twist Sport/Music/TV + Shahid Mobile + VIU + unused MB converts to e& money cashback"
+    perks_ar: "300 وحدة مكالمات/رسائل + تطبيقان مختاران + Twist Sport/Music/TV + Shahid Mobile + VIU + تحويل الميجابايت غير المستخدمة لكاش باك e& money"
+    source: "HekayaInternet.pdf"
+
+  - id: hekaya_internet_132
+    name_en: "Hekaya Internet 132"
+    name_ar: "حكاية إنترنت 132"
+    price_egp: 132
+    ussd_code: "*319*132#"
+    quota_mb: 6750
+    quota_label_en: "6,750 MB"
+    quota_label_ar: "6,750 ميجابايت"
+    validity_days: 30
+    description_en: "6,750 MB mobile internet plus 300 call/SMS units, 2 free-use apps (from a 12-app list), Twist Sport/Music/TV, Starzplay, and Shahid Mobile."
+    description_ar: "6,750 ميجابايت إنترنت بالإضافة إلى 300 وحدة مكالمات/رسائل، تطبيقان مجانيان (من قائمة 12 تطبيق)، Twist Sport/Music/TV، Starzplay، واشتراك Shahid Mobile."
+    perks_en: "300 call/SMS units + 2 selected apps + Twist Sport/Music/TV + Starzplay + Shahid Mobile + unused MB converts to e& money cashback"
+    perks_ar: "300 وحدة مكالمات/رسائل + تطبيقان مختاران + Twist Sport/Music/TV + Starzplay + Shahid Mobile + تحويل الميجابايت غير المستخدمة لكاش باك e& money"
+    source: "HekayaInternet.pdf"
+
+  - id: hekaya_internet_165
+    name_en: "Hekaya Internet 165"
+    name_ar: "حكاية إنترنت 165"
+    price_egp: 165
+    ussd_code: "*319*165#"
+    quota_mb: 8750
+    quota_label_en: "8,750 MB"
+    quota_label_ar: "8,750 ميجابايت"
+    validity_days: 30
+    description_en: "8,750 MB mobile internet plus 300 call/SMS units, 2 free-use apps (from a 12-app list), Twist Sport/Music/TV, Starzplay, and Shahid Mobile."
+    description_ar: "8,750 ميجابايت إنترنت بالإضافة إلى 300 وحدة مكالمات/رسائل، تطبيقان مجانيان (من قائمة 12 تطبيق)، Twist Sport/Music/TV، Starzplay، واشتراك Shahid Mobile."
+    perks_en: "300 call/SMS units + 2 selected apps + Twist Sport/Music/TV + Starzplay + Shahid Mobile + unused MB converts to e& money cashback"
+    perks_ar: "300 وحدة مكالمات/رسائل + تطبيقان مختاران + Twist Sport/Music/TV + Starzplay + Shahid Mobile + تحويل الميجابايت غير المستخدمة لكاش باك e& money"
+    source: "HekayaInternet.pdf"
+
+  - id: hekaya_internet_205
+    name_en: "Hekaya Internet 205"
+    name_ar: "حكاية إنترنت 205"
+    price_egp: 205
+    ussd_code: "*319*205#"
+    quota_mb: 11500
+    quota_label_en: "11,500 MB (11.5 GB)"
+    quota_label_ar: "11,500 ميجابايت (11.5 جيجا)"
+    validity_days: 30
+    description_en: "11.5 GB mobile internet plus 300 call/SMS units, 3 free-use apps (from a 12-app list), Twist Sport/Music/TV, Starzplay, and Shahid Mobile."
+    description_ar: "11.5 جيجا إنترنت بالإضافة إلى 300 وحدة مكالمات/رسائل، 3 تطبيقات مجانية (من قائمة 12 تطبيق)، Twist Sport/Music/TV، Starzplay، واشتراك Shahid Mobile."
+    perks_en: "300 call/SMS units + 3 selected apps + Twist Sport/Music/TV + Starzplay + Shahid Mobile + unused MB converts to e& money cashback"
+    perks_ar: "300 وحدة مكالمات/رسائل + 3 تطبيقات مختارة + Twist Sport/Music/TV + Starzplay + Shahid Mobile + تحويل الميجابايت غير المستخدمة لكاش باك e& money"
+    source: "HekayaInternet.pdf"
+
+  - id: hekaya_internet_270
+    name_en: "Hekaya Internet 270"
+    name_ar: "حكاية إنترنت 270"
+    price_egp: 270
+    ussd_code: "*319*270#"
+    quota_mb: 15000
+    quota_label_en: "15,000 MB (15 GB)"
+    quota_label_ar: "15,000 ميجابايت (15 جيجا)"
+    validity_days: 30
+    description_en: "15 GB mobile internet plus 300 call/SMS units, 3 free-use apps (from a 12-app list), Twist Sport/Music/TV, Starzplay, and Shahid Mobile."
+    description_ar: "15 جيجا إنترنت بالإضافة إلى 300 وحدة مكالمات/رسائل، 3 تطبيقات مجانية (من قائمة 12 تطبيق)، Twist Sport/Music/TV، Starzplay، واشتراك Shahid Mobile."
+    perks_en: "300 call/SMS units + 3 selected apps + Twist Sport/Music/TV + Starzplay + Shahid Mobile + unused MB converts to e& money cashback"
+    perks_ar: "300 وحدة مكالمات/رسائل + 3 تطبيقات مختارة + Twist Sport/Music/TV + Starzplay + Shahid Mobile + تحويل الميجابايت غير المستخدمة لكاش باك e& money"
+    source: "HekayaInternet.pdf"
+
+  - id: hekaya_internet_345
+    name_en: "Hekaya Internet 345"
+    name_ar: "حكاية إنترنت 345"
+    price_egp: 345
+    ussd_code: "*319*345#"
+    quota_mb: 20000
+    quota_label_en: "20,000 MB (20 GB)"
+    quota_label_ar: "20,000 ميجابايت (20 جيجا)"
+    validity_days: 30
+    description_en: "20 GB mobile internet plus 300 call/SMS units, 3 free-use apps (from a 12-app list), Twist Sport/Music/TV, Starzplay, and a free Shahid VIP subscription (upgraded from Shahid Mobile on lower tiers)."
+    description_ar: "باقة إنترنت 20 جيجا بالإضافة إلى 300 وحدة مكالمات/رسائل، 3 تطبيقات مجانية (من قائمة 12 تطبيق)، Twist Sport/Music/TV، Starzplay، واشتراك مجاني في Shahid VIP (ترقية من Shahid Mobile في الفئات الأقل)."
+    perks_en: "300 call/SMS units + 3 selected apps + Twist Sport/Music/TV + Starzplay + Free Shahid VIP + unused MB converts to e& money cashback"
+    perks_ar: "300 وحدة مكالمات/رسائل + 3 تطبيقات مختارة + Twist Sport/Music/TV + Starzplay + اشتراك مجاني Shahid VIP + تحويل الميجابايت غير المستخدمة لكاش باك e& money"
+    source: "HekayaInternet.pdf"
+
+  - id: hekaya_internet_415
+    name_en: "Hekaya Internet 415"
+    name_ar: "حكاية إنترنت 415"
+    price_egp: 415
+    ussd_code: "*319*415#"
+    quota_mb: 25000
+    quota_label_en: "25,000 MB (25 GB)"
+    quota_label_ar: "25,000 ميجابايت (25 جيجا)"
+    validity_days: 30
+    description_en: "25 GB mobile internet plus 300 call/SMS units, 3 free-use apps (from a 12-app list), Twist Sport/Music/TV, Starzplay, and a free Shahid VIP subscription."
+    description_ar: "باقة إنترنت 25 جيجا بالإضافة إلى 300 وحدة مكالمات/رسائل، 3 تطبيقات مجانية (من قائمة 12 تطبيق)، Twist Sport/Music/TV، Starzplay، واشتراك مجاني في Shahid VIP."
+    perks_en: "300 call/SMS units + 3 selected apps + Twist Sport/Music/TV + Starzplay + Free Shahid VIP + unused MB converts to e& money cashback"
+    perks_ar: "300 وحدة مكالمات/رسائل + 3 تطبيقات مختارة + Twist Sport/Music/TV + Starzplay + اشتراك مجاني Shahid VIP + تحويل الميجابايت غير المستخدمة لكاش باك e& money"
+    source: "HekayaInternet.pdf"
+
+  - id: hekaya_internet_480
+    name_en: "Hekaya Internet 480"
+    name_ar: "حكاية إنترنت 480"
+    price_egp: 480
+    ussd_code: "*319*480#"
+    quota_mb: 30000
+    quota_label_en: "30,000 MB (30 GB)"
+    quota_label_ar: "30,000 ميجابايت (30 جيجا)"
+    validity_days: 30
+    description_en: "30 GB mobile internet plus 300 call/SMS units, up to 3 free-use apps (from a 12-app list), Twist Sport/Music/TV, Starzplay, Shahid VIP, VIU, and TOD (TOD auto-renews with every renewal but must be activated manually the first time via the My e& Egypt app)."
+    description_ar: "30 جيجا إنترنت بالإضافة إلى 300 وحدة مكالمات/رسائل، حتى 3 تطبيقات مجانية (من قائمة 12 تطبيق)، Twist Sport/Music/TV، Starzplay، Shahid VIP، VIU، وTOD (يتجدد TOD تلقائياً مع كل تجديد لكن يجب تفعيله يدوياً أول مرة عبر تطبيق My e& Egypt)."
+    perks_en: "300 call/SMS units + up to 3 selected apps + Twist Sport/Music/TV + Starzplay + Shahid VIP + VIU + TOD + unused MB converts to e& money cashback"
+    perks_ar: "300 وحدة مكالمات/رسائل + حتى 3 تطبيقات مختارة + Twist Sport/Music/TV + Starzplay + Shahid VIP + VIU + TOD + تحويل الميجابايت غير المستخدمة لكاش باك e& money"
+    source: "HekayaInternet.pdf"
+
+  - id: hekaya_internet_600
+    name_en: "Hekaya Internet 600"
+    name_ar: "حكاية إنترنت 600"
+    price_egp: 600
+    ussd_code: "*319*600#"
+    quota_mb: 50000
+    quota_label_en: "50,000 MB (50 GB)"
+    quota_label_ar: "50,000 ميجابايت (50 جيجا)"
+    validity_days: 30
+    description_en: "50 GB mobile internet plus 300 call/SMS units, up to 3 free-use apps (from a 12-app list), Twist Sport/Music/TV, Starzplay, Shahid VIP, VIU, and TOD (TOD auto-renews with every renewal but must be activated manually the first time via the My e& Egypt app). The largest Hekaya Internet monthly plan."
+    description_ar: "50 جيجا إنترنت بالإضافة إلى 300 وحدة مكالمات/رسائل، حتى 3 تطبيقات مجانية (من قائمة 12 تطبيق)، Twist Sport/Music/TV، Starzplay، Shahid VIP، VIU، وTOD (يتجدد TOD تلقائياً مع كل تجديد لكن يجب تفعيله يدوياً أول مرة عبر تطبيق My e& Egypt). أكبر باقة شهرية في حكاية إنترنت."
+    perks_en: "300 call/SMS units + up to 3 selected apps + Twist Sport/Music/TV + Starzplay + Shahid VIP + VIU + TOD + unused MB converts to e& money cashback"
+    perks_ar: "300 وحدة مكالمات/رسائل + حتى 3 تطبيقات مختارة + Twist Sport/Music/TV + Starzplay + Shahid VIP + VIU + TOD + تحويل الميجابايت غير المستخدمة لكاش باك e& money"
+    source: "HekayaInternet.pdf"
+
+  - id: hekaya_internet_extra_200units
+    name_en: "Hekaya Internet Extra 200 Units"
+    name_ar: "حكاية إنترنت إكسترا 200 وحدة"
+    price_egp: 7.5
+    ussd_code: "*200#"
+    quota_units: 200
+    quota_label_en: "200 call/SMS units (no internet)"
+    quota_label_ar: "200 وحدة مكالمات/رسائل (بدون إنترنت)"
+    validity_days: null
+    description_en: "Call/SMS-only top-up add-on, no internet included. One-time or auto-renewing based on the customer's choice."
+    description_ar: "إضافة مكالمات/رسائل فقط بدون إنترنت. مرة واحدة أو تجديد تلقائي حسب اختيار العميل."
+    perks_en: "One-time or auto-renewing"
+    perks_ar: "مرة واحدة أو تجديد تلقائي"
+    source: "HekayaInternet.pdf"
+
+  - id: hekaya_internet_extra_650units
+    name_en: "Hekaya Internet Extra 650 Units"
+    name_ar: "حكاية إنترنت إكسترا 650 وحدة"
+    price_egp: 23
+    ussd_code: "*200#"
+    quota_units: 650
+    quota_label_en: "650 call/SMS units (no internet)"
+    quota_label_ar: "650 وحدة مكالمات/رسائل (بدون إنترنت)"
+    validity_days: null
+    description_en: "Call/SMS-only top-up add-on, no internet included. One-time or auto-renewing based on the customer's choice."
+    description_ar: "إضافة مكالمات/رسائل فقط بدون إنترنت. مرة واحدة أو تجديد تلقائي حسب اختيار العميل."
+    perks_en: "One-time or auto-renewing"
+    perks_ar: "مرة واحدة أو تجديد تلقائي"
+    source: "HekayaInternet.pdf"
+
+  - id: hekaya_internet_extra_1400units
+    name_en: "Hekaya Internet Extra 1400 Units"
+    name_ar: "حكاية إنترنت إكسترا 1400 وحدة"
+    price_egp: 46
+    ussd_code: "*200#"
+    quota_units: 1400
+    quota_label_en: "1,400 call/SMS units (no internet)"
+    quota_label_ar: "1,400 وحدة مكالمات/رسائل (بدون إنترنت)"
+    validity_days: null
+    description_en: "Call/SMS-only top-up add-on, no internet included. One-time or auto-renewing based on the customer's choice."
+    description_ar: "إضافة مكالمات/رسائل فقط بدون إنترنت. مرة واحدة أو تجديد تلقائي حسب اختيار العميل."
+    perks_en: "One-time or auto-renewing"
+    perks_ar: "مرة واحدة أو تجديد تلقائي"
+    source: "HekayaInternet.pdf"
+
+  - id: hekaya_internet_extra_3000units
+    name_en: "Hekaya Internet Extra 3000 Units"
+    name_ar: "حكاية إنترنت إكسترا 3000 وحدة"
+    price_egp: 75
+    ussd_code: "*200#"
+    quota_units: 3000
+    quota_label_en: "3,000 call/SMS units (no internet)"
+    quota_label_ar: "3,000 وحدة مكالمات/رسائل (بدون إنترنت)"
+    validity_days: null
+    description_en: "Call/SMS-only top-up add-on, no internet included. One-time or auto-renewing based on the customer's choice."
+    description_ar: "إضافة مكالمات/رسائل فقط بدون إنترنت. مرة واحدة أو تجديد تلقائي حسب اختيار العميل."
+    perks_en: "One-time or auto-renewing"
+    perks_ar: "مرة واحدة أو تجديد تلقائي"
+    source: "HekayaInternet.pdf"
+
+  - id: hekaya_internet_mini_300mb_1w
+    name_en: "Mini Hekaya Internet 10.5 (1 Week)"
+    name_ar: "ميني حكاية إنترنت 10.5 (أسبوع)"
+    price_egp: 10.5
+    ussd_code: "*200#"
+    quota_mb: 300
+    quota_label_en: "300 MB + 60 call/SMS units"
+    quota_label_ar: "300 ميجابايت + 60 وحدة مكالمات/رسائل"
+    validity_days: 7
+    description_en: "Short-term Mini Hekaya Internet bundle: 300 MB plus 60 call/SMS units, 1-week validity. Subscribe via *200# or the My e& Egypt app; auto-renews if balance is sufficient."
+    description_ar: "باقة ميني حكاية إنترنت قصيرة المدى: 300 ميجابايت بالإضافة إلى 60 وحدة مكالمات/رسائل، صلاحية أسبوع. الاشتراك عبر *200# أو تطبيق My e& Egypt؛ تتجدد تلقائياً إذا كان الرصيد كافياً."
+    perks_en: "1-week validity, auto-renew if balance sufficient"
+    perks_ar: "صلاحية أسبوع، تجديد تلقائي عند توفر الرصيد"
+    source: "HekayaInternet.pdf"
+
+  - id: hekaya_internet_mini_500mb_1w
+    name_en: "Mini Hekaya Internet 15 (1 Week)"
+    name_ar: "ميني حكاية إنترنت 15 (أسبوع)"
+    price_egp: 15
+    ussd_code: "*200#"
+    quota_mb: 500
+    quota_label_en: "500 MB + 60 call/SMS units"
+    quota_label_ar: "500 ميجابايت + 60 وحدة مكالمات/رسائل"
+    validity_days: 7
+    description_en: "Short-term Mini Hekaya Internet bundle: 500 MB plus 60 call/SMS units, 1-week validity. Subscribe via *200# or the My e& Egypt app; auto-renews if balance is sufficient."
+    description_ar: "باقة ميني حكاية إنترنت قصيرة المدى: 500 ميجابايت بالإضافة إلى 60 وحدة مكالمات/رسائل، صلاحية أسبوع. الاشتراك عبر *200# أو تطبيق My e& Egypt؛ تتجدد تلقائياً إذا كان الرصيد كافياً."
+    perks_en: "1-week validity, auto-renew if balance sufficient"
+    perks_ar: "صلاحية أسبوع، تجديد تلقائي عند توفر الرصيد"
+    source: "HekayaInternet.pdf"
+
+  - id: hekaya_internet_mini_900mb_1w
+    name_en: "Mini Hekaya Internet 21 (1 Week)"
+    name_ar: "ميني حكاية إنترنت 21 (أسبوع)"
+    price_egp: 21
+    ussd_code: "*200#"
+    quota_mb: 900
+    quota_label_en: "900 MB + 60 call/SMS units"
+    quota_label_ar: "900 ميجابايت + 60 وحدة مكالمات/رسائل"
+    validity_days: 7
+    description_en: "Short-term Mini Hekaya Internet bundle: 900 MB plus 60 call/SMS units, 1-week validity. Subscribe via *200# or the My e& Egypt app; auto-renews if balance is sufficient."
+    description_ar: "باقة ميني حكاية إنترنت قصيرة المدى: 900 ميجابايت بالإضافة إلى 60 وحدة مكالمات/رسائل، صلاحية أسبوع. الاشتراك عبر *200# أو تطبيق My e& Egypt؛ تتجدد تلقائياً إذا كان الرصيد كافياً."
+    perks_en: "1-week validity, auto-renew if balance sufficient"
+    perks_ar: "صلاحية أسبوع، تجديد تلقائي عند توفر الرصيد"
+    source: "HekayaInternet.pdf"
+
+  - id: hekaya_internet_mini_675mb_2w
+    name_en: "Mini Hekaya Internet 23 (2 Weeks)"
+    name_ar: "ميني حكاية إنترنت 23 (أسبوعين)"
+    price_egp: 23
+    ussd_code: "*200#"
+    quota_mb: 675
+    quota_label_en: "675 MB + 90 call/SMS units"
+    quota_label_ar: "675 ميجابايت + 90 وحدة مكالمات/رسائل"
+    validity_days: 14
+    description_en: "Short-term Mini Hekaya Internet bundle: 675 MB plus 90 call/SMS units, 2-week validity. Subscribe via *200# or the My e& Egypt app; auto-renews if balance is sufficient."
+    description_ar: "باقة ميني حكاية إنترنت قصيرة المدى: 675 ميجابايت بالإضافة إلى 90 وحدة مكالمات/رسائل، صلاحية أسبوعين. الاشتراك عبر *200# أو تطبيق My e& Egypt؛ تتجدد تلقائياً إذا كان الرصيد كافياً."
+    perks_en: "2-week validity, auto-renew if balance sufficient"
+    perks_ar: "صلاحية أسبوعين، تجديد تلقائي عند توفر الرصيد"
+    source: "HekayaInternet.pdf"
+
+  - id: hekaya_internet_mini_1100mb_2w
+    name_en: "Mini Hekaya Internet 32 (2 Weeks)"
+    name_ar: "ميني حكاية إنترنت 32 (أسبوعين)"
+    price_egp: 32
+    ussd_code: "*200#"
+    quota_mb: 1100
+    quota_label_en: "1,100 MB + 90 call/SMS units"
+    quota_label_ar: "1,100 ميجابايت + 90 وحدة مكالمات/رسائل"
+    validity_days: 14
+    description_en: "Short-term Mini Hekaya Internet bundle: 1,100 MB plus 90 call/SMS units, 2-week validity. Note: the source PDF flags a naming collision — there are two plans named 'Mini Hekaya Internet 32', this 2-week/1,100 MB one and a separate 3-week/850 MB one (see hekaya_internet_mini_850mb_3w). Subscribe via *200# or the My e& Egypt app; auto-renews if balance is sufficient."
+    description_ar: "باقة ميني حكاية إنترنت قصيرة المدى: 1,100 ميجابايت بالإضافة إلى 90 وحدة مكالمات/رسائل، صلاحية أسبوعين. ملاحظة: يوجد باقتان باسم 'ميني حكاية إنترنت 32' — هذه (أسبوعين/1,100 ميجا) وأخرى منفصلة (3 أسابيع/850 ميجا). الاشتراك عبر *200# أو تطبيق My e& Egypt؛ تتجدد تلقائياً إذا كان الرصيد كافياً."
+    perks_en: "2-week validity, auto-renew if balance sufficient"
+    perks_ar: "صلاحية أسبوعين، تجديد تلقائي عند توفر الرصيد"
+    source: "HekayaInternet.pdf"
+
+  - id: hekaya_internet_mini_1750mb_2w
+    name_en: "Mini Hekaya Internet 41 (2 Weeks)"
+    name_ar: "ميني حكاية إنترنت 41 (أسبوعين)"
+    price_egp: 41
+    ussd_code: "*200#"
+    quota_mb: 1750
+    quota_label_en: "1,750 MB + 90 call/SMS units"
+    quota_label_ar: "1,750 ميجابايت + 90 وحدة مكالمات/رسائل"
+    validity_days: 14
+    description_en: "Short-term Mini Hekaya Internet bundle: 1,750 MB plus 90 call/SMS units, 2-week validity. Subscribe via *200# or the My e& Egypt app; auto-renews if balance is sufficient."
+    description_ar: "باقة ميني حكاية إنترنت قصيرة المدى: 1,750 ميجابايت بالإضافة إلى 90 وحدة مكالمات/رسائل، صلاحية أسبوعين. الاشتراك عبر *200# أو تطبيق My e& Egypt؛ تتجدد تلقائياً إذا كان الرصيد كافياً."
+    perks_en: "2-week validity, auto-renew if balance sufficient"
+    perks_ar: "صلاحية أسبوعين، تجديد تلقائي عند توفر الرصيد"
+    source: "HekayaInternet.pdf"
+
+  - id: hekaya_internet_mini_850mb_3w
+    name_en: "Mini Hekaya Internet 32 (3 Weeks)"
+    name_ar: "ميني حكاية إنترنت 32 (3 أسابيع)"
+    price_egp: 32
+    ussd_code: "*200#"
+    quota_mb: 850
+    quota_label_en: "850 MB + 120 call/SMS units"
+    quota_label_ar: "850 ميجابايت + 120 وحدة مكالمات/رسائل"
+    validity_days: 21
+    description_en: "Short-term Mini Hekaya Internet bundle: 850 MB plus 120 call/SMS units, 3-week validity. Note: the source PDF flags a naming collision — there are two plans named 'Mini Hekaya Internet 32', this 3-week/850 MB one and a separate 2-week/1,100 MB one (see hekaya_internet_mini_1100mb_2w). Subscribe via *200# or the My e& Egypt app; auto-renews if balance is sufficient."
+    description_ar: "باقة ميني حكاية إنترنت قصيرة المدى: 850 ميجابايت بالإضافة إلى 120 وحدة مكالمات/رسائل، صلاحية 3 أسابيع. ملاحظة: يوجد باقتان باسم 'ميني حكاية إنترنت 32' — هذه (3 أسابيع/850 ميجا) وأخرى منفصلة (أسبوعين/1,100 ميجا). الاشتراك عبر *200# أو تطبيق My e& Egypt؛ تتجدد تلقائياً إذا كان الرصيد كافياً."
+    perks_en: "3-week validity, auto-renew if balance sufficient"
+    perks_ar: "صلاحية 3 أسابيع، تجديد تلقائي عند توفر الرصيد"
+    source: "HekayaInternet.pdf"
+
+  - id: hekaya_internet_mini_1500mb_3w
+    name_en: "Mini Hekaya Internet 46 (3 Weeks)"
+    name_ar: "ميني حكاية إنترنت 46 (3 أسابيع)"
+    price_egp: 46
+    ussd_code: "*200#"
+    quota_mb: 1500
+    quota_label_en: "1,500 MB + 120 call/SMS units"
+    quota_label_ar: "1,500 ميجابايت + 120 وحدة مكالمات/رسائل"
+    validity_days: 21
+    description_en: "Short-term Mini Hekaya Internet bundle: 1,500 MB plus 120 call/SMS units, 3-week validity. Subscribe via *200# or the My e& Egypt app; auto-renews if balance is sufficient."
+    description_ar: "باقة ميني حكاية إنترنت قصيرة المدى: 1,500 ميجابايت بالإضافة إلى 120 وحدة مكالمات/رسائل، صلاحية 3 أسابيع. الاشتراك عبر *200# أو تطبيق My e& Egypt؛ تتجدد تلقائياً إذا كان الرصيد كافياً."
+    perks_en: "3-week validity, auto-renew if balance sufficient"
+    perks_ar: "صلاحية 3 أسابيع، تجديد تلقائي عند توفر الرصيد"
+    source: "HekayaInternet.pdf"
+
+  - id: hekaya_internet_mini_2500mb_3w
+    name_en: "Mini Hekaya Internet 63 (3 Weeks)"
+    name_ar: "ميني حكاية إنترنت 63 (3 أسابيع)"
+    price_egp: 63
+    ussd_code: "*200#"
+    quota_mb: 2500
+    quota_label_en: "2,500 MB + 120 call/SMS units"
+    quota_label_ar: "2,500 ميجابايت + 120 وحدة مكالمات/رسائل"
+    validity_days: 21
+    description_en: "Short-term Mini Hekaya Internet bundle: 2,500 MB plus 120 call/SMS units, 3-week validity. Subscribe via *200# or the My e& Egypt app; auto-renews if balance is sufficient."
+    description_ar: "باقة ميني حكاية إنترنت قصيرة المدى: 2,500 ميجابايت بالإضافة إلى 120 وحدة مكالمات/رسائل، صلاحية 3 أسابيع. الاشتراك عبر *200# أو تطبيق My e& Egypt؛ تتجدد تلقائياً إذا كان الرصيد كافياً."
+    perks_en: "3-week validity, auto-renew if balance sufficient"
+    perks_ar: "صلاحية 3 أسابيع، تجديد تلقائي عند توفر الرصيد"
+    source: "HekayaInternet.pdf"
+
+terms_and_conditions:
+  - en: "Every Hekaya Internet monthly plan includes 300 call/SMS units (1 unit per minute to the e& network, 5 units per minute to other networks)."
+    ar: "كل باقة شهرية في حكاية إنترنت تتضمن 300 وحدة مكالمات/رسائل (وحدة واحدة لكل دقيقة داخل شبكة اتصالات مصر، 5 وحدات لكل دقيقة لباقي الشبكات)."
+  - en: "Customers can convert part of their internet bundle into extra call minutes, or into credit toward any app subscription; a mid-cycle upgrade to a larger plan is also possible at any time, paying only the price difference."
+    ar: "يمكن للعميل تحويل جزء من باقة الإنترنت إلى دقائق مكالمات إضافية، أو إلى رصيد لأي اشتراك تطبيق؛ كما يمكن الترقية لباقة أكبر في أي وقت خلال الشهر بدفع فرق السعر فقط."
+  - en: "Out-of-bundle overage rate: 19 piasters per minute, SMS, or MB once the plan's units/data are exhausted."
+    ar: "سعر تجاوز الباقة: 19 قرشاً لكل دقيقة أو رسالة أو ميجابايت بعد استهلاك وحدات/بيانات الباقة."
+  - en: "Hekaya Internet monthly plans are available to new customers; customers can subscribe to Mini plans or renew after expiry even with an active loan (Salfa)."
+    ar: "باقات حكاية إنترنت الشهرية متاحة للعملاء الجدد؛ يمكن الاشتراك في باقات ميني أو التجديد بعد الانتهاء حتى مع وجود سلفة نشطة."
+  - en: "Hekaya Internet is data-first with 300 included call/SMS units, unlike Hekaya Mixat which uses one unified 'Mix' unit for both calls and data."
+    ar: "حكاية إنترنت تركز على البيانات مع 300 وحدة مكالمات/رسائل متضمنة، بخلاف حكاية مكسات التي تستخدم وحدة 'مكس' موحدة للمكالمات والبيانات معاً."
+

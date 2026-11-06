@@ -1,0 +1,21 @@
+# Single source of truth for e& Egypt tax/fee math.
+# prepaid: recharge tax only. postpaid/emerald: percentage tax + flat monthly fee
+# (confirmed in Emerald (2).pdf, Section 9: 8% schedule tax + 14% VAT + 10 EGP
+# state resource development fee, all on the pre-tax base price).
+prepaid:
+  rate: 0.42857142857
+  flat_fee_egp: 0.0
+  description_en: "Prepaid recharge tax (42.857%), applied to the pre-tax package price."
+  description_ar: "ضريبة الشحن للمسبق الدفع (42.857%) تُحسب على سعر الباقة قبل الضريبة."
+
+postpaid:
+  rate: 0.22
+  flat_fee_egp: 10.0
+  description_en: "8% schedule tax + 14% VAT (22% combined) on the base price, plus a flat 10 EGP monthly state resource development fee."
+  description_ar: "ضريبة جدول 8% + ضريبة قيمة مضافة 14% (22% إجمالاً) على السعر الأساسي، بالإضافة إلى رسوم تنمية موارد الدولة الثابتة 10 جنيه شهرياً."
+
+emerald:
+  rate: 0.22
+  flat_fee_egp: 10.0
+  description_en: "8% schedule tax + 14% VAT (22% combined) on the base price, plus a flat 10 EGP monthly state resource development fee."
+  description_ar: "ضريبة جدول 8% + ضريبة قيمة مضافة 14% (22% إجمالاً) على السعر الأساسي، بالإضافة إلى رسوم تنمية موارد الدولة الثابتة 10 جنيه شهرياً."

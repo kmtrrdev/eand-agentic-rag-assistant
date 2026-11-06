@@ -3,100 +3,55 @@ from typing import Annotated, Any, Dict, List, Optional, TypedDict
 
 
 class AgentState(TypedDict, total=False):
-    # ── User Input & Context ───────────────────────────────────────────────────
+    # ── Input ─────────────────────────────────────────────────────────────────
     question: str
     history: List[Dict[str, str]]
     conversation_id: Optional[str]
 
-    # ── Guardrails State ──────────────────────────────────────────────────────
-    guardrail_result: Optional[Dict[str, Any]]
+    # ── Guardrail ─────────────────────────────────────────────────────────────
+    blocked: bool
+    block_reason: Optional[str]
 
-    # ── Profiling & Query Understanding ────────────────────────────────────────
+    # ── Classification (classify_node) ───────────────────────────────────────
+    language: str
     intent: str
-    category: str
-    service: str
-    sub_track: Optional[str]          # e.g. "Mixat" | "Internet" for Hekaya
-    line_type: str
-    data_usage: str
-    voice_usage: str
+    category: str                      # catalog family id, e.g. "hekaya_mixat"
+    service: str                       # display name, e.g. "Hekaya Mixat"
+    line_type: str                     # "prepaid" | "postpaid" | ""
     budget_egp: Optional[float]
+    device_type: Optional[str]
+    usage_focus: Optional[str]         # "minutes" | "data" | "balanced"
+    package_name_raw: Optional[str]
+    tier_price_egp: Optional[float]
     keywords: List[str]
     entities: List[str]
     is_out_of_scope: bool
     is_unsupported_service: bool
-    needs_clarification: bool         # True when query is genuinely ambiguous
-    clarification_hint: Optional[str] # Suggested clarifying question
-    pending_clarification: Optional[str]
-    clarification_candidates: List[str]
-    analysis_summary: str
+    is_lang_switch: Optional[bool]
+    lang_switch_user_q: Optional[str]
+    lang_switch_target_lang: Optional[str]
 
-    # ── Response Strategy Routing & Tool Policy ───────────────────────────────
-    # GREETING | SAFE_REFUSAL | CLARIFICATION | MCP_EXACT | MCP_CALCULATION |
-    # MCP_ACTIVATION | MCP_RECOMMENDATION | MCP_COMPARISON | MCP_PLUS_RAG | RAG_ONLY
+    # ── Strategy & deterministic tool resolution ─────────────────────────────
     strategy: str
-    strategy_reason: str
-    allowed_tools: List[str]
-    required_facts: List[str]
-
-    # ── Recommendation Constraints & Candidate Filtering State ───────────────
-    recommendation_constraints: Optional[Dict[str, Any]]
-    candidate_packages: List[Dict[str, Any]]
-    filtered_candidates: List[Dict[str, Any]]
-    rejected_candidates: List[Dict[str, Any]]
-    selected_package: Optional[Dict[str, Any]]
-    recommendation_validation: Optional[Dict[str, Any]]
-
-    # ── MCP Ground Truth State & Cache ────────────────────────────────────────
+    needs_clarification: bool
+    closest_matches: List[str]
     mcp_tools_called: List[str]
-    mcp_tool_results: List[Dict[str, Any]]
-    mcp_evidence: List[Dict[str, Any]]
+    tool_evidence: List[Dict[str, Any]]
 
-    # ── Retrieval & Search State ──────────────────────────────────────────────
-    rewritten_query: str
-    documents: List[Any]
+    # ── Retrieval ─────────────────────────────────────────────────────────────
+    retrieval_query: str               # query_rewrite_node's output; what retrieve_node actually searches with
     context: str
     sources: List[Dict[str, Any]]
-    retrieval_evidence: List[Dict[str, Any]]
-    retrieval_status: str             # RETRIEVAL_GOOD | RETRIEVAL_WEAK | RETRIEVAL_FAILED
-    retrieval_relevance_score: float
-    previous_retrieval_score: Optional[float]
-    current_retrieval_score: Optional[float]
-    last_retrieval_query: Optional[str]
-    retrieval_diagnostics: Dict[str, Any]
 
-    # ── Subsystem Independent Retry Budgets ────────────────────────────────────
-    # Only counters that actually gate a real retry loop belong here.
-    # (validation_attempts, mcp_attempts, and recommendation_attempts used to be
-    # tracked too, but nothing ever read them — no edge function branched on them —
-    # so they were pure write-only overhead, not real retry budgets. Removed rather
-    # than wired into new retry logic that isn't otherwise needed.)
-    retrieval_attempts: int           # Default ceiling: 2 (route_after_retrieval)
-    rewrite_attempts: int             # Default ceiling: 1 (route_after_retrieval)
-    generation_repairs: int           # Default ceiling: 1 (route_after_validate)
-    last_retry_reason: Optional[str]
-    last_failure_type: Optional[str]
-    repair_strategy: Optional[str]    # REGENERATE_FROM_MCP | FIX_PRICE | FIX_USSD | RETRIEVE_MISSING
-
-    # ── Generation & Security State ───────────────────────────────────────────
+    # ── Generation ────────────────────────────────────────────────────────────
     answer: str
-    sanitized_answer: str
+    generation_repairs: int
 
-    # ── Claim-Level Validation Diagnostics State ──────────────────────────────
-    # PASS | REPAIR | REFUSE
-    validation_result: str
+    # ── Validation (actually wired into the graph — see graph.py) ───────────
+    validation_result: str             # PASS | REPAIR | REFUSE
     validation_details: Dict[str, Any]
-    claims: List[Dict[str, Any]]
-    claim_verification: List[Dict[str, Any]]
-    unsupported_claims: List[str]
-    contradictions: List[str]
-    missing_evidence: List[str]
     confidence: float
 
-    # ── Final Answer ──────────────────────────────────────────────────────────
-    final_answer: str
-
-    # ── Execution Trace & Observability ───────────────────────────────────────
-    latency_metrics: Dict[str, float]
+    # ── Observability ─────────────────────────────────────────────────────────
     workflow_trace: Annotated[List[Dict[str, Any]], operator.add]
     errors: Annotated[List[Dict[str, Any]], operator.add]
-

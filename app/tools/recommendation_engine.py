@@ -1,419 +1,244 @@
 """
-app/tools/recommendation_engine.py
------------------------------------
-Structured recommendation constraint extraction, candidate filtering, ranking,
-and post-selection validation for e& Egypt Agentic RAG assistant.
-
-Principle:
-A recommendation is correct ONLY if it satisfies the user's explicit constraints:
-REAL + RELEVANT TO REQUEST + WITHIN BUDGET + EVIDENCE-BACKED + VALIDATED.
+Tool: recommend_packages
+Deterministic, constraint-based package recommendation. Takes the structured
+constraints already extracted by the agent's classify step (budget, family,
+device type) rather than re-parsing raw customer text itself.
 """
-import re
-from typing import Any, Dict, List, Optional, Tuple
-from app.tools.get_package_details import PACKAGE_REGISTRY
-from app.guardrails.security_utils import is_arabic_text
+from typing import Any, Dict, Optional
+
+from app.data.catalog import get_catalog
+from app.tools.calculate_price import calculate_price_tool
+
+_DEVICE_FAMILIES = {
+    "phone": ["aqwa_card", "hekaya_mixat", "hekaya_internet", "emerald"],
+    "mobile": ["aqwa_card", "hekaya_mixat", "hekaya_internet", "emerald"],
+    "router": ["dataline"],
+    "mifi": ["dataline"],
+    "modem": ["dataline"],
+    "usb": ["dataline"],
+}
 
 
-def extract_recommendation_constraints(
-    question: str,
-    history: Optional[List[Dict[str, str]]] = None,
+def _quota_gb(tier: Dict[str, Any]) -> float:
+    if "quota_gb" in tier and tier["quota_gb"] is not None:
+        return float(tier["quota_gb"])
+    if "quota_mb" in tier and tier["quota_mb"] is not None:
+        return float(tier["quota_mb"]) / 1024.0
+    if "internet_gb" in tier and tier["internet_gb"] is not None:
+        return float(tier["internet_gb"])
+    return 0.0
+
+
+def _with_after_tax_total(tier: Dict[str, Any]) -> Dict[str, Any]:
+    calc = calculate_price_tool(base_price=tier["price_egp"], tax_type=tier.get("tax_type", "prepaid"))
+    tier_copy = dict(tier)
+    if calc.get("found"):
+        tier_copy["total_egp"] = calc["total_egp"]
+        tier_copy["tax_amount_egp"] = calc["tax_amount_egp"]
+        tier_copy["flat_fee_egp"] = calc["flat_fee_egp"]
+    if "activation_code" not in tier_copy and "ussd_code" in tier_copy:
+        tier_copy["activation_code"] = tier_copy["ussd_code"]
+    return tier_copy
+
+
+def _is_addon_tier(tier: Dict[str, Any]) -> bool:
+    tier_id = str(tier.get("id", "")).lower()
+    fam = str(tier.get("family", "")).lower()
+    name = str(tier.get("name_en", "")).lower()
+    if fam == "daily_addons":
+        return True
+    if "extra" in tier_id or "addon" in tier_id or "extra" in name or "add-on" in name:
+        return True
+    return False
+
+
+def recommend_packages_tool(
+    budget_egp: Optional[float] = None,
+    family: Optional[str] = None,
+    device_type: Optional[str] = None,
+    min_data_gb: Optional[float] = None,
+    usage_focus: Optional[str] = None,
+    include_addons: bool = False,
+    max_results: int = 3,
+    min_price_egp: Optional[float] = None,
 ) -> Dict[str, Any]:
     """
-    Extract structured recommendation constraints from the user question and conversation history.
-    Does NOT invent constraints that the user did not specify.
+    Args:
+        budget_egp: the customer's total available cash — compared against the
+            AFTER-TAX total, not the bare listed price, since that's what they
+            actually have to pay.
+        family: a specific catalog family id (e.g. "hekaya_mixat"); overrides device_type.
+        device_type: "phone" or "router"/"mifi" — used to pick candidate families
+            when no specific family is named.
+        min_data_gb: minimum data quota required, if the customer cares about data.
+        usage_focus: "minutes"/"calls" or "data"/"internet" — prioritizes plans matching
+            the customer's usage pattern.
+        include_addons: whether to include add-on top-ups (default False: customer wants a real plan).
+        max_results: how many recommendations to return.
+        min_price_egp: minimum BASE price — filters out plans at or below this price.
+            Used for "show me higher tiers" follow-ups (typically no budget cap).
     """
-    q = str(question or "").strip()
-    q_lower = q.lower()
+    catalog = get_catalog()
 
-    # ── 1. Split Primary Request from Explicit Fallback Clauses ───────────────
-    fallback_parts = re.split(r"ولو\s*مفيش|لو\s*مفيش|if\s*no\s+voice|if\s*no\s+internet", q, flags=re.IGNORECASE)
-    primary_q = fallback_parts[0]
-    fallback_q = fallback_parts[1] if len(fallback_parts) > 1 else ""
+    focus = (usage_focus or "").lower()
+    if device_type and device_type.lower() in ("router", "mifi", "modem", "usb"):
+        family = "dataline"
+    elif focus in ("minutes", "calls", "voice", "دقايق", "مكالمات"):
+        if not family or family in ("hekaya_internet", "hekaya", "super_connect", "dataline"):
+            family = "hekaya_mixat"
+    elif focus in ("data", "internet", "نت", "انترنت"):
+        if not family or family in ("hekaya_mixat", "hekaya"):
+            if not device_type or device_type.lower() not in ("router", "mifi", "modem", "usb"):
+                family = "hekaya_internet"
 
-    # Voice / Minutes keywords
-    voice_patterns = [
-        r"دقايق", r"دقيقة", r"دقائق", r"مكالمات", r"مكالمة", r"اتصال", r"اتصالات",
-        r"voice", r"minute", r"minutes", r"call", r"calls", r"local minutes",
-        r"voice package", r"minutes package", r"calls package"
-    ]
-    # Internet / Data keywords
-    net_patterns = [
-        r"نت", r"إنترنت", r"انترنت", r"ميجا", r"ميجابايت", r"جيجا", r"جيجابايت",
-        r"data", r"internet", r"megabyte", r"gigabyte", r"gb", r"mb",
-        r"data package", r"internet package", r"gb package", r"أكبر كمية داتا", r"اكبر كمية داتا", r"اكبر باقة نت", r"أكبر باقة نت"
-    ]
-    # Mixed keywords
-    mixed_patterns = [
-        r"دقايق\s*و\s*نت", r"مكالمات\s*و\s*نت", r"نت\s*و\s*دقايق", r"نت\s*و\s*مكالمات",
-        r"مكسات", r"ميكسات", r"mixat", r"mixes", r"تجمع\s*الاتنين", r"الاتنين\s*مع\s*بعض",
-        r"voice\s*and\s*data", r"calls\s*and\s*internet", r"mixed package"
-    ]
-
-    # Voice negation patterns (e.g. "مش فارق معايا المكالمات", "مش عايز دقايق", "no calls")
-    neg_voice_patterns = [
-        r"مش\s*فارق\s*(?:معايا)?\s*(?:ال)?مكالمات",
-        r"مش\s*فارق\s*(?:معايا)?\s*(?:ال)?دقايق",
-        r"مش\s*عايز\s*(?:ال)?مكالمات",
-        r"مش\s*عايز\s*(?:ال)?دقايق",
-        r"مش\s*محتاج\s*(?:ال)?مكالمات",
-        r"مش\s*محتاج\s*(?:ال)?دقايق",
-        r"بدون\s*(?:ال)?مكالمات",
-        r"بدون\s*(?:ال)?دقايق",
-        r"من\s*غير\s*(?:ال)?مكالمات",
-        r"من\s*غير\s*(?:ال)?دقايق",
-        r"no\s+calls?",
-        r"no\s+voice",
-        r"without\s+calls?",
-        r"without\s+voice",
-        r"don't\s+need\s+calls?",
-        r"don't\s+care\s+about\s+calls?",
-    ]
-    is_voice_negated = any(re.search(p, primary_q, re.IGNORECASE) for p in neg_voice_patterns)
-
-    # Net negation patterns
-    neg_net_patterns = [
-        r"مش\s*فارق\s*(?:معايا)?\s*(?:ال)?نت",
-        r"مش\s*فارق\s*(?:معايا)?\s*(?:ال)?انترنت",
-        r"مش\s*عايز\s*(?:ال)?نت",
-        r"مش\s*عايز\s*(?:ال)?انترنت",
-        r"مش\s*محتاج\s*(?:ال)?نت",
-        r"مش\s*محتاج\s*(?:ال)?انترنت",
-        r"بدون\s*(?:ال)?نت",
-        r"بدون\s*(?:ال)?انترنت",
-        r"من\s*غير\s*(?:ال)?نت",
-        r"من\s*غير\s*(?:ال)?انترنت",
-        r"no\s+data",
-        r"no\s+internet",
-        r"without\s+data",
-        r"without\s+internet",
-        r"don't\s+need\s+internet",
-    ]
-    is_net_negated = any(re.search(p, primary_q, re.IGNORECASE) for p in neg_net_patterns)
-
-    # Device & MiFi / Router detection
-    is_mifi = any(k in q_lower for k in ["mifi", "ماي فاي", "مايفاي", "راوتر", "مودم", "router", "modem", "dataline", "data line", "usb"])
-    line_type = "mifi_router" if is_mifi else "mobile_phone"
-
-    is_mixed = any(re.search(p, primary_q, re.IGNORECASE) for p in mixed_patterns)
-    has_voice = any(re.search(p, primary_q, re.IGNORECASE) for p in voice_patterns)
-    has_net = any(re.search(p, primary_q, re.IGNORECASE) for p in net_patterns)
-
-    if is_mifi:
-        service_type = "INTERNET"
-    elif is_voice_negated:
-        service_type = "INTERNET"
-    elif is_net_negated:
-        service_type = "VOICE"
-    elif is_mixed or (has_voice and has_net):
-        service_type = "MIXED"
-    elif has_voice:
-        service_type = "VOICE"
-    elif has_net:
-        service_type = "INTERNET"
+    if family and catalog.family(family):
+        pool = catalog.tiers_for_family(family)
+    elif device_type and device_type.lower() in _DEVICE_FAMILIES:
+        pool = [t for f in _DEVICE_FAMILIES[device_type.lower()] for t in catalog.tiers_for_family(f)]
     else:
-        # Check history if turn is a continuation
-        hist_service = None
-        if history:
-            for turn in reversed(history[-4:]):
-                t_content = turn.get("content", "")
-                if any(re.search(p, t_content, re.IGNORECASE) for p in mixed_patterns):
-                    hist_service = "MIXED"
+        pool = [t for f in _DEVICE_FAMILIES["phone"] for t in catalog.tiers_for_family(f)]
+
+    # Attach family to each tier if missing
+    for t in pool:
+        if "family" not in t:
+            # Infer family from tier id
+            for f in catalog.families:
+                if t["id"].startswith(f):
+                    t["family"] = f
                     break
-                elif any(re.search(p, t_content, re.IGNORECASE) for p in voice_patterns):
-                    hist_service = "VOICE"
-                    break
-                elif any(re.search(p, t_content, re.IGNORECASE) for p in net_patterns):
-                    hist_service = "INTERNET"
-                    break
-        service_type = hist_service if hist_service else "UNKNOWN"
 
-    # ── 4. Explicit Fallback Permissions ─────────────────────────────────────
-    # NOTE: this used to be computed TWICE — once here using fallback_q (the text
-    # after "ولو مفيش"/"لو مفيش"), and then a second, simpler block further down
-    # unconditionally overwrote it using only `q` and only ever checking for
-    # internet keywords. That silently discarded the VOICE-fallback detection
-    # (e.g. "عايز نت، ولو مفيش هات مكالمات" never resolved fallback_categories to
-    # ["VOICE"]) every single time. Merged into one correct pass below.
-    fallback_allowed = False
-    fallback_categories: List[str] = []
-    fallback_search_text = fallback_q or q
-    if fallback_q or any(k in q for k in ["ولو مفيش", "لو مفيش", "ممكن إنترنت", "ممكن انترنت", "internet is ok", "internet is fine", "ممكن نت"]):
-        fallback_allowed = True
-        if any(re.search(p, fallback_search_text, re.IGNORECASE) for p in net_patterns):
-            fallback_categories.append("INTERNET")
-        if any(re.search(p, fallback_search_text, re.IGNORECASE) for p in voice_patterns):
-            fallback_categories.append("VOICE")
+    # Exclude add-ons / top-ups unless customer specifically asked for add-ons
+    if not include_addons:
+        pool = [t for t in pool if not _is_addon_tier(t)]
 
-    # ── 2. Budget and Tax Semantics Extraction ────────────────────────────────
-    # A number is a USSD/short-code reference (not a budget) if it is structurally
-    # part of one in the text — adjacent to '*'/'#' (e.g. "*130#"), or immediately
-    # followed by "code"/"كود" — rather than merely matching a blacklist of specific
-    # values. A blacklist silently drops real budgets that happen to equal a known
-    # code (e.g. a genuine 130 EGP budget was previously always discarded because
-    # *130# is also a real USSD code).
-    def _extract_budget(text: str) -> Optional[float]:
-        for m in re.finditer(r"\b\d+(?:\.\d+)?\b", text):
-            start, end = m.span()
-            window = text[max(0, start - 6):min(len(text), end + 6)].lower()
-            if "*" in window or "#" in window or "code" in window or "كود" in window:
-                continue
-            return float(m.group(0))
-        return None
+    candidates = [_with_after_tax_total(t) for t in pool]
+    if min_data_gb is not None:
+        candidates = [t for t in candidates if _quota_gb(t) >= float(min_data_gb)]
 
-    budget: Optional[float] = _extract_budget(q)
-
-    # Inherit budget from history if not present in current question
-    if budget is None and history:
-        for turn in reversed(history[-4:]):
-            budget = _extract_budget(turn.get("content", ""))
-            if budget is not None:
-                break
-
-    # Budget Type
-    if any(k in q for k in ["حد أقصى", "بحد أقصى", "أقل من", "اقل من", "تحت", "max", "maximum", "under", "less than", "up to", "مش أكتر من"]):
-        budget_type = "MAX"
-    elif any(k in q for k in ["في حدود", "حوالي", "تقريباً", "تقريبا", "around", "about", "approx"]):
-        budget_type = "APPROXIMATE"
-    elif budget is not None:
-        budget_type = "EXACT_OR_STANDARD"
-    else:
-        budget_type = "UNKNOWN"
-
-    # Tax Semantics
-    if any(k in q_lower for k in ["شامل الضريبة", "شامل الضريبه", "شاملة الضريبة", "بعد الضريبة", "including tax", "tax included", "with tax", "total", "معايا"]):
-        tax_included = True
-    elif any(k in q_lower for k in ["قبل الضريبة", "قبل الضريبه", "بدون ضريبة", "pre-tax", "pretax", "excluding tax", "before tax"]):
-        tax_included = False
-    else:
-        # Standard consumer expectation: prepaid recharges are evaluated against total cash budget
-        tax_included = True
-
-    # ── 3. Feature & Quota Minimum Requirements ──────────────────────────────
-    min_minutes: Optional[int] = None
-    min_match = re.search(r"(\d+)\s*(?:دقيقة|دقايق|دقائق|minute|minutes|min)", q, re.IGNORECASE)
-    if min_match:
-        min_minutes = int(min_match.group(1))
-
-    min_data: Optional[float] = None
-    data_match = re.search(r"(\d+(?:\.\d+)?)\s*(?:جيجا|جيجابايت|gb|giga)", q, re.IGNORECASE)
-    if data_match:
-        min_data = float(data_match.group(1))
-
-    # (Fallback permissions already computed above — see NOTE.)
-
-    # ── 5. Specific Package Category / Sub-track preference ───────────────────
-    package_category = None
-    if is_mifi or any(k in q for k in ["داتا لاين", "داتالاين", "dataline"]):
-        package_category = "DataLine"
-    elif any(k in q for k in ["إمرالد", "امرالد", "اميرالد", "emerald"]):
-        package_category = "Emerald"
-    elif any(k in q for k in ["حكاية مكسات", "حكاية ميكسات", "mixat"]):
-        package_category = "Hekaya Mixat"
-    elif any(k in q for k in ["حكاية إنترنت", "حكاية انترنت", "نت حكاية"]):
-        package_category = "Hekaya Internet"
-    elif any(k in q for k in ["أقوى كارت", "اقوى كارت", "aqwa card"]):
-        package_category = "Aqwa Card"
-
-    return {
-        "service_type": service_type,
-        "line_type": line_type,
-        "is_voice_negated": is_voice_negated,
-        "budget": budget,
-        "budget_type": budget_type,
-        "tax_included": tax_included,
-        "min_data": min_data,
-        "min_minutes": min_minutes,
-        "package_category": package_category,
-        "fallback_allowed": fallback_allowed,
-        "fallback_categories": fallback_categories,
-        "explicit_exclusions": [],
-    }
-
-
-def validate_candidate_package(
-    candidate: Dict[str, Any],
-    constraints: Dict[str, Any],
-) -> Dict[str, Any]:
-    """
-    Deterministically validate a package candidate against user recommendation constraints.
-    Returns:
-        {
-            "valid": bool,
-            "violations": List[str],
-            "score": float,
-            "reason": str
+    # ── "Higher tiers" mode: min_price_egp set, no budget cap ───────────────
+    # Return plans ABOVE the price floor, sorted ascending by price.
+    if min_price_egp is not None and budget_egp is None:
+        min_val = float(min_price_egp)
+        higher = [t for t in candidates if float(t["price_egp"]) > min_val]
+        higher.sort(key=lambda t: float(t["price_egp"]))
+        top = higher[:max_results]
+        for t in top:
+            t["recommendation_role"] = "higher_tier"
+        return {
+            "found": bool(top),
+            "count": len(top),
+            "recommendations": top,
+            "constraints_applied": {
+                "budget_egp": budget_egp,
+                "family": family,
+                "device_type": device_type,
+                "min_data_gb": min_data_gb,
+                "usage_focus": usage_focus,
+                "min_price_egp": min_price_egp,
+            },
         }
-    """
-    violations = []
-    score = 100.0
 
-    service_type = constraints.get("service_type", "UNKNOWN")
-    line_type = constraints.get("line_type", "mobile_phone")
-    is_voice_negated = constraints.get("is_voice_negated", False)
-    budget = constraints.get("budget")
-    budget_type = constraints.get("budget_type", "UNKNOWN")
-    tax_included = constraints.get("tax_included", True)
-    min_minutes = constraints.get("min_minutes")
-    min_data = constraints.get("min_data")
-    fallback_allowed = constraints.get("fallback_allowed", False)
-    fallback_categories = constraints.get("fallback_categories", [])
-    package_category = constraints.get("package_category")
+    if focus in ("minutes", "calls", "voice", "دقايق", "مكالمات"):
+        # Prioritize voice/mix plans (Hekaya Mixat, Aqwa Card, Emerald) over pure internet plans
+        def _sort_key(t: Dict[str, Any]):
+            t_fam = t.get("family", "")
+            mins = t.get("local_minutes") or t.get("quota_units") or 0
+            is_voice_plan = 1 if t_fam in ("hekaya_mixat", "aqwa_card", "emerald") or mins > 300 else 0
+            return (is_voice_plan, float(t["price_egp"]))
+    elif focus in ("data", "internet", "نت", "انترنت"):
+        def _sort_key(t: Dict[str, Any]):
+            t_fam = t.get("family", "")
+            is_data_plan = 1 if t_fam in ("hekaya_internet", "super_connect", "dataline", "emerald") else 0
+            return (is_data_plan, _quota_gb(t), float(t["price_egp"]))
+    else:
+        # Best value first: highest price tier
+        def _sort_key(t: Dict[str, Any]):
+            return float(t["price_egp"])
 
-    pkg_svc = candidate.get("service", "").lower()
-    pkg_type = candidate.get("type", candidate.get("package_name", ""))
-    is_internet_only = ("internet" in pkg_svc or "dataline" in pkg_svc or "super connect" in pkg_svc)
-    is_voice_capable = ("mix" in pkg_svc or "aqwa" in pkg_svc or "emerald" in pkg_svc or "ahlan" in pkg_svc)
+    if budget_egp is not None:
+        b_val = float(budget_egp)
+        candidates_within = [t for t in candidates if float(t.get("total_egp", t["price_egp"])) <= b_val]
+        candidates_above = [t for t in candidates if float(t.get("total_egp", t["price_egp"])) > b_val]
 
-    # 0. Line Type / Device compatibility (CRITICAL)
-    if line_type == "mifi_router":
-        if "dataline" not in pkg_svc:
-            violations.append("DEVICE_INCOMPATIBLE")
-            return {
-                "valid": False,
-                "violations": violations,
-                "score": 0.0,
-                "reason": f"Device is MiFi / Router, candidate {pkg_type} is for mobile lines.",
-            }
-    elif line_type == "mobile_phone" and not package_category:
-        if "dataline" in pkg_svc:
-            violations.append("DEVICE_INCOMPATIBLE")
-            return {
-                "valid": False,
-                "violations": violations,
-                "score": 0.0,
-                "reason": f"Device is Mobile Phone, candidate {pkg_type} is for MiFi/Router only.",
-            }
+        # If the requested family reached its ceiling, offer the next tier up from Emerald
+        if not candidates_above:
+            emerald_pool = [_with_after_tax_total(t) for t in catalog.tiers_for_family("emerald")]
+            emerald_above = [t for t in emerald_pool if float(t.get("total_egp", t["price_egp"])) > b_val]
+            if emerald_above:
+                candidates_above = emerald_above
 
-    # 1. Service Type Validation (CRITICAL CONSTRAINT)
-    if service_type == "VOICE":
-        if is_internet_only:
-            if not (fallback_allowed and "INTERNET" in fallback_categories):
-                violations.append("SERVICE_TYPE_MISMATCH")
-                return {
-                    "valid": False,
-                    "violations": violations,
-                    "score": 0.0,
-                    "reason": f"User explicitly requested VOICE/MINUTES package, but candidate {pkg_type} is INTERNET-only.",
-                }
-            else:
-                score -= 30.0  # Fallback penalty
-    elif service_type == "INTERNET":
-        if is_voice_negated and "mix" in pkg_svc:
-            violations.append("VOICE_NOT_WANTED")
-            return {
-                "valid": False,
-                "violations": violations,
-                "score": 0.0,
-                "reason": f"User explicitly does not want voice minutes, candidate {pkg_type} is a voice/mix bundle.",
-            }
-        elif not is_internet_only and "mix" not in pkg_svc:
-            # Previously this always rejected pure-voice candidates for an INTERNET
-            # request with no fallback path (the VOICE fallback was only ever
-            # honored on the symmetric VOICE branch above). Now a voice-only
-            # candidate is allowed through — at a scoring penalty — when the user
-            # explicitly said an internet-first request can fall back to voice.
-            if not (fallback_allowed and "VOICE" in fallback_categories):
-                violations.append("SERVICE_TYPE_MISMATCH")
-                return {
-                    "valid": False,
-                    "violations": violations,
-                    "score": 0.0,
-                    "reason": f"User explicitly requested INTERNET package, but candidate {pkg_type} is not internet-focused.",
-                }
-            else:
-                score -= 30.0  # Fallback penalty, mirrors the VOICE branch above
-    elif service_type == "MIXED":
-        if is_internet_only:
-            violations.append("SERVICE_TYPE_MISMATCH")
-            return {
-                "valid": False,
-                "violations": violations,
-                "score": 0.0,
-                "reason": f"User requested MIXED (calls + internet) package, but candidate {pkg_type} has no voice minutes.",
-            }
+        # Sort within-budget candidates: best matching value first
+        candidates_within.sort(key=_sort_key, reverse=True)
 
-    # 2. Package Category Filter (if user specified e.g. Emerald or Hekaya)
-    if package_category:
-        cat_lower = package_category.lower()
-        if cat_lower not in pkg_svc:
-            violations.append("CATEGORY_MISMATCH")
-            return {
-                "valid": False,
-                "violations": violations,
-                "score": 0.0,
-                "reason": f"User specifically requested {package_category}, but candidate is {candidate.get('service')}.",
-            }
+        top = []
+        best_within = None
+        if candidates_within:
+            best_within = dict(candidates_within[0])
+            best_within["recommendation_role"] = "within_budget"
+            best_within["fits_after_tax_budget"] = True
+            best_within["remaining_budget_egp"] = round(
+                b_val - float(best_within.get("total_egp", best_within["price_egp"])), 2
+            )
+            top.append(best_within)
 
-    # 3. Budget Validation
-    if budget is not None and budget > 0:
-        actual_price = candidate.get("total_price_egp", candidate.get("pretax_price_egp", 0.0)) if tax_included else candidate.get("pretax_price_egp", 0.0)
-        
-        # Hard cap for MAX budget type
-        if budget_type == "MAX" and actual_price > budget:
-            violations.append("BUDGET_EXCEEDED")
-            return {
-                "valid": False,
-                "violations": violations,
-                "score": 0.0,
-                "reason": f"Package price ({actual_price} EGP) strictly exceeds max budget ({budget} EGP).",
-            }
-        elif actual_price > (budget * 1.05):  # 5% margin tolerance for standard budgets
-            violations.append("BUDGET_EXCEEDED")
-            return {
-                "valid": False,
-                "violations": violations,
-                "score": 0.0,
-                "reason": f"Package price ({actual_price} EGP) exceeds budget ({budget} EGP).",
-            }
-        else:
-            # Score bonus for filling the budget well without exceeding
-            budget_utilization = actual_price / budget
-            score += (budget_utilization * 20.0)
+        # For the slightly-above-budget option (upsell / next tier up):
+        # Prefer a package from the same family as best_within (or matching focus),
+        # sorted by total_egp ASCENDING so it is the closest tier above budget.
+        if candidates_above:
+            target_family = best_within.get("family") if best_within else None
+            same_family_above = (
+                [t for t in candidates_above if t.get("family") == target_family]
+                if target_family
+                else []
+            )
 
-    # 4. Minimum Requirements Validation
-    if min_minutes is not None:
-        cand_minutes = candidate.get("minutes", candidate.get("mixes", 0))
-        if cand_minutes < min_minutes:
-            violations.append("INSUFFICIENT_MINUTES")
-            return {
-                "valid": False,
-                "violations": violations,
-                "score": 0.0,
-                "reason": f"Candidate provides {cand_minutes} minutes, but user required minimum {min_minutes}.",
-            }
+            above_pool = same_family_above if same_family_above else candidates_above
+            # Sort by total cost ascending to pick the immediate next step up
+            above_pool.sort(key=lambda t: float(t.get("total_egp", t["price_egp"])))
+
+            best_above = dict(above_pool[0])
+            best_above["recommendation_role"] = "slightly_above_budget_upgrade"
+            best_above["fits_after_tax_budget"] = False
+            best_above["extra_cost_over_budget_egp"] = round(
+                float(best_above.get("total_egp", best_above["price_egp"])) - b_val, 2
+            )
+            if best_within:
+                diff_cost = float(best_above.get("total_egp", best_above["price_egp"])) - float(
+                    best_within.get("total_egp", best_within["price_egp"])
+                )
+                best_above["extra_cost_over_within_plan_egp"] = round(diff_cost, 2)
+
+                # Persuasive comparison highlights for the prompt
+                pitch_reasons = []
+                u_above = best_above.get("quota_units") or best_above.get("quota_mb") or 0
+                u_within = best_within.get("quota_units") or best_within.get("quota_mb") or 0
+                if u_above and u_within and u_above > u_within:
+                    pitch_reasons.append(f"وحدات ومكسات أكتر: {u_above:,} مقابل {u_within:,}")
+                fam_above = best_above.get("family_lines") or best_above.get("family_members_limit") or 0
+                fam_within = best_within.get("family_lines") or best_within.get("family_members_limit") or 0
+                if fam_above > fam_within:
+                    pitch_reasons.append(f"خطوط عيلة إضافية: {fam_above} خط بدل {fam_within}")
+
+                best_above["upsell_pitch_points"] = pitch_reasons
+
+            top.append(best_above)
+    else:
+        candidates.sort(key=_sort_key, reverse=True)
+        top = candidates[:max_results]
+        for t in top:
+            t["recommendation_role"] = "general_recommendation"
 
     return {
-        "valid": True,
-        "violations": [],
-        "score": score,
-        "reason": "Candidate satisfies all explicit user constraints.",
+        "found": bool(top),
+        "count": len(top),
+        "recommendations": top,
+        "constraints_applied": {
+            "budget_egp": budget_egp,
+            "family": family,
+            "device_type": device_type,
+            "min_data_gb": min_data_gb,
+            "usage_focus": usage_focus,
+            "min_price_egp": min_price_egp,
+        },
     }
 
-
-def filter_and_rank_candidates(
-    constraints: Dict[str, Any],
-) -> Tuple[List[Dict[str, Any]], List[Dict[str, Any]]]:
-    """
-    Filter all registered packages against constraints and return (valid_ranked_candidates, rejected_candidates).
-    Never ranks an invalid candidate above a valid candidate.
-    """
-    valid_candidates = []
-    rejected_candidates = []
-
-    for pkg_key, pkg in PACKAGE_REGISTRY.items():
-        candidate_item = dict(pkg)
-        candidate_item["key"] = pkg_key
-        candidate_item["package_name"] = pkg.get("type", pkg_key)
-
-        val_res = validate_candidate_package(candidate_item, constraints)
-        candidate_item["validation"] = val_res
-
-        if val_res["valid"]:
-            candidate_item["rank_score"] = val_res["score"]
-            valid_candidates.append(candidate_item)
-        else:
-            rejected_candidates.append(candidate_item)
-
-    # Rank valid candidates by rank_score descending (best budget value & exact match)
-    valid_candidates.sort(key=lambda x: x["rank_score"], reverse=True)
-    return valid_candidates, rejected_candidates

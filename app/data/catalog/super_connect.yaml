@@ -1,0 +1,159 @@
+family: super_connect
+family_name_en: "Super Connect"
+family_name_ar: "سوبر كونكت"
+category: data_addon
+tax_type: prepaid
+default_ussd: "*566#"
+family_description_en: "Super Connect is e& Egypt's mobile internet add-on line, stacked on top of any existing line via *566#."
+family_description_ar: "سوبر كونكت هي باقات إنترنت إضافية من اتصالات مصر تُضاف فوق أي خط عبر *566#."
+
+tiers:
+  - id: super_connect_9
+    name_en: "Super Connect 9"
+    name_ar: "سوبر كونكت 9"
+    price_egp: 9
+    ussd_code: "*566#"
+    quota_mb: 600
+    quota_label_en: "600 MB"
+    quota_label_ar: "600 ميجابايت"
+    validity_days: 30
+    description_en: "600 MB mobile internet add-on bundle via *566#."
+    description_ar: "باقة إنترنت إضافية بحجم 600 ميجابايت عبر *566#."
+    perks_en: "Exclusive add-on"
+    perks_ar: "باقة إضافية حصرية"
+    source: "e& Egypt Super Connect"
+
+  - id: super_connect_20
+    name_en: "Super Connect 20"
+    name_ar: "سوبر كونكت 20"
+    price_egp: 20
+    ussd_code: "*566#"
+    quota_mb: 1500
+    quota_label_en: "1,500 MB"
+    quota_label_ar: "1,500 ميجابايت"
+    validity_days: 30
+    description_en: "1,500 MB mobile internet add-on bundle via *566#."
+    description_ar: "باقة إنترنت إضافية بحجم 1,500 ميجابايت عبر *566#."
+    perks_en: "Exclusive add-on"
+    perks_ar: "باقة إضافية حصرية"
+    source: "e& Egypt Super Connect"
+
+  - id: super_connect_32
+    name_en: "Super Connect 32"
+    name_ar: "سوبر كونكت 32"
+    price_egp: 32
+    ussd_code: "*566#"
+    quota_mb: 2500
+    quota_label_en: "2,500 MB"
+    quota_label_ar: "2,500 ميجابايت"
+    validity_days: 30
+    description_en: "2,500 MB mobile internet add-on bundle via *566#."
+    description_ar: "باقة إنترنت إضافية بحجم 2,500 ميجابايت عبر *566#."
+    perks_en: "Exclusive add-on"
+    perks_ar: "باقة إضافية حصرية"
+    source: "e& Egypt Super Connect"
+
+  - id: super_connect_50
+    name_en: "Super Connect 50"
+    name_ar: "سوبر كونكت 50"
+    price_egp: 50
+    ussd_code: "*566#"
+    quota_mb: 4500
+    quota_label_en: "4,500 MB"
+    quota_label_ar: "4,500 ميجابايت"
+    validity_days: 30
+    description_en: "4,500 MB mobile internet add-on bundle via *566#."
+    description_ar: "باقة إنترنت إضافية بحجم 4,500 ميجابايت عبر *566#."
+    perks_en: "Exclusive add-on"
+    perks_ar: "باقة إضافية حصرية"
+    source: "e& Egypt Super Connect"
+
+  - id: super_connect_80
+    name_en: "Super Connect 80"
+    name_ar: "سوبر كونكت 80"
+    price_egp: 80
+    ussd_code: "*566#"
+    quota_mb: 8000
+    quota_label_en: "8,000 MB"
+    quota_label_ar: "8,000 ميجابايت"
+    validity_days: 30
+    description_en: "8,000 MB mobile internet add-on bundle via *566#."
+    description_ar: "باقة إنترنت إضافية بحجم 8,000 ميجابايت عبر *566#."
+    perks_en: "Exclusive add-on"
+    perks_ar: "باقة إضافية حصرية"
+    source: "e& Egypt Super Connect"
+
+  - id: super_connect_105
+    name_en: "Super Connect 105"
+    name_ar: "سوبر كونكت 105"
+    price_egp: 105
+    ussd_code: "*566#"
+    quota_mb: 12000
+    quota_label_en: "12,000 MB"
+    quota_label_ar: "12,000 ميجابايت"
+    validity_days: 30
+    description_en: "12,000 MB mobile internet add-on bundle via *566#."
+    description_ar: "باقة إنترنت إضافية بحجم 12,000 ميجابايت عبر *566#."
+    perks_en: "Exclusive add-on"
+    perks_ar: "باقة إضافية حصرية"
+    source: "e& Egypt Super Connect"
+
+  - id: super_connect_165
+    name_en: "Super Connect 165"
+    name_ar: "سوبر كونكت 165"
+    price_egp: 165
+    ussd_code: "*566#"
+    quota_mb: 20000
+    quota_label_en: "20,000 MB"
+    quota_label_ar: "20,000 ميجابايت"
+    validity_days: 30
+    description_en: "20,000 MB mobile internet add-on bundle via *566#."
+    description_ar: "باقة إنترنت إضافية بحجم 20,000 ميجابايت عبر *566#."
+    perks_en: "Exclusive add-on"
+    perks_ar: "باقة إضافية حصرية"
+    source: "e& Egypt Super Connect"
+
+  - id: super_connect_260
+    name_en: "Super Connect 260"
+    name_ar: "سوبر كونكت 260"
+    price_egp: 260
+    ussd_code: "*566#"
+    quota_mb: 32000
+    quota_label_en: "32,000 MB"
+    quota_label_ar: "32,000 ميجابايت"
+    validity_days: 30
+    description_en: "32,000 MB mobile internet add-on bundle via *566#."
+    description_ar: "باقة إنترنت إضافية بحجم 32,000 ميجابايت عبر *566#."
+    perks_en: "Exclusive add-on"
+    perks_ar: "باقة إضافية حصرية"
+    source: "e& Egypt Super Connect"
+
+  - id: super_connect_390
+    name_en: "Super Connect 390"
+    name_ar: "سوبر كونكت 390"
+    price_egp: 390
+    ussd_code: "*566#"
+    quota_mb: 50000
+    quota_label_en: "50,000 MB"
+    quota_label_ar: "50,000 ميجابايت"
+    validity_days: 30
+    description_en: "50,000 MB mobile internet add-on bundle via *566#."
+    description_ar: "باقة إنترنت إضافية بحجم 50,000 ميجابايت عبر *566#."
+    perks_en: "Exclusive add-on"
+    perks_ar: "باقة إضافية حصرية"
+    source: "e& Egypt Super Connect"
+
+  - id: super_connect_520
+    name_en: "Super Connect 520"
+    name_ar: "سوبر كونكت 520"
+    price_egp: 520
+    ussd_code: "*566#"
+    quota_mb: 70000
+    quota_label_en: "70,000 MB"
+    quota_label_ar: "70,000 ميجابايت"
+    validity_days: 30
+    description_en: "70,000 MB mobile internet add-on bundle via *566#."
+    description_ar: "باقة إنترنت إضافية بحجم 70,000 ميجابايت عبر *566#."
+    perks_en: "Exclusive add-on"
+    perks_ar: "باقة إضافية حصرية"
+    source: "e& Egypt Super Connect"

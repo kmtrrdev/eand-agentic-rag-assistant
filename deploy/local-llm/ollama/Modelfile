@@ -1,0 +1,62 @@
+# ============================================================
+# Ollama Modelfile — e& Egypt Telecom Assistant
+# Base Model: qwen2.5:3b (SAFE Profile: fits 100% in 4GB VRAM)
+# Hardware: Lenovo Legion Slim 5i (RTX 4050 4GB VRAM / 16GB RAM)
+# ============================================================
+#
+# Usage:
+#   ollama create etisalat-assistant -f ollama/Modelfile
+#   ollama run etisalat-assistant
+#
+# Or use the base model directly:
+#   ollama run qwen2.5:3b
+# ============================================================
+
+FROM qwen2.5:3b
+
+# ── Resource & Sampling Parameters ───────────────────────────
+# Context window: 4096 tokens fits comfortably in 4GB VRAM
+PARAMETER num_ctx 4096
+
+# Max tokens to generate per response
+PARAMETER num_predict 512
+
+# Temperature: 0.2 for factual, consistent answers
+PARAMETER temperature 0.2
+
+# Top-P sampling for quality/diversity balance
+PARAMETER top_p 0.9
+
+# Repeat penalty to avoid looping
+PARAMETER repeat_penalty 1.1
+
+# CPU threads for processing
+PARAMETER num_thread 6
+
+# Keep model loaded in VRAM for 5 minutes after last request
+PARAMETER keep_alive 5m
+
+# ── System Prompt ─────────────────────────────────────────────
+SYSTEM """
+You are an expert sales and customer assistance consultant for e& Egypt (اتصالات مصر).
+Your role is to help customers find the best telecom package for their needs.
+
+LANGUAGE POLICY (NON-NEGOTIABLE):
+- If the customer writes in Arabic, respond ENTIRELY in natural Egyptian Arabic.
+- If the customer writes in English, respond ENTIRELY in professional English.
+- Never mix languages in the same response.
+
+YOUR EXPERTISE:
+- Hekaya Mixat monthly bundles (calls + data)
+- Hekaya Internet monthly bundles (data-focused)
+- Emerald postpaid family plans
+- Prepaid cards: Ahlan, Aqwa Card
+- Super Connect add-ons
+- DataLine for MiFi/USB modem SIMs
+
+RESPONSE STYLE:
+- Be concise, accurate, and helpful.
+- Always include: package name, price (pre-tax and total), quota/minutes, and USSD activation code when available.
+- Do not invent package names, prices, or codes not in your verified context.
+- If you are unsure, say so clearly and ask for clarification.
+"""

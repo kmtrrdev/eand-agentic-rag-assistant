@@ -1,0 +1,378 @@
+family: emerald
+family_name_en: "Emerald"
+family_name_ar: "إمرالد"
+category: postpaid
+tax_type: emerald
+default_ussd: "Call 111 or visit an e& Egypt store"
+family_description_en: "Emerald (\"Emerald Family\") is e& Egypt's premium postpaid mobile program for high-value customers: five tiered packages (Emerald 430/780/1120/1725/3450) offering large internet quotas, family lines, roaming, entertainment E-Coins, and lifestyle privileges. Subscription and line changes go through customer service (111) or an e& Egypt store, not USSD self-activation."
+family_description_ar: "إمرالد (\"عيلة إمرالد\") هو برنامج اتصالات مصر المميز لباقات الدفع الآجل لعملاء الاستخدام العالي: خمس باقات متدرجة (إمرالد 430/780/1120/1725/3450) تقدم رصيد إنترنت كبير وخطوط عائلة ورومنج وكوينز ترفيهية ومزايا لايف ستايل. الاشتراك وتغيير الخط يتم عبر خدمة العملاء (111) أو زيارة أحد فروع اتصالات مصر، وليس عبر كود USSD ذاتي."
+
+tiers:
+  - id: emerald_430
+    name_en: "Emerald 430"
+    name_ar: "إمرالد 430"
+    price_egp: 430
+    internet_gb: 12
+    local_minutes: 2500
+    sms: 500
+    extra_family_lines: 1
+    intra_family_minutes: 10000
+    ehome_dsl_discount_egp: 160
+    ehome_wireless_discount_egp: 165
+    ehome_dsl_internet_tradeoff_gb: 2
+    intl_minutes: 0
+    roaming_out_minutes: 10
+    roaming_in_minutes: 0
+    roaming_internet_mb_monthly: 50
+    roaming_internet_bonus_gb: 1.5
+    roaming_bonus_times_per_year: 2
+    roaming_to_local_exchange_en: "Exchange 1.5 GB roaming internet for 2 GB local internet."
+    roaming_to_local_exchange_ar: "استبدال 1.5 جيجا رومنج بـ 2 جيجا إنترنت محلي."
+    emerald_points_monthly: 250
+    ecoins_monthly: 1875
+    hotel_discount_pct: 10
+    installment_limit_egp: 15000
+    special_privileges_en: "No additional special privileges beyond the standard Emerald benefits, except a 25% discount on MOVE Club."
+    special_privileges_ar: "لا توجد مزايا إضافية خاصة بخلاف مزايا إمرالد القياسية، باستثناء خصم 25% على نادي MOVE."
+    description_en: "Emerald 430: 12 GB local internet, 2,500 local minutes, 500 SMS/month, 1 extra family line, 10,000 free intra-family minutes, 250 Emerald Points/month, 1,875 Entertainment E-Coins/month, 10% GTO hotel discount."
+    description_ar: "إمرالد 430: 12 جيجا إنترنت محلي، 2,500 دقيقة محلية، 500 رسالة شهرياً، خط عائلة إضافي واحد، 10,000 دقيقة مجانية بين خطوط العائلة، 250 نقطة إمرالد شهرياً، 1,875 كوين ترفيهي شهرياً، خصم 10% على فنادق GTO."
+    source: "Emerald (2).pdf"
+
+  - id: emerald_780
+    name_en: "Emerald 780"
+    name_ar: "إمرالد 780"
+    price_egp: 780
+    internet_gb: 25
+    local_minutes: 4500
+    sms: 2000
+    extra_family_lines: 2
+    intra_family_minutes: 10000
+    ehome_dsl_discount_egp: 210
+    ehome_wireless_discount_egp: 225
+    ehome_dsl_internet_tradeoff_gb: 3
+    intl_minutes: 30
+    roaming_out_minutes: 30
+    roaming_in_minutes: 15
+    roaming_internet_mb_monthly: 50
+    roaming_internet_bonus_gb: 5
+    roaming_bonus_times_per_year: 2
+    roaming_to_local_exchange_en: "Exchange 5 GB roaming internet for 5 GB local internet."
+    roaming_to_local_exchange_ar: "استبدال 5 جيجا رومنج بـ 5 جيجا إنترنت محلي."
+    emerald_points_monthly: 450
+    ecoins_monthly: 3375
+    hotel_discount_pct: 10
+    installment_limit_egp: 30000
+    special_privileges_en: "No additional special privileges beyond the standard Emerald benefits, except a 25% discount on MOVE Club."
+    special_privileges_ar: "لا توجد مزايا إضافية خاصة بخلاف مزايا إمرالد القياسية، باستثناء خصم 25% على نادي MOVE."
+    description_en: "Emerald 780: 25 GB local internet, 4,500 local minutes, 2,000 SMS/month, 2 extra family lines, 10,000 free intra-family minutes, 450 Emerald Points/month, 3,375 Entertainment E-Coins/month, 10% GTO hotel discount."
+    description_ar: "إمرالد 780: 25 جيجا إنترنت محلي، 4,500 دقيقة محلية، 2,000 رسالة شهرياً، خطا عائلة إضافيان، 10,000 دقيقة مجانية بين خطوط العائلة، 450 نقطة إمرالد شهرياً، 3,375 كوين ترفيهي شهرياً، خصم 10% على فنادق GTO."
+    source: "Emerald (2).pdf"
+
+  - id: emerald_1120
+    name_en: "Emerald 1120"
+    name_ar: "إمرالد 1120"
+    price_egp: 1120
+    internet_gb: 40
+    local_minutes: 6500
+    sms: 2000
+    extra_family_lines: 4
+    intra_family_minutes: 10000
+    ehome_dsl_discount_egp: 325
+    ehome_wireless_discount_egp: 380
+    ehome_dsl_internet_tradeoff_gb: 5
+    intl_minutes: 45
+    roaming_out_minutes: 45
+    roaming_in_minutes: 20
+    roaming_internet_mb_monthly: 50
+    roaming_internet_bonus_gb: 10
+    roaming_bonus_times_per_year: 2
+    roaming_to_local_exchange_en: "Exchange 10 GB roaming internet for 10 GB local internet."
+    roaming_to_local_exchange_ar: "استبدال 10 جيجا رومنج بـ 10 جيجا إنترنت محلي."
+    emerald_points_monthly: 1000
+    ecoins_monthly: 4875
+    hotel_discount_pct: 15
+    installment_limit_egp: 60000
+    special_privileges_en: "No additional special privileges beyond the standard Emerald benefits, except a 25% discount on MOVE Club."
+    special_privileges_ar: "لا توجد مزايا إضافية خاصة بخلاف مزايا إمرالد القياسية، باستثناء خصم 25% على نادي MOVE."
+    description_en: "Emerald 1120: 40 GB local internet, 6,500 local minutes, 2,000 SMS/month, 4 extra family lines, 10,000 free intra-family minutes, 1,000 Emerald Points/month, 4,875 Entertainment E-Coins/month, 15% GTO hotel discount."
+    description_ar: "إمرالد 1120: 40 جيجا إنترنت محلي، 6,500 دقيقة محلية، 2,000 رسالة شهرياً، 4 خطوط عائلة إضافية، 10,000 دقيقة مجانية بين خطوط العائلة، 1,000 نقطة إمرالد شهرياً، 4,875 كوين ترفيهي شهرياً، خصم 15% على فنادق GTO."
+    source: "Emerald (2).pdf"
+
+  - id: emerald_1725
+    name_en: "Emerald 1725"
+    name_ar: "إمرالد 1725"
+    price_egp: 1725
+    internet_gb: 70
+    local_minutes: 10000
+    sms: 2000
+    extra_family_lines: 5
+    intra_family_minutes: 10000
+    ehome_dsl_discount_egp: 430
+    ehome_wireless_discount_egp: 450
+    ehome_dsl_internet_tradeoff_gb: 10
+    intl_minutes: 60
+    roaming_out_minutes: 60
+    roaming_in_minutes: 30
+    roaming_internet_mb_monthly: 50
+    roaming_internet_bonus_gb: 10
+    roaming_bonus_times_per_year: 3
+    roaming_to_local_exchange_en: "Exchange 10 GB roaming internet for 10 GB local internet."
+    roaming_to_local_exchange_ar: "استبدال 10 جيجا رومنج بـ 10 جيجا إنترنت محلي."
+    emerald_points_monthly: 2000
+    ecoins_monthly: 7500
+    hotel_discount_pct: 20
+    installment_limit_egp: 75000
+    special_privileges_en: "No additional special privileges beyond the standard Emerald benefits, except a 25% discount on MOVE Club."
+    special_privileges_ar: "لا توجد مزايا إضافية خاصة بخلاف مزايا إمرالد القياسية، باستثناء خصم 25% على نادي MOVE."
+    description_en: "Emerald 1725: 70 GB local internet, 10,000 local minutes, 2,000 SMS/month, 5 extra family lines, 10,000 free intra-family minutes, 2,000 Emerald Points/month, 7,500 Entertainment E-Coins/month, 20% GTO hotel discount."
+    description_ar: "إمرالد 1725: 70 جيجا إنترنت محلي، 10,000 دقيقة محلية، 2,000 رسالة شهرياً، 5 خطوط عائلة إضافية، 10,000 دقيقة مجانية بين خطوط العائلة، 2,000 نقطة إمرالد شهرياً، 7,500 كوين ترفيهي شهرياً، خصم 20% على فنادق GTO."
+    source: "Emerald (2).pdf"
+
+  - id: emerald_3450
+    name_en: "Emerald 3450"
+    name_ar: "إمرالد 3450"
+    price_egp: 3450
+    internet_gb: 200
+    local_minutes: 12000
+    sms: 2000
+    extra_family_lines: 7
+    intra_family_minutes: 10000
+    ehome_dsl_discount_egp: 650
+    ehome_wireless_discount_egp: 800
+    ehome_dsl_internet_tradeoff_gb: 10
+    intl_minutes: 90
+    roaming_out_minutes: 90
+    roaming_in_minutes: 45
+    roaming_internet_mb_monthly: 50
+    roaming_internet_bonus_gb: 10
+    roaming_bonus_times_per_year: 4
+    roaming_to_local_exchange_en: "Exchange 10 GB roaming internet for 10 GB local internet."
+    roaming_to_local_exchange_ar: "استبدال 10 جيجا رومنج بـ 10 جيجا إنترنت محلي."
+    emerald_points_monthly: 4000
+    ecoins_monthly: 10000
+    hotel_discount_pct: 30
+    installment_limit_egp: 75000
+    special_privileges_en: "24/7 personal account manager, international concierge service, and a 25% discount on MOVE Club."
+    special_privileges_ar: "مدير حساب شخصي متاح 24/7، وخدمة كونسيرج دولية، وخصم 25% على نادي MOVE."
+    description_en: "Emerald 3450: 200 GB local internet, 12,000 local minutes, 2,000 SMS/month, 7 extra family lines, 10,000 free intra-family minutes, 4,000 Emerald Points/month, 10,000 Entertainment E-Coins/month, 30% GTO hotel discount, 24/7 personal account manager and international concierge."
+    description_ar: "إمرالد 3450: 200 جيجا إنترنت محلي، 12,000 دقيقة محلية، 2,000 رسالة شهرياً، 7 خطوط عائلة إضافية، 10,000 دقيقة مجانية بين خطوط العائلة، 4,000 نقطة إمرالد شهرياً، 10,000 كوين ترفيهي شهرياً، خصم 30% على فنادق GTO، مدير حساب شخصي وخدمة كونسيرج دولية."
+    source: "Emerald (2).pdf"
+
+# Cross-tier programs and facts — rendered as their own RAG chunks since they
+# apply across the whole family rather than one tier (source: Emerald (2).pdf).
+shared_benefits:
+  savings_program:
+    name_en: "Emerald Savings Program"
+    name_ar: "برنامج إمرالد للتوفير"
+    cashback_pct: 25
+    description_en: "All Emerald customers get 25% cashback on qualifying daily expenses (dining, shopping, etc.), usable as travel discounts. Activate via the PoshSaver app (App Store / Google Play)."
+    description_ar: "يحصل كل عملاء إمرالد على استرداد نقدي 25% من المصروفات اليومية المؤهلة (مطاعم، تسوق، إلخ)، تُستخدم كخصومات سفر. يتم التفعيل عبر تطبيق PoshSaver."
+
+  hotel_discounts:
+    name_en: "Emerald GTO Hotel Discounts"
+    name_ar: "خصومات فنادق GTO لعملاء إمرالد"
+    max_discount_pct: 30
+    discount_by_tier_en: "10% for Emerald 430 and 780; 15% for Emerald 1120; 20% for Emerald 1725; 30% for Emerald 3450."
+    discount_by_tier_ar: "10% لإمرالد 430 و 780؛ 15% لإمرالد 1120؛ 20% لإمرالد 1725؛ 30% لإمرالد 3450."
+    description_en: "Instant guaranteed discount up to 30% off the lowest available online hotel rate worldwide, booked through the GTO platform partnered with e& Egypt."
+    description_ar: "خصم فوري مضمون يصل إلى 30% على أقل سعر فندقي متاح عبر الإنترنت حول العالم، عبر منصة GTO الشريكة لاتصالات مصر."
+
+  family_lines:
+    name_en: "Emerald Family Lines"
+    name_ar: "خطوط عائلة إمرالد"
+    max_lines_by_tier_en: "1 line (Emerald 430), 2 lines (780), 4 lines (1120), 5 lines (1725), 7 lines (3450)."
+    max_lines_by_tier_ar: "خط واحد (إمرالد 430)، خطان (780)، 4 خطوط (1120)، 5 خطوط (1725)، 7 خطوط (3450)."
+    intra_family_minutes: 10000
+    extra_data_line_egp: 50
+    extra_voice_line_egp: 100
+    extra_landline_egp: 10
+    description_en: "Family lines share the account's quota with a unified bill for all lines, and the account owner can set a maximum bill limit for each family line (My e& Egypt app or *800# to manage/transfer quota). A landline can be added as a family line. Extra lines beyond the package's included count cost 50 EGP/month (data line), 100 EGP/month (voice line), or 10 EGP/month (landline)."
+    description_ar: "خطوط العائلة تشارك رصيد الحساب مع فاتورة موحدة لجميع الخطوط، ويمكن لصاحب الحساب تحديد حد أقصى للفاتورة لكل خط عائلة (عبر تطبيق My e& Egypt أو *800# لإدارة/نقل الرصيد). يمكن إضافة خط أرضي كخط عائلة. الخطوط الإضافية بعد الحد المتضمن في الباقة تكلف 50 جنيه/شهر (خط بيانات)، 100 جنيه/شهر (خط مكالمات)، أو 10 جنيه/شهر (خط أرضي)."
+
+  entertainment:
+    name_en: "Emerald Entertainment E-Coins"
+    name_ar: "كوينز إمرالد الترفيهية"
+    ecoins_by_tier: {emerald_430: 1875, emerald_780: 3375, emerald_1120: 4875, emerald_1725: 7500, emerald_3450: 10000}
+    services: ["Twist Sport", "Twist Music", "Twist TV", "TOD", "VIU", "Shahid", "Starzplay", "Amazon Prime"]
+    description_en: "Every Emerald tier grants a monthly Entertainment E-Coins balance, separate from Emerald loyalty points, used to choose streaming/entertainment subscriptions covering movies, series, music, sports, and an Islamic content service (Twist Sport, Twist Music, Twist TV, TOD, VIU, Shahid, Starzplay, Amazon Prime)."
+    description_ar: "كل باقة إمرالد تمنح رصيد كوينز ترفيهية شهري، منفصل عن نقاط الولاء، يُستخدم لاختيار اشتراكات ترفيهية تغطي أفلام ومسلسلات وموسيقى ورياضة وخدمة محتوى إسلامي (Twist Sport، Twist Music، Twist TV، TOD، VIU، Shahid، Starzplay، Amazon Prime)."
+
+  internet_worthy:
+    name_en: "Internet Worthy (Internet Flexibility)"
+    name_ar: "مرونة الإنترنت (Internet Worthy)"
+    rollover_months: 1
+    borrow_next_month_pct: 50
+    description_en: "Unused local internet rolls over one month, and up to 50% of next month's quota can be borrowed in advance. Internet can be redistributed among family lines via the My e& Egypt app or *800#. Recurring and on-demand internet add-ons are also available."
+    description_ar: "الإنترنت غير المستخدم يترحل لشهر واحد، ويمكن اقتراض حتى 50% من رصيد الشهر القادم مقدماً. يمكن إعادة توزيع الإنترنت بين خطوط العائلة عبر تطبيق My e& Egypt أو *800#. تتوفر أيضاً إضافات إنترنت شهرية أو عند الطلب."
+
+  move_club:
+    name_en: "MOVE Club Discount"
+    name_ar: "خصم نادي MOVE"
+    discount_pct: 25
+    description_en: "All Emerald customers (every tier) get a 25% discount on MOVE sports club memberships."
+    description_ar: "يحصل جميع عملاء إمرالد (كل الباقات) على خصم 25% على اشتراكات نادي MOVE الرياضي."
+
+  exclusive_privileges:
+    name_en: "Emerald Exclusive Privileges"
+    name_ar: "مزايا إمرالد الحصرية"
+    airport_lounges: 840
+    description_en: "Free instant access to up to 840 airport VIP lounges worldwide via the co-branded ADIB (Abu Dhabi Islamic Bank–Egypt)–e& Egypt card, a 24/7 personal account manager available to handle any request wherever the customer is globally, and an international concierge service exclusive to Emerald 3450."
+    description_ar: "دخول فوري ومجاني لصالات كبار الزوار في حتى 840 مطاراً حول العالم عبر بطاقة ADIB (بنك أبوظبي الإسلامي – مصر) المشتركة مع اتصالات مصر، ومدير حساب شخصي متاح 24/7 لتلبية أي طلب أينما كان العميل حول العالم، وخدمة كونسيرج دولية حصرية لعملاء إمرالد 3450."
+
+# Out-of-bundle usage rates, applicable across all Emerald tiers.
+out_of_bundle_rates:
+  extra_local_minute_egp: 0.19
+  extra_local_sms_egp: 0.30
+  extra_international_minute_egp: 8.0
+  extra_international_sms_egp: 5.0
+  extra_roaming_minute_egp: 1.5
+  extra_7070_directory_minute_egp: 1.5
+  extra_data_line_monthly_egp: 50.0
+  extra_voice_line_monthly_egp: 100.0
+  extra_landline_monthly_egp: 10.0
+  description_en: "Rates charged when an Emerald customer exceeds package usage: 19 piasters/local minute, 30 piasters/local SMS, 8 EGP/international minute, 5 EGP/international SMS, 1.5 EGP/extra roaming or 7070 Directory minute."
+  description_ar: "الأسعار عند تجاوز استخدام الباقة: 19 قرش/دقيقة محلية، 30 قرش/رسالة محلية، 8 جنيه/دقيقة دولية، 5 جنيه/رسالة دولية، 1.5 جنيه/دقيقة رومنج أو دليل 7070 إضافية."
+
+terms_and_conditions:
+  - en: "All announced Emerald prices are exclusive of taxes."
+    ar: "جميع أسعار إمرالد المعلنة غير شاملة الضرائب."
+  - en: "Taxes added monthly: 8% schedule tax, 14% VAT, and a 10 EGP state resource development fee."
+    ar: "الضرائب المضافة شهرياً: ضريبة جدول 8%، ضريبة قيمة مضافة 14%، ورسوم تنمية موارد الدولة 10 جنيه."
+  - en: "The eHome DSL discount is exchanged for a portion of local internet quota: 2 GB (Emerald 430), 3 GB (780), 5 GB (1120), 10 GB (1725 and 3450)."
+    ar: "خصم eHome DSL يُستبدل بجزء من رصيد الإنترنت المحلي: 2 جيجا (إمرالد 430)، 3 جيجا (780)، 5 جيجا (1120)، 10 جيجا (1725 و 3450)."
+  - en: "The eHome DSL discount and eHome Wireless discount cannot be combined; the customer must choose one."
+    ar: "لا يمكن الجمع بين خصم eHome DSL وخصم eHome Wireless؛ يجب على العميل اختيار أحدهما."
+  - en: "The maximum SMS limit is 500 messages for Emerald 430, and 2,000 messages for Emerald 780, 1120, 1725, and 3450."
+    ar: "الحد الأقصى للرسائل هو 500 رسالة لإمرالد 430، و 2,000 رسالة لإمرالد 780 و1120 و1725 و3450."
+  - en: "The \"Call Filter\" (Nas We Nas) service is included free with all Emerald packages."
+    ar: "خدمة \"فلتر المكالمات\" (ناس وناس) متضمنة مجاناً في جميع باقات إمرالد."
+  - en: "Roaming must be activated via the My e& Egypt app before travel, and roaming internet only works in the approved country list."
+    ar: "يجب تفعيل الرومنج عبر تطبيق My e& Egypt قبل السفر، وإنترنت الرومنج يعمل فقط في قائمة الدول المعتمدة."
+  - en: "USSD code *800# is used to manage an Emerald account and package (quota distribution among family lines, etc.)."
+    ar: "كود USSD *800# يُستخدم لإدارة حساب وباقة إمرالد (توزيع الرصيد بين خطوط العائلة، إلخ)."
+  - en: "7070 Directory minutes included per tier: 15 minutes for Emerald 430; 30 minutes for Emerald 780 and 1120; 60 minutes for Emerald 1725 and 3450. Extra minutes beyond the included quota cost 1.5 EGP each."
+    ar: "دقائق دليل 7070 المتضمنة حسب الفئة: 15 دقيقة لإمرالد 430؛ 30 دقيقة لإمرالد 780 و1120؛ 60 دقيقة لإمرالد 1725 و3450. الدقائق الإضافية بعد الرصيد المتضمن بسعر 1.5 جنيه لكل دقيقة."
+  - en: "An Emerald customer can benefit from a mobile phone installment plan; the maximum installment value varies based on both the Emerald package tier and the subscription duration."
+    ar: "يمكن لعميل إمرالد الاستفادة من خطة تقسيط لهاتف محمول؛ الحد الأقصى لقيمة التقسيط يختلف حسب فئة باقة إمرالد ومدة الاشتراك معاً."
+
+roaming_countries_70:
+  - Albania
+  - Anguilla
+  - Antigua and Barbuda
+  - Argentina
+  - Austria
+  - Bangladesh
+  - Barbados
+  - Belarus
+  - Belgium
+  - Bosnia and Herzegovina
+  - Bulgaria
+  - Canada
+  - Cayman Islands
+  - China
+  - Croatia
+  - Democratic Republic of the Congo
+  - Cyprus
+  - Czech Republic
+  - Denmark
+  - Dominican Republic
+  - El Salvador
+  - France
+  - Georgia
+  - Germany
+  - Greece
+  - Grenada
+  - Guadeloupe
+  - Hong Kong
+  - Hungary
+  - Ireland
+  - Italy
+  - Jamaica
+  - Jordan
+  - Kazakhstan
+  - Kuwait
+  - Kyrgyzstan
+  - Liechtenstein
+  - Luxembourg
+  - North Macedonia
+  - Malaysia
+  - Malta
+  - Montserrat
+  - Netherlands
+  - New Zealand
+  - Panama
+  - Poland
+  - Portugal
+  - Qatar
+  - Romania
+  - Russia
+  - Saint Lucia
+  - Saint Vincent and the Grenadines
+  - Saudi Arabia
+  - Serbia
+  - Slovakia
+  - South Africa
+  - Spain
+  - Saint Kitts
+  - Sudan
+  - Sweden
+  - Switzerland
+  - Thailand
+  - Turkey
+  - Turks and Caicos
+  - Ukraine
+  - United Arab Emirates
+  - United Kingdom
+  - United States of America
+  - Uzbekistan
+  - British Virgin Islands
+
+glossary:
+  - term_en: "Emerald"
+    term_ar: "إمرالد"
+    definition_en: "e& Egypt's premium postpaid mobile program (\"Emerald Family\"), with five tiers: 430, 780, 1120, 1725, 3450."
+    definition_ar: "برنامج اتصالات مصر المميز لباقات الدفع الآجل (\"عيلة إمرالد\")، بخمس فئات: 430، 780، 1120، 1725، 3450."
+  - term_en: "Family Line"
+    term_ar: "خط عائلة"
+    definition_en: "An additional line added under the main Emerald package owner's account. Family lines share the account's package and enjoy 10,000 free internal minutes among family members."
+    definition_ar: "خط إضافي يُضاف تحت حساب صاحب باقة إمرالد الرئيسية. تشارك خطوط العائلة رصيد الحساب وتتمتع بـ10,000 دقيقة مجانية بين أفراد العائلة."
+  - term_en: "Intra Minutes"
+    term_ar: "الدقائق الداخلية"
+    definition_en: "Free minutes shared exclusively among an Emerald account's own family lines (10,000 minutes/month, common to all tiers)."
+    definition_ar: "دقائق مجانية تُستخدم حصرياً بين خطوط العائلة الخاصة بحساب إمرالد (10,000 دقيقة شهرياً، مشتركة بين كل الفئات)."
+  - term_en: "eHome DSL and eHome Wireless"
+    term_ar: "eHome DSL وeHome Wireless"
+    definition_en: "Two home internet discount options an Emerald customer can choose between (not combine): a fixed EGP discount on a DSL line, or on a wireless home internet line, each exchanged for a portion of the tier's local internet quota."
+    definition_ar: "خياران لخصم إنترنت منزلي يمكن لعميل إمرالد الاختيار بينهما (وليس الجمع بينهما): خصم بالجنيه على خط DSL منزلي، أو على خط إنترنت منزلي لاسلكي، ويُستبدل كل منهما بجزء من رصيد الإنترنت المحلي للفئة."
+  - term_en: "Emerald Points"
+    term_ar: "نقاط إمرالد"
+    definition_en: "Monthly loyalty points earned by every Emerald tier, redeemable through the MORE Program with partner merchants."
+    definition_ar: "نقاط ولاء شهرية تمنحها كل فئة إمرالد، تُستبدل عبر برنامج MORE لدى التجار الشركاء."
+  - term_en: "Entertainment E-Coins"
+    term_ar: "كوينز إمرالد الترفيهية"
+    definition_en: "A separate monthly balance from Emerald Points, used to choose streaming/entertainment subscriptions (Twist Sport, Twist Music, Twist TV, TOD, VIU, Shahid, Starzplay, Amazon Prime)."
+    definition_ar: "رصيد شهري منفصل عن نقاط إمرالد، يُستخدم لاختيار اشتراكات ترفيهية وبث (Twist Sport، Twist Music، Twist TV، TOD، VIU، Shahid، Starzplay، Amazon Prime)."
+  - term_en: "My e& Egypt App"
+    term_ar: "تطبيق My e& Egypt"
+    definition_en: "e& Egypt's official self-service app, used by the Emerald customer to manage their account, distribute the package among family lines, and activate roaming."
+    definition_ar: "تطبيق الخدمة الذاتية الرسمي لاتصالات مصر، يستخدمه عميل إمرالد لإدارة حسابه، وتوزيع الباقة بين خطوط العائلة، وتفعيل الرومنج."
+  - term_en: "7070 Directory"
+    term_ar: "دليل 7070"
+    definition_en: "A directory assistance service with a per-tier included minute quota (15 minutes for Emerald 430; 30 for 780 and 1120; 60 for 1725 and 3450); extra minutes beyond the included quota cost 1.5 EGP each."
+    definition_ar: "خدمة دليل استعلامات برصيد دقائق متضمن حسب الفئة (15 دقيقة لإمرالد 430؛ 30 لـ780 و1120؛ 60 لـ1725 و3450)؛ الدقائق الإضافية بعد الرصيد المتضمن بسعر 1.5 جنيه لكل دقيقة."
+  - term_en: "Code *800#"
+    term_ar: "كود *800#"
+    definition_en: "The USSD code dialed by an Emerald customer to manage their account and package."
+    definition_ar: "كود USSD الذي يطلبه عميل إمرالد لإدارة حسابه وباقته."
+  - term_en: "GTO"
+    term_ar: "GTO"
+    definition_en: "The hotel booking partner offering Emerald customers up to 30% off the lowest available online hotel rate."
+    definition_ar: "الشريك المتخصص في حجز الفنادق ويقدم لعملاء إمرالد خصماً يصل إلى 30% على أقل سعر متاح عبر الإنترنت."
+  - term_en: "ADIB"
+    term_ar: "ADIB"
+    definition_en: "Abu Dhabi Islamic Bank–Egypt, issuer of the co-branded card with e& Egypt granting Emerald customers airport lounge access."
+    definition_ar: "بنك أبوظبي الإسلامي – مصر، مُصدر البطاقة المشتركة مع اتصالات مصر التي تمنح عملاء إمرالد دخول صالات المطارات."
+  - term_en: "MORE Program"
+    term_ar: "برنامج MORE"
+    definition_en: "e& Egypt's general loyalty rewards program where Emerald Points are redeemed with partners like La Poire, Renaissance Cinemas, Roma Pizza, McDonald's, Ghataty, Espresso Lab, Kazyon, and Bath & Body Works."
+    definition_ar: "برنامج الولاء العام لاتصالات مصر، حيث تُستبدل نقاط إمرالد لدى شركاء مثل لا بوار، سينمات النهضة، روما بيتزا، ماكدونالدز، غطاطي، إسبريسو لاب، كازيون، وباث آند بودي ووركس."

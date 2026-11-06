@@ -1,0 +1,949 @@
+{
+  "timestamp": "2026-09-05 18:36:34",
+  "total_cases": 28,
+  "passed_cases": 25,
+  "partial_cases": 3,
+  "failed_cases": 0,
+  "pass_rate_percent": 89.3,
+  "average_overall_score_percent": 85.9,
+  "average_semantic_similarity_percent": 74.0,
+  "average_keyword_recall_percent": 79.6,
+  "average_latency_ms": 5589,
+  "total_execution_time_seconds": 163.36,
+  "results": [
+    {
+      "id": "EVAL-001",
+      "category": "package_inquiry",
+      "language": "ar",
+      "question": "عايز أعرف كل تفاصيل باقة حكاية مكسات 92 وسعرها ومميزاتها وكود التفعيل",
+      "expected_answer": "باقة حكاية مكسات 92 سعرها 92 جنيه مصري شهرياً قبل الضريبة (مطلوب شحن 131.43 جنيه بعد احتساب ضريبة الشحن 42.857%). تمنحك الباقة 3,750 وحدة مكس صالحة لمدة 30 يوماً. تشمل خط عائلة إضافي واحد (يُخصص له نسبة 10% أو 25% أو 50% من الرصيد)، ورقمين مفضلين بسعر 0.5 مكس للدقيقة، مع استخدام غير محدود لتطبيقي فيسبوك وواتساب طوال فترة الصلاحية بدون سقف، واشتراكات ترفيهية تشمل VIU وTwist Music وTwist TV وShahid Mobile، وترحيل المكسات المتبقية عند التجديد في الموعد، بالإضافة إلى 184 كوينز. كود التفعيل والاشتراك هو *319*80# أو عبر قائمة حكاية *319#.",
+      "model_answer": "أكيد — دي تفاصيل باقة حكاية مكسات 92 كاملة ومؤكدة:\n\n- الاسم: حكاية مكسات 92 (Hekaya Mixat 92)  \n- السعر: 92 جنيه مصري (السعر المعلن قبل الضريبة) — بعد الضريبة المطلوبة للشحن: 131.43 جنيه شحن مطلوب (92 + 42.857% ضريبة شحن)  \n- الرصيد / الحصة: 3,750 وحدة مكس  \n- الصلاحية: 30 يوم  \n- كود التفعيل / التجديد (USSD): *319*80#  \n- خطوط عائلة: 1 خط عائلة (يُخصَّص كنسبة 10% أو 25% أو 50% من رصيد المكس الأساسي؛ بدون تخصيص دقائق ثابت)  \n- مميزات أساسية ومحتوى الباقة:\n  - 2 رقم مفضل (الرسوم: 0.5 مكس/دقيقة للرقم المفضل)  \n  - فيسبوك وواتساب متاحان طوال الصلاحية بدون سقف استخدام (unmetered)  \n  - خدمات محتوى مرفقة: VIU، Twist Music، Twist TV، Shahid Mobile  \n  - ترحيل الوحدات المتبقية عند التجديد في موعدها  \n  - 184 كوينز عند التجديد عبر نفس كود *319*80#  \n- وصف مختصر: 3,750 وحدة مكس للمكالمات والإنترنت مع خط عائلة واحد ورقمان مفضلان وفوائد المحتوى المذكورة أعلاه.\n\nلو عايز أفعلها ليك دلوقتي أشرح طريقة الشحن أو أساعدك في اختيار باقة تانية مناسبة لميزانيتك؟",
+      "comparison": {
+        "verdict": "PASS",
+        "overall_score_percent": 92.2,
+        "semantic_similarity_percent": 60.8,
+        "keyword_recall_percent": 100.0,
+        "factual_accuracy_percent": 100.0,
+        "factual_checks": {
+          "price_match": true,
+          "quota_match": true,
+          "ussd_match": true,
+          "validity_match": true
+        },
+        "matched_key_facts": [
+          "92",
+          "3,750",
+          "3750",
+          "319",
+          "عائلة",
+          "مكس",
+          "فيسبوك",
+          "واتساب"
+        ],
+        "missing_key_facts": [],
+        "analysis_notes": "✅ Correct price | ✅ Correct quota | ✅ Correct activation code | Keywords Recall: 8/8 (100.0%) | Semantic Alignment: 60.8%"
+      },
+      "latency_ms": 8174
+    },
+    {
+      "id": "EVAL-002",
+      "category": "package_inquiry",
+      "language": "en",
+      "question": "What is the price, quota, validity, and activation code for Hekaya Mixat 180?",
+      "expected_answer": "Hekaya Mixat 180 costs 180 EGP per month before tax (requires 257.14 EGP recharge after the 42.857% tax). It gives you 9,350 Mix units valid for 30 days. It includes 2 additional family lines (each allocated 10%, 25%, or 50% of the primary Mixes), 3 favorite numbers at 0.5 Mix/minute, unmetered Facebook & WhatsApp throughout validity, entertainment subscriptions (VIU, Twist Music & TV, Starzplay, Shahid Mobile), rollover on on-time renewal, and 360 Coins. Activation USSD code is *319*155# or through the main *319# menu.",
+      "model_answer": "- Name: Hekaya Mixat 180 (حكاية مكسات 180)\n- Price: 180 EGP (جنيه مصري) — After-tax recharge required: 257.14 EGP (جنيه شحن مطلوب)\n- Quota: 9,350 Mix units (9,350 وحدة مكس)\n- Validity: 30 days (صلاحية 30 يوم)\n- Activation / Renewal USSD: *319*155#",
+      "comparison": {
+        "verdict": "PASS",
+        "overall_score_percent": 90.2,
+        "semantic_similarity_percent": 79.6,
+        "keyword_recall_percent": 85.7,
+        "factual_accuracy_percent": 100.0,
+        "factual_checks": {
+          "price_match": true,
+          "quota_match": true,
+          "ussd_match": true,
+          "validity_match": true
+        },
+        "matched_key_facts": [
+          "180",
+          "9,350",
+          "9350",
+          "30 days",
+          "319",
+          "Mix"
+        ],
+        "missing_key_facts": [
+          "family"
+        ],
+        "analysis_notes": "✅ Correct price | ✅ Correct quota | ✅ Correct activation code | Keywords Recall: 6/7 (85.7%) | Semantic Alignment: 79.6%"
+      },
+      "latency_ms": 5150
+    },
+    {
+      "id": "EVAL-003",
+      "category": "package_inquiry",
+      "language": "ar",
+      "question": "ايه هي مميزات باقة حكاية مكسات 52 وكود الاشتراك؟",
+      "expected_answer": "باقة حكاية مكسات 52 سعرها 52 جنيه مصري قبل الضريبة (شحن 74.29 جنيه بعد الضريبة). تمنحك 1,900 وحدة مكس لمدة 30 يوماً. تشمل رقماً مفضلاً واحداً (0.5 مكس/دقيقة)، واستخدام فيسبوك وواتساب بحد أقصى 200 ميجا حسب سياسة الاستخدام العادل، واشتراكات VIU وTwist Music وShahid Mobile، و104 كوينز عند التجديد في الموعد مع ترحيل الوحدات. الباقة لا تتضمن خطوط عائلة. كود التفعيل هو *319*45# أو *319#.",
+      "model_answer": "أكيد — دي بيانات باقة حكاية مكسات 52 بالمعلومات الموثقة:\n\n- الاسم: Hekaya Mixat 52 / حكاية مكسات 52  \n- السعر: 52 جنيه مصري (سعر قبل الضريبة). بعد ضريبة الشحن (42.857%) يلزم شحن 74.29 جنيه شحن مطلوب تقريباً.  \n- الحصة: 1,900 وحدة مكس (تُستخدم للمكالمات أو الإنترنت حسب تحويلات المكس)  \n- الصلاحية: 30 يوم  \n- كود الاشتراك / التجديد: *319*45#  \n- المزايا الرئيسية:  \n  - 1 رقم مفضل (التعريفة 0.5 مكس/الدقيقة)  \n  - فيسبوك وواتساب محدودان حتى 200 ميجا حسب سياسة الاستخدام العادل (FUP)  \n  - اشتراكات VIU + Twist Music + Shahid Mobile مدموجة  \n  - ترحيل الوحدات غير المستخدمة عند التجديد في الموعد  \n  - 104 كوينز عند التجديد عبر الكود أعلاه\n\nلو حابب أساعدك أختار باقة أقرب لاحتياجاتك (مكالمات أكتر / إنترنت أكتر / ميزانية معينة)، قلّي ميزانيتك أو استخدامك وانا أقدملك اقتراح مناسب. أو تقدر تتصل بـ111 أو تزور فرع اتصالات مصر لأي استفسار إضافي.",
+      "comparison": {
+        "verdict": "PASS",
+        "overall_score_percent": 93.0,
+        "semantic_similarity_percent": 65.1,
+        "keyword_recall_percent": 100.0,
+        "factual_accuracy_percent": 100.0,
+        "factual_checks": {
+          "price_match": true,
+          "quota_match": true,
+          "ussd_match": true,
+          "validity_match": true
+        },
+        "matched_key_facts": [
+          "52",
+          "1,900",
+          "1900",
+          "319",
+          "مفضل",
+          "مكس"
+        ],
+        "missing_key_facts": [],
+        "analysis_notes": "✅ Correct price | ✅ Correct quota | ✅ Correct activation code | Keywords Recall: 6/6 (100.0%) | Semantic Alignment: 65.1%"
+      },
+      "latency_ms": 5959
+    },
+    {
+      "id": "EVAL-004",
+      "category": "package_inquiry",
+      "language": "en",
+      "question": "Tell me the details, quota, and price of Hekaya Internet 80.",
+      "expected_answer": "Hekaya Internet 80 is a data-focused prepaid plan costing 80 EGP before tax (requires 114.29 EGP recharge after tax). It offers 3,250 MB of mobile internet plus 300 call/SMS units valid for 30 days. You can pick 2 free-use apps from a 12-app list, and it includes Twist Sport, Twist Music, Twist TV, and Shahid Mobile. Unused MBs convert to e& money cashback upon cycle end instead of rolling over as data. Subscription and management is done via the My e& Egypt app or *319*80#.",
+      "model_answer": "Here are the verified details for Hekaya Internet 80:\n\n- Name: Hekaya Internet 80 (حكاية إنترنت 80)  \n- Price: 80 جنيه مصري (listed/pre-tax) — After-tax recharge required: 114.29 جنيه مصري (estimated total including prepaid recharge tax)  \n- Quota: 3,250 MB (3,250 ميجابايت)  \n- Validity: 30 days (صلاحية 30 يوم)  \n- Activation / Renewal USSD code: *319*80#  \n- What’s included: 3,250 MB mobile internet + 300 call/SMS units; 2 free-use apps (from a 12-app list); Twist Sport/Music/TV; Shahid Mobile.  \n- Perks: 300 call/SMS units, 2 selected free apps, Twist Sport/Music/TV, Shahid Mobile, and unused MBs convert to e& money cashback.\n\nIf you want to subscribe now, dial the USSD code above or use the My e& Egypt app. If you need a cheaper or larger alternative, tell me your budget or required data and I’ll recommend options.",
+      "comparison": {
+        "verdict": "PASS",
+        "overall_score_percent": 95.8,
+        "semantic_similarity_percent": 79.0,
+        "keyword_recall_percent": 100.0,
+        "factual_accuracy_percent": 100.0,
+        "factual_checks": {
+          "price_match": true,
+          "quota_match": true,
+          "ussd_match": true,
+          "validity_match": true
+        },
+        "matched_key_facts": [
+          "80",
+          "3,250",
+          "3250",
+          "300",
+          "cashback",
+          "MB",
+          "app"
+        ],
+        "missing_key_facts": [],
+        "analysis_notes": "✅ Correct price | ✅ Correct quota | ✅ Correct activation code | Keywords Recall: 7/7 (100.0%) | Semantic Alignment: 79.0%"
+      },
+      "latency_ms": 5437
+    },
+    {
+      "id": "EVAL-005",
+      "category": "package_inquiry",
+      "language": "ar",
+      "question": "ما هي باقة حكاية إنترنت 46 وما هي مميزاتها وسعرها؟",
+      "expected_answer": "باقة حكاية إنترنت 46 هي الباقة الأساسية في خط حكاية إنترنت، سعرها 46 جنيه مصري قبل الضريبة (شحن 65.71 جنيه بعد الضريبة). تمنح 1,250 ميجابايت إنترنت بالإضافة إلى 300 وحدة مكالمات ورسائل صالحة لمدة 30 يوماً. تشمل اختيار تطبيق مجاني واحد من قائمة 12 تطبيق، واشتراك Twist Sport/Music/TV، واشتراك Shahid Mobile. الميجابايتس غير المستخدمة تتحول إلى كاش باك في محفظة e& money عند التجديد في الموعد. الاشتراك عبر تطبيق My e& Egypt أو كود *319*46#.",
+      "model_answer": "- الاسم: حكاية إنترنت 46 (Hekaya Internet 46)\n- السعر: 46 جنيه مصري (سعر معلن) — بعد ضريبة الشحن: 65.71 جنيه شحن مطلوب تقريباً\n- الحصة: 1,250 ميجابايت + 300 وحدة مكالمات/رسائل\n- الصلاحية: 30 يوم\n- كود التفعيل/التجديد (موثّق): *319*46#\n- المميزات المؤكد عليها:\n  - 1 تطبيق مجاني للاستخدام من قائمة الـ12 تطبيق\n  - اشتراكات Twist Sport / Music / TV وShahid Mobile\n  - تحويل الميجابايت غير المستخدمة إلى كاش باك في محفظة e& money\n\nإذا رغبت أساعدك في طريقة التفعيل أو أقدّم باقات بديلة وفق احتياجك (مثلاً بيانات أكثر أو باقات ميني أقصر صلاحية).",
+      "comparison": {
+        "verdict": "PASS",
+        "overall_score_percent": 89.9,
+        "semantic_similarity_percent": 78.3,
+        "keyword_recall_percent": 85.7,
+        "factual_accuracy_percent": 100.0,
+        "factual_checks": {
+          "price_match": true,
+          "quota_match": true,
+          "ussd_match": true,
+          "validity_match": true
+        },
+        "matched_key_facts": [
+          "46",
+          "1,250",
+          "1250",
+          "300",
+          "كاش باك",
+          "ميجابايت"
+        ],
+        "missing_key_facts": [
+          "شاهد"
+        ],
+        "analysis_notes": "✅ Correct price | ✅ Correct quota | ✅ Correct activation code | Keywords Recall: 6/7 (85.7%) | Semantic Alignment: 78.3%"
+      },
+      "latency_ms": 5429
+    },
+    {
+      "id": "EVAL-006",
+      "category": "package_inquiry",
+      "language": "en",
+      "question": "What is the quota, price, and activation code for Super Connect 90?",
+      "expected_answer": "Super Connect 90 is a mobile internet add-on plan costing 90 EGP before tax (requires 128.57 EGP recharge). It grants 9,000 MB valid for 30 days. It can be stacked on any existing prepaid or postpaid voice line. The activation USSD dial code is *566# (or *566*90#).",
+      "model_answer": "Sorry — there is no Super Connect 90 in the catalog. Here are the closest verified alternatives:\n\n- Super Connect 80 / سوبر كونكت 80\n  - Price: 80 جنيه مصري (listed/pre-tax)\n  - After-tax recharge required: ~114.29 جنيه شحن مطلوب (80 + 42.857% ضريبة شحن)\n  - Quota: 8,000 MB (8,000 ميجابايت)\n  - Validity: 30 days (صلاحية 30 يوم)\n  - Activation USSD: *566#\n  \n- Super Connect 105 / سوبر كونكت 105\n  - Price: 105 جنيه مصري (listed/pre-tax)\n  - After-tax recharge required: 150.0 جنيه شحن مطلوب (105 + 42.857% ضريبة شحن)\n  - Quota: 12,000 MB (12,000 ميجابايت)\n  - Validity: 30 days (صلاحية 30 يوم)\n  - Activation USSD: *566#\n\nIf you specifically need a \"Super Connect 90\", that package is not listed. You can contact 111 or visit an e& Egypt store for further help or to request other options.",
+      "comparison": {
+        "verdict": "PARTIAL",
+        "overall_score_percent": 72.0,
+        "semantic_similarity_percent": 76.7,
+        "keyword_recall_percent": 66.7,
+        "factual_accuracy_percent": 75.0,
+        "factual_checks": {
+          "price_match": true,
+          "quota_match": false,
+          "ussd_match": true,
+          "validity_match": true
+        },
+        "matched_key_facts": [
+          "90",
+          "566",
+          "MB",
+          "Super Connect"
+        ],
+        "missing_key_facts": [
+          "9,000",
+          "9000"
+        ],
+        "analysis_notes": "✅ Correct price | ❌ Missing/wrong quota (expected: 9000) | ✅ Correct activation code | Keywords Recall: 4/6 (66.7%) | Semantic Alignment: 76.7%"
+      },
+      "latency_ms": 7886
+    },
+    {
+      "id": "EVAL-007",
+      "category": "package_inquiry",
+      "language": "ar",
+      "question": "عايز تفاصيل باقة سوبر كونكت 20 وسعرها وكود الاشتراك",
+      "expected_answer": "باقة سوبر كونكت 20 باقة إنترنت إضافية للموبايل سعرها 20 جنيه مصري قبل الضريبة (تتطلب شحن 28.57 جنيه بعد الضريبة). تمنحك 1,500 ميجابايت إنترنت صالحة لمدة 30 يوماً وتضاف فوق أي خط اتصالات. كود التفعيل والاشتراك هو *566#.",
+      "model_answer": "أكيد — دي تفاصيل باقة \"سوبر كونكت 20\":\n\n- الاسم: سوبر كونكت 20 (Super Connect 20)  \n- السعر: 20 جنيه مصري (المطلوب عند الشحن بعد الضريبة: 28.57 جنيه شحن)  \n- الباقة / الكوتا: 1,500 ميجابايت  \n- الصلاحية: 30 يوم  \n- كود الاشتراك / التجديد: *566#  \n- الوصف: باقة إنترنت إضافية حصرية تُضاف فوق أي خط موجود عبر *566#.\n\nملاحظة ضريبية: الباقات مسبقة الدفع تحتاج ضريبة شحن ~42.857% عند إعادة الشحن، لذلك المجموع المطلوب هو 28.57 جنيه لشحن باقة 20 جنيه.  \nلو حابب أفعّلها ليك أو عايز باقات قريبة في نفس الفئة (مثلاً سوبر كونكت 9 أو 32)، أقولك الاختيارات والكود بسرعة.",
+      "comparison": {
+        "verdict": "PASS",
+        "overall_score_percent": 93.4,
+        "semantic_similarity_percent": 67.2,
+        "keyword_recall_percent": 100.0,
+        "factual_accuracy_percent": 100.0,
+        "factual_checks": {
+          "price_match": true,
+          "quota_match": true,
+          "ussd_match": true,
+          "validity_match": true
+        },
+        "matched_key_facts": [
+          "20",
+          "1,500",
+          "1500",
+          "566",
+          "ميجابايت",
+          "سوبر كونكت"
+        ],
+        "missing_key_facts": [],
+        "analysis_notes": "✅ Correct price | ✅ Correct quota | ✅ Correct activation code | Keywords Recall: 6/6 (100.0%) | Semantic Alignment: 67.2%"
+      },
+      "latency_ms": 5180
+    },
+    {
+      "id": "EVAL-008",
+      "category": "package_inquiry",
+      "language": "en",
+      "question": "What is the price, quota, and USSD code for Super Connect 165?",
+      "expected_answer": "Super Connect 165 costs 165 EGP pre-tax (requires 235.71 EGP recharge after tax). It delivers 20,000 MB valid for 30 days. It is activated via USSD dial code *566# (or *566*165#) or through the My e& Egypt application.",
+      "model_answer": "- Name: Super Connect 165 — سوبر كونكت 165\n- Price: 165 جنيه مصري (After-tax recharge required: 235.71 جنيه شحن مطلوب)\n- Quota: 20,000 MB — 20,000 ميجابايت\n- Validity: 30 days — صلاحية 30 يوم\n- Activation / Renewal USSD code: *566#\n\nهل تحب أساعدك في تفعيلها الآن أو اختيار باقة أصغر؟",
+      "comparison": {
+        "verdict": "PASS",
+        "overall_score_percent": 94.3,
+        "semantic_similarity_percent": 71.7,
+        "keyword_recall_percent": 100.0,
+        "factual_accuracy_percent": 100.0,
+        "factual_checks": {
+          "price_match": true,
+          "quota_match": true,
+          "ussd_match": true,
+          "validity_match": true
+        },
+        "matched_key_facts": [
+          "165",
+          "20,000",
+          "20000",
+          "566",
+          "MB",
+          "Super Connect"
+        ],
+        "missing_key_facts": [],
+        "analysis_notes": "✅ Correct price | ✅ Correct quota | ✅ Correct activation code | Keywords Recall: 6/6 (100.0%) | Semantic Alignment: 71.7%"
+      },
+      "latency_ms": 4073
+    },
+    {
+      "id": "EVAL-009",
+      "category": "package_inquiry",
+      "language": "ar",
+      "question": "اشرحلي بالتفصيل باقة إمرالد 430 الشهرية وسعرها بعد الضرائب ومميزاتها",
+      "expected_answer": "باقة إمرالد 430 هي الفئة الأولى في برنامج إمرالد للخطوط الشهرية المفوترة. سعرها الأساسي 430 جنيه مصري قبل الضريبة. يُضاف إليها ضريبة الجدول 8% (34.40 ج) وضريبة القيمة المضافة 14% (60.20 ج) بالإضافة إلى رسم تنمية موارد الدولة الثابت 10 جنيه، ليكون الإجمالي الشهري المطلوب بعد الضريبة والرسوم 534.60 جنيه مصري. تشمل الباقة: 12 جيجابايت إنترنت محلي، 2,500 دقيقة محلية، 500 رسالة SMS، خط عائلة إضافي واحد مع 10,000 دقيقة مجانية بين خطوط العائلة، 250 نقطة إمرالد شهرياً، 1,875 كوين ترفيهي، خصم 10% على حجوزات فنادق GTO، خصم 25% على نادي MOVE، وخصم 160 جنيه على إنترنت eHome DSL. الاشتراك والتحويل يتم عبر الاتصال بـ 111 أو زيارة فروع e& Egypt وليس عبر كود USSD.",
+      "model_answer": "أكيد — دي تفاصيل باقة إمرالد 430 بالضبط ومثبتة رسميًا:\n\n- الاسم: إمرالد 430 (Emerald 430)\n- السعر: 430 جنيه مصري (السعر المعلن قبل الضرائب) — السعر بعد الضرائب: 534.6 جنيه مصري (430 جنيه + ضريبة مجمعة 22% = 94.6 جنيه + رسوم ثابتة 10 جنيه)\n- الصلاحية: شهرية / تجدد تلقائي (One-time / auto-renew)\n- كود التفعيل / إدارة الباقة: الرجاء الاتصال بـ 111 أو زيارة فرع اتصالات مصر (لا يوجد كود USSD للتفعيل الذاتي)\n- السعة (Quota):\n  - إنترنت محلي: 12 GB\n  - دقائق محلية: 2,500 دقيقة\n  - رسائل SMS: 500 رسالة (هذا هو الحد الأقصى لإمرالد 430)\n  - خط عائلة إضافي: 1 خط\n  - دقائق داخلية بين خطوط العائلة: 10,000 دقيقة مجانية بين خطوط العيلة\n  - دقائق دليل 7070 المتضمنة: 15 دقيقة\n- رومينج ومزايا السفر:\n  - دقائق رومينج صادرة: 10 دقائق\n  - إنترنت رومينج شهريًا: 50 MB\n  - بونص رومينج: 1.5 GB (ممكن استبدالها محليًا حسب القاعدة: استبدال 1.5 جيجا رومنج بـ 2 جيجا إنترنت محلي)\n  - ملاحظة: يجب تفعيل الرومينج عبر تطبيق My e& Egypt قبل السفر ورومينج الإنترنت يعمل في الدول المعتمدة فقط\n- مزايا ترفيهية واشتراكية:\n  - 250 نقطة إمرالد شهرية\n  - 1,875 كوين ترفيهي شهرياً (Entertainment E-Coins)\n  - خصم 10% على فنادق GTO\n  - خصم 25% على نادي MOVE (مذكور كميزة خاصة)\n- مزايا منزلية وتقسيط:\n  - خصم eHome DSL: يعادل استبدال 2 GB من الإنترنت المحلي (لا يمكن الجمع بين خصم eHome DSL وeHome Wireless — يجب اختيار واحد)\n  - حد تقسيط هاتف: يصل حتى 15,000 جنيه كحد أقصى تقسيط (حسب شروط الباقة ومدة الاشتراك)\n- ملاحظات عملية وقواعد مهمة:\n  - جميع أسعار إمرالد المعلنة غير شاملة الضرائب؛ يتم إضافة 8% جدول + 14% ضريبة قيمة مضافة + 10 جنيه رسوم ثابتة كما هو موضح أعلاه.\n  - الاشتراك وتغيير الخطوط وإدارة باقات إمرالد يتم عبر 111 أو زيارة فرع اتصالات مصر (لا يوجد تفعيل ذاتي عبر USSD).\n\nلو عايز أساعدك أطلب الاشتراك نيابةً عنك أو أجيب لك أقرب فرع/أرقام خدمة عملاء، أبلغني وانا أوجّهك.",
+      "comparison": {
+        "verdict": "PASS",
+        "overall_score_percent": 85.0,
+        "semantic_similarity_percent": 75.2,
+        "keyword_recall_percent": 75.0,
+        "factual_accuracy_percent": 100.0,
+        "factual_checks": {
+          "price_match": true,
+          "quota_match": true,
+          "ussd_match": true,
+          "validity_match": true
+        },
+        "matched_key_facts": [
+          "430",
+          "12",
+          "جيجا",
+          "2,500",
+          "111",
+          "إمرالد"
+        ],
+        "missing_key_facts": [
+          "534.60",
+          "فروع"
+        ],
+        "analysis_notes": "✅ Correct price | ✅ Correct quota | ✅ Correct activation code | Keywords Recall: 6/8 (75.0%) | Semantic Alignment: 75.2%"
+      },
+      "latency_ms": 8567
+    },
+    {
+      "id": "EVAL-010",
+      "category": "package_inquiry",
+      "language": "en",
+      "question": "What perks, minutes, and hotel discounts are included with Emerald 780, and how is it activated?",
+      "expected_answer": "Emerald 780 is a premium postpaid plan with a base price of 780 EGP before tax. With postpaid taxes (8% schedule tax + 14% VAT = 22% or 171.60 EGP) plus the 10 EGP state development fee, the total monthly bill is 961.60 EGP. It includes 25 GB local internet, 4,500 local minutes, 2,000 SMS, 2 extra family lines with 10,000 intra-family minutes, 450 Emerald Points/month, 3,375 entertainment E-Coins/month, 30 international minutes, roaming allowances, 10% GTO hotel booking discount, 25% MOVE Club discount, and 210 EGP eHome DSL discount. Subscription and plan changes must be done by calling 111 or visiting an e& Egypt store.",
+      "model_answer": "- Name: Emerald 780 (إمرالد 780)\n- Price: 780 جنيه مصري (before taxes) — Total after monthly taxes & fees: 961.60 جنيه مصري  \n  (Taxes/fees applied: 8% schedule tax, 14% VAT, and 10 EGP state resource fee, per Emerald terms)\n- Quota / Allowances:\n  - Local internet: 25 GB\n  - Local minutes: 4,500 minutes\n  - SMS: 2,000 SMS/month\n  - Extra family lines included: 2 additional lines\n  - Free intra-family minutes: 10,000 minutes between family lines\n  - 7070 Directory minutes included for Emerald 780: 30 minutes (extra minutes cost 1.5 EGP/min)\n- Roaming & international:\n  - International minutes: 30 minutes\n  - Roaming outgoing minutes: 30 min; roaming incoming minutes: 15 min\n  - Roaming internet: 50 MB/month + roaming bonus: 5 GB (usable by exchange to local internet) × 2 times/year\n  - Roaming-to-local exchange: \"Exchange 5 GB roaming internet for 5 GB local internet.\" (استبدال 5 جيجا رومنج بـ 5 جيجا إنترنت محلي.)\n- Rewards & extras:\n  - Emerald Points: 450 points/month\n  - Entertainment E-Coins: 3,375 eCoins/month\n  - Hotel discount (GTO): 10% guaranteed discount for Emerald 780 (book via GTO platform)\n  - Special privilege: 25% discount on MOVE Club (no other extra special privileges)\n- How to activate / manage:\n  - Activation / subscription: Call 111 or visit an e& Egypt store (verified activation instruction)\n  - To manage your Emerald package (quota distribution, family lines, etc.) you can use USSD *800# and the My e& Egypt app (per Emerald terms)\n\nIf you'd like, I can check eligibility for phone installment limits, or guide you step-by-step to activate by calling 111 or locate the nearest e& Egypt store.",
+      "comparison": {
+        "verdict": "PASS",
+        "overall_score_percent": 95.8,
+        "semantic_similarity_percent": 79.2,
+        "keyword_recall_percent": 100.0,
+        "factual_accuracy_percent": 100.0,
+        "factual_checks": {
+          "price_match": true,
+          "quota_match": true,
+          "ussd_match": true,
+          "validity_match": true
+        },
+        "matched_key_facts": [
+          "780",
+          "961.60",
+          "25 GB",
+          "4,500",
+          "111",
+          "GTO",
+          "store",
+          "Emerald"
+        ],
+        "missing_key_facts": [],
+        "analysis_notes": "✅ Correct price | ✅ Correct quota | ✅ Correct activation code | Keywords Recall: 8/8 (100.0%) | Semantic Alignment: 79.2%"
+      },
+      "latency_ms": 9543
+    },
+    {
+      "id": "EVAL-011",
+      "category": "package_inquiry",
+      "language": "ar",
+      "question": "كام سعر باقة إمرالد 1725 الشاملة وما هي ضريبتها ومحتوياتها؟",
+      "expected_answer": "باقة إمرالد 1725 سعرها الأساسي 1,725 جنيه مصري شهرياً. يُضاف إليها 22% ضرائب (8% ضريبة جدول + 14% ضريبة قيمة مضافة بقيمة 379.50 ج) بالإضافة إلى رسم تنمية موارد الدولة 10 جنيه، ليكون الإجمالي الشهري المطلوب 2,114.50 جنيه مصري. تقدم الباقة: 70 جيجابايت إنترنت محلي، 10,000 دقيقة محلية، 2,000 رسالة SMS، حتى 5 خطوط عائلة إضافية مع 10,000 دقيقة مجانية بين خطوط العائلة، 2,000 نقطة إمرالد شهرياً، 7,500 كوين ترفيهي شهرياً، خصم 20% على فنادق GTO، ومزايا تجوال دولي. التفعيل يتم عن طريق الاتصال بخدمة العملاء 111 أو زيارة فروع اتصالات مصر.",
+      "model_answer": "- الاسم: إمرالد 1725\n- السعر: 1725.00 جنيه مصري (قبل الضريبة) — الإجمالي المطلوب شهرياً: 2114.50 جنيه مصري (بعد إضافة ضريبة 22%: 379.50 جنيه + 10.00 جنيه رسوم الدولة)\n- الحصة (Quota): 70 GB إنترنت محلي\n- المحتويات الأساسية الإضافية:\n  - 10,000 دقيقة محلية\n  - 2,000 رسالة SMS شهرياً\n  - حتى 5 خطوط عائلة إضافية مع 10,000 دقيقة مجانية بين خطوط العائلة\n  - 2,000 نقطة إمرالد شهرياً\n  - 7,500 كوين ترفيهي شهرياً\n  - خصم 20% على فنادق GTO\n- الصلاحية: باقة شهرية / متجددة (اشتراك ما بعد الدفع)\n- كود تفعيل / تجديد موثَّق: للتفعيل أو التعديل اتصل بـ 111 أو زور فرع اتصالات مصر (الإدارة والاشتراك لا يتمان عبر USSD للتفعيل الأولي؛ يمكن استخدام *800# لإدارة حساب إمرالد بعد الاشتراك).\n\nلو تحب أساعدك في خطوات التفعيل عبر 111 أو أوجهك لأقرب فرع؟",
+      "comparison": {
+        "verdict": "PASS",
+        "overall_score_percent": 96.7,
+        "semantic_similarity_percent": 83.5,
+        "keyword_recall_percent": 100.0,
+        "factual_accuracy_percent": 100.0,
+        "factual_checks": {
+          "price_match": true,
+          "quota_match": true,
+          "ussd_match": true,
+          "validity_match": true
+        },
+        "matched_key_facts": [
+          "1725",
+          "2,114.50",
+          "2114.50",
+          "70",
+          "10,000",
+          "111",
+          "إمرالد"
+        ],
+        "missing_key_facts": [],
+        "analysis_notes": "✅ Correct price | ✅ Correct quota | ✅ Correct activation code | Keywords Recall: 7/7 (100.0%) | Semantic Alignment: 83.5%"
+      },
+      "latency_ms": 7576
+    },
+    {
+      "id": "EVAL-012",
+      "category": "package_inquiry",
+      "language": "en",
+      "question": "What does Aqwa Card 15 provide, what is its validity and recharge code?",
+      "expected_answer": "Aqwa Card 15 costs 15 EGP (requires 21.43 EGP recharge after tax). It gives you 300 Mixes usable for calls, megabytes, or SMS, plus 210 dedicated video and streaming minutes, with a validity of 2 days. It does not include Hekaya Mini. Activation and recharge is done via USSD code *811#.",
+      "model_answer": "- Name: Aqwa Card 15 (أقوى كارت 15)\n- Price: 15 جنيه مصري (pre-tax) — After-tax recharge required: 21.43 جنيه شحن مطلوب\n- Quota: 300 Mixes (300 مكس)\n- Validity: 2 days (صلاحية 2 يوم)\n- Activation / Renewal USSD code: *811#\n- What it provides: 300 Mixes usable for calls, internet or SMS + 210 dedicated video & streaming minutes. Does not include Hekaya Mini.",
+      "comparison": {
+        "verdict": "PASS",
+        "overall_score_percent": 95.7,
+        "semantic_similarity_percent": 78.7,
+        "keyword_recall_percent": 100.0,
+        "factual_accuracy_percent": 100.0,
+        "factual_checks": {
+          "price_match": true,
+          "quota_match": true,
+          "ussd_match": true,
+          "validity_match": true
+        },
+        "matched_key_facts": [
+          "15",
+          "300",
+          "210",
+          "2 days",
+          "811",
+          "Aqwa"
+        ],
+        "missing_key_facts": [],
+        "analysis_notes": "✅ Correct price | ✅ Correct quota | ✅ Correct activation code | Keywords Recall: 6/6 (100.0%) | Semantic Alignment: 78.7%"
+      },
+      "latency_ms": 4362
+    },
+    {
+      "id": "EVAL-013",
+      "category": "package_inquiry",
+      "language": "ar",
+      "question": "ما هي مميزات أقوى كارت 19 جنيه وصلاحيته وكود الشحن؟",
+      "expected_answer": "أقوى كارت 19 جنيه سعره 19 جنيه (يتطلب شحن 27.14 جنيه بعد الضريبة). يمنحك 425 مكس للمكالمات والإنترنت بالإضافة إلى 300 دقيقة فيديو وسوشيال ميديا، ويتضمن شحنة حكاية ميني مدمجة، وصلاحيته 6 أيام. كود الشحن والتفعيل هو *811#.",
+      "model_answer": "أقوى كارت 19 (Aqwa Card 19):\n\n- السعر: 19 جنيه مصري (المعلن) — بعد ضريبة الشحن: 27.14 جنيه شحن مطلوب.  \n- الحصة (الكوته): 425 مكس.  \n- دقائق فيديو/سوشيال: 300 دقيقة فيديو/سوشيال.  \n- مزايا مدمجة: شحنة حكاية ميني بقيمة 400 مكس + فيسبوك وواتساب (مضمّنة مع الكارت).  \n- الصلاحية: 6 أيام.  \n- كود التفعيل/الشحن: *811#.\n\nهل تريد أساعدك في تفعيلها الآن أو أرشح لك باقة بديلة حسب استخدامك؟",
+      "comparison": {
+        "verdict": "PASS",
+        "overall_score_percent": 95.5,
+        "semantic_similarity_percent": 77.7,
+        "keyword_recall_percent": 100.0,
+        "factual_accuracy_percent": 100.0,
+        "factual_checks": {
+          "price_match": true,
+          "quota_match": true,
+          "ussd_match": true,
+          "validity_match": true
+        },
+        "matched_key_facts": [
+          "19",
+          "425",
+          "300",
+          "6",
+          "811",
+          "حكاية ميني",
+          "أقوى كارت"
+        ],
+        "missing_key_facts": [],
+        "analysis_notes": "✅ Correct price | ✅ Correct quota | ✅ Correct activation code | Keywords Recall: 7/7 (100.0%) | Semantic Alignment: 77.7%"
+      },
+      "latency_ms": 4689
+    },
+    {
+      "id": "EVAL-014",
+      "category": "package_inquiry",
+      "language": "en",
+      "question": "What is the DataLine 2.5GB package, its price, and the first recharge offer?",
+      "expected_answer": "DataLine 2.5GB is a dedicated data-only SIM package designed exclusively for 4G MiFi routers and USB modems (not for mobile phones). It costs 69 EGP before tax and is valid for 30 days. Under the 'Double the Package' promotion for new customers, the first recharge grants double the quota, giving you a total of 5 GB. Managed via the My e& Egypt app or *130#.",
+      "model_answer": "- Name: DataLine 2.5GB (داتا لاين 2.5 جيجا)\n- Price: 69 جنيه مصري (listed price, pre-tax) — 98.57 جنيه شحن مطلوب بعد الضريبة (after 42.857% prepaid recharge tax)\n- Quota: 2.5 GB\n- Validity: 30 days\n- Activation / Renewal USSD code: *130#\n- First-recharge offer: Double the package on first recharge — total 5 GB on the first recharge\n- Notes: Dedicated for portable internet devices (MiFi / USB modem); does not work on mobile phones.",
+      "comparison": {
+        "verdict": "PASS",
+        "overall_score_percent": 89.0,
+        "semantic_similarity_percent": 73.8,
+        "keyword_recall_percent": 85.7,
+        "factual_accuracy_percent": 100.0,
+        "factual_checks": {
+          "price_match": true,
+          "quota_match": true,
+          "ussd_match": true,
+          "validity_match": true
+        },
+        "matched_key_facts": [
+          "69",
+          "2.5",
+          "5 GB",
+          "130",
+          "MiFi",
+          "DataLine"
+        ],
+        "missing_key_facts": [
+          "router"
+        ],
+        "analysis_notes": "✅ Correct price | ✅ Correct quota | ✅ Correct activation code | Keywords Recall: 6/7 (85.7%) | Semantic Alignment: 73.8%"
+      },
+      "latency_ms": 4969
+    },
+    {
+      "id": "EVAL-015",
+      "category": "package_inquiry",
+      "language": "ar",
+      "question": "عايز باقة داتا لاين للراوتر صالحة 3 شهور، ايه هي باقة 8 جيجا وسعرها؟",
+      "expected_answer": "باقة داتا لاين 8 جيجا مخصصة لأجهزة المودم والراوتر المحمول (MiFi)، سعرها 150 جنيه مصري قبل الضريبة وصلاحيتها 3 أشهر (90 يوماً). تتضمن عرض مضاعفة الباقة عند أول شحنة لعميل جديد لتمنح 16 جيجابايت إجمالاً. تُدار عبر تطبيق My e& Egypt أو كود *130#.",
+      "model_answer": "أكيد — المعلومات عن باقة داتا لاين 8 جيجا (صالحة 3 شهور):\n\n- الاسم: DataLine 8GB (داتا لاين 8 جيجا)  \n- السعر: 150 جنيه مصري (السعر قبل الضريبة) — بعد إضافة ضريبة الشحن (42.857%) يصبح إجمالي الشحن المطلوب: 214.29 جنيه شحن مطلوب  \n- السعة: 8 جيجابايت (ومع عرض مضاعفة الباقة في أول شحنة لعميل جديد تصبح 16 جيجابايت إجمالاً)  \n- الصلاحية: 90 يوم (3 شهور)  \n- كود التفعيل / التجديد: *130#\n\nلو حابب أساعدك تشترك الآن أو أقترح بدائل بنفس صلاحية 3 شهور حسب ميزانيتك، قول لي ميزانيتك أو عايز باقة أكبر/أصغر.",
+      "comparison": {
+        "verdict": "PASS",
+        "overall_score_percent": 83.3,
+        "semantic_similarity_percent": 66.4,
+        "keyword_recall_percent": 75.0,
+        "factual_accuracy_percent": 100.0,
+        "factual_checks": {
+          "price_match": true,
+          "quota_match": true,
+          "ussd_match": true,
+          "validity_match": true
+        },
+        "matched_key_facts": [
+          "150",
+          "8",
+          "16",
+          "90",
+          "130",
+          "داتا لاين"
+        ],
+        "missing_key_facts": [
+          "3 أشهر",
+          "راوتر"
+        ],
+        "analysis_notes": "✅ Correct price | ✅ Correct quota | ✅ Correct activation code | Keywords Recall: 6/8 (75.0%) | Semantic Alignment: 66.4%"
+      },
+      "latency_ms": 6173
+    },
+    {
+      "id": "EVAL-016",
+      "category": "package_inquiry",
+      "language": "en",
+      "question": "What are the details of DataLine 25GB, its price, validity, and management code?",
+      "expected_answer": "DataLine 25GB is a 4G data-only SIM package for MiFi and USB routers costing 375 EGP before tax. It has a 3-month (90 days) validity. With the Double the Package introductory offer, the first recharge yields 50 GB in total. You manage or renew it via *130# or the My e& Egypt app.",
+      "model_answer": "- Name: DataLine 25GB (داتا لاين 25 جيجا)\n- Price: 375 جنيه مصري (listed, قبل الضريبة) — After-tax recharge required: 535.71 جنيه شحن مطلوب (375 + 42.857% ضريبة شحن)\n- Quota: 25 GB (يجابايت) — (First recharge for a new customer: doubled to 50 GB under the Double the Package offer)\n- Validity: 90 days (صلاحية 90 يوم)\n- Activation / Management USSD: *130#\n\nملاحظة سريعة: داتا لاين مخصصة لأجهزة الإنترنت المحمولة (MiFi / USB modem) ولا تعمل على الهواتف المحمولة. لادارة أو تجديد الباقة يمكنك أيضاً استخدام تطبيق My e& Egypt أو إرسال \"1\" برسالة إلى 130.",
+      "comparison": {
+        "verdict": "PASS",
+        "overall_score_percent": 94.8,
+        "semantic_similarity_percent": 74.2,
+        "keyword_recall_percent": 100.0,
+        "factual_accuracy_percent": 100.0,
+        "factual_checks": {
+          "price_match": true,
+          "quota_match": true,
+          "ussd_match": true,
+          "validity_match": true
+        },
+        "matched_key_facts": [
+          "375",
+          "25",
+          "50",
+          "90",
+          "130",
+          "DataLine"
+        ],
+        "missing_key_facts": [],
+        "analysis_notes": "✅ Correct price | ✅ Correct quota | ✅ Correct activation code | Keywords Recall: 6/6 (100.0%) | Semantic Alignment: 74.2%"
+      },
+      "latency_ms": 4385
+    },
+    {
+      "id": "EVAL-017",
+      "category": "package_inquiry",
+      "language": "ar",
+      "question": "ايه هو نظام أهلاً 15 قرش لكل حاجة وازاي احول عليه؟",
+      "expected_answer": "نظام 'أهلاً - 15 قرش لكل حاجة' هو نظام محاسبة بالدفع أولاً بأول (Pay As You Go) بدون باقة شهرية. يحاسبك بسعر موحد 15 قرشاً للدقيقة لأي رقم وأي شبكة في مصر، و15 قرشاً لكل رسالة SMS. رقم الخدمة الصوتية هو 5250، والتحويل بين أنظمة أهلاً يتم عبر طلب الكود *339# أو كود إدارة العروض *3333#.",
+      "model_answer": "- الاسم: أهلاً - 15 قرش لكل حاجة (Ahlan - 15 Piastres Everything)\n- السعر: 0.00 جنيه مصري معلن (بعد الضريبة: 0.0 جنيه شحن مطلوب)\n- الباقة / المستفاد: 15 قرش/دقيقة لأي رقم وعلى أي شبكة، و15 قرش/رسالة (خطة بدون باقة)\n- صلاحية: 365 يوم\n- كود التفعيل / التحويل: *339#\n- ملاحظات مهمة: رقم الخدمة الصوتية 5250. ممكن كمان التنقل بين خطط أهلاً عبر *3333#.\n\nلو تحب أحول لك عليها دلوقتي أقولك الخطوات أو أقدملك باقات بديلة مناسبة؟",
+      "comparison": {
+        "verdict": "PASS",
+        "overall_score_percent": 92.9,
+        "semantic_similarity_percent": 64.3,
+        "keyword_recall_percent": 100.0,
+        "factual_accuracy_percent": 100.0,
+        "factual_checks": {
+          "price_match": true,
+          "quota_match": true,
+          "ussd_match": true,
+          "validity_match": true
+        },
+        "matched_key_facts": [
+          "15 قرش",
+          "339",
+          "3333",
+          "5250",
+          "أهلاً"
+        ],
+        "missing_key_facts": [],
+        "analysis_notes": "✅ Correct price | ✅ Correct quota | ✅ Correct activation code | Keywords Recall: 5/5 (100.0%) | Semantic Alignment: 64.3%"
+      },
+      "latency_ms": 6389
+    },
+    {
+      "id": "EVAL-018",
+      "category": "package_inquiry",
+      "language": "en",
+      "question": "What is Menu El Geneh and what do you get for One Pound?",
+      "expected_answer": "Menu El Geneh is e& Egypt's micro-bundle subscription service dialed via *101#. The One Pound tier costs 1 EGP and gives you 60 minutes to e& Egypt numbers, 30 minutes to any other network (with 7 piasters per extra minute afterwards), plus 20 MB of internet, valid for 24 hours.",
+      "model_answer": "- Name: Menu El Geneh - One Pound (منيو الجنيه - جنيه واحد)\n- Price: 1.00 جنيه مصري (listed) — After-tax recharge required: 1.43 جنيه مصري\n- Quota: 60 minutes to e& Egypt numbers + 30 minutes to any network + 20 MB\n- Validity: 1 day\n- USSD activation code: *101#\n- Description: Daily micro-bundle giving 60 min to e& numbers, 30 min to other networks (7 piasters/min after bundle) and 20 MB internet. Subscribe or renew via *101#.\n- Perk: Includes 20 MB internet.\n\nNeed help subscribing now or want a cheaper / larger Menu El Geneh tier?",
+      "comparison": {
+        "verdict": "PASS",
+        "overall_score_percent": 85.8,
+        "semantic_similarity_percent": 79.0,
+        "keyword_recall_percent": 100.0,
+        "factual_accuracy_percent": 75.0,
+        "factual_checks": {
+          "price_match": true,
+          "quota_match": false,
+          "ussd_match": true,
+          "validity_match": true
+        },
+        "matched_key_facts": [
+          "1",
+          "One Pound",
+          "60",
+          "30",
+          "20 MB",
+          "101",
+          "Menu El Geneh"
+        ],
+        "missing_key_facts": [],
+        "analysis_notes": "✅ Correct price | ❌ Missing/wrong quota (expected: 60 min + 30 min + 20 MB) | ✅ Correct activation code | Keywords Recall: 7/7 (100.0%) | Semantic Alignment: 79.0%"
+      },
+      "latency_ms": 6549
+    },
+    {
+      "id": "EVAL-019",
+      "category": "price_calculation",
+      "language": "ar",
+      "question": "لو عايز رصيد صافي 100 جنيه في اتصالات مصر، أدفع كام كارت شحن شامل الضريبة؟",
+      "expected_answer": "للحصول على رصيد صافي 100 جنيه في كروت الشحن مسبقة الدفع من اتصالات مصر، تبلغ نسبة ضريبة الشحن 42.857% (أي أن الرصيد الصافي يعادل 70% من قيمة الشحن المدفوعة: 100 ÷ 0.70). بالتالي، يجب شحن كارت بقيمة 142.86 جنيه مصري تقريباً (أو شحن مبلغ 143 جنيهاً).",
+      "model_answer": "عشان يصلك رصيد صافي 100 جنيه على خط دفع مسبق اتصالات مصر:\n\n- المبلغ قبل الضريبة (قيمة الكارت): 100.00 جنيه\n- ضريبة الشحن (42.86%): 42.86 جنيه\n- الإجمالي المطلوب للدفع شامل الضريبة: 142.86 جنيه\n\nبمعنى آخر اشترِ كارت شحن بقيمة 100 جنيه وسيُطلب منك دفع 142.86 جنيه شامل الضريبة ليصل الرصيد الصافي 100 جنيه.",
+      "comparison": {
+        "verdict": "PASS",
+        "overall_score_percent": 78.3,
+        "semantic_similarity_percent": 91.6,
+        "keyword_recall_percent": 50.0,
+        "factual_accuracy_percent": 100.0,
+        "factual_checks": {
+          "price_match": true,
+          "quota_match": null,
+          "ussd_match": null,
+          "validity_match": null
+        },
+        "matched_key_facts": [
+          "100",
+          "142.86",
+          "ضريبة"
+        ],
+        "missing_key_facts": [
+          "143",
+          "42.857%",
+          "70%"
+        ],
+        "analysis_notes": "✅ Correct price | Keywords Recall: 3/6 (50.0%) | Semantic Alignment: 91.6%"
+      },
+      "latency_ms": 5461
+    },
+    {
+      "id": "EVAL-020",
+      "category": "price_calculation",
+      "language": "en",
+      "question": "How much money do I need to pay to get 50 EGP net balance on prepaid?",
+      "expected_answer": "In Egypt's prepaid telecom tax system, the recharge tax is 42.857% on net credit (net balance = 70% of payment amount). To obtain 50 EGP of net credit, the calculation is 50 / 0.70 = 71.43 EGP. Therefore, you need to recharge for 71.43 EGP (approx. 71.50 or 72 EGP).",
+      "model_answer": "To get 50.00 EGP net prepaid balance you must recharge 71.43 EGP.\n\nBreakdown:\n- Pre-tax amount (net balance): 50.00 EGP\n- Recharge tax (42.86%): 21.43 EGP\n- Total required recharge: 71.43 EGP\n\nIf you meant the Aqwa Card 50 product:\n- Name: Aqwa Card 50 (أقوى كارت 50)\n- Price: 50.00 جنيه مصري (pre-tax) — Total to recharge: 71.43 جنيه مصري\n- Quota: 1,400 mixes\n- Validity: 14 days\n- Activation USSD: *811#\n\nIf you need help topping up or want alternatives, call 111 or visit an e& Egypt store.",
+      "comparison": {
+        "verdict": "PASS",
+        "overall_score_percent": 76.2,
+        "semantic_similarity_percent": 67.0,
+        "keyword_recall_percent": 57.1,
+        "factual_accuracy_percent": 100.0,
+        "factual_checks": {
+          "price_match": true,
+          "quota_match": null,
+          "ussd_match": null,
+          "validity_match": null
+        },
+        "matched_key_facts": [
+          "50",
+          "71.43",
+          "tax",
+          "recharge"
+        ],
+        "missing_key_facts": [
+          "71.5",
+          "42.857%",
+          "70%"
+        ],
+        "analysis_notes": "✅ Correct price | Keywords Recall: 4/7 (57.1%) | Semantic Alignment: 67.0%"
+      },
+      "latency_ms": 5885
+    },
+    {
+      "id": "EVAL-021",
+      "category": "price_calculation",
+      "language": "ar",
+      "question": "احسبلي بالتفصيل إجمالي فاتورة باقة إمرالد 430 الشهرية مع تفصيل كل ضريبة ورسم",
+      "expected_answer": "حساب فاتورة باقة إمرالد 430 الشهرية بالتفصيل: السعر الأساسي قبل الضريبة = 430.00 جنيه مصري. يُضاف عليه: 1) ضريبة جدول 8% = 34.40 جنيه. 2) ضريبة قيمة مضافة 14% = 60.20 جنيه (إجمالي الضرائب النسبية 22% = 94.60 جنيه). 3) رسم تنمية الموارد المالية للدولة الثابت = 10.00 جنيه. الإجمالي النهائي المطلوب سداده شهرياً = 430 + 34.40 + 60.20 + 10 = 534.60 جنيه مصري.",
+      "model_answer": "أكيد — هشرحلك بالتفصيل فاتورة باقة إمرالد 430 الشهرية مع تفصيل كل ضريبة ورسم باللغـة العربية:\n\n- الاسم: إمرالد 430 (Emerald 430)  \n- السعر قبل الضريبة: 430.00 جنيه مصري  \n- الحصة / الباقة: 12 جيجابايت  \n- الصلاحية: شهرية / تجدد تلقائي (اشتراك دفع آجل)  \n- كود التفعيل / التجديد: الاشتراك عبر خدمة العملاء 111 أو زيارة فرع e& Egypt (لا يوجد تفعيل ذاتي عبر USSD)\n\nالتفصيل المالي (مؤكد):\n- السعر قبل الضريبة: 430.00 جنيه  \n- ضريبة بنسبة 22.0% (مجموعة من ضريبة جدول 8% + ضريبة قيمة مضافة 14%): 94.60 جنيه  \n- رسم الدولة الثابت: 10.00 جنيه  \n- الإجمالي المطلوب (بعد الضريبة والرسم): 534.60 جنيه مصري\n\nشرح موجز للأرقام:\n- 430.00 جنيه = السعر المعلن (قبل الضرائب)  \n- 94.60 جنيه = 430 × 22%  \n- 10.00 جنيه = رسم دولة ثابت يضاف شهرياً  \n- 430 + 94.60 + 10 = 534.60 جنيه (الإجمالي الشهري الواجب دفعه)\n\nلو حابب أرسللك الفاتورة بصيغة مختصرة أو أساعدك في إجراءات الاشتراك عبر 111، أقدر أساعدك فوراً.",
+      "comparison": {
+        "verdict": "PASS",
+        "overall_score_percent": 86.9,
+        "semantic_similarity_percent": 78.7,
+        "keyword_recall_percent": 77.8,
+        "factual_accuracy_percent": 100.0,
+        "factual_checks": {
+          "price_match": true,
+          "quota_match": null,
+          "ussd_match": null,
+          "validity_match": null
+        },
+        "matched_key_facts": [
+          "430",
+          "534.60",
+          "8%",
+          "14%",
+          "10",
+          "جدول",
+          "قيمة مضافة"
+        ],
+        "missing_key_facts": [
+          "34.40",
+          "60.20"
+        ],
+        "analysis_notes": "✅ Correct price | Keywords Recall: 7/9 (77.8%) | Semantic Alignment: 78.7%"
+      },
+      "latency_ms": 5843
+    },
+    {
+      "id": "EVAL-022",
+      "category": "comparison",
+      "language": "ar",
+      "question": "قارن بين باقة حكاية مكسات 92 وباقة سوبر كونكت 90 من حيث السعر والاستخدام ونوع الرصيد",
+      "expected_answer": "مقارنة بين حكاية مكسات 92 وسوبر كونكت 90: 1) حكاية مكسات 92: سعرها 92 جنيه (131.43 ج بعد الضريبة)، تمنح 3,750 مكس هجين يُستخدم في المكالمات أو الإنترنت (1 مكس = 1 دقيقة لاتصالات أو 2 ميجا سوشيال)، وتشمل خط عائلة إضافي، رقمين مفضلين، فيسبوك وواتساب مجاني بدون حدود، واشتراكات ترفيهية، وتُفعل عبر *319*80#. 2) سوبر كونكت 90: سعرها 90 جنيه (128.57 ج بعد الضريبة)، باقة مخصصة للإنترنت فقط تمنح 9,000 ميجابايت صافية بدون مكالمات أو خطوط عائلة، وتُفعل عبر *566#. الخلاصة: إذا كان استخدامك مكالمات وإنترنت فإن حكاية مكسات 92 هي الأنسب، أما إذا أردت إنترنت فقط بأكبر حجم ميجابايتس فإن سوبر كونكت 90 توفر 9,000 ميجا.",
+      "model_answer": "أهلاً — باختصار واضح ومقارن بين الباقتين، لكن أولاً تنبيه مهم: لا توجد باقة اسمها \"سوبر كونكت 90\" في المصادر الموثَّقة عندنا. أقدّم لك البدائل الأقرب (سوبر كونكت 80 و105) وأقارن كلٍ منهما مع حكاية مكسات 92.\n\n1) ملاحظة عن الباقة غير الموجودة\n- \"سوبر كونكت 90\" غير موجودة في قائمة باقات Super Connect. لو تقصد سعة/سعر معين أخبرني أقدر أختار الأنسب.\n\n2) Hekaya Mixat 92 — بيانات موثقة\n- الاسم: Hekaya Mixat 92 / حكاية مكسات 92\n- السعر: 92 جنيه مصري\n- الرصيد/الحصة: 3,750 Mix وحدة (وحدة مكس موحّدة للمكالمات والإنترنت)\n- الصلاحية: 30 يوم\n- كود التفعيل/التجديد: *319*80#\n- نوع الرصيد: \"Mix\" موحد يستخدم للمكالمات والبيانات (ملاحظة: مكالمات/رسائل إلى شبكات أخرى تكلف 5 مكس لكل دقيقة/رسالة حسب الشروط)\n- مميزات رئيسية: يشمل 1 خط عائلة، رقمين مفضلين، فيسبوك وواتساب بدون قيود خلال الصلاحية، خدمات محتوى (VIU, Twist Music, Twist TV, Shahid Mobile)، 184 كوينز عند التجديد.\n\n3) Super Connect — ملاحظة عامة\n- سلسلة Super Connect هي باقات إضافية للإنترنت تُضاف فوق أي خط موجود، وتُشترَى عبر كود واحد: *566#.\n- تُطبق عليها ضريبة شحن/زيادة عند الشراء (مذكور في مصادرنا: ضريبة شحن ~42.857% تُضاف على السعر المعلن)، لذا أدرجت التكلفة النهائية بعد الضريبة لكل بديل أدناه.\n\n4) أقرب بدائل لسوبر كونكت 90 (لموجودة): قارن Hekaya Mixat 92 مع Super Connect 80 و Super Connect 105\n\n- Super Connect 80 (الأقرب من ناحية السعر)\n  - الاسم: Super Connect 80 / سوبر كونكت 80\n  - السعر: 80 جنيه مصري (قيمة معلنة)\n  - السعر بعد ضريبة الشحن: 114.29 جنيه شحن مطلوب (80 + 42.857% ضريبة)\n  - الحصة: 8,000 MB\n  - الصلاحية: 30 يوم\n  - كود التفعيل/التجديد: *566#\n  - نوع الرصيد: ميجابايت إنترنت فقط (حزمة بيانات إضافية تُضاف على أي خط)\n  - مميزات رئيسية: باقة إنترنت إضافية حصرية — لا تشمل دقائق أو خدمات عائلية.\n\n- Super Connect 105 (بديل أعلى)\n  - الاسم: Super Connect 105 / سوبر كونكت 105\n  - السعر: 105 جنيه مصري\n  - السعر بعد ضريبة الشحن: 150.00 جنيه شحن مطلوب (105 + 42.857% ضريبة)\n  - الحصة: 12,000 MB\n  - الصلاحية: 30 يوم\n  - كود التفعيل/التجديد: *566#\n  - نوع الرصيد: ميجابايت إنترنت فقط\n\n5) مقارنة سريعة ومباشرة (مَن يناسب مَن)\n- إذا تريد رصيد موحَّد للمكالمات والالنت واستخدام عائلي/أرقام مفضلة ومزايا محتوى:\n  - اختر Hekaya Mixat 92 — يعطيك 3,750 Mix تستخدمها للمكالمات والنت مع خط عائلة وميزات محتوى وقواعد استخدام مرنة.\n- إذا هدفك زيادة كمية بيانات خام للإنترنت فقط (MB) على خطك الحالي:\n  - اختر Super Connect (مثلاً 80 أو 105) — تعطيك MB كبيرة لكن هي بيانات فقط، وتحتاج دفع ضريبة شحن تزيد التكلفة الفعلية.\n- مقارنة كمية البيانات:\n  - Super Connect 80 = 8,000 MB (أكبر بكثير من أي حصة إنترنت ضمن مكسات 92 لأن المكسات وحدة موحّدة وليست ميجابايت محددة).\n- اختلاف النوع:\n  - Hekaya Mixat 92 = رصيد Mix موحّد (يمكن استعماله للمكالمات والبيانات).\n  - Super Connect = باقة بيانات صرفة (ميجابايت).\n\n6) إذا تحب أساعدك تحديد الأفضل حسب استخدامك اليومي/ميزانيتك (مثلاً: مكالمات كثيرة؟ إنترنت فيديو؟ ميزانية شهرية كم؟) أكتب لي التفاصيل وأرشّح الأنسب.\n\nلو حابب أفعل أي باقة الآن أقولك خطوات التفعيل بالضبط أو أوجّهك إلى الرقم 111 أو لأقرب فرع إذا تحب.",
+      "comparison": {
+        "verdict": "PASS",
+        "overall_score_percent": 85.2,
+        "semantic_similarity_percent": 51.0,
+        "keyword_recall_percent": 87.5,
+        "factual_accuracy_percent": 100.0,
+        "factual_checks": {
+          "price_match": null,
+          "quota_match": null,
+          "ussd_match": null,
+          "validity_match": null
+        },
+        "matched_key_facts": [
+          "حكاية مكسات 92",
+          "سوبر كونكت 90",
+          "3,750",
+          "مكالمات",
+          "إنترنت فقط",
+          "319",
+          "566"
+        ],
+        "missing_key_facts": [
+          "9,000"
+        ],
+        "analysis_notes": "Keywords Recall: 7/8 (87.5%) | Semantic Alignment: 51.0%"
+      },
+      "latency_ms": 14657
+    },
+    {
+      "id": "EVAL-023",
+      "category": "comparison",
+      "language": "en",
+      "question": "What is the difference between DataLine router plans and Super Connect mobile plans?",
+      "expected_answer": "Key differences between DataLine and Super Connect: 1) Device Compatibility: DataLine is exclusively for 4G MiFi routers and USB modems (cannot be used in mobile phones), while Super Connect is an add-on bundle for smartphones and voice SIMs. 2) Quota & Validity: DataLine offers larger long-term data buckets (such as 8GB, 14GB, 25GB, 45GB valid for 90 days / 3 months) with a 'Double the Package' offer on first recharge, managed via *130#. Super Connect provides monthly 30-day mobile internet add-ons (from 600MB up to 20,000MB) managed via *566#. 3) Use Case: DataLine is intended for home/portable router sharing, while Super Connect supplements mobile data on personal phones.",
+      "model_answer": "Here are the main verified differences between DataLine (router/MiFi) plans and Super Connect (mobile add-on) plans:\n\n- Target device / use\n  - DataLine: dedicated data SIMs for MiFi, USB modems and 4G routers (data-only).  \n  - Super Connect: mobile internet add-on that you stack on top of any existing mobile line.\n\n- Typical quotas and units\n  - DataLine: offered in GB tiers (e.g., 1.8 GB, 8 GB, 25 GB, 72 GB, etc.).  \n  - Super Connect: offered in MB tiers for mobile add-ons (e.g., 600 MB, 2,500 MB, 12,000 MB, up to 70,000 MB).\n\n- Validity\n  - DataLine: some tiers have multi-month validity (examples: 3 months or 6 months for specific tiers like 3.5GB, 8GB, 14GB, 25GB, 45GB, 72GB).  \n  - Super Connect: standard 30-day validity for all listed tiers.\n\n- Activation / subscription method\n  - DataLine: core DataLine tiers use *130# (some add-ons subscribe by SMS to 138 — e.g., send \"1\" to 138 for 500MB or \"2\" to 138 for 1GB).  \n  - Super Connect: activate/renew via *566#.\n\n- Special offers / perks\n  - DataLine: many core DataLine tiers include a \"Double package on 1st recharge\" promotion (e.g., 8GB becomes 16GB on first recharge) for applicable tiers.  \n  - Super Connect: positioned as an \"exclusive add-on\" to top up mobile internet; no double-first-recharge rule listed.\n\n- Tax & pricing note\n  - Both families are prepaid. For Super Connect the knowledge base shows an example tax calculation (a 42.857% recharge tax applied on the listed price to get the required recharge total). DataLine prices in the catalog are listed (some entries note “before tax” for longer-term bundles).\n\nIf you want, I can:\n- Compare specific tiers side-by-side (give me which DataLine and which Super Connect tier), or\n- Recommend a plan based on your device (mobile vs router) and monthly data need.",
+      "comparison": {
+        "verdict": "PASS",
+        "overall_score_percent": 84.1,
+        "semantic_similarity_percent": 87.2,
+        "keyword_recall_percent": 66.7,
+        "factual_accuracy_percent": 100.0,
+        "factual_checks": {
+          "price_match": null,
+          "quota_match": null,
+          "ussd_match": null,
+          "validity_match": null
+        },
+        "matched_key_facts": [
+          "DataLine",
+          "Super Connect",
+          "router",
+          "MiFi",
+          "130",
+          "566"
+        ],
+        "missing_key_facts": [
+          "mobile phone",
+          "90 days",
+          "30 days"
+        ],
+        "analysis_notes": "Keywords Recall: 6/9 (66.7%) | Semantic Alignment: 87.2%"
+      },
+      "latency_ms": 8755
+    },
+    {
+      "id": "EVAL-024",
+      "category": "recommendation",
+      "language": "ar",
+      "question": "معايا ميزانية 100 جنيه شهرياً وعايز باقة للمكالمات والنت مع بعض، تنصحني بإيه؟",
+      "expected_answer": "بميزانية 100 جنيه شهرياً للمكالمات والإنترنت معاً، أفضل وأنسب باقة هي 'حكاية مكسات 92' (سعرها 92 جنيه قبل الضريبة). تمنحك 3,750 وحدة مكس مرنة تستهلكها في الدقائق أو الميجابايتس حسب احتياجك، وتشمل رقمان مفضلان بسعر 0.5 مكس/دقيقة، وخط عائلة إضافي، واستخدام مجاني لتطبيقي فيسبوك وواتساب طوال الشهر، واشتراكات ترفيهية (شاهد موبايل، VIU، Twist)، مع ترحيل الوحدات المتبقية للشهر التالي. كود الاشتراك هو *319*80#. (أما إذا كانت ميزانيتك 100 جنيه شاملة الضريبة أي رصيد شحن 100 جنيه، فيمكنك اختيار حكاية مكسات 69 بسعر 69 جنيه قبل الضريبة وتمنح 2,800 مكس).",
+      "model_answer": "قبل ما أرشحلك حاجة — عايز باقة لموبايلك (مكالمات/نت) ولا باقة إنترنت بس لراوتر/MiFi؟",
+      "comparison": {
+        "verdict": "PARTIAL",
+        "overall_score_percent": 61.1,
+        "semantic_similarity_percent": 48.5,
+        "keyword_recall_percent": 28.6,
+        "factual_accuracy_percent": 100.0,
+        "factual_checks": {
+          "price_match": null,
+          "quota_match": null,
+          "ussd_match": null,
+          "validity_match": null
+        },
+        "matched_key_facts": [
+          "مكالمات",
+          "إنترنت"
+        ],
+        "missing_key_facts": [
+          "حكاية مكسات 92",
+          "92",
+          "3,750",
+          "حكاية مكسات 69",
+          "319"
+        ],
+        "analysis_notes": "Keywords Recall: 2/7 (28.6%) | Semantic Alignment: 48.5%"
+      },
+      "latency_ms": 4
+    },
+    {
+      "id": "EVAL-025",
+      "category": "greeting",
+      "language": "en",
+      "question": "how are you",
+      "expected_answer": "Hello! I am doing well, thank you. I am your e& Egypt AI Assistant. I'm here to help you with information about e& Egypt packages, prices, after-tax calculations, USSD activation codes, and plan recommendations. How can I help you today?",
+      "model_answer": "Hello! I'm doing great, thank you for asking! I'm ready to help you with e& Egypt packages, prices, and activation codes (Hekaya, Aqwa Card, Super Connect, Emerald, DataLine). What would you like to know?",
+      "comparison": {
+        "verdict": "PASS",
+        "overall_score_percent": 79.7,
+        "semantic_similarity_percent": 78.7,
+        "keyword_recall_percent": 60.0,
+        "factual_accuracy_percent": 100.0,
+        "factual_checks": {
+          "price_match": null,
+          "quota_match": null,
+          "ussd_match": null,
+          "validity_match": null
+        },
+        "matched_key_facts": [
+          "e& Egypt",
+          "help",
+          "packages"
+        ],
+        "missing_key_facts": [
+          "assistant",
+          "services"
+        ],
+        "analysis_notes": "Keywords Recall: 3/5 (60.0%) | Semantic Alignment: 78.7%"
+      },
+      "latency_ms": 3
+    },
+    {
+      "id": "EVAL-026",
+      "category": "greeting",
+      "language": "ar",
+      "question": "ازيك عامل ايه ومين انت؟",
+      "expected_answer": "أهلاً وسهلاً بك! أنا المساعد الذكي لخدمات وباقات اتصالات مصر (e& Egypt). أنا هنا لمساعدتك في معرفة تفاصيل باقات حكاية، سوبر كونكت، إمرالد، أقوى كارت، وداتا لاين، وحساب الأسعار شاملة الضرائب وأكواد التفعيل. إزاي أقدر أساعدك النهاردة؟",
+      "model_answer": "أهلاً بيك! أنا بخير والحمد لله، وجاهز لمساعدتك في كل ما يخص باقات وخدمات اتصالات مصر (حكاية، أقوى كارت، سوبر كونكت، إمرالد، وداتا لاين). تحب تسأل عن إيه النهارده؟",
+      "comparison": {
+        "verdict": "PASS",
+        "overall_score_percent": 78.6,
+        "semantic_similarity_percent": 73.2,
+        "keyword_recall_percent": 60.0,
+        "factual_accuracy_percent": 100.0,
+        "factual_checks": {
+          "price_match": null,
+          "quota_match": null,
+          "ussd_match": null,
+          "validity_match": null
+        },
+        "matched_key_facts": [
+          "اتصالات مصر",
+          "باقات",
+          "حكاية"
+        ],
+        "missing_key_facts": [
+          "e& Egypt",
+          "أساعدك"
+        ],
+        "analysis_notes": "Keywords Recall: 3/5 (60.0%) | Semantic Alignment: 73.2%"
+      },
+      "latency_ms": 1645
+    },
+    {
+      "id": "EVAL-027",
+      "category": "out_of_scope",
+      "language": "en",
+      "question": "Can you give me the price of Vodafone Red packages and their mobile internet plans?",
+      "expected_answer": "I cannot assist with questions about Vodafone or other competing networks. I am exclusively specialized in e& Egypt (Etisalat Egypt) services, packages, prices, and activation codes. If you would like to know about comparable e& Egypt postpaid packages, I can provide full details on our Emerald packages. How can I assist you with e& Egypt?",
+      "model_answer": "That's outside what I can help with — I'm focused on e& Egypt packages, prices, and activation codes. For billing, technical support, or anything else, please call 111 or visit your nearest e& Egypt store.",
+      "comparison": {
+        "verdict": "PASS",
+        "overall_score_percent": 75.8,
+        "semantic_similarity_percent": 78.8,
+        "keyword_recall_percent": 50.0,
+        "factual_accuracy_percent": 100.0,
+        "factual_checks": {
+          "price_match": null,
+          "quota_match": null,
+          "ussd_match": null,
+          "validity_match": null
+        },
+        "matched_key_facts": [
+          "e& Egypt",
+          "outside",
+          "111"
+        ],
+        "missing_key_facts": [
+          "Vodafone",
+          "competitor",
+          "Emerald"
+        ],
+        "analysis_notes": "Keywords Recall: 3/6 (50.0%) | Semantic Alignment: 78.8%"
+      },
+      "latency_ms": 1955
+    },
+    {
+      "id": "EVAL-028",
+      "category": "out_of_scope",
+      "language": "ar",
+      "question": "عايز اعرف اسعار وباقات أورنج فري ماكس وعروض النت المنزلي عندهم",
+      "expected_answer": "عذراً، أنا متخصص حصرياً في خدمات وباقات وأسعار اتصالات مصر (e& Egypt) ولا يمكنني تقديم معلومات عن شبكات منافسة مثل أورنج. إذا كنت تبحث عن باقات مكالمات وإنترنت مميزة في اتصالات مصر، يمكنني إطلاعك على باقات حكاية مكسات أو سوبر كونكت أو إمرالد. كيف تحب أساعدك في اتصالات مصر؟",
+      "model_answer": "الموضوع ده مش من ضمن اللي أقدر أساعدك فيه — أنا متخصص في باقات وأسعار وأكواد تفعيل خدمات اتصالات مصر بس. لأي حاجة تانية زي الفواتير أو الدعم الفني، اتصل بـ 111 أو زور أقرب فرع اتصالات.",
+      "comparison": {
+        "verdict": "PARTIAL",
+        "overall_score_percent": 64.3,
+        "semantic_similarity_percent": 88.3,
+        "keyword_recall_percent": 16.7,
+        "factual_accuracy_percent": 100.0,
+        "factual_checks": {
+          "price_match": null,
+          "quota_match": null,
+          "ussd_match": null,
+          "validity_match": null
+        },
+        "matched_key_facts": [
+          "اتصالات مصر"
+        ],
+        "missing_key_facts": [
+          "e& Egypt",
+          "أورنج",
+          "حكاية",
+          "خارج",
+          "مساعدتك"
+        ],
+        "analysis_notes": "Keywords Recall: 1/6 (16.7%) | Semantic Alignment: 88.3%"
+      },
+      "latency_ms": 1813
+    }
+  ]
+}

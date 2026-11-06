@@ -10,6 +10,8 @@ __pycache__/
 
 # Databases & Vector store
 *.db
+*.db-shm
+*.db-wal
 *.sqlite3
 memory.db
 chroma_db/
@@ -21,3 +23,6 @@ env/
 
 # Pytest
 .pytest_cache/
+
+# local dev scripts
+scratch/

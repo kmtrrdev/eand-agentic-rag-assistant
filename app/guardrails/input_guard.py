@@ -1,89 +1,73 @@
-from typing import Optional
-from app.config import settings
-from app.guardrails.policies import GuardrailCategory, GuardrailResult
-from app.guardrails.garak_guard import GarakInputGuard
-from app.guardrails.security_utils import is_arabic_text
+import base64
+import re
+from typing import Any, Dict, List, Optional
+
+from app.guardrails.patterns import contains_injection, contains_secret_probe
+
+REFUSAL_EN = (
+    "I can't process that request. I'm here to help with e& Egypt packages, "
+    "prices, and services — how can I help with that?"
+)
+REFUSAL_AR = (
+    "معذرة، مش هقدر أساعد في الطلب ده. أنا هنا عشان أساعدك في باقات وأسعار وخدمات اتصالات مصر — إزاي أقدر أساعدك؟"
+)
+
+# How many recent turns to re-check for an injection attempt
+_HISTORY_LOOKBACK = 6
+
+# Base64 tokens: at least 16 alphanumeric characters, optional = padding
+_BASE64_PATTERN = re.compile(r"[A-Za-z0-9+/]{16,}={0,2}")
 
 
-def get_safe_refusal_message(category: GuardrailCategory, is_arabic: bool) -> str:
-    """Generate a polite, secure customer-facing refusal based on violation category."""
-    if is_arabic:
-        if category == GuardrailCategory.SECRET_REQUEST:
-            return "عذراً، لا يمكنني مشاركة أي مفاتيح تشغيل أو بيانات سرية أو إعدادات داخلية. أنا هنا لمساعدتك في باقات وخدمات اتصالات مصر فقط."
-        if category == GuardrailCategory.SYSTEM_PROMPT_REQUEST:
-            return "عذراً، تعليمات النظام والإعدادات الداخلية محمية ولا يمكن عرضها. يسعدني مساعدتك في أي استفسار يخص باقات وخدمات اتصالات مصر."
-        if category == GuardrailCategory.PROMPT_INJECTION or category == GuardrailCategory.MALICIOUS_INPUT:
-            return "عذراً، لا يمكن معالجة هذا الطلب لأسباب أمنية. يرجى كتابة استفسارك حول باقات وعروض اتصالات مصر وسأكون سعيداً بمساعدتك."
-        if category == GuardrailCategory.INVALID_INPUT:
-            return "عذراً، نص السؤال غير صالح أو يتجاوز الحد المسموح به. يرجى كتابة سؤال محدد وموجز."
-        return "عذراً، لا يمكن إتمام هذا الطلب. كيف يمكنني مساعدتك في باقات اتصالات مصر؟"
-    else:
-        if category == GuardrailCategory.SECRET_REQUEST:
-            return "I cannot share API keys, credentials, or internal configuration. I am here to help you with e& Egypt telecom plans and services."
-        if category == GuardrailCategory.SYSTEM_PROMPT_REQUEST:
-            return "Internal system instructions and configurations cannot be displayed. I am happy to assist you with any questions regarding e& Egypt packages and services."
-        if category == GuardrailCategory.PROMPT_INJECTION or category == GuardrailCategory.MALICIOUS_INPUT:
-            return "This request cannot be processed for security reasons. Please ask a question related to e& Egypt packages and services."
-        if category == GuardrailCategory.INVALID_INPUT:
-            return "The provided query is invalid or exceeds the maximum allowed length. Please provide a concise telecom question."
-        return "I cannot fulfill this request. How may I assist you with e& Egypt services?"
-
-
-def validate_input(text: Optional[str]) -> GuardrailResult:
+def _deobfuscate(text: str) -> str:
+    """Normalize common evasion tricks:
+    1. Hyphenated / dotted characters: 'I-g-n-o-r-e' -> 'Ignore', 'p-r-i-n-t' -> 'print'
+    2. Single-spaced characters: 'p r i n t' -> 'print'
     """
-    Validate user input using Garak probe analytics before retrieval.
-    Protects against prompt injection, DAN jailbreaks, obfuscated base64 attacks,
-    secret extraction, system prompt theft, oversized inputs, and malicious payloads.
-    """
-    if not text or not str(text).strip():
-        return GuardrailResult(
-            allowed=False,
-            category=GuardrailCategory.INVALID_INPUT,
-            reason="Empty query received",
-            safe_message="يرجى إدخال استفسارك لمساعدتك."
-        )
+    # Remove hyphens and dots between letters
+    clean = re.sub(r"(?<=\w)[-\.](?=\w)", "", text)
+    # Remove single spaces between isolated single letters: e.g. "a l l" -> "all"
+    clean = re.sub(r"(?<=\b[a-zA-Z])\s+(?=[a-zA-Z]\b)", "", clean)
+    return clean
 
-    raw_text = str(text).strip()
-    is_ar = is_arabic_text(raw_text)
 
-    # 1. Length check
-    if len(raw_text) > settings.MAX_QUERY_LENGTH:
-        return GuardrailResult(
-            allowed=False,
-            category=GuardrailCategory.INVALID_INPUT,
-            reason=f"Query length ({len(raw_text)}) exceeds limit of {settings.MAX_QUERY_LENGTH}",
-            safe_message=get_safe_refusal_message(GuardrailCategory.INVALID_INPUT, is_ar)
-        )
 
-    # 2. Garak-Powered Input Security Engine (DAN, Goodside, Base64/Obfuscation, SysPrompt, APIKey)
-    garak_res = GarakInputGuard.evaluate(raw_text)
-    if not garak_res["allowed"]:
-        cat_str = garak_res.get("category", "PROMPT_INJECTION")
-        if cat_str == "SECRET_REQUEST":
-            cat_enum = GuardrailCategory.SECRET_REQUEST
-        elif cat_str == "SYSTEM_PROMPT_REQUEST":
-            cat_enum = GuardrailCategory.SYSTEM_PROMPT_REQUEST
-        elif cat_str == "INVALID_INPUT":
-            cat_enum = GuardrailCategory.INVALID_INPUT
-        else:
-            cat_enum = GuardrailCategory.PROMPT_INJECTION
+def _check_payload(text: str) -> Optional[Dict[str, Any]]:
+    """Checks raw text, de-obfuscated text, and any embedded base64 payloads."""
+    # 1. Raw text
+    if contains_injection(text):
+        return {"blocked": True, "reason": "prompt_injection", "refusal_en": REFUSAL_EN, "refusal_ar": REFUSAL_AR}
+    if contains_secret_probe(text):
+        return {"blocked": True, "reason": "secret_probe", "refusal_en": REFUSAL_EN, "refusal_ar": REFUSAL_AR}
 
-        return GuardrailResult(
-            allowed=False,
-            category=cat_enum,
-            reason=garak_res.get("reason", "Garak security probe triggered"),
-            safe_message=get_safe_refusal_message(cat_enum, is_ar)
-        )
+    # 2. De-obfuscated text (e.g. I-g-n-o-r-e)
+    deobf = _deobfuscate(text)
+    if deobf != text:
+        if contains_injection(deobf):
+            return {"blocked": True, "reason": "obfuscated_injection", "refusal_en": REFUSAL_EN, "refusal_ar": REFUSAL_AR}
+        if contains_secret_probe(deobf):
+            return {"blocked": True, "reason": "obfuscated_secret_probe", "refusal_en": REFUSAL_EN, "refusal_ar": REFUSAL_AR}
 
-    # GarakInputGuard.evaluate() above already covers secret/system-prompt/injection
-    # patterns (EN + AR) — this used to be followed by a second regex pass over four
-    # more pattern lists in security_utils.py that were ~90% duplicates of the ones
-    # just checked. The handful of patterns that were genuinely distinct got merged
-    # into garak_guard.py's GARAK_MISC_PATTERNS instead of being re-scanned separately.
-    return GuardrailResult(
-        allowed=True,
-        category=GuardrailCategory.SAFE,
-        reason="Input passed all Garak security checks",
-        safe_message=None
-    )
+    # 3. Base64 payload smuggling
+    for b64_match in _BASE64_PATTERN.findall(text):
+        try:
+            decoded = base64.b64decode(b64_match).decode("utf-8", errors="ignore")
+            if decoded:
+                if contains_injection(decoded):
+                    return {"blocked": True, "reason": "base64_injection", "refusal_en": REFUSAL_EN, "refusal_ar": REFUSAL_AR}
+                if contains_secret_probe(decoded):
+                    return {"blocked": True, "reason": "base64_secret_probe", "refusal_en": REFUSAL_EN, "refusal_ar": REFUSAL_AR}
+        except Exception:
+            pass
+
+    return None
+
+
+def check_input(question: str, history: Optional[List[Dict[str, str]]] = None) -> Dict[str, Any]:
+    text = str(question or "")
+    hit = _check_payload(text)
+    if hit:
+        return hit
+    return {"blocked": False, "reason": None}
+
 

@@ -1,45 +1,38 @@
-from typing import Any, Dict
-from app.guardrails.input_guard import validate_input
+from app.agent.lang import detect_language
+from app.agent.state import AgentState
+from app.agent.trace import elapsed_ms, now, step
+from app.guardrails import check_input
 
 
-def input_guard_node(state: Dict[str, Any]) -> Dict[str, Any]:
-    """
-    First line of defense: validates user question against security policies
-    (prompt injection, secret extraction, system prompt requests, oversized input).
-    """
+def input_guard_node(state: AgentState) -> dict:
+    start = now()
     question = state.get("question", "")
-    result = validate_input(question)
+    result = check_input(question, history=state.get("history"))
 
-    step_info = {
-        "node": "input_guard",
-        "title_ar": "حارس المدخلات والأمان",
-        "title_en": "Input Guardrail",
-        "status": "passed" if result.allowed else "blocked",
-        "badge": "✅ آمن" if result.allowed else "🚫 محظور",
-        "description_ar": "فحص السؤال والتأكد من خلوه من محاولات حقن الأوامر أو استخراج التعليمات السرية."
-        if result.allowed
-        else "تم رصد محاولة غير مصرح بها وحظر الطلب طبقاً لسياسات الأمان.",
-        "description_en": "Validated query against prompt injection and security policies."
-        if result.allowed
-        else "Blocked request due to security policy violation.",
-        "details": {
-            "allowed": result.allowed,
-            "category": getattr(result, "category", "safe"),
-            "risk_level": "low" if result.allowed else "high",
-        },
-    }
-
-    if not result.allowed:
+    if result["blocked"]:
+        language = detect_language(question)
+        answer = result["refusal_ar"] if language in ("ar", "mixed") else result["refusal_en"]
         return {
-            "guardrail_result": result.to_dict(),
-            "answer": result.safe_message or "عذراً، لا يمكن معالجة هذا الطلب لأسباب أمنية.",
-            "confidence": 1.0,
-            "sources": [],
-            "workflow_trace": [step_info],
+            "blocked": True,
+            "block_reason": result["reason"],
+            "language": language,
+            "answer": answer,
+            "workflow_trace": [step(
+                "input_guard", "1. Input Guardrail", "١. حارس المدخلات والأمان",
+                description_en=f"Blocked: {result['reason']}",
+                badge="Blocked", status="blocked",
+                details={"reason": result["reason"]},
+                latency_ms=elapsed_ms(start),
+            )],
         }
 
     return {
-        "guardrail_result": result.to_dict(),
-        "workflow_trace": [step_info],
+        "blocked": False,
+        "block_reason": None,
+        "workflow_trace": [step(
+            "input_guard", "1. Input Guardrail", "١. حارس المدخلات والأمان",
+            description_en="No injection or secret-probing patterns detected.",
+            badge="Passed", status="completed",
+            latency_ms=elapsed_ms(start),
+        )],
     }
-

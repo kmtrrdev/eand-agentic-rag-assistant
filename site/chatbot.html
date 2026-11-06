@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title data-i18n="chatbot.pageTitle">e& Egypt | AI Smart Assistant</title>
+<link rel="stylesheet" href="assets/style.css?v=20260908_chatbot_v1">
+<script src="assets/theme.js?v=20260908_v1"></script>
+<script src="assets/translations.js?v=20260908_v1"></script>
+<script src="assets/lang.js?v=20260908_v1"></script>
+</head>
+
+<body class="chatbot-page">
+
+<header class="site-header">
+  <div class="container">
+    <a href="index.html" class="brand">
+      <img src="assets/logo.png" alt="e& logo">
+      <span data-i18n="brand.name">e& Egypt</span>
+    </a>
+    <nav class="nav">
+      <a href="index.html" data-i18n="nav.home">Home</a>
+      <a href="services.html" data-i18n="nav.services">Services</a>
+      <a href="packages.html" data-i18n="nav.packages">Packages</a>
+      <a href="about.html" data-i18n="nav.about">About</a>
+      <a href="contact.html" data-i18n="nav.contact">Contact</a>
+      <a href="chatbot.html" class="active" data-i18n="nav.chatbot">AI Assistant</a>
+    </nav>
+    <div class="header-actions">
+      <button id="lang-toggle" class="lang-toggle" aria-label="Switch language">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15 15 0 0 1 0 20 15 15 0 0 1 0-20z"></path></svg>
+        <span id="lang-toggle-label">AR</span>
+      </button>
+      <button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode">
+        <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.8A9 9 0 1 1 11.2 3 7 7 0 0 0 21 12.8z"></path></svg>
+        <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"></path></svg>
+      </button>
+      <a href="contact.html" class="btn btn-primary" data-i18n="nav.contactBtn">Contact Us</a>
+    </div>
+  </div>
+</header>
+
+<main class="chatbot-layout-wrapper">
+  <div class="chatbot-top-bar">
+    <div class="chatbot-title-group">
+      <h1>
+        <span data-i18n="chatbot.h1">Ask the e& Assistant</span>
+        <span class="live-badge">
+          <span class="pulse-dot"></span>
+          <span data-i18n="chatbot.status">Online & Ready</span>
+        </span>
+      </h1>
+      <p data-i18n="chatbot.lead">Instant, verified answers about packages, bills, internet, and roaming powered by Agentic RAG and live catalog data.</p>
+    </div>
+  </div>
+
+  <div class="chatbot-grid">
+    <!-- Left / Control Sidebar -->
+    <aside class="chatbot-sidebar">
+      <button type="button" class="sidebar-new-chat-btn" id="sidebar-new-chat">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14"></path></svg>
+        <span data-i18n="chatbot.newChat">New Conversation</span>
+      </button>
+
+      <div class="sidebar-model-box">
+        <div class="sidebar-section-title">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+          <span data-i18n="chat.modelSelectorLabel">Model:</span>
+        </div>
+        <div class="model-toggle-group" style="width:100%;">
+          <button type="button" class="model-btn active" data-model="cloud" style="flex:1;">
+            <span class="icon">☁️</span>
+            <span data-i18n="chat.modelCloud">Cloud (GPT-5 mini)</span>
+          </button>
+          <button type="button" class="model-btn" data-model="local" style="flex:1;">
+            <span class="icon">⚡</span>
+            <span data-i18n="chat.modelLocal">Local GPU (DeepSeek-R1 7B)</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="sidebar-section-title">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+        <span data-i18n="chatbot.sidebarTitle">Suggested Questions</span>
+      </div>
+
+      <div class="quick-prompts-list">
+        <button type="button" class="quick-prompt-btn" data-prompt="ما هي أرخص باقات النت المنزلي VDSL؟" data-prompt-en="What are the cheapest VDSL home internet plans?">
+          <svg class="prompt-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"></path></svg>
+          <span data-i18n="chatbot.q1">What are the cheapest VDSL home internet plans?</span>
+        </button>
+
+        <button type="button" class="quick-prompt-btn" data-prompt="تفاصيل باقات حكاية وأسعارها الرسمية" data-prompt-en="Explain Hekaya prepaid bundles and prices">
+          <svg class="prompt-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"></path></svg>
+          <span data-i18n="chatbot.q2">Explain Hekaya prepaid bundles and prices</span>
+        </button>
+
+        <button type="button" class="quick-prompt-btn" data-prompt="كيفية الاشتراك في باقات التجوال الدولي؟" data-prompt-en="How do I subscribe to international roaming?">
+          <svg class="prompt-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"></path></svg>
+          <span data-i18n="chatbot.q3">How do I subscribe to international roaming?</span>
+        </button>
+
+        <button type="button" class="quick-prompt-btn" data-prompt="طرق دفع الفاتورة وشحن الرصيد" data-prompt-en="How can I pay my bill or recharge balance?">
+          <svg class="prompt-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"></path></svg>
+          <span data-i18n="chatbot.q4">How can I pay my bill or recharge balance?</span>
+        </button>
+      </div>
+
+      <div class="capabilities-list">
+        <div class="capability-item">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+          <span data-i18n="chatbot.capability1">83 Official Packages Indexed</span>
+        </div>
+        <div class="capability-item">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+          <span data-i18n="chatbot.capability2">Deterministic USSD & Price Tools</span>
+        </div>
+        <div class="capability-item">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+          <span data-i18n="chatbot.capability3">Hybrid BM25 + Dense RAG</span>
+        </div>
+        <div class="capability-item">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+          <span data-i18n="chatbot.capability4">Multi-turn Context Memory</span>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Chat Column -->
+    <section class="chatbot-main">
+      <div id="chat-panel" class="open fullpage-chat">
+        <div class="chat-head">
+          <span class="dot"></span>
+          <div>
+            <b data-i18n="chat.title">e& Assistant</b>
+            <small data-i18n="chat.subtitle">Usually replies in seconds</small>
+          </div>
+          <button id="chat-close" aria-label="Close" style="display:none;">✕</button>
+        </div>
+
+        <div class="chat-model-bar" style="display:none;">
+          <span class="chat-model-label" data-i18n="chat.modelSelectorLabel">Model:</span>
+          <div class="model-toggle-group">
+            <button type="button" class="model-btn active" data-model="cloud">
+              <span class="icon">☁️</span>
+              <span data-i18n="chat.modelCloud">Cloud (GPT-5 mini)</span>
+            </button>
+            <button type="button" class="model-btn" data-model="local">
+              <span class="icon">⚡</span>
+              <span data-i18n="chat.modelLocal">Local GPU (DeepSeek-R1 7B)</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="chat-body" id="chat-body">
+          <div class="msg bot" data-i18n="chat.greeting">Hi! I'm the e& smart assistant 👋 Ask me about any plan or service.</div>
+        </div>
+
+        <form class="chat-input" id="chat-form">
+          <input type="text" id="chat-input" placeholder="Type your question..." data-i18n-ph="chat.placeholder" autocomplete="off">
+          <button type="submit" aria-label="Send">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+          </button>
+        </form>
+      </div>
+    </section>
+  </div>
+</main>
+
+<script src="assets/chat.js?v=20260908_chatbot_v1"></script>
+<script>
+// Chatbot page specific enhancements
+document.addEventListener('DOMContentLoaded', () => {
+  // Sync sidebar new chat button with startNewChat
+  const sidebarNewChat = document.getElementById('sidebar-new-chat');
+  if (sidebarNewChat && typeof startNewChat === 'function') {
+    sidebarNewChat.addEventListener('click', () => {
+      startNewChat();
+    });
+  }
+
+  // Quick prompt buttons
+  document.querySelectorAll('.quick-prompt-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const isAr = document.documentElement.getAttribute('lang') === 'ar';
+      const promptText = isAr 
+        ? (btn.getAttribute('data-prompt') || btn.textContent.trim()) 
+        : (btn.getAttribute('data-prompt-en') || btn.textContent.trim());
+      
+      const chatInput = document.getElementById('chat-input');
+      const chatForm = document.getElementById('chat-form');
+      if (chatInput && chatForm) {
+        chatInput.value = promptText;
+        chatForm.dispatchEvent(new Event('submit', { cancelable: true }));
+      }
+    });
+  });
+
+  // Handle URL query parameters (e.g. chatbot.html?q=...)
+  const urlParams = new URLSearchParams(window.location.search);
+  const initialQuery = urlParams.get('q');
+  if (initialQuery) {
+    const chatInput = document.getElementById('chat-input');
+    const chatForm = document.getElementById('chat-form');
+    if (chatInput && chatForm) {
+      chatInput.value = initialQuery;
+      setTimeout(() => {
+        chatForm.dispatchEvent(new Event('submit', { cancelable: true }));
+      }, 300);
+    }
+  }
+});
+</script>
+</body>
+</html>

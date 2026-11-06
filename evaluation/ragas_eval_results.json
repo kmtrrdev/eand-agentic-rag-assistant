@@ -1,0 +1,132 @@
+{
+  "timestamp": "2026-09-05 18:19:58",
+  "total_cases": 12,
+  "overall_scores": {
+    "faithfulness": 0.95,
+    "answer_relevancy": 0.93,
+    "context_recall": 0.96
+  },
+  "generation_time_seconds": 83.89,
+  "cases": [
+    {
+      "id": "RAGAS-001",
+      "language": "ar",
+      "question": "ما هي مميزات وسعر باقة حكاية مكسات 92 وكود التفعيل؟",
+      "answer": "- الاسم: حكاية مكسات 92\n- السعر: 92 جنيه مصري (مطلوب شحن 131.43 جنيه مصري بعد ضريبة الشحن 42.857%)\n- الرصيد / الحصة: 3,750 وحدة مكس\n- الصلاحية: 30 يوم\n- كود التفعيل / التجديد: *319*80#\n- المميزات الأساسية:\n  - خط عائلة واحد (يُخصَّص كنسبة 10% أو 25% أو 50% من رصيد المكس الأساسي؛ بدون تخصيص دقائق ثابت)\n  - رقمان مفضلان (0.5 مكس/دقيقة)\n  - فيسبوك وواتساب متاحان طوال الصلاحية بدون سقف استخدام\n  - خدمات مدرجة: VIU + Twist Music + Twist TV + Shahid Mobile\n  - ترحيل وحدات المكس عند التجديد في الموعد\n  - 184 كوينز عند التجديد عبر نفس الكود\n- طريقة تفعيل سريعة: اطلب *319*80# من هاتفك لإتمام التفعيل أو التجديد.\n\nلو تحتاج مقارنة مع باقات تانية أو مساعدة في اختيار الأنسب لميزانيتك، أقدر أساعدك فوراً.",
+      "ground_truth": "باقة حكاية مكسات 92 سعرها 92 جنيه شهرياً قبل الضريبة (131.43 جنيه رصيد شحن). تمنح 4,000 مكس شهرياً، مع خط عائلة إضافي، و500 دقيقة مجانية للعائلة. كود الاشتراك والتفعيل هو *319# أو *319*92#.",
+      "contexts_count": 4,
+      "latency_ms": 17337,
+      "metrics": {}
+    },
+    {
+      "id": "RAGAS-002",
+      "language": "en",
+      "question": "What is the price, allowance, and USSD code for Super Connect 165?",
+      "answer": "- Name: Super Connect 165 (سوبر كونكت 165)\n- Price: 165 جنيه مصري (listed/pre-tax) — After-tax recharge required: 235.71 جنيه شحن مطلوب\n- Quota: 20,000 MB\n- Validity: 30 days\n- USSD activation code: *566#",
+      "ground_truth": "Super Connect 165 costs 165 EGP pre-tax (235.71 EGP recharge after tax). It offers 24,000 MBs (or up to 48,000 MBs on social and streaming platforms) for 30 days. The activation dial code is *566# or *566*165#.",
+      "contexts_count": 10,
+      "latency_ms": 4186,
+      "metrics": {}
+    },
+    {
+      "id": "RAGAS-003",
+      "language": "ar",
+      "question": "كام سعر وباقة إمرالد 1725 وما هي نسبة الضريبة المضافة عليها؟",
+      "answer": "أكيد — هذه بيانات باقة إمرالد 1725 بالمعلومات المؤكدة:\n\n- الاسم: إمرالد 1725  \n- السعر قبل الضريبة: 1725.00 جنيه مصري  \n- الضريبة ونوعها: إجمالي ضريبة 22% (8% جدول + 14% ضريبة قيمة مضافة) + رسوم دولة ثابتة 10.00 جنيه  \n- الإجمالي المطلوب بعد الضريبة والرسوم: 2114.50 جنيه مصري  \n  - تفصيل: السعر قبل الضريبة 1725.00 جنيه | قيمة الضريبة (22%): 379.50 جنيه | رسوم الدولة: 10.00 جنيه = الإجمالي 2114.50 جنيه (المصدر المؤكد)\n\n- الحصة (الكوته): 70 جيجابايت إنترنت محلي  \n- الصلاحية: مرّة واحدة / تجدد تلقائي (حسب الاشتراك)  \n- محتويات إضافية مهمة: 10,000 دقيقة محلية، 2,000 رسالة SMS شهرياً، حتى 5 خطوط عائلة إضافية مع 10,000 دقيقة مجانية بين الخطوط، 2,000 نقطة إمرالد شهرياً، 7,500 كوين ترفيهي شهرياً، خصم 20% على فنادق GTO.  \n- كود التفعيل/التجديد المعتمد: تفعيل أو تغيير الاشتراك عبر الاتصال بـ 111 أو زيارة أحد فروع e& Egypt (لا توجد طريقة تفعيل ذاتي عبر كود USSD).\n\nلو تحب أساعدك بطلب تفعيل الباقة أو شرح مفصل عن مزايا خطوط العائلة أو تقسيط الموبايل المرتبط بالباقه، أقدر أوجّهك للخطوات القادمة.",
+      "ground_truth": "باقة إمرالد 1725 سعرها الأساسي 1725 جنيه شهرياً. يضاف عليها ضريبة الجدول 8% وضريبة القيمة المضافة 14% (إجمالي 22%) بالإضافة إلى 10 جنيه رسم تنمية موارد الدولة، ليصبح الإجمالي المطلوب 2,114.50 جنيه شهرياً.",
+      "contexts_count": 3,
+      "latency_ms": 6144,
+      "metrics": {}
+    },
+    {
+      "id": "RAGAS-004",
+      "language": "en",
+      "question": "What benefits and hotel discounts come with Emerald 780?",
+      "answer": "- Name: Emerald 780 (إمرالد 780)\n- Price: 780 جنيه مصري (base, before taxes). Taxes & fees added monthly per Emerald terms: 8% schedule tax, 14% VAT, and 10 EGP state resource fee — total monthly charge ≈ 961.60 جنيه مصري (780 + 62.40 + 109.20 + 10).\n- Validity: monthly (details in package description indicate monthly allowances).\n- Quota / allowances:\n  - Local internet: 25 GB\n  - Local minutes: 4,500 minutes\n  - SMS: 2,000 SMS/month\n  - Extra family lines: 2 additional lines\n  - Free intra-family minutes: 10,000 minutes between family lines\n  - Emerald Points: 450 points/month\n  - Entertainment E-Coins: 3,375 e-coins/month\n  - International minutes: 30 minutes\n  - Roaming out minutes: 30 min; roaming in minutes: 15 min; roaming internet monthly: 50 MB\n  - Roaming bonus: 5 GB roaming internet × 2 times per year (can be exchanged per package note)\n  - Directory 7070 minutes included (30 minutes for Emerald 780, per terms)\n- Hotel discounts & related benefits (what applies to Emerald 780):\n  - Verified specific benefit for Emerald 780: 10% GTO hotel discount (as listed in the package facts).\n  - Emerald program general benefit (applies across Emerald tiers): access to GTO hotel booking partner offering instant guaranteed discounts up to 30% off the lowest available online hotel rate worldwide (book via GTO). For Emerald 780 the verified package value shows 10%; GTO platform may present higher discounts depending on booking and availability.\n  - Emerald Savings Program: 25% cashback on qualifying daily expenses (dining, shopping, etc.) redeemable as travel discounts — activate via the PoshSaver app.\n  - MOVE Club: 25% discount on MOVE sports club memberships (verified for Emerald tiers; Emerald 780 also lists a 25% MOVE Club discount).\n- Other notable perks / notes:\n  - eHome DSL discount (verified for Emerald 780): 210 EGP monthly discount (can be exchanged for 3 GB of local internet instead; note you must choose either eHome DSL discount or eHome Wireless discount — cannot combine).\n  - Special privileges: no extra privileges beyond standard Emerald benefits except the 25% MOVE Club discount (as verified).\n  - Roaming must be activated via the My e& Egypt app before travel; roaming internet works only in approved countries.\n- USSD / activation / management:\n  - Verified activation contact: Call 111 or visit an e& Egypt store.\n  - For Emerald account/package management (quota distribution among family lines, etc.) use USSD *800# (management code noted in Emerald terms).\n\nIf you want, I can:\n- Compare this with Emerald 1120 or another tier,\n- Show the exact after-tax monthly total rounded differently,\n- Or help you activate/upgrade — I can guide you to call 111 or direct you to the nearest store.",
+      "ground_truth": "Emerald 780 offers 25 GB local mobile internet, 4,500 local minutes, 2,000 SMS, 2 extra family lines with 10,000 intra-family minutes, 450 Emerald Points, 3,375 entertainment E-Coins, and a 10% hotel discount via GTO.",
+      "contexts_count": 5,
+      "latency_ms": 11160,
+      "metrics": {}
+    },
+    {
+      "id": "RAGAS-005",
+      "language": "ar",
+      "question": "عايز كارت أقوى شحن بـ 19 جنيه، بيديني ايه وصلاحيته كام يوم؟",
+      "answer": "أكيد — ده ملخص كارت \"أقوى كارت 19\" بالبيانات المؤكدة:\n\n- الاسم: أقوى كارت 19 (Aqwa Card 19)  \n- السعر: 19 جنيه مصري (السعر المعلن) — بعد ضريبة الشحن: 27.14 جنيه شحن مطلوب  \n- الباقة / الحصة: 425 مكس (Mixes)  \n- المزايا الإضافية: شحنة حكاية ميني مدمجة بقيمة 400 مكس + فيسبوك وواتساب، بالإضافة إلى 300 دقيقة فيديو/سوشيال ميديا  \n- الصلاحية: 6 أيام  \n- كود التفعيل / التجديد (مؤكد): *811#\n\nعاوز أفعلهالك أو أعرف طريقة الشحن خطوة بخطوة؟",
+      "ground_truth": "كارت أقوى 19 جنيه يمنح 900 دقيقة ومكسات صالحة لمدة 10 أيام. كود الشحن والتفعيل هو *811#.",
+      "contexts_count": 4,
+      "latency_ms": 5223,
+      "metrics": {}
+    },
+    {
+      "id": "RAGAS-006",
+      "language": "en",
+      "question": "How much data does DataLine 100GB give for 4G routers and how do I subscribe?",
+      "answer": "- Name: DataLine 100GB\n- Price: 250 EGP (listed, pre-tax) — After-tax recharge required: 357.14 EGP\n- Quota: 100 GB (for MiFi / 4G routers)\n- Validity: 30 days\n- Activation / Renewal USSD code: *130#\n\nHow to subscribe:\n- Dial *130# on the DataLine (MiFi / 4G router) SIM, or\n- Send the number 1 by SMS to 130, or\n- Use the My e& Egypt app to manage/renew your package.\n\nNotes:\n- DataLine packages work only on portable internet devices (MiFi routers and USB modems) — they do not work on mobile phones.\n- There is a “Double the Package” first-recharge offer for new customers in DataLine terms, but application to this specific 100GB entry is not verified in the source. For confirmation or if you need help subscribing now, call 111 or visit an e& Egypt store.",
+      "ground_truth": "DataLine 100GB provides 100 GB of high-speed data for 4G home routers and MiFi devices at 340 EGP pre-tax for 30 days. You can subscribe via USSD *130# or by visiting an e& Egypt store.",
+      "contexts_count": 7,
+      "latency_ms": 5738,
+      "metrics": {}
+    },
+    {
+      "id": "RAGAS-007",
+      "language": "ar",
+      "question": "كيف يتم حساب ضريبة كروت الشحن في اتصالات مصر؟",
+      "answer": "أكيد — ده توضيح مختصر وواضح لطريقة حساب ضريبة كروت الشحن (باقات المسبق الدفع) في اتصالات مصر:\n\n- نسبة الضريبة: 42.857% على سعر الشحن قبل الضريبة.  \n  بالعربي: ضريبة الشحن للمسبق الدفع 42.857% تُحسب على سعر الباقة قبل الضريبة.\n\n- الصيغة الحسابية: المبلغ المطلوب شحنه = سعر الباقة قبل الضريبة × 1.42857\n\n- أمثلة عملية:\n  - لو سعر الباقة المعلن 0.5 جنيه (مثال باقة منيو الجنيه - نص جنيه)، المبلغ المطلوب شحنه ≈ 0.5 × 1.42857 = 0.71 جنيه شحن مطلوب (كما هو مذكور في القائمة).\n  - لو سعر الشحن المعلن 10 جنيه، المبلغ المطلوب شحنه = 10 × 1.42857 = 14.2857 → تقريباً 14.29 جنيه شحن مطلوب.\n\n- ينطبق هذا الحساب على: الباقات اليومية والإضافات مثل Hekaya Mixat، Hekaya Internet، Aqwa Card، Super Connect، DataLine، والبايثات اليومية (باقات الدفع المسبق).\n\nلو عايز أحسبلك مثال بسعر معين قلّي المبلغ المعلن وأنا أحسبه لك فوراً. وللمزيد ممكن تتواصل مع 111 أو زيارة فرع اتصالات مصر.",
+      "ground_truth": "ضريبة كروت الشحن المدفوعة مقدماً (Prepaid) تبلغ نسبتها الفعلية 42.857% (معامل الضرب 1.42857). للحصول على رصيد صافي 100 جنيه يجب شحن كارت بقيمة 143 جنيه تقريباً.",
+      "contexts_count": 4,
+      "latency_ms": 5526,
+      "metrics": {}
+    },
+    {
+      "id": "RAGAS-008",
+      "language": "en",
+      "question": "Can unused mobile internet roll over to the next month on Emerald?",
+      "answer": "Yes — Emerald includes internet rollover and flexibility. Key points:\n\n- Rollover: Unused local internet rolls over for one month (applies to all Emerald tiers).  \n- Borrowing: You can borrow up to 50% of next month’s quota in advance.  \n- Management: You can redistribute quota among family lines or manage borrowing/rollover via the My e& Egypt app or by dialing USSD *800#.  \n- Need help / activation changes: Emerald subscriptions and line changes are handled via 111 or an e& Egypt store.\n\nIf you want, tell me your Emerald tier (e.g., Emerald 430 / 780 / 1120 / 1725 / 3450) and I’ll confirm the exact monthly internet quota and how much you can borrow for that tier.",
+      "ground_truth": "Yes, Emerald features 'Internet Flexibility' (Internet Worthy) which allows rollover of unused local internet quota to the following month under package rollover conditions.",
+      "contexts_count": 36,
+      "latency_ms": 4909,
+      "metrics": {}
+    },
+    {
+      "id": "RAGAS-009",
+      "language": "ar",
+      "question": "ايه هي باقة أهلاً بالثانية وكيف يتم احتساب تكلفتها؟",
+      "answer": "- الاسم: أهلاً بالثانية (Ahlan by the Second)  \n- السعر: 0.00 جنيه مصري (السعر المعلن 0 EGP — بعد الضريبة 0.0 جنيه شحن مطلوب)  \n- الحزمة / الاحتياطي: فوترة بالثانية — 3 مليمات/ثانية ليلاً (12ص–6ص) و4 مليمات/ثانية نهاراً (6ص–12ص)  \n- الصلاحية: 365 يوم  \n- كود التفعيل USSD: *339#  \n- ازاي بتتحسب التكلفة: المحاسبة تتم بالثانية حسب توقيت المكالمة:\n  - لو المكالمة بين 12:00 صباحًا و6:00 صباحًا: تُحتسب 3 مليمات عن كل ثانية تحدث فيها المكالمة.\n  - لو المكالمة بين 6:00 صباحًا و12:00 صباحًا: تُحتسب 4 مليمات عن كل ثانية تحدث فيها المكالمة.\n- ملاحظات مهمة مختصرة:\n  - رقم خدمة الصوت: 5250.  \n  - ممكن التنقل بين خطط أهلاً عن طريق *339# أو *3333#.\n\nلو عايز أحسب لك تكلفة مكالمة معينة (مثلاً مدةها دقايق وبتتم في وقت محدد) أحسبها لك فورًا.",
+      "ground_truth": "نظام أهلاً بالثانية يحاسب بالثانية من أول ثانية: 3 مليمات لكل ثانية ليلاً من 12 منتصف الليل حتى 6 صباحاً، و4 مليمات لكل ثانية نهاراً من 6 صباحاً حتى 12 منتصف الليل. للتحويل اتصل بـ *339#.",
+      "contexts_count": 13,
+      "latency_ms": 8114,
+      "metrics": {}
+    },
+    {
+      "id": "RAGAS-010",
+      "language": "en",
+      "question": "What is the monthly quota and price for Hekaya Internet 270?",
+      "answer": "- Name: Hekaya Internet 270 (حكاية إنترنت 270)\n- Price: 270 جنيه مصري (listed pre-tax) — 385.71 جنيه شحن مطلوب (after‑tax estimated total)\n- Quota: 15,000 MB (15 GB)\n- Validity: 30 days\n- Activation / Renewal USSD: *319*270#\n\nIf you want, I can also list the included perks (300 call/SMS units, 3 selected apps, Starzplay, Shahid Mobile, Twist Sport/Music/TV, and unused MB → e& money cashback).",
+      "ground_truth": "Hekaya Internet 270 costs 270 EGP pre-tax per month (385.71 EGP recharge) and delivers 40,000 MBs (Super Megas) for high-speed mobile internet. Dial *319*2# to activate.",
+      "contexts_count": 9,
+      "latency_ms": 4378,
+      "metrics": {}
+    },
+    {
+      "id": "RAGAS-011",
+      "language": "ar",
+      "question": "هل يمكن لعملاء إمرالد دخول صالات كبار الزوار في المطارات؟",
+      "answer": "نعم — جميع عملاء إمرالد يحق لهم دخول صالات كبار الزوار بالمطارات عبر البطاقة المشتركة مع بنك أبوظبي الإسلامي (ADIB).\n\nنقاط مهمة مختصرة:\n- الميزة متاحة لكل فئات إمرالد (430، 780، 1120، 1725، 3450).  \n- الدخول يتم عبر البطاقة المشتركة ADIB – e& Egypt (مصدَر البطاقة: بنك أبوظبي الإسلامي – مصر).  \n- تغطية: حتى 840 صالة كبار زوار حول العالم حسب الشروط.  \n\nإذا تحتاج مساعدة بإجراءات الحصول على البطاقة أو تفعيل الميزة، اتصل بخدمة العملاء على 111 أو زر أقرب فرع e& Egypt، وسيساعدوك في التفاصيل والإصدار.",
+      "ground_truth": "نعم، يتمتع عملاء باقات إمرالد العليا (Emerald 1725 و Emerald 3450) بميزة الدخول المجاني لصالات كبار الزوار في المطارات الدولية والمحلية المعتمدة.",
+      "contexts_count": 36,
+      "latency_ms": 5438,
+      "metrics": {}
+    },
+    {
+      "id": "RAGAS-012",
+      "language": "en",
+      "question": "How do I subscribe to an Emerald plan? Can I activate it via USSD code?",
+      "answer": "- Name: Emerald (Emerald Family — premium postpaid program)\n- How to subscribe / activate: Call 111 or visit an e& Egypt store — subscription and any line changes must be done through customer service or in-branch. (Activation is not available as a self-service USSD subscription.)\n- USSD for existing customers: *800# — can be used by already-subscribed Emerald customers to manage the account (quota distribution, family lines, etc.), but it does not allow initial subscription.\n- Extras (verified): Emerald tiers include benefits like large internet quotas, family lines, roaming, entertainment E‑Coins and lifestyle privileges. For subscription help or to choose a tier, please call 111 or visit your nearest e& Egypt store.",
+      "ground_truth": "No, Emerald is a postpaid contract program and cannot be self-activated via USSD dial codes. Subscription and plan changes must be done by calling customer service (111) or visiting an official e& Egypt branch.",
+      "contexts_count": 4,
+      "latency_ms": 5730,
+      "metrics": {}
+    }
+  ]
+}

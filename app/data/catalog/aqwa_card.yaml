@@ -1,0 +1,189 @@
+family: aqwa_card
+family_name_en: "Aqwa Card"
+family_name_ar: "أقوى كارت"
+category: prepaid
+tax_type: prepaid
+default_ussd: "*811#"
+family_description_en: "Aqwa Card is e& Egypt's flexible prepaid recharge line: every recharge grants a pool of \"Mixes\" that can be freely used for calls, mobile internet, or SMS to any network."
+family_description_ar: "أقوى كارت هو خط الشحن المرن من اتصالات مصر لعملاء الدفع المسبق: كل شحنة تمنحك رصيد \"مكسات\" تستخدمه بحرية في المكالمات أو الإنترنت أو الرسائل لأي شبكة."
+
+tiers:
+  - id: aqwa_card_5
+    name_en: "Aqwa Card 5"
+    name_ar: "أقوى كارت 5"
+    price_egp: 5
+    ussd_code: "*811#"
+    quota_units: 80
+    quota_label_en: "80 Mixes"
+    quota_label_ar: "80 مكس"
+    video_minutes: 0
+    includes_hekaya_mini: false
+    validity_days: 2
+    description_en: "80 Mixes for calls, megabytes, or SMS with 2 days validity. Does not include Hekaya Mini."
+    description_ar: "80 مكس للمكالمات أو الإنترنت أو الرسائل، صلاحية يومين. لا تشمل حكاية ميني."
+    perks_en: "Flexible unit allocation to calls or internet"
+    perks_ar: "توزيع مرن للوحدات بين المكالمات والإنترنت"
+    source: "PrepaidSystems.pdf"
+
+  - id: aqwa_card_10
+    name_en: "Aqwa Card 10"
+    name_ar: "أقوى كارت 10"
+    price_egp: 10
+    ussd_code: "*811#"
+    quota_units: 175
+    quota_label_en: "175 Mixes"
+    quota_label_ar: "175 مكس"
+    video_minutes: 100
+    includes_hekaya_mini: false
+    validity_days: 3
+    description_en: "175 Mixes for calls and megabytes with 3 days validity, plus 100 video/social minutes. Not listed in the current PrepaidSystems.pdf reference (which documents 8 tiers: 5/15/19/22.5/30/44/45/75 EGP) — kept here as an existing catalog entry pending verification against another source."
+    description_ar: "175 مكس للمكالمات والإنترنت، صلاحية 3 أيام، بالإضافة إلى 100 دقيقة فيديو وسوشيال ميديا. غير مذكورة في نسخة PrepaidSystems.pdf الحالية (التي توثق 8 فئات: 5/15/19/22.5/30/44/45/75 جنيه) — محتفظ بها كعنصر موجود في الكتالوج لحين التحقق من مصدر آخر."
+    perks_en: "100 video/social minutes"
+    perks_ar: "100 دقيقة فيديو وسوشيال ميديا"
+    source: "PrepaidSystems.pdf"
+
+  - id: aqwa_card_15
+    name_en: "Aqwa Card 15"
+    name_ar: "أقوى كارت 15"
+    price_egp: 15
+    ussd_code: "*811#"
+    quota_units: 300
+    quota_label_en: "300 Mixes"
+    quota_label_ar: "300 مكس"
+    video_minutes: 210
+    includes_hekaya_mini: false
+    validity_days: 2
+    description_en: "300 Mixes plus 210 video & streaming minutes, valid for 2 days. Does not include Hekaya Mini."
+    description_ar: "300 مكس بالإضافة إلى 210 دقيقة فيديو وستريمينج، صلاحية يومين. لا تشمل حكاية ميني."
+    perks_en: "210 dedicated video/social minutes"
+    perks_ar: "210 دقيقة مخصصة للفيديو والسوشيال ميديا"
+    source: "PrepaidSystems.pdf"
+
+  - id: aqwa_card_19
+    name_en: "Aqwa Card 19"
+    name_ar: "أقوى كارت 19"
+    price_egp: 19
+    ussd_code: "*811#"
+    quota_units: 425
+    quota_label_en: "425 Mixes"
+    quota_label_ar: "425 مكس"
+    video_minutes: 300
+    includes_hekaya_mini: true
+    hekaya_mini_value_mixes: 400
+    validity_days: 6
+    description_en: "425 Mixes plus 300 video/social minutes plus an embedded Hekaya Mini recharge worth 400 Mixes + Facebook & WhatsApp, valid for 6 days."
+    description_ar: "425 مكس بالإضافة إلى 300 دقيقة فيديو وسوشيال ميديا، وشحنة حكاية ميني مدمجة بقيمة 400 مكس + فيسبوك وواتساب، صلاحية 6 أيام."
+    perks_en: "Embedded Hekaya Mini (400 Mixes + Facebook & WhatsApp) + 300 video minutes"
+    perks_ar: "حكاية ميني مدمجة (400 مكس + فيسبوك وواتساب) + 300 دقيقة فيديو"
+    source: "PrepaidSystems.pdf"
+
+  - id: aqwa_card_22.5
+    name_en: "Aqwa Card 22.5"
+    name_ar: "أقوى كارت 22.5"
+    price_egp: 22.5
+    ussd_code: "*811#"
+    quota_units: 550
+    quota_label_en: "550 Mixes"
+    quota_label_ar: "550 مكس"
+    video_minutes: 320
+    includes_hekaya_mini: true
+    hekaya_mini_value_mixes: 525
+    validity_days: 7
+    description_en: "550 Mixes plus 320 video/social minutes plus an embedded Hekaya Mini recharge worth 525 Mixes + Facebook & WhatsApp, valid for 7 days."
+    description_ar: "550 مكس بالإضافة إلى 320 دقيقة فيديو وسوشيال ميديا، وشحنة حكاية ميني مدمجة بقيمة 525 مكس + فيسبوك وواتساب، صلاحية 7 أيام."
+    perks_en: "Embedded Hekaya Mini (525 Mixes) + 320 video minutes"
+    perks_ar: "حكاية ميني مدمجة (525 مكس) + 320 دقيقة فيديو"
+    source: "PrepaidSystems.pdf"
+
+  - id: aqwa_card_30
+    name_en: "Aqwa Card 30"
+    name_ar: "أقوى كارت 30"
+    price_egp: 30
+    ussd_code: "*811#"
+    quota_units: 750
+    quota_label_en: "750 Mixes"
+    quota_label_ar: "750 مكس"
+    video_minutes: 400
+    includes_hekaya_mini: true
+    hekaya_mini_value_mixes: 700
+    validity_days: 10
+    description_en: "750 Mixes plus 400 video minutes plus an embedded Hekaya Mini recharge worth 700 Mixes + Facebook & WhatsApp, valid for 10 days."
+    description_ar: "750 مكس بالإضافة إلى 400 دقيقة فيديو، وشحنة حكاية ميني مدمجة بقيمة 700 مكس + فيسبوك وواتساب، صلاحية 10 أيام."
+    perks_en: "Embedded Hekaya Mini (700 Mixes) + 400 video minutes"
+    perks_ar: "حكاية ميني مدمجة (700 مكس) + 400 دقيقة فيديو"
+    source: "PrepaidSystems.pdf"
+
+  - id: aqwa_card_44
+    name_en: "Aqwa Card 44"
+    name_ar: "أقوى كارت 44"
+    price_egp: 44
+    ussd_code: "*811#"
+    quota_units: 1100
+    quota_label_en: "1,100 Mixes"
+    quota_label_ar: "1,100 مكس"
+    video_minutes: 0
+    includes_hekaya_mini: false
+    validity_days: 14
+    description_en: "1,100 Mixes for calls and internet, valid for 14 days. Does not include Hekaya Mini."
+    description_ar: "1,100 مكس للمكالمات والإنترنت، صلاحية 14 يوم. لا تشمل حكاية ميني."
+    perks_en: "1,100 Mixes for calls/internet"
+    perks_ar: "1,100 مكس للمكالمات والإنترنت"
+    source: "PrepaidSystems.pdf"
+
+  - id: aqwa_card_45
+    name_en: "Aqwa Card 45"
+    name_ar: "أقوى كارت 45"
+    price_egp: 45
+    ussd_code: "*811#"
+    quota_units: 700
+    quota_label_en: "700 Mixes"
+    quota_label_ar: "700 مكس"
+    video_minutes: 0
+    includes_hekaya_mini: false
+    validity_days: 28
+    description_en: "700 Mixes valid for a full 28-day month. Does not include Hekaya Mini."
+    description_ar: "700 مكس بصلاحية شهر كامل (28 يوم). لا تشمل حكاية ميني."
+    perks_en: "28-day monthly validity"
+    perks_ar: "صلاحية شهرية 28 يوم"
+    source: "PrepaidSystems.pdf"
+
+  - id: aqwa_card_50
+    name_en: "Aqwa Card 50"
+    name_ar: "أقوى كارت 50"
+    price_egp: 50
+    ussd_code: "*811#"
+    quota_units: 1400
+    quota_label_en: "1,400 Mixes"
+    quota_label_ar: "1,400 مكس"
+    video_minutes: 750
+    includes_hekaya_mini: true
+    hekaya_mini_value_mixes: null
+    validity_days: 14
+    description_en: "1,400 Mixes plus 750 video minutes plus an embedded Hekaya Mini recharge, valid for 14 days. Not listed in the current PrepaidSystems.pdf reference (which documents 8 tiers: 5/15/19/22.5/30/44/45/75 EGP) — kept here as an existing catalog entry pending verification against another source."
+    description_ar: "1,400 مكس بالإضافة إلى 750 دقيقة فيديو، وشحنة حكاية ميني مدمجة، صلاحية 14 يوم. غير مذكورة في نسخة PrepaidSystems.pdf الحالية (التي توثق 8 فئات: 5/15/19/22.5/30/44/45/75 جنيه) — محتفظ بها كعنصر موجود في الكتالوج لحين التحقق من مصدر آخر."
+    perks_en: "Embedded Hekaya Mini + 750 video minutes"
+    perks_ar: "حكاية ميني مدمجة + 750 دقيقة فيديو"
+    source: "PrepaidSystems.pdf"
+
+  - id: aqwa_card_75
+    name_en: "Aqwa Card 75"
+    name_ar: "أقوى كارت 75"
+    price_egp: 75
+    ussd_code: "*811#"
+    quota_units: 1300
+    quota_label_en: "1,300 Mixes"
+    quota_label_ar: "1,300 مكس"
+    video_minutes: 0
+    includes_hekaya_mini: false
+    validity_days: 28
+    description_en: "1,300 Mixes or minutes to all networks, valid for 28 days. Does not include video/entertainment/social app minutes or an embedded Hekaya Mini recharge."
+    description_ar: "1,300 مكس أو دقيقة لكل الشبكات، صلاحية 28 يوم. لا تشمل دقائق فيديو/ترفيه/سوشيال ميديا ولا شحنة حكاية ميني مدمجة."
+    perks_en: "1,300 Mixes for calls/internet to any network"
+    perks_ar: "1,300 مكس للمكالمات والإنترنت لأي شبكة"
+    source: "PrepaidSystems.pdf"
+
+terms_and_conditions:
+  - en: "A minute to a network other than e& Egypt is charged as 5 minutes (5 Mixes) from the bundle."
+    ar: "الدقيقة لغير شبكة اتصالات مصر تُحتسب كـ5 دقائق (5 مكسات) من الرصيد."
+  - en: "Aqwa Card tiers that include video minutes also grant access to specific Entertainment, Social, and Video app categories for that dedicated usage."
+    ar: "فئات أقوى كارت التي تشمل دقائق فيديو تمنح أيضاً وصولاً لتطبيقات ترفيهية واجتماعية وفيديو محددة لهذا الاستخدام المخصص."

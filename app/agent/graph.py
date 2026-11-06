@@ -1,169 +1,95 @@
+"""
+LangGraph wiring for the agentic pipeline:
+
+    input_guard -> classify -> [greeting | safe_response | clarify | strategy_router]
+    strategy_router -> [tools | query_rewrite] -> query_rewrite -> retrieve -> generate -> validate
+    validate -> generate (one repair loop) | output_guard -> END
+
+Tools and retrieval always run together (tools -> query_rewrite -> retrieve is
+a plain, unconditional chain): deterministic facts stay the source of truth
+for exact numbers, but retrieval still runs after them to pull in
+supplementary context (e.g. Emerald's benefit/terms/roaming chunks, which
+live only in the vector store) and to populate the sources shown to the
+customer — a tool hit should enrich the answer, not silence retrieval
+entirely.
+
+query_rewrite sits between the two entry paths and retrieve so every
+retrieval call — whether reached via tools or directly via RAG_ONLY — is
+searched with the same rewritten, reference-resolved, bilingually-bridged
+query rather than the raw customer message.
+
+Node ids match the vocabulary the frontend's workflow visualization already
+understands (see app/agent/trace.py) — greeting/safe_response/clarify
+short-circuit straight to output_guard exactly like the diagram's "fast
+path" branches.
+"""
+import functools
+
 from langgraph.graph import END, START, StateGraph
 
-from app.agent.state import AgentState
-from app.agent.instrumentation import instrument_node
 from app.agent.edges import (
+    route_after_classify,
     route_after_input_guard,
-    route_after_understand,
     route_after_strategy,
-    route_after_mcp_tool,
-    route_after_retrieval,
-    route_after_rewrite,
     route_after_validate,
 )
-# NOTE: route_after_retrieval decides WEAK/FAILED retrieval -> rewrite vs GOOD -> generate.
-# It MUST be wired as a conditional edge after "evaluate" (see below). Previously this
-# import was unused and "retrieve" pointed straight at "generate", which silently
-# disabled the entire retrieval-quality check and query-rewrite retry loop.
-#
-# There used to be a separate "intent" node here (app/agent/nodes/intent_node.py) with
-# its own LLM classification call. It was registered via add_node but never wired into
-# any add_edge/add_conditional_edges — a dead, unreachable node. understand_query_node
-# already does greeting/scope/intent classification as part of its own fast path (using
-# helpers now in app/agent/text_signals.py), so the orphaned node was deleted rather
-# than wired in — it would have just been a second, redundant LLM call per request.
-from app.agent.nodes.input_guard_node import input_guard_node
+from app.agent.nodes.classify_node import classify_node
+from app.agent.nodes.clarify_node import clarify_node
+from app.agent.nodes.generate_node import generate_node
 from app.agent.nodes.greeting_node import greeting_node
-from app.agent.nodes.understand_query import understand_query_node
-from app.agent.nodes.strategy_router import strategy_router_node
-from app.agent.nodes.safe_response_node import safe_response_node
-from app.agent.nodes.mcp_tool_node import mcp_tool_node
-from app.agent.nodes.retrieve import retrieve_node
-from app.agent.nodes.evaluate_retrieval import evaluate_retrieval_node
-from app.agent.nodes.rewrite_query import rewrite_query_node
-from app.agent.nodes.generate_answer import generate_answer_node
+from app.agent.nodes.input_guard_node import input_guard_node
 from app.agent.nodes.output_guard_node import output_guard_node
-from app.agent.nodes.validate_answer import validate_answer_node
-
-_cached_agent = None
+from app.agent.nodes.query_rewrite_node import query_rewrite_node
+from app.agent.nodes.retrieve_node import retrieve_node
+from app.agent.nodes.safe_response_node import safe_response_node
+from app.agent.nodes.strategy_router_node import strategy_router_node
+from app.agent.nodes.tools_node import tools_node
+from app.agent.nodes.validate_node import validate_node
+from app.agent.state import AgentState
 
 
 def build_graph():
-    """
-    Build and compile the e& Egypt Production State Machine:
-    1. Input Guard (Prompt injection defense)
-    2. Query Understanding (Intent/greeting/scope fast paths + entity, constraint & budget extraction)
-    3. Response Strategy Router (MCP_EXACT, MCP_CALCULATION, MCP_ACTIVATION, MCP_RECOMMENDATION, MCP_COMPARISON, RAG_ONLY)
-    4. Structured Tool Dispatch (Deterministic Ground Truth)
-    5. Parallel Hybrid Retrieval (Only when RAG is required)
-    6. Retrieval Evaluation (Objective multi-dimensional relevance check)
-    7. Targeted Query Rewriting (Contextual self-correction with progress detection)
-    8. Answer Generation (Grounded generation & targeted repair mode)
-    9. 3-Tier Fact Validation (PASS / REPAIR / REFUSE)
-    10. Output Guard & Sanitization (Terminal node on every path)
-    11. Fast Greeting & Safe Response (Instant exits without RAG/eval loops)
-    """
     graph = StateGraph(AgentState)
 
-    # 1. Register all instrumented nodes
-    graph.add_node("input_guard", instrument_node("input_guard")(input_guard_node))
-    graph.add_node("greeting", instrument_node("greeting")(greeting_node))
-    graph.add_node("understand", instrument_node("understand")(understand_query_node))
-    graph.add_node("strategy_router", instrument_node("strategy_router")(strategy_router_node))
-    graph.add_node("mcp_tool", instrument_node("mcp_tool")(mcp_tool_node))
-    graph.add_node("safe_response", instrument_node("safe_response")(safe_response_node))
-    graph.add_node("retrieve", instrument_node("retrieve")(retrieve_node))
-    graph.add_node("evaluate", instrument_node("evaluate")(evaluate_retrieval_node))
-    graph.add_node("rewrite", instrument_node("rewrite")(rewrite_query_node))
-    graph.add_node("generate", instrument_node("generate")(generate_answer_node))
-    graph.add_node("output_guard", instrument_node("output_guard")(output_guard_node))
-    graph.add_node("validate", instrument_node("validate")(validate_answer_node))
+    graph.add_node("input_guard", input_guard_node)
+    graph.add_node("classify", classify_node)
+    graph.add_node("greeting", greeting_node)
+    graph.add_node("safe_response", safe_response_node)
+    graph.add_node("clarify", clarify_node)
+    graph.add_node("strategy_router", strategy_router_node)
+    graph.add_node("tools", tools_node)
+    graph.add_node("query_rewrite", query_rewrite_node)
+    graph.add_node("retrieve", retrieve_node)
+    graph.add_node("generate", generate_node)
+    graph.add_node("validate", validate_node)
+    graph.add_node("output_guard", output_guard_node)
 
-    # 2. Add edges & conditional transitions
     graph.add_edge(START, "input_guard")
-
+    graph.add_conditional_edges("input_guard", route_after_input_guard, ["classify", "output_guard"])
     graph.add_conditional_edges(
-        "input_guard",
-        route_after_input_guard,
-        {
-            "output_guard": "output_guard",
-            "understand": "understand",
-        },
+        "classify", route_after_classify, ["greeting", "safe_response", "strategy_router"]
     )
-
-    graph.add_conditional_edges(
-        "understand",
-        route_after_understand,
-        {
-            "greeting": "greeting",
-            "safe_response": "safe_response",
-            "strategy_router": "strategy_router",
-        },
-    )
+    graph.add_conditional_edges("strategy_router", route_after_strategy, ["tools", "query_rewrite", "clarify"])
+    graph.add_edge("tools", "query_rewrite")
+    graph.add_edge("query_rewrite", "retrieve")
+    graph.add_edge("retrieve", "generate")
+    graph.add_edge("generate", "validate")
+    graph.add_conditional_edges("validate", route_after_validate, ["generate", "output_guard"])
 
     graph.add_edge("greeting", "output_guard")
     graph.add_edge("safe_response", "output_guard")
-
-    graph.add_conditional_edges(
-        "strategy_router",
-        route_after_strategy,
-        {
-            "greeting": "greeting",
-            "safe_response": "safe_response",
-            "mcp_tool": "mcp_tool",
-            "retrieve": "retrieve",
-        },
-    )
-
-    graph.add_conditional_edges(
-        "mcp_tool",
-        route_after_mcp_tool,
-        {
-            "retrieve": "retrieve",
-            "safe_response": "safe_response",
-            "generate": "generate",
-        },
-    )
-
-    # Retrieval -> Evaluation -> (rewrite & retry | generate)
-    # This wiring was previously missing: "retrieve" pointed directly at "generate",
-    # so evaluate_retrieval_node/rewrite_query_node were registered but unreachable and
-    # weak/failed retrievals were silently sent straight to generation instead of being
-    # retried with a rewritten query.
-    graph.add_edge("retrieve", "evaluate")
-
-    graph.add_conditional_edges(
-        "evaluate",
-        route_after_retrieval,
-        {
-            "rewrite": "rewrite",
-            "generate": "generate",
-        },
-    )
-
-    # A no-op rewrite (identical to the original question) skips straight to
-    # generation instead of guaranteed-redundant retrieval — see route_after_rewrite.
-    graph.add_conditional_edges(
-        "rewrite",
-        route_after_rewrite,
-        {
-            "retrieve": "retrieve",
-            "generate": "generate",
-        },
-    )
-
-    # Correct Pipeline Ordering: Generation -> Validation -> Output Guard (Sanitization) -> END
-    graph.add_edge("generate", "validate")
-
-    graph.add_conditional_edges(
-        "validate",
-        route_after_validate,
-        {
-            "output_guard": "output_guard",
-            "generate": "generate",
-            "safe_response": "safe_response",
-        },
-    )
-
+    graph.add_edge("clarify", "output_guard")
     graph.add_edge("output_guard", END)
 
     return graph.compile()
 
 
-def get_agent():
-    """Get or build the cached singleton compiled LangGraph agent."""
-    global _cached_agent
-    if _cached_agent is None:
-        _cached_agent = build_graph()
-    return _cached_agent
+import threading
+from app.retrieval.reranker import warmup_reranker
 
+
+@functools.lru_cache(maxsize=1)
+def get_agent():
+    # Warm up cross-encoder in background thread if not already warmed up
+    threading.Thread(target=warmup_reranker, daemon=True).start()
+    return build_graph()

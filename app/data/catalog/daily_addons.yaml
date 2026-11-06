@@ -1,0 +1,174 @@
+family: daily_addons
+family_name_en: "Daily Bundles & Add-ons"
+family_name_ar: "الباقات اليومية والإضافات"
+category: addon
+tax_type: prepaid
+default_ussd: null
+family_description_en: "Short-validity daily bundles and Hekaya Mixat top-up add-ons for e& Egypt prepaid customers, plus the Ahlan pay-as-you-go plan."
+family_description_ar: "باقات يومية قصيرة الصلاحية وإضافات لتعزيز حكاية مكسات لعملاء اتصالات مصر مسبقي الدفع، بالإضافة إلى خط أهلاً بالدفع أولاً بأول."
+
+tiers:
+  - id: daily_55
+    name_en: "Daily Bundle 55 Mixes"
+    name_ar: "الباقة اليومية 55 مكس"
+    price_egp: 1.5
+    ussd_code: "*972#"
+    quota_units: 55
+    quota_label_en: "55 Mixes"
+    quota_label_ar: "55 مكس"
+    validity_days: 1
+    description_en: "55 Mixes for calls and internet, 24-hour validity, via *972#. Out-of-bundle overage: 14 piasters/min, 14 piasters/MB, 30 piasters/SMS."
+    description_ar: "55 مكس للمكالمات والإنترنت، صلاحية 24 ساعة، عبر *972#. سعر تجاوز الباقة: 14 قرش/دقيقة، 14 قرش/ميجابايت، 30 قرش/رسالة."
+    perks_en: "Daily flexibility"
+    perks_ar: "مرونة يومية"
+    source: "PrepaidSystems.pdf"
+
+  - id: daily_120
+    name_en: "Daily Bundle 120 Mixes"
+    name_ar: "الباقة اليومية 120 مكس"
+    price_egp: 2.5
+    ussd_code: "*973#"
+    quota_units: 120
+    quota_label_en: "120 Mixes"
+    quota_label_ar: "120 مكس"
+    validity_days: 1
+    description_en: "120 Mixes for calls and internet, 24-hour validity, via *973#. Out-of-bundle overage: 14 piasters/min, 14 piasters/MB, 30 piasters/SMS."
+    description_ar: "120 مكس للمكالمات والإنترنت، صلاحية 24 ساعة، عبر *973#. سعر تجاوز الباقة: 14 قرش/دقيقة، 14 قرش/ميجابايت، 30 قرش/رسالة."
+    perks_en: "Daily flexibility"
+    perks_ar: "مرونة يومية"
+    source: "PrepaidSystems.pdf"
+
+  - id: menu_el_geneh_half_pound
+    name_en: "Menu El Geneh - Half Pound"
+    name_ar: "منيو الجنيه - نص جنيه"
+    price_egp: 0.5
+    ussd_code: "*101#"
+    quota_units: 30
+    quota_label_en: "30 min to e& Egypt numbers + 15 min to any network"
+    quota_label_ar: "30 دقيقة لأرقام اتصالات مصر + 15 دقيقة لأي شبكة"
+    validity_days: 1
+    description_en: "Menu El Geneh micro-bundle: 30 minutes to e& Egypt numbers, plus 15 minutes to any network at 7 piasters/extra minute after that. No MB included. Subscribe via *101#."
+    description_ar: "باقة منيو الجنيه المصغرة: 30 دقيقة لأرقام اتصالات مصر، بالإضافة إلى 15 دقيقة لأي شبكة وبعدها 7 قروش/دقيقة إضافية. بدون إنترنت. الاشتراك عبر *101#."
+    perks_en: "Cheapest Menu El Geneh tier"
+    perks_ar: "أرخص فئة في منيو الجنيه"
+    source: "PrepaidSystems.pdf"
+
+  - id: menu_el_geneh_one_pound
+    name_en: "Menu El Geneh - One Pound"
+    name_ar: "منيو الجنيه - جنيه واحد"
+    price_egp: 1
+    ussd_code: "*101#"
+    quota_units: 90
+    quota_label_en: "60 min to e& Egypt numbers + 30 min to any network + 20 MB"
+    quota_label_ar: "60 دقيقة لأرقام اتصالات مصر + 30 دقيقة لأي شبكة + 20 ميجابايت"
+    validity_days: 1
+    description_en: "Menu El Geneh micro-bundle: 60 minutes to e& Egypt numbers, 30 minutes to any network at 7 piasters/extra minute after that, plus 20 MB internet. Subscribe via *101#."
+    description_ar: "باقة منيو الجنيه المصغرة: 60 دقيقة لأرقام اتصالات مصر، 30 دقيقة لأي شبكة وبعدها 7 قروش/دقيقة إضافية، بالإضافة إلى 20 ميجابايت إنترنت. الاشتراك عبر *101#."
+    perks_en: "Includes 20 MB internet"
+    perks_ar: "تشمل 20 ميجابايت إنترنت"
+    source: "PrepaidSystems.pdf"
+
+  - id: menu_el_geneh_one_half_pound
+    name_en: "Menu El Geneh - One and a Half Pound"
+    name_ar: "منيو الجنيه - جنيه ونص"
+    price_egp: 1.5
+    ussd_code: "*101#"
+    quota_units: 180
+    quota_label_en: "120 min to e& Egypt numbers + 60 min to any network + 40 MB"
+    quota_label_ar: "120 دقيقة لأرقام اتصالات مصر + 60 دقيقة لأي شبكة + 40 ميجابايت"
+    validity_days: 1
+    description_en: "Menu El Geneh micro-bundle: 120 minutes to e& Egypt numbers, 60 minutes to any network at 7 piasters/extra minute after that, plus 40 MB internet. Subscribe via *101#."
+    description_ar: "باقة منيو الجنيه المصغرة: 120 دقيقة لأرقام اتصالات مصر، 60 دقيقة لأي شبكة وبعدها 7 قروش/دقيقة إضافية، بالإضافة إلى 40 ميجابايت إنترنت. الاشتراك عبر *101#."
+    perks_en: "Largest Menu El Geneh tier"
+    perks_ar: "أكبر فئة في منيو الجنيه"
+    source: "PrepaidSystems.pdf"
+
+  - id: extra_4.5
+    name_en: "Hekaya Extra 4.5"
+    name_ar: "حكاية إكسترا 4.5"
+    price_egp: 4.5
+    ussd_code: "*626#"
+    quota_units: 60
+    quota_label_en: "60 Mixes"
+    quota_label_ar: "60 مكس"
+    validity_days: 30
+    description_en: "60 Mixes top-up add-on for Hekaya Mixat, via *626#."
+    description_ar: "إضافة 60 مكس لباقة حكاية مكسات، عبر *626#."
+    perks_en: "Add-on for Hekaya Mixat"
+    perks_ar: "إضافة لباقة حكاية مكسات"
+    source: "e& Egypt Hekaya Mixat"
+
+  - id: extra_7.5
+    name_en: "Hekaya Extra 7.5"
+    name_ar: "حكاية إكسترا 7.5"
+    price_egp: 7.5
+    ussd_code: "*626#"
+    quota_units: 120
+    quota_label_en: "120 Mixes"
+    quota_label_ar: "120 مكس"
+    validity_days: 30
+    description_en: "120 Mixes top-up add-on for Hekaya Mixat, via *626#."
+    description_ar: "إضافة 120 مكس لباقة حكاية مكسات، عبر *626#."
+    perks_en: "Add-on for Hekaya Mixat"
+    perks_ar: "إضافة لباقة حكاية مكسات"
+    source: "e& Egypt Hekaya Mixat"
+
+  - id: extra_15
+    name_en: "Hekaya Extra 15"
+    name_ar: "حكاية إكسترا 15"
+    price_egp: 15
+    ussd_code: "*626#"
+    quota_units: 300
+    quota_label_en: "300 Mixes"
+    quota_label_ar: "300 مكس"
+    validity_days: 30
+    description_en: "300 Mixes top-up add-on for Hekaya Mixat, via *626#."
+    description_ar: "إضافة 300 مكس لباقة حكاية مكسات، عبر *626#."
+    perks_en: "Add-on for Hekaya Mixat"
+    perks_ar: "إضافة لباقة حكاية مكسات"
+    source: "e& Egypt Hekaya Mixat"
+
+  - id: ahlan_15pt_everything
+    name_en: "Ahlan - 15 Piastres Everything"
+    name_ar: "أهلاً - 15 قرش لكل حاجة"
+    price_egp: 0
+    ussd_code: "*339#"
+    quota_units: null
+    quota_label_en: "15 piasters/min to any number & any network, 15 piasters/SMS"
+    quota_label_ar: "15 قرش/دقيقة لأي رقم وأي شبكة، 15 قرش/رسالة"
+    validity_days: 365
+    description_en: "Ahlan Pay As You Go tariff plan 1 of 3: flat 15 piasters/minute to any number on any network, and 15 piasters/SMS. No bundle. Voice service number 5250. Migrate between Ahlan plans via *339# or *3333#."
+    description_ar: "خطة أهلاً 1 من 3: 15 قرش/دقيقة ثابتة لأي رقم على أي شبكة، و15 قرش/رسالة. بدون باقة. رقم الخدمة الصوتية 5250. التنقل بين خطط أهلاً عبر *339# أو *3333#."
+    perks_en: "Simplest flat-rate Ahlan plan"
+    perks_ar: "أبسط خطة أهلاً بسعر ثابت"
+    source: "PrepaidSystems.pdf"
+
+  - id: ahlan_super_yes
+    name_en: "Ahlan - Super Yes"
+    name_ar: "أهلاً - سوبر ييس"
+    price_egp: 0
+    ussd_code: "*339#"
+    quota_units: null
+    quota_label_en: "15 pt/min local, 25 pt/min other networks, 30 pt/SMS, 7 pt/min & SMS to up to 10 favorite numbers"
+    quota_label_ar: "15 قرش/دقيقة محلي، 25 قرش/دقيقة لباقي الشبكات، 30 قرش/رسالة، 7 قروش/دقيقة ورسالة لحتى 10 أرقام مفضلة"
+    validity_days: 365
+    description_en: "Ahlan Pay As You Go tariff plan 2 of 3: 15 piasters/min to e& Egypt, 25 piasters/min to other local networks, 30 piasters/SMS, and a discounted 7 piasters/minute & SMS to up to 10 favorite numbers. Set favorite numbers by calling 535 (60 piasters) or SMS to 535 (7 piasters); free changes once a month. Voice service number 5250."
+    description_ar: "خطة أهلاً 2 من 3: 15 قرش/دقيقة لاتصالات مصر، 25 قرش/دقيقة لباقي الشبكات المحلية، 30 قرش/رسالة، وسعر مخفض 7 قروش/دقيقة ورسالة لحتى 10 أرقام مفضلة. تحديد الأرقام المفضلة بالاتصال بـ535 (60 قرش) أو رسالة إلى 535 (7 قروش)؛ تغيير مجاني مرة شهرياً. رقم الخدمة الصوتية 5250."
+    perks_en: "Up to 10 favorite numbers at 7 piasters/min & SMS"
+    perks_ar: "حتى 10 أرقام مفضلة بسعر 7 قروش/دقيقة ورسالة"
+    source: "PrepaidSystems.pdf"
+
+  - id: ahlan_by_the_second
+    name_en: "Ahlan by the Second"
+    name_ar: "أهلاً بالثانية"
+    price_egp: 0
+    ussd_code: "*339#"
+    quota_units: null
+    quota_label_en: "3 milliemes/sec at night (12am-6am), 4 milliemes/sec during the day (6am-12am)"
+    quota_label_ar: "3 مليمات/ثانية ليلاً (12ص-6ص)، 4 مليمات/ثانية نهاراً (6ص-12ص)"
+    validity_days: 365
+    description_en: "Ahlan Pay As You Go tariff plan 3 of 3: billed by the second — 3 milliemes/second at night (12am-6am), 4 milliemes/second during the day (6am-12am). Voice service number 5250. Migrate between Ahlan plans via *339# or *3333#."
+    description_ar: "خطة أهلاً 3 من 3: فوترة بالثانية — 3 مليمات/ثانية ليلاً (12ص-6ص)، 4 مليمات/ثانية نهاراً (6ص-12ص). رقم الخدمة الصوتية 5250. التنقل بين خطط أهلاً عبر *339# أو *3333#."
+    perks_en: "Per-second billing, cheapest at night"
+    perks_ar: "فوترة بالثانية، أرخص سعر ليلاً"
+    source: "PrepaidSystems.pdf"

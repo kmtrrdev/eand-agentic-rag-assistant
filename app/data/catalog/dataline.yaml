@@ -1,0 +1,173 @@
+family: dataline
+family_name_en: "DataLine"
+family_name_ar: "داتا لاين"
+category: data_only
+tax_type: prepaid
+default_ussd: "*130#"
+family_description_en: "DataLine is e& Egypt's dedicated data-only SIM line for MiFi routers and USB modems — exclusively for these devices, not for mobile phones. Prices are exclusive of tax. Every core package includes the 'Double the Package' offer (doubles the quota on the first recharge only for a new customer; does not repeat on renewal; the doubled quota's validity follows the base package's validity). Managed via the My e& Egypt app or *130#; renew by sending 1 in an SMS to 130, dialing *130#, or through the app."
+family_description_ar: "داتا لاين هو خط بيانات مخصص من اتصالات مصر لأجهزة المودم والراوتر المحمول (MiFi) حصرياً، ولا يعمل على الهواتف المحمولة. الأسعار غير شاملة الضريبة. كل باقة أساسية تتضمن عرض 'مضاعفة الباقة' (يضاعف الرصيد في أول شحنة فقط لعميل جديد، ولا يتكرر عند التجديد، وصلاحية الرصيد المضاعف تتبع صلاحية الباقة الأساسية). تُدار عبر تطبيق My e& Egypt أو *130#؛ التجديد بإرسال الرقم 1 برسالة نصية إلى 130، أو الاتصال بـ *130#، أو عبر التطبيق."
+
+tiers:
+  - id: dataline_1.8gb
+    name_en: "DataLine 1.8GB"
+    name_ar: "داتا لاين 1.8 جيجا"
+    price_egp: 46
+    ussd_code: "*130#"
+    quota_gb: 1.8
+    quota_label_en: "1.8 GB"
+    quota_label_ar: "1.8 جيجابايت"
+    validity_days: 30
+    description_en: "1.8 GB dedicated MiFi/USB internet SIM."
+    description_ar: "شريحة إنترنت مخصصة لأجهزة MiFi/USB بحجم 1.8 جيجابايت."
+    perks_en: "Double package on 1st recharge"
+    perks_ar: "مضاعفة الباقة عند أول شحن"
+    source: "DataLine.pdf"
+
+  - id: dataline_2.5gb
+    name_en: "DataLine 2.5GB"
+    name_ar: "داتا لاين 2.5 جيجا"
+    price_egp: 69
+    ussd_code: "*130#"
+    quota_gb: 2.5
+    quota_label_en: "2.5 GB"
+    quota_label_ar: "2.5 جيجابايت"
+    validity_days: 30
+    description_en: "2.5 GB dedicated MiFi/USB internet SIM. With the Double the Package offer, the first recharge grants a total of 5 GB."
+    description_ar: "شريحة إنترنت مخصصة لأجهزة MiFi/USB بحجم 2.5 جيجابايت. مع عرض مضاعفة الباقة، أول شحنة تمنح 5 جيجا إجمالاً."
+    perks_en: "Double package on 1st recharge (5 GB total)"
+    perks_ar: "مضاعفة الباقة عند أول شحن (5 جيجا إجمالاً)"
+    source: "DataLine.pdf"
+
+  - id: dataline_3.5gb
+    name_en: "DataLine 3.5GB"
+    name_ar: "داتا لاين 3.5 جيجا"
+    price_egp: 92
+    ussd_code: "*130#"
+    quota_gb: 3.5
+    quota_label_en: "3.5 GB"
+    quota_label_ar: "3.5 جيجابايت"
+    validity_days: 90
+    description_en: "3.5 GB dedicated MiFi/USB internet SIM, 3-month validity. With the Double the Package offer, the first recharge grants a total of 7 GB."
+    description_ar: "شريحة إنترنت مخصصة لأجهزة MiFi/USB بحجم 3.5 جيجابايت، صلاحية 3 أشهر. مع عرض مضاعفة الباقة، أول شحنة تمنح 7 جيجا إجمالاً."
+    perks_en: "Double package on 1st recharge (7 GB total)"
+    perks_ar: "مضاعفة الباقة عند أول شحن (7 جيجا إجمالاً)"
+    source: "DataLine.pdf"
+
+  - id: dataline_8gb
+    name_en: "DataLine 8GB"
+    name_ar: "داتا لاين 8 جيجا"
+    price_egp: 150
+    ussd_code: "*130#"
+    quota_gb: 8
+    quota_label_en: "8 GB"
+    quota_label_ar: "8 جيجابايت"
+    validity_days: 90
+    description_en: "8 GB data-only package for MiFi and USB Modems, 3-month validity. With the Double the Package offer, the first recharge grants a total of 16 GB."
+    description_ar: "باقة بيانات فقط بحجم 8 جيجابايت لأجهزة MiFi وUSB Modem، صلاحية 3 أشهر. مع عرض مضاعفة الباقة، أول شحنة تمنح 16 جيجا إجمالاً."
+    perks_en: "Double package on 1st recharge (16 GB total)"
+    perks_ar: "مضاعفة الباقة عند أول شحن (16 جيجا إجمالاً)"
+    source: "DataLine.pdf"
+
+  - id: dataline_14gb
+    name_en: "DataLine 14GB"
+    name_ar: "داتا لاين 14 جيجا"
+    price_egp: 225
+    ussd_code: "*130#"
+    quota_gb: 14
+    quota_label_en: "14 GB"
+    quota_label_ar: "14 جيجابايت"
+    validity_days: 90
+    description_en: "14 GB dedicated MiFi/USB internet SIM, 3-month validity. With the Double the Package offer, the first recharge grants a total of 28 GB."
+    description_ar: "شريحة إنترنت مخصصة لأجهزة MiFi/USB بحجم 14 جيجابايت، صلاحية 3 أشهر. مع عرض مضاعفة الباقة، أول شحنة تمنح 28 جيجا إجمالاً."
+    perks_en: "Double package on 1st recharge (28 GB total)"
+    perks_ar: "مضاعفة الباقة عند أول شحن (28 جيجا إجمالاً)"
+    source: "DataLine.pdf"
+
+  - id: dataline_25gb
+    name_en: "DataLine 25GB"
+    name_ar: "داتا لاين 25 جيجا"
+    price_egp: 375
+    ussd_code: "*130#"
+    quota_gb: 25
+    quota_label_en: "25 GB"
+    quota_label_ar: "25 جيجابايت"
+    validity_days: 90
+    description_en: "25 GB dedicated MiFi/USB internet SIM, 3-month validity. With the Double the Package offer, the first recharge grants a total of 50 GB."
+    description_ar: "شريحة إنترنت مخصصة بحجم 25 جيجابايت، صلاحية 3 أشهر. مع عرض مضاعفة الباقة، أول شحنة تمنح 50 جيجا إجمالاً."
+    perks_en: "Double package on 1st recharge (50 GB total)"
+    perks_ar: "مضاعفة الباقة عند أول شحن (50 جيجا إجمالاً)"
+    source: "DataLine.pdf"
+
+  - id: dataline_45gb
+    name_en: "DataLine 45GB (3 Months)"
+    name_ar: "داتا لاين 45 جيجا (3 أشهر)"
+    price_egp: 600
+    ussd_code: "*130#"
+    quota_gb: 45
+    quota_label_en: "45 GB"
+    quota_label_ar: "45 جيجابايت"
+    validity_days: 90
+    description_en: "45 GB package valid for 3 months (600 EGP before tax). With the Double the Package offer, the first recharge grants a total of 90 GB."
+    description_ar: "باقة 45 جيجابايت بصلاحية 3 أشهر (600 جنيه قبل الضريبة). مع عرض مضاعفة الباقة، أول شحنة تمنح 90 جيجا إجمالاً."
+    perks_en: "3-month validity + Double package on 1st recharge (90 GB total)"
+    perks_ar: "صلاحية 3 أشهر + مضاعفة الباقة عند أول شحن (90 جيجا إجمالاً)"
+    source: "DataLine.pdf"
+
+  - id: dataline_addon_500mb
+    name_en: "DataLine Extra 500MB"
+    name_ar: "داتا لاين إكسترا 500 ميجا"
+    price_egp: 15
+    ussd_code: "Send 1 in an SMS to 138"
+    quota_mb: 500
+    quota_label_en: "500 MB"
+    quota_label_ar: "500 ميجابايت"
+    validity_days: 30
+    description_en: "Add-on package for DataLine customers needing extra internet: 500 MB, valid for one month. Subscribe by sending the number 1 in an SMS to 138."
+    description_ar: "باقة إضافية لعملاء داتا لاين المحتاجين إنترنت إضافي: 500 ميجابايت، صلاحية شهر. الاشتراك بإرسال الرقم 1 برسالة نصية إلى 138."
+    perks_en: "One-time top-up, no core package change needed"
+    perks_ar: "إضافة سريعة بدون تغيير الباقة الأساسية"
+    source: "DataLine.pdf"
+
+  - id: dataline_addon_1gb
+    name_en: "DataLine Extra 1GB"
+    name_ar: "داتا لاين إكسترا 1 جيجا"
+    price_egp: 29
+    ussd_code: "Send 2 in an SMS to 138"
+    quota_gb: 1
+    quota_label_en: "1 GB"
+    quota_label_ar: "1 جيجابايت"
+    validity_days: 30
+    description_en: "Add-on package for DataLine customers needing extra internet: 1 GB, valid for one month. Subscribe by sending the number 2 in an SMS to 138."
+    description_ar: "باقة إضافية لعملاء داتا لاين المحتاجين إنترنت إضافي: 1 جيجابايت، صلاحية شهر. الاشتراك بإرسال الرقم 2 برسالة نصية إلى 138."
+    perks_en: "One-time top-up, no core package change needed"
+    perks_ar: "إضافة سريعة بدون تغيير الباقة الأساسية"
+    source: "DataLine.pdf"
+
+  - id: dataline_72gb
+    name_en: "DataLine 72GB (6 Months)"
+    name_ar: "داتا لاين 72 جيجا (6 أشهر)"
+    price_egp: 900
+    ussd_code: "*130#"
+    quota_gb: 72
+    quota_label_en: "72 GB (144 GB on double offer)"
+    quota_label_ar: "72 جيجابايت (144 جيجا عند عرض المضاعفة)"
+    validity_days: 180
+    description_en: "72 GB dedicated MiFi internet SIM for 6 months (900 EGP before tax), with a 144 GB double offer on the first recharge."
+    description_ar: "شريحة إنترنت MiFi بحجم 72 جيجابايت لمدة 6 أشهر (900 جنيه قبل الضريبة)، مع عرض مضاعفة إلى 144 جيجا عند أول شحن."
+    perks_en: "6-month validity + double offer"
+    perks_ar: "صلاحية 6 أشهر + عرض مضاعفة"
+    source: "DataLine.pdf"
+
+terms_and_conditions:
+  - en: "DataLine is exclusively dedicated to portable internet devices (MiFi routers and USB Modems) and does not work on mobile phones."
+    ar: "داتا لاين مخصصة حصرياً لأجهزة الإنترنت المحمولة (راوتر MiFi وUSB Modem) ولا تعمل على الهواتف المحمولة."
+  - en: "DataLine package prices are exclusive of tax; the prepaid recharge tax (42.857%) applies on top of the listed price."
+    ar: "أسعار باقات داتا لاين غير شاملة الضريبة؛ تُطبَّق ضريبة الشحن للدفع المسبق (42.857%) فوق السعر المعلن."
+  - en: "The Double the Package offer doubles the internet quota on the first recharge only for every new customer, and does not repeat upon renewal; its validity follows the validity of the base package (1, 3, or 6 months)."
+    ar: "عرض مضاعفة الباقة يضاعف رصيد الإنترنت في أول شحنة فقط لكل عميل جديد، ولا يتكرر عند التجديد؛ صلاحيته تتبع صلاحية الباقة الأساسية (1 أو 3 أو 6 أشهر)."
+  - en: "A DataLine customer can manage and renew their package via the My e& Egypt app, by sending the number 1 in an SMS to 130, or by dialing *130#."
+    ar: "يمكن لعميل داتا لاين إدارة وتجديد باقته عبر تطبيق My e& Egypt، أو بإرسال الرقم 1 برسالة نصية إلى 130، أو بالاتصال بـ *130#."
+  - en: "Two DataLine add-on packages are available for extra internet: Extra 500 MB for 15 EGP (send 1 in an SMS to 138), and Extra 1 GB for 29 EGP (send 2 in an SMS to 138), both valid for one month."
+    ar: "تتوفر باقتان إضافيتان لداتا لاين للإنترنت الإضافي: إكسترا 500 ميجا بسعر 15 جنيه (إرسال 1 برسالة نصية إلى 138)، وإكسترا 1 جيجا بسعر 29 جنيه (إرسال 2 برسالة نصية إلى 138)، وكلاهما صالح لمدة شهر."
+  - en: "DataLine has 3 validity tiers: one month (1.8 and 2.5 GB packages), three months (3.5 to 45 GB packages), and six months (the 72 GB package)."
+    ar: "لداتا لاين 3 مستويات صلاحية: شهر واحد (باقتا 1.8 و2.5 جيجا)، ثلاثة أشهر (باقات من 3.5 إلى 45 جيجا)، وستة أشهر (باقة 72 جيجا)."

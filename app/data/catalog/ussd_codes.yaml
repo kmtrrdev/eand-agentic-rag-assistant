@@ -1,0 +1,31 @@
+# General/service-level USSD codes not tied to one catalog family (e.g. a menu
+# code, or an alias service name customers use). Per-tier codes live on each
+# tier in the family YAML files and take priority when a specific tier matches.
+services:
+  - key: hekaya
+    name_en: "Hekaya"
+    name_ar: "حكاية"
+    ussd_code: "*319#"
+    description_en: "General Hekaya bundle menu; dial a tier-specific code for a specific Hekaya Mixat or Hekaya Internet package."
+    description_ar: "قائمة حكاية العامة؛ استخدم كود الباقة المحدد لحكاية مكسات أو حكاية إنترنت."
+
+  - key: hekaya_mini
+    name_en: "Hekaya Mini"
+    name_ar: "حكاية ميني"
+    ussd_code: "*811#"
+    description_en: "Hekaya Mini has two paths: (1) embedded free with Aqwa Card 19/22.5/30 via *811#, same menu as Aqwa Card; (2) a standalone recharge via *556*9*RechargeCode# (renew via *319#) — see the hekaya_mixat catalog's hekaya_mini_recharge_* tiers for the standalone version's exact terms."
+    description_ar: "لحكاية ميني مساران: (1) مدمجة مجاناً مع أقوى كارت 19/22.5/30 عبر *811#، نفس قائمة أقوى كارت؛ (2) شحنة مستقلة عبر *556*9*RechargeCode# (التجديد عبر *319#) — راجع فئات hekaya_mini_recharge_* في كتالوج حكاية مكسات لتفاصيل النسخة المستقلة."
+
+  - key: menu_el_geneh
+    name_en: "Menu El Geneh"
+    name_ar: "منيو الجنيه"
+    ussd_code: "*101#"
+    description_en: "Menu El Geneh micro-bundle subscription menu (Half Pound, One Pound, One-and-a-Half Pound tiers)."
+    description_ar: "قائمة الاشتراك في باقات منيو الجنيه المصغرة (نص جنيه، جنيه، جنيه ونص)."
+
+  - key: promotions_migration
+    name_en: "Promotions, Balance & Plan Migration"
+    name_ar: "العروض والرصيد والتنقل بين الباقات"
+    ussd_code: "*3333#"
+    description_en: "Used to check the latest offers/promotions, check balance, and migrate between plans (e.g. between Ahlan pay-as-you-go tariffs, or between Daily Bundles)."
+    description_ar: "يُستخدم للاطلاع على أحدث العروض، فحص الرصيد، والتنقل بين الباقات (مثل التنقل بين خطط أهلاً أو بين الباقات اليومية)."

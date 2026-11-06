@@ -1,358 +1,328 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 1660" width="100%" height="100%" style="background:#070B14; font-family:'Segoe UI', 'Cairo', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1020 1380" width="100%" height="100%" style="background:#0B132B; font-family:'Cairo',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;">
   <defs>
-    <!-- Background Tech Grid Pattern -->
-    <pattern id="techGrid" width="40" height="40" patternUnits="userSpaceOnUse">
-      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#1E293B" stroke-width="0.75" opacity="0.4"/>
-      <circle cx="40" cy="0" r="1" fill="#334155" opacity="0.3"/>
-      <circle cx="0" cy="40" r="1" fill="#334155" opacity="0.3"/>
-    </pattern>
+    <!-- Sharp clean arrow markers -->
+    <marker id="arrow" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 1 2 L 7 5 L 1 8 z" fill="#94A3B8" />
+    </marker>
+    <marker id="arrow-blue" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 1 2 L 7 5 L 1 8 z" fill="#38BDF8" />
+    </marker>
+    <marker id="arrow-green" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 1 2 L 7 5 L 1 8 z" fill="#34D399" />
+    </marker>
+    <marker id="arrow-amber" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 1 2 L 7 5 L 1 8 z" fill="#FBBF24" />
+    </marker>
+    <marker id="arrow-rose" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 1 2 L 7 5 L 1 8 z" fill="#FB7185" />
+    </marker>
+
+    <!-- Sleek Card Glow & Drop Shadows -->
+    <filter id="nodeGlow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="6" stdDeviation="10" flood-color="#000000" flood-opacity="0.5" />
+    </filter>
+    <filter id="badgeGlow" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="0" dy="2" stdDeviation="4" flood-color="#38BDF8" flood-opacity="0.3" />
+    </filter>
 
     <!-- Gradients -->
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0F172A" />
+      <stop offset="50%" stop-color="#0B1329" />
+      <stop offset="100%" stop-color="#020617" />
+    </linearGradient>
     <linearGradient id="headerGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-      <stop offset="0%" stop-color="#0F172A"/>
-      <stop offset="30%" stop-color="#1E1B4B"/>
-      <stop offset="70%" stop-color="#31102B"/>
-      <stop offset="100%" stop-color="#0F172A"/>
+      <stop offset="0%" stop-color="#E4002B" />
+      <stop offset="100%" stop-color="#FF5722" />
     </linearGradient>
-
-    <linearGradient id="eandRedGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#FF2E4D"/>
-      <stop offset="100%" stop-color="#B8001F"/>
-    </linearGradient>
-
-    <linearGradient id="cyanGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#0284C7"/>
-      <stop offset="100%" stop-color="#0369A1"/>
-    </linearGradient>
-
-    <linearGradient id="mcpGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#F59E0B"/>
-      <stop offset="100%" stop-color="#B45309"/>
-    </linearGradient>
-
-    <linearGradient id="ragGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#10B981"/>
-      <stop offset="100%" stop-color="#047857"/>
-    </linearGradient>
-
-    <linearGradient id="purpleGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#8B5CF6"/>
-      <stop offset="100%" stop-color="#6D28D9"/>
-    </linearGradient>
-
-    <linearGradient id="pinkGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#EC4899"/>
-      <stop offset="100%" stop-color="#BE185D"/>
-    </linearGradient>
-
-    <!-- Drop Shadows & Glow Filters -->
-    <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
-      <feDropShadow dx="0" dy="6" stdDeviation="8" flood-color="#000000" flood-opacity="0.65"/>
-    </filter>
-    <filter id="glowCyan" x="-20%" y="-20%" width="140%" height="140%">
-      <feDropShadow dx="0" dy="0" stdDeviation="8" flood-color="#38BDF8" flood-opacity="0.55"/>
-    </filter>
-    <filter id="glowGreen" x="-20%" y="-20%" width="140%" height="140%">
-      <feDropShadow dx="0" dy="0" stdDeviation="8" flood-color="#10B981" flood-opacity="0.6"/>
-    </filter>
-    <filter id="glowOrange" x="-20%" y="-20%" width="140%" height="140%">
-      <feDropShadow dx="0" dy="0" stdDeviation="8" flood-color="#F59E0B" flood-opacity="0.6"/>
-    </filter>
-    <filter id="glowPurple" x="-20%" y="-20%" width="140%" height="140%">
-      <feDropShadow dx="0" dy="0" stdDeviation="8" flood-color="#8B5CF6" flood-opacity="0.55"/>
-    </filter>
-    <filter id="glowPink" x="-20%" y="-20%" width="140%" height="140%">
-      <feDropShadow dx="0" dy="0" stdDeviation="8" flood-color="#EC4899" flood-opacity="0.55"/>
-    </filter>
-    <filter id="glowRed" x="-20%" y="-20%" width="140%" height="140%">
-      <feDropShadow dx="0" dy="0" stdDeviation="8" flood-color="#EF4444" flood-opacity="0.6"/>
-    </filter>
-
-    <!-- Arrow Markers -->
-    <marker id="arrowCyan" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-      <path d="M 0 2 L 8 5 L 0 8 z" fill="#38BDF8"/>
-    </marker>
-    <marker id="arrowGreen" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-      <path d="M 0 2 L 8 5 L 0 8 z" fill="#10B981"/>
-    </marker>
-    <marker id="arrowOrange" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-      <path d="M 0 2 L 8 5 L 0 8 z" fill="#F59E0B"/>
-    </marker>
-    <marker id="arrowPurple" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-      <path d="M 0 2 L 8 5 L 0 8 z" fill="#A855F7"/>
-    </marker>
-    <marker id="arrowPink" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-      <path d="M 0 2 L 8 5 L 0 8 z" fill="#EC4899"/>
-    </marker>
-    <marker id="arrowRed" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-      <path d="M 0 2 L 8 5 L 0 8 z" fill="#EF4444"/>
-    </marker>
   </defs>
 
-  <!-- Background Base -->
-  <rect width="100%" height="100%" fill="#070B14"/>
-  <rect width="100%" height="100%" fill="url(#techGrid)"/>
+  <style>
+    .title-main { font-size: 24px; font-weight: 900; fill: #F8FAFC; letter-spacing: -0.5px; }
+    .title-sub { font-size: 13px; font-weight: 500; fill: #94A3B8; }
+    .node-title { font-size: 14.5px; font-weight: 800; fill: #F8FAFC; }
+    .node-sub { font-size: 11px; font-weight: 500; }
+    .node-badge { font-size: 9.5px; font-weight: 800; }
+    .edge-label { font-size: 11px; font-weight: 700; fill: #94A3B8; }
+    .edge-line { fill: none; stroke: #475569; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+    .edge-dash { fill: none; stroke: #64748B; stroke-width: 1.8; stroke-linecap: round; stroke-dasharray: 5 4; }
+    .edge-active { fill: none; stroke: #38BDF8; stroke-width: 2.2; }
+    .edge-repair { fill: none; stroke: #F59E0B; stroke-width: 2.2; stroke-dasharray: 6 4; }
+  </style>
 
-  <!-- ========================================== -->
-  <!-- 1. HEADER SECTION                          -->
-  <!-- ========================================== -->
-  <g transform="translate(600, 52)">
-    <rect x="-560" y="-36" width="1120" height="74" rx="18" fill="url(#headerGrad)" stroke="#334155" stroke-width="1.5" filter="url(#shadow)"/>
-    <rect x="-550" y="-26" width="6" height="54" rx="3" fill="#E60000"/>
-    <text x="-525" y="-6" font-size="20" font-weight="900" fill="#F8FAFC" letter-spacing="0.5">
-      e&amp; Egypt — Natural State Machine Architecture
-    </text>
-    <text x="-525" y="18" font-size="12" font-weight="600" fill="#94A3B8">
-      Deterministic MCP Engine • Strategy Routing • Hybrid RAG • Eval &amp; Query Rewrite • 3-Tier Fact Validation
-    </text>
-    <g transform="translate(430, -5)">
-      <rect x="-80" y="-14" width="160" height="28" rx="14" fill="#E60000" stroke="#FF4D6D" stroke-width="1"/>
-      <text x="0" y="5" text-anchor="middle" font-size="11.5" font-weight="800" fill="#FFFFFF">Production v2.4</text>
-    </g>
+  <!-- Deep Tech Background Canvas -->
+  <rect width="100%" height="100%" fill="url(#bgGrad)" />
+
+  <!-- Subtle Blueprint Grid Pattern -->
+  <g opacity="0.08" stroke="#FFFFFF" stroke-width="1">
+    <line x1="100" y1="0" x2="100" y2="1380" />
+    <line x1="300" y1="0" x2="300" y2="1380" />
+    <line x1="510" y1="0" x2="510" y2="1380" />
+    <line x1="720" y1="0" x2="720" y2="1380" />
+    <line x1="920" y1="0" x2="920" y2="1380" />
+    <line x1="0" y1="120" x2="1020" y2="120" />
+    <line x1="0" y1="380" x2="1020" y2="380" />
+    <line x1="0" y1="640" x2="1020" y2="640" />
+    <line x1="0" y1="900" x2="1020" y2="900" />
+    <line x1="0" y1="1160" x2="1020" y2="1160" />
   </g>
 
-  <!-- ========================================== -->
-  <!-- 2. CONNECTING EDGES & WORKFLOW PATHS       -->
-  <!-- ========================================== -->
-  <g fill="none" opacity="0.95">
-    <!-- START -> 1. Input Guard -->
-    <path d="M 600 138 L 600 160" stroke="#38BDF8" stroke-width="2.5" marker-end="url(#arrowCyan)"/>
-
-    <!-- 1. Input Guard -> Blocked Attack Bypass -> 10. Output Guard -->
-    <path d="M 770 190 H 1120 V 1290 H 770" stroke="#EF4444" stroke-width="2.2" stroke-dasharray="6 4" marker-end="url(#arrowRed)"/>
-    <rect x="1030" y="700" width="160" height="26" rx="6" fill="#1E131D" stroke="#EF4444" stroke-width="1"/>
-    <text x="1110" y="717" text-anchor="middle" fill="#FCA5A5" font-size="10.5" font-weight="800">⛔ Blocked Attack Bypass</text>
-
-    <!-- 1. Input Guard -> 2. Query Understanding (Safe Input) -->
-    <path d="M 600 220 L 600 250" stroke="#38BDF8" stroke-width="2.5" marker-end="url(#arrowCyan)"/>
-    <rect x="610" y="225" width="80" height="18" rx="4" fill="#0C2538" stroke="#0284C7" stroke-width="0.8"/>
-    <text x="650" y="238" text-anchor="middle" fill="#38BDF8" font-size="9.5" font-weight="700">Safe Input</text>
-
-    <!-- 2. Understand -> Fast Greeting Exit (Left) -->
-    <path d="M 430 280 H 220 V 335" stroke="#F59E0B" stroke-width="2.2" marker-end="url(#arrowOrange)"/>
-    <text x="300" y="272" fill="#F59E0B" font-size="10.5" font-weight="800">Greeting Intent</text>
-
-    <!-- 2. Understand -> Safe Refusal / Out-of-Scope (Right) -->
-    <path d="M 770 280 H 980 V 335" stroke="#EF4444" stroke-width="2.2" marker-end="url(#arrowRed)"/>
-    <text x="805" y="272" fill="#EF4444" font-size="10.5" font-weight="800">Out-of-Scope / Unsupported</text>
-
-    <!-- 2. Understand -> 3. Strategy Router (Center) -->
-    <path d="M 600 310 L 600 405" stroke="#818CF8" stroke-width="2.5" marker-end="url(#arrowPurple)"/>
-    <text x="612" y="360" fill="#A5B4FC" font-size="11" font-weight="700">Telecom Inquiry</text>
-
-    <!-- Fast Greeting -> Output Guard (Left Rail to Bottom) -->
-    <path d="M 220 395 V 1290 H 430" stroke="#F59E0B" stroke-width="2" stroke-dasharray="5 4" marker-end="url(#arrowOrange)"/>
-
-    <!-- Safe Refusal -> Output Guard (Right Rail to Bottom) -->
-    <path d="M 980 395 V 1290 H 770" stroke="#EF4444" stroke-width="2" stroke-dasharray="5 4" marker-end="url(#arrowRed)"/>
-
-    <!-- 3. Strategy Router -> 4. MCP Ground Truth (Left Rail) -->
-    <path d="M 420 440 H 350 V 525" stroke="#F59E0B" stroke-width="2.8" marker-end="url(#arrowOrange)"/>
-    <text x="240" y="475" fill="#FBBF24" font-size="10.5" font-weight="800">MCP_EXACT / CALC / USSD / REC</text>
-
-    <!-- 3. Strategy Router -> 5. Hybrid RAG (Right Rail) -->
-    <path d="M 780 440 H 850 V 525" stroke="#10B981" stroke-width="2.8" marker-end="url(#arrowGreen)"/>
-    <text x="735" y="475" fill="#34D399" font-size="10.5" font-weight="800">RAG_ONLY (Knowledge Base)</text>
-
-    <!-- 4. MCP Tool -> Direct Short-Circuit to Generation (Zero Hallucination) -->
-    <path d="M 350 595 V 960 H 420" stroke="#F59E0B" stroke-width="3" filter="url(#glowOrange)" marker-end="url(#arrowOrange)"/>
-    <rect x="180" y="740" width="160" height="42" rx="8" fill="#241808" stroke="#F59E0B" stroke-width="1.2"/>
-    <text x="260" y="757" text-anchor="middle" fill="#FDE68A" font-size="11" font-weight="900">⚡ Direct MCP Path</text>
-    <text x="260" y="773" text-anchor="middle" fill="#FBBF24" font-size="9.5" font-weight="700">Zero Hallucination Exit</text>
-
-    <!-- 4. MCP Tool -> MCP_PLUS_RAG -> 5. Hybrid RAG -->
-    <path d="M 500 560 H 695" stroke="#F59E0B" stroke-width="2" stroke-dasharray="5 4" marker-end="url(#arrowOrange)"/>
-    <text x="545" y="550" fill="#FDE68A" font-size="10" font-weight="700">MCP_PLUS_RAG</text>
-
-    <!-- 5. Parallel Hybrid RAG -> 6. Retrieval Quality Evaluator -->
-    <path d="M 850 595 L 850 645" stroke="#10B981" stroke-width="2.5" marker-end="url(#arrowGreen)"/>
-    <text x="860" y="625" fill="#6EE7B7" font-size="10.5" font-weight="700">Retrieved Chunks</text>
-
-    <!-- 6. Retrieval Evaluator -> GOOD -> 8. Grounded Generation -->
-    <path d="M 850 715 V 960 H 780" stroke="#10B981" stroke-width="2.5" marker-end="url(#arrowGreen)"/>
-    <rect x="860" y="825" width="130" height="24" rx="6" fill="#063223" stroke="#10B981" stroke-width="1"/>
-    <text x="925" y="841" text-anchor="middle" fill="#6EE7B7" font-size="10.5" font-weight="800">RETRIEVAL_GOOD</text>
-
-    <!-- 6. Retrieval Evaluator -> WEAK / FAILED -> 7. Targeted Query Rewrite -->
-    <path d="M 700 680 H 570 V 755" stroke="#EC4899" stroke-width="2.2" marker-end="url(#arrowPink)"/>
-    <rect x="580" y="665" width="115" height="22" rx="4" fill="#331024" stroke="#EC4899" stroke-width="0.8"/>
-    <text x="637" y="680" text-anchor="middle" fill="#F472B6" font-size="9.5" font-weight="800">WEAK (Attempts &lt; 2)</text>
-
-    <!-- 7. Query Rewrite -> Retry Loop back to 5. Hybrid RAG -->
-    <path d="M 570 755 V 560 H 695" stroke="#EC4899" stroke-width="2.5" stroke-dasharray="6 3" filter="url(#glowPink)" marker-end="url(#arrowPink)"/>
-    <rect x="470" y="635" width="140" height="34" rx="6" fill="#2E0A1E" stroke="#EC4899" stroke-width="1"/>
-    <text x="540" y="650" text-anchor="middle" fill="#FBCFE8" font-size="10" font-weight="800">🔄 Self-Correction Loop</text>
-    <text x="540" y="663" text-anchor="middle" fill="#F472B6" font-size="8.5" font-weight="600">Contextual Rewrite (Max 1)</text>
-
-    <!-- 8. Grounded Generation -> 9. 3-Tier Fact Validator -->
-    <path d="M 600 995 L 600 1070" stroke="#A855F7" stroke-width="2.8" marker-end="url(#arrowPurple)"/>
-    <text x="612" y="1038" fill="#D8B4FE" font-size="11" font-weight="800">Generated Draft Answer</text>
-
-    <!-- 9. Fact Validator -> PASS -> 10. Output Guard -->
-    <path d="M 600 1145 L 600 1255" stroke="#10B981" stroke-width="3.5" filter="url(#glowGreen)" marker-end="url(#arrowGreen)"/>
-    <rect x="615" y="1190" width="170" height="26" rx="6" fill="#043825" stroke="#10B981" stroke-width="1.2"/>
-    <text x="700" y="1207" text-anchor="middle" fill="#A7F3D0" font-size="11" font-weight="900">✅ PASS (100% Fact Checked)</text>
-
-    <!-- 9. Fact Validator -> REPAIR -> 8. Grounded Generation (Targeted Repair Loop) -->
-    <path d="M 410 1110 H 130 V 960 H 420" stroke="#A855F7" stroke-width="2.5" stroke-dasharray="6 3" marker-end="url(#arrowPurple)"/>
-    <rect x="60" y="1025" width="135" height="34" rx="6" fill="#200D36" stroke="#A855F7" stroke-width="1"/>
-    <text x="127" y="1040" text-anchor="middle" fill="#E9D5FF" font-size="10" font-weight="800">🔧 Targeted Repair</text>
-    <text x="127" y="1053" text-anchor="middle" fill="#C084FC" font-size="8.5" font-weight="600">MCP Repair (Repairs ≤ 1)</text>
-
-    <!-- 9. Fact Validator -> REFUSE -> Safe Response (Refusal) -->
-    <path d="M 790 1110 H 1060 V 395" stroke="#EF4444" stroke-width="2" stroke-dasharray="6 4" marker-end="url(#arrowRed)"/>
-    <rect x="990" y="990" width="150" height="34" rx="6" fill="#2E0B13" stroke="#EF4444" stroke-width="1"/>
-    <text x="1065" y="1005" text-anchor="middle" fill="#FECDD3" font-size="10" font-weight="800">⛔ REFUSE Violation</text>
-    <text x="1065" y="1018" text-anchor="middle" fill="#FCA5A5" font-size="8.5" font-weight="600">Critical Unverified Facts</text>
-
-    <!-- 10. Output Guard -> Final Output Terminal -->
-    <path d="M 600 1325 L 600 1370" stroke="#38BDF8" stroke-width="3" marker-end="url(#arrowCyan)"/>
+  <!-- ============================================================== -->
+  <!-- HEADER & BANNER                                                -->
+  <!-- ============================================================== -->
+  <g transform="translate(50, 30)">
+    <rect x="0" y="0" width="130" height="28" rx="6" fill="url(#headerGrad)" />
+    <text x="65" y="19" text-anchor="middle" font-size="12" font-weight="900" fill="#FFFFFF" letter-spacing="1">e&amp; EGYPT AI</text>
+    <text x="145" y="22" class="title-main">Agentic LangGraph Architecture</text>
+    <text x="0" y="52" class="title-sub">Ultra-low latency, multi-turn bilingual bridge, deterministic tools, parallel hybrid retrieval &amp; 3-tier validation</text>
   </g>
 
-  <!-- ========================================== -->
-  <!-- 3. NODES & CARDS (TOPOLOGY)               -->
-  <!-- ========================================== -->
+  <!-- ============================================================== -->
+  <!-- CONNECTING EDGES & PATHS                                       -->
+  <!-- ============================================================== -->
 
-  <!-- START TERMINAL -->
-  <g transform="translate(600, 120)">
-    <rect x="-105" y="-18" width="210" height="36" rx="18" fill="#1E293B" stroke="#475569" stroke-width="1.8" filter="url(#shadow)"/>
-    <text x="0" y="6" text-anchor="middle" font-size="13" font-weight="900" fill="#F8FAFC" letter-spacing="0.5">🚀 START USER QUERY</text>
+  <!-- 1. Start -> Input Guard -->
+  <path d="M 510 135 L 510 162" class="edge-line" marker-end="url(#arrow)" />
+
+  <!-- 2. Input Guard -> Classify (clean) -->
+  <path d="M 510 228 L 510 262" class="edge-active" marker-end="url(#arrow-blue)" />
+  <rect x="518" y="235" width="46" height="18" rx="4" fill="#0F172A" stroke="#38BDF8" stroke-width="1"/>
+  <text x="541" y="248" text-anchor="middle" font-size="10" font-weight="800" fill="#38BDF8">CLEAN</text>
+
+  <!-- 3. Input Guard -> Output Guard (blocked prompt injection fast-path) -->
+  <path d="M 370 195 L 80 195 L 80 1205 L 370 1205" class="edge-dash" marker-end="url(#arrow-rose)" />
+  <rect x="90" y="200" width="94" height="20" rx="4" fill="#1E1B4B" stroke="#F43F5E" stroke-width="1"/>
+  <text x="137" y="214" text-anchor="middle" font-size="9.5" font-weight="800" fill="#FB7185">BLOCKED / INJECTION</text>
+
+  <!-- 4. Classify -> Fast Greeting Branch (Left) -->
+  <path d="M 370 295 L 230 295 L 230 365" class="edge-line" marker-end="url(#arrow-amber)" />
+  <rect x="235" y="285" width="70" height="18" rx="4" fill="#0F172A" stroke="#F59E0B" stroke-width="1"/>
+  <text x="270" y="298" text-anchor="middle" font-size="10" font-weight="700" fill="#FBBF24">GREETING</text>
+
+  <!-- 5. Classify -> Safe Response Branch (Right) -->
+  <path d="M 650 295 L 790 295 L 790 365" class="edge-line" marker-end="url(#arrow-rose)" />
+  <rect x="670" y="285" width="96" height="18" rx="4" fill="#0F172A" stroke="#F43F5E" stroke-width="1"/>
+  <text x="718" y="298" text-anchor="middle" font-size="9.5" font-weight="700" fill="#FB7185">OUT-OF-SCOPE / 111</text>
+
+  <!-- 6. Fast Greeting -> Output Guard (Fast short-circuit) -->
+  <path d="M 230 435 L 230 1190 L 370 1190" class="edge-line" marker-end="url(#arrow)" />
+
+  <!-- 7. Safe Response -> Output Guard (Safe short-circuit) -->
+  <path d="M 790 435 L 790 1190 L 650 1190" class="edge-line" marker-end="url(#arrow)" />
+
+  <!-- 8. Classify -> Query Understanding & Profiling -->
+  <path d="M 510 330 L 510 365" class="edge-active" marker-end="url(#arrow-blue)" />
+
+  <!-- 9. Query Understanding -> Strategy Router -->
+  <path d="M 510 430 L 510 468" class="edge-active" marker-end="url(#arrow-blue)" />
+
+  <!-- 10. Strategy Router -> Clarify Device (Branch) -->
+  <path d="M 370 500 L 230 500 L 230 565" class="edge-line" marker-end="url(#arrow-amber)" />
+  <rect x="235" y="490" width="105" height="18" rx="4" fill="#0F172A" stroke="#F59E0B" stroke-width="1"/>
+  <text x="287" y="503" text-anchor="middle" font-size="9.5" font-weight="700" fill="#FBBF24">DEVICE AMBIGUOUS</text>
+
+  <!-- Clarify -> Output Guard -->
+  <path d="M 230 635 L 230 1175 L 370 1175" class="edge-line" marker-end="url(#arrow)" />
+
+  <!-- 11. Strategy Router -> Deterministic Tools (Exact, Code, Budget, Calc) -->
+  <path d="M 510 532 L 510 570" class="edge-active" marker-end="url(#arrow-blue)" />
+  <rect x="518" y="538" width="138" height="18" rx="4" fill="#0F172A" stroke="#F97316" stroke-width="1"/>
+  <text x="587" y="551" text-anchor="middle" font-size="9.5" font-weight="800" fill="#FB923C">EXACT / REC / CALC TOOLS</text>
+
+  <!-- Strategy Router -> Direct Bypass to Query Rewrite (RAG_ONLY) -->
+  <path d="M 650 500 L 760 500 L 760 695 L 650 695" class="edge-dash" marker-end="url(#arrow)" />
+  <rect x="680" y="580" width="70" height="18" rx="4" fill="#0F172A" stroke="#818CF8" stroke-width="1"/>
+  <text x="715" y="593" text-anchor="middle" font-size="9" font-weight="700" fill="#818CF8">RAG ONLY</text>
+
+  <!-- 12. Tools -> Query Rewrite (Unconditional fact-to-search chain) -->
+  <path d="M 510 636 L 510 670" class="edge-active" marker-end="url(#arrow-blue)" />
+
+  <!-- 13. Query Rewrite -> Hybrid Retrieval -->
+  <path d="M 510 736 L 510 770" class="edge-active" marker-end="url(#arrow-blue)" />
+
+  <!-- 14. Hybrid Retrieval -> Grounded Generation -->
+  <path d="M 510 840 L 510 878" class="edge-active" marker-end="url(#arrow-blue)" />
+
+  <!-- 15. Grounded Generation -> 3-Tier Fact Validator -->
+  <path d="M 510 948 L 510 985" class="edge-active" marker-end="url(#arrow-blue)" />
+
+  <!-- 16. Validator -> Generation (Conditional Self-Correction / Repair Loop 1x) -->
+  <path d="M 650 1020 L 750 1020 L 750 913 L 650 913" class="edge-repair" marker-end="url(#arrow-amber)" />
+  <rect x="670" y="955" width="130" height="22" rx="5" fill="#1C1917" stroke="#F59E0B" stroke-width="1.2"/>
+  <text x="735" y="970" text-anchor="middle" font-size="10" font-weight="900" fill="#FBBF24">🔄 REPAIR LOOP (1x)</text>
+
+  <!-- 17. Validator -> Output Guard (Passed validation) -->
+  <path d="M 510 1055 L 510 1170" class="edge-line" stroke="#34D399" stroke-width="2.2" marker-end="url(#arrow-green)" />
+  <rect x="518" y="1100" width="76" height="20" rx="4" fill="#064E3B" stroke="#34D399" stroke-width="1"/>
+  <text x="556" y="1114" text-anchor="middle" font-size="10" font-weight="900" fill="#6EE7B7">✓ PASS</text>
+
+  <!-- 18. Output Guard -> End -->
+  <path d="M 510 1238 L 510 1275" class="edge-line" marker-end="url(#arrow)" />
+
+  <!-- ============================================================== -->
+  <!-- NODES                                                          -->
+  <!-- ============================================================== -->
+
+  <!-- Node: START -->
+  <g filter="url(#nodeGlow)" transform="translate(435, 95)">
+    <rect width="150" height="40" rx="20" fill="#1E293B" stroke="#475569" stroke-width="1.5" />
+    <circle cx="24" cy="20" r="7" fill="#10B981" />
+    <text x="85" y="25" text-anchor="middle" font-size="13" font-weight="800" fill="#F8FAFC">START QUERY</text>
   </g>
 
-  <!-- 1. INPUT GUARD NODE -->
-  <g transform="translate(600, 190)">
-    <rect x="-170" y="-30" width="340" height="60" rx="15" fill="#0B132B" stroke="#38BDF8" stroke-width="2.2" filter="url(#glowCyan)"/>
-    <text x="-135" y="8" font-size="24">🛡️</text>
-    <text x="-100" y="-6" font-size="14" font-weight="900" fill="#F8FAFC">1. Input Security Guard</text>
-    <text x="-100" y="14" font-size="10.5" font-weight="600" fill="#38BDF8">Prompt Injection Defense • Length &amp; Policy Filter</text>
+  <!-- Node 1: Input Guardrail -->
+  <g filter="url(#nodeGlow)" transform="translate(370, 162)">
+    <rect width="280" height="66" rx="14" fill="#1E1B4B" stroke="#EF4444" stroke-width="1.8" />
+    <text x="18" y="27" class="node-title">🛡️ 1. Input Guardrail</text>
+    <text x="18" y="47" class="node-sub" fill="#F87171">Prompt injection defense, safety check &amp; token length</text>
+    <rect x="205" y="10" width="62" height="18" rx="9" fill="#7F1D1D"/>
+    <text x="236" y="22.5" text-anchor="middle" class="node-badge" fill="#FCA5A5">SECURITY</text>
   </g>
 
-  <!-- FAST GREETING (LEFT BRANCH) -->
-  <g transform="translate(220, 365)">
-    <rect x="-120" y="-28" width="240" height="56" rx="13" fill="#1C160C" stroke="#F59E0B" stroke-width="2" filter="url(#shadow)"/>
-    <text x="-95" y="7" font-size="22">👋</text>
-    <text x="-65" y="-5" font-size="13" font-weight="900" fill="#F8FAFC">Fast Greeting Exit</text>
-    <text x="-65" y="14" font-size="10" font-weight="600" fill="#FDE68A">Instant Warm Reply • Zero Latency</text>
+  <!-- Node 2: Intent Classifier & Resolver -->
+  <g filter="url(#nodeGlow)" transform="translate(370, 262)">
+    <rect width="280" height="68" rx="14" fill="#082F49" stroke="#06B6D4" stroke-width="2" />
+    <text x="18" y="26" class="node-title">🎯 2. Intent Classifier &amp; Resolver</text>
+    <text x="18" y="45" class="node-sub" fill="#38BDF8">Fast regex &amp; microsecond multi-turn referent resolver</text>
+    <rect x="200" y="8" width="68" height="18" rx="9" fill="#0C4A6E"/>
+    <text x="234" y="20.5" text-anchor="middle" class="node-badge" fill="#7DD3FC">&lt;1ms FAST</text>
   </g>
 
-  <!-- SAFE RESPONSE / REFUSAL (RIGHT BRANCH) -->
-  <g transform="translate(980, 365)">
-    <rect x="-120" y="-28" width="240" height="56" rx="13" fill="#200B11" stroke="#EF4444" stroke-width="2" filter="url(#shadow)"/>
-    <text x="-95" y="7" font-size="22">🛑</text>
-    <text x="-65" y="-5" font-size="13" font-weight="900" fill="#F8FAFC">Safe Response &amp; Refusal</text>
-    <text x="-65" y="14" font-size="10" font-weight="600" fill="#FCA5A5">Out-of-Scope • Support 111 Referral</text>
+  <!-- Side Node: Fast Greeting Branch -->
+  <g filter="url(#nodeGlow)" transform="translate(100, 365)">
+    <rect width="260" height="70" rx="14" fill="#451A03" stroke="#F59E0B" stroke-width="1.8" />
+    <text x="16" y="27" class="node-title">⚡ Fast Greeting</text>
+    <text x="16" y="46" class="node-sub" fill="#FCD34D">Instant warm reply for polite greetings</text>
+    <text x="16" y="60" class="node-sub" fill="#FDE68A">Bypasses RAG to respond in &lt;10ms</text>
   </g>
 
-  <!-- 2. QUERY UNDERSTANDING NODE -->
-  <g transform="translate(600, 280)">
-    <rect x="-170" y="-30" width="340" height="60" rx="15" fill="#0E1738" stroke="#818CF8" stroke-width="2.2" filter="url(#shadow)"/>
-    <text x="-135" y="8" font-size="24">🧠</text>
-    <text x="-100" y="-6" font-size="14" font-weight="900" fill="#F8FAFC">2. Query Understanding</text>
-    <text x="-100" y="14" font-size="10.5" font-weight="600" fill="#C7D2FE">Intent, Entity, Budget &amp; Negation Profiling</text>
+  <!-- Side Node: Safe Response Branch -->
+  <g filter="url(#nodeGlow)" transform="translate(660, 365)">
+    <rect width="260" height="70" rx="14" fill="#4C0519" stroke="#F43F5E" stroke-width="1.8" />
+    <text x="16" y="27" class="node-title">🛑 Safe Response &amp; 111</text>
+    <text x="16" y="46" class="node-sub" fill="#FDA4AF">Competitor queries &amp; unsupported topics</text>
+    <text x="16" y="60" class="node-sub" fill="#FECDD3">Polite deflection with e&amp; support referral</text>
   </g>
 
-  <!-- 3. RESPONSE STRATEGY ROUTER -->
-  <g transform="translate(600, 440)">
-    <rect x="-180" y="-33" width="360" height="66" rx="16" fill="#1C1438" stroke="#A855F7" stroke-width="2.6" filter="url(#glowPurple)"/>
-    <text x="-145" y="10" font-size="26">🧭</text>
-    <text x="-105" y="-7" font-size="15" font-weight="900" fill="#F8FAFC">3. Response Strategy Router</text>
-    <text x="-105" y="16" font-size="11" font-weight="700" fill="#E9D5FF">MCP_EXACT | CALC | REC | USSD | RAG_ONLY</text>
+  <!-- Node 3: Query Understanding -->
+  <g filter="url(#nodeGlow)" transform="translate(370, 365)">
+    <rect width="280" height="65" rx="14" fill="#1E1B4B" stroke="#6366F1" stroke-width="1.8" />
+    <text x="18" y="26" class="node-title">🧠 3. Query Profiling</text>
+    <text x="18" y="45" class="node-sub" fill="#A5B4FC">Entity extraction, target package &amp; budget parser</text>
+    <rect x="205" y="8" width="62" height="18" rx="9" fill="#312E81"/>
+    <text x="236" y="20.5" text-anchor="middle" class="node-badge" fill="#C7D2FE">ENTITIES</text>
   </g>
 
-  <!-- 4. MCP GROUND TRUTH ENGINE (LEFT RAIL) -->
-  <g transform="translate(350, 560)">
-    <rect x="-150" y="-33" width="300" height="66" rx="15" fill="#261705" stroke="#F59E0B" stroke-width="2.8" filter="url(#glowOrange)"/>
-    <text x="-125" y="10" font-size="26">🛠️</text>
-    <text x="-85" y="-7" font-size="14.5" font-weight="900" fill="#FDE68A">4. MCP Ground Truth Engine</text>
-    <text x="-85" y="15" font-size="10.5" font-weight="700" fill="#FBBF24">Official Catalog • Specs • USSD • Math</text>
+  <!-- Node 4: Strategy Router -->
+  <g filter="url(#nodeGlow)" transform="translate(370, 468)">
+    <rect width="280" height="64" rx="14" fill="#2E1065" stroke="#A855F7" stroke-width="2" />
+    <text x="18" y="26" class="node-title">🧭 4. Strategy Router</text>
+    <text x="18" y="45" class="node-sub" fill="#D8B4FE">TOOL_EXACT / RECOMMENDATION / RAG_ONLY</text>
+    <rect x="208" y="8" width="58" height="18" rx="9" fill="#581C87"/>
+    <text x="237" y="20.5" text-anchor="middle" class="node-badge" fill="#E9D5FF">ROUTER</text>
   </g>
 
-  <!-- 5. PARALLEL HYBRID RETRIEVAL (RIGHT RAIL) -->
-  <g transform="translate(850, 560)">
-    <rect x="-150" y="-33" width="300" height="66" rx="15" fill="#063223" stroke="#10B981" stroke-width="2.6" filter="url(#glowGreen)"/>
-    <text x="-125" y="10" font-size="26">🔍</text>
-    <text x="-85" y="-7" font-size="14.5" font-weight="900" fill="#ECFDF5">5. Parallel Hybrid RAG</text>
-    <text x="-85" y="15" font-size="10.5" font-weight="600" fill="#A7F3D0">Chroma Dense + BM25 Sparse + Rerank</text>
+  <!-- Side Node: Device Clarification -->
+  <g filter="url(#nodeGlow)" transform="translate(100, 565)">
+    <rect width="260" height="70" rx="14" fill="#451A03" stroke="#F59E0B" stroke-width="1.8" />
+    <text x="16" y="27" class="node-title">❓ Device Clarification</text>
+    <text x="16" y="46" class="node-sub" fill="#FCD34D">Clarifies Phone vs Router/MiFi for generic data</text>
+    <text x="16" y="60" class="node-sub" fill="#FDE68A">Short-circuits redundant follow-up calls</text>
   </g>
 
-  <!-- 6. RETRIEVAL QUALITY EVALUATOR (RIGHT RAIL) -->
-  <g transform="translate(850, 680)">
-    <rect x="-150" y="-32" width="300" height="64" rx="15" fill="#0A2238" stroke="#0284C7" stroke-width="2.4" filter="url(#glowCyan)"/>
-    <text x="-125" y="9" font-size="24">📊</text>
-    <text x="-85" y="-7" font-size="14" font-weight="900" fill="#F0F9FF">6. Retrieval Evaluator</text>
-    <text x="-85" y="14" font-size="10.5" font-weight="700" fill="#7DD3FC">Relevance Score &amp; Keyword Match Check</text>
+  <!-- Node 5: Deterministic Catalog Tools -->
+  <g filter="url(#nodeGlow)" transform="translate(370, 570)">
+    <rect width="280" height="66" rx="14" fill="#431407" stroke="#F97316" stroke-width="2" />
+    <text x="18" y="26" class="node-title">🛠️ 5. Deterministic Catalog Tools</text>
+    <text x="18" y="45" class="node-sub" fill="#FDBA74">Single-source YAML truth: Prices, USSD codes, 2-tier upsell</text>
+    <rect x="188" y="8" width="80" height="18" rx="9" fill="#7C2D12"/>
+    <text x="228" y="20.5" text-anchor="middle" class="node-badge" fill="#FED7AA">GROUND TRUTH</text>
   </g>
 
-  <!-- 7. TARGETED QUERY REWRITER (MID RAIL) -->
-  <g transform="translate(570, 790)">
-    <rect x="-135" y="-30" width="270" height="60" rx="14" fill="#2E0A1E" stroke="#EC4899" stroke-width="2.4" filter="url(#glowPink)"/>
-    <text x="-110" y="8" font-size="24">🔄</text>
-    <text x="-75" y="-6" font-size="13.5" font-weight="900" fill="#FDF2F8">7. Targeted Query Rewrite</text>
-    <text x="-75" y="14" font-size="10" font-weight="700" fill="#F472B6">Entity Guard • Self-Correction Retry</text>
+  <!-- Node 5b: Query Rewrite & Bilingual Bridge -->
+  <g filter="url(#nodeGlow)" transform="translate(370, 670)">
+    <rect width="280" height="66" rx="14" fill="#0C2A4D" stroke="#0EA5E9" stroke-width="2" />
+    <text x="18" y="26" class="node-title">🔄 5b. Query Rewrite &amp; Bridge</text>
+    <text x="18" y="45" class="node-sub" fill="#7DD3FC">Reference resolution &amp; AR/EN telecom dictionary bridge</text>
+    <rect x="200" y="8" width="68" height="18" rx="9" fill="#075985"/>
+    <text x="234" y="20.5" text-anchor="middle" class="node-badge" fill="#BAE6FD">BILINGUAL</text>
   </g>
 
-  <!-- 8. GROUNDED ANSWER GENERATION -->
-  <g transform="translate(600, 960)">
-    <rect x="-180" y="-34" width="360" height="68" rx="16" fill="#1B1238" stroke="#A855F7" stroke-width="2.8" filter="url(#glowPurple)"/>
-    <text x="-145" y="10" font-size="26">✍️</text>
-    <text x="-105" y="-7" font-size="15" font-weight="900" fill="#F8FAFC">8. Grounded Generation</text>
-    <text x="-105" y="16" font-size="10.5" font-weight="600" fill="#DDD6FE">MCP Supremacy • Strict Citation &amp; Repair Mode</text>
+  <!-- Node 6: Parallel Hybrid Retrieval -->
+  <g filter="url(#nodeGlow)" transform="translate(370, 770)">
+    <rect width="280" height="70" rx="14" fill="#064E3B" stroke="#10B981" stroke-width="2" />
+    <text x="18" y="26" class="node-title">🔍 6. Parallel Hybrid Retrieval</text>
+    <text x="18" y="45" class="node-sub" fill="#6EE7B7">ChromaDB Dense + BM25 Morphological Sparse</text>
+    <text x="18" y="58" class="node-sub" fill="#A7F3D0">Multilingual Reciprocal Rank Fusion (RRF) &amp; Pruned Rerank</text>
+    <rect x="202" y="8" width="66" height="18" rx="9" fill="#047857"/>
+    <text x="235" y="20.5" text-anchor="middle" class="node-badge" fill="#D1FAE5">RRF FUSION</text>
   </g>
 
-  <!-- 9. 3-TIER FACT & HALLUCINATION VALIDATOR -->
-  <g transform="translate(600, 1110)">
-    <rect x="-190" y="-37" width="380" height="74" rx="17" fill="#06291E" stroke="#10B981" stroke-width="2.8" filter="url(#glowGreen)"/>
-    <text x="-155" y="12" font-size="28">⚖️</text>
-    <text x="-110" y="-9" font-size="15" font-weight="900" fill="#F8FAFC">9. 3-Tier Fact Validator</text>
-    <text x="-110" y="11" font-size="11.5" font-weight="800" fill="#6EE7B7">PASS  |  REPAIR (Max 1)  |  REFUSE</text>
-    <text x="-110" y="27" font-size="9.5" font-weight="600" fill="#94A3B8">Claim-Level Price, Quota &amp; USSD Anti-Hallucination</text>
+  <!-- Node 7: Grounded Generator -->
+  <g filter="url(#nodeGlow)" transform="translate(370, 878)">
+    <rect width="280" height="70" rx="14" fill="#3B0764" stroke="#A855F7" stroke-width="2" />
+    <text x="18" y="26" class="node-title">✍️ 7. Grounded Generator</text>
+    <text x="18" y="45" class="node-sub" fill="#D8B4FE">Natural conversational intro + strict verified facts</text>
+    <text x="18" y="58" class="node-sub" fill="#E9D5FF">Azure gpt-5-mini / local Ollama slot</text>
+    <rect x="198" y="8" width="70" height="18" rx="9" fill="#6B21A8"/>
+    <text x="233" y="20.5" text-anchor="middle" class="node-badge" fill="#F3E8FF">ANTI-HALLUC</text>
   </g>
 
-  <!-- 10. OUTPUT SECURITY GUARD -->
-  <g transform="translate(600, 1290)">
-    <rect x="-170" y="-30" width="340" height="60" rx="15" fill="#0B1C33" stroke="#38BDF8" stroke-width="2.2" filter="url(#glowCyan)"/>
-    <text x="-135" y="8" font-size="24">🔒</text>
-    <text x="-100" y="-6" font-size="14" font-weight="900" fill="#F8FAFC">10. Output Security Guard</text>
-    <text x="-100" y="14" font-size="10.5" font-weight="600" fill="#BAE6FD">Secret Scrubbing • Tag Scrubber • Clean Delivery</text>
+  <!-- Node 8: 3-Tier Fact & Number Validator -->
+  <g filter="url(#nodeGlow)" transform="translate(370, 985)">
+    <rect width="280" height="70" rx="14" fill="#134E4A" stroke="#14B8A6" stroke-width="2" />
+    <text x="18" y="26" class="node-title">⚖️ 8. 3-Tier Fact Validator</text>
+    <text x="18" y="45" class="node-sub" fill="#5EEAD4">Deterministic regex scan for exact prices &amp; USSD numbers</text>
+    <text x="18" y="58" class="node-sub" fill="#99F6E4">Triggers 1x repair loop if hallucinated numbers detected</text>
+    <rect x="194" y="8" width="74" height="18" rx="9" fill="#0F766E"/>
+    <text x="231" y="20.5" text-anchor="middle" class="node-badge" fill="#CCFBF1">VALIDATION</text>
   </g>
 
-  <!-- FINAL OUTPUT TERMINAL -->
-  <g transform="translate(600, 1400)">
-    <rect x="-145" y="-24" width="290" height="48" rx="24" fill="url(#eandRedGrad)" stroke="#FFE4E6" stroke-width="1.8" filter="url(#shadow)"/>
-    <text x="0" y="7" text-anchor="middle" font-size="15" font-weight="900" fill="#FFFFFF" letter-spacing="0.5">🏁 FINAL VERIFIED OUTPUT</text>
+  <!-- Node 9: Output Guardrail -->
+  <g filter="url(#nodeGlow)" transform="translate(370, 1170)">
+    <rect width="280" height="68" rx="14" fill="#1E3A8A" stroke="#3B82F6" stroke-width="2" />
+    <text x="18" y="26" class="node-title">🔒 9. Output Guardrail</text>
+    <text x="18" y="45" class="node-sub" fill="#93C5FD">PII scrub, sensitive token redact &amp; formatting polish</text>
+    <rect x="198" y="8" width="70" height="18" rx="9" fill="#1D4ED8"/>
+    <text x="233" y="20.5" text-anchor="middle" class="node-badge" fill="#DBEAFE">SANITIZER</text>
   </g>
 
-  <!-- ========================================== -->
-  <!-- 4. ARCHITECTURE SUMMARY & LEGEND CARD     -->
-  <!-- ========================================== -->
-  <g transform="translate(600, 1550)">
-    <rect x="-560" y="-80" width="1120" height="150" rx="16" fill="#0F172A" stroke="#334155" stroke-width="1.5" filter="url(#shadow)"/>
-    
-    <!-- Header of Legend -->
-    <text x="-530" y="-55" font-size="13" font-weight="900" fill="#F8FAFC">Architecture &amp; Safety Guarantees:</text>
-    
-    <!-- Column 1: MCP Determinism -->
-    <g transform="translate(-530, -32)">
-      <circle cx="8" cy="8" r="6" fill="#F59E0B"/>
-      <text x="24" y="12" font-size="11.5" font-weight="800" fill="#FDE68A">MCP Ground Truth Supremacy</text>
-      <text x="24" y="30" font-size="10" font-weight="500" fill="#94A3B8">Direct lookup for packages, calculations, USSD codes</text>
-      <text x="24" y="46" font-size="10" font-weight="500" fill="#94A3B8">and comparisons — bypasses RAG to eliminate hallucinations.</text>
-    </g>
+  <!-- Node: END -->
+  <g filter="url(#nodeGlow)" transform="translate(435, 1275)">
+    <rect width="150" height="40" rx="20" fill="#1E293B" stroke="#475569" stroke-width="1.5" />
+    <circle cx="24" cy="20" r="7" fill="#3B82F6" />
+    <text x="85" y="25" text-anchor="middle" font-size="13" font-weight="800" fill="#F8FAFC">CLIENT REPLY</text>
+  </g>
 
-    <!-- Column 2: Self-Correction Loops -->
-    <g transform="translate(-140, -32)">
-      <circle cx="8" cy="8" r="6" fill="#EC4899"/>
-      <text x="24" y="12" font-size="11.5" font-weight="800" fill="#FBCFE8">Dual Self-Correction Loops</text>
-      <text x="24" y="30" font-size="10" font-weight="500" fill="#94A3B8">1. Retrieval Evaluator ➔ Rewrite retry (max 1 budget).</text>
-      <text x="24" y="46" font-size="10" font-weight="500" fill="#94A3B8">2. Fact Validator REPAIR ➔ Targeted prompt correction.</text>
-    </g>
+  <!-- ============================================================== -->
+  <!-- FOOTER & COLOR KEY LEGEND                                      -->
+  <!-- ============================================================== -->
+  <g transform="translate(60, 1335)">
+    <line x1="0" y1="0" x2="900" y2="0" stroke="#334155" stroke-width="1" />
+    <g transform="translate(0, 20)">
+      <circle cx="10" cy="0" r="5" fill="#EF4444"/>
+      <text x="22" y="4" font-size="11" font-weight="600" fill="#94A3B8">Guardrails</text>
 
-    <!-- Column 3: 3-Tier Validation & Guardrails -->
-    <g transform="translate(250, -32)">
-      <circle cx="8" cy="8" r="6" fill="#10B981"/>
-      <text x="24" y="12" font-size="11.5" font-weight="800" fill="#6EE7B7">3-Tier Verification &amp; Security</text>
-      <text x="24" y="30" font-size="10" font-weight="500" fill="#94A3B8">PASS (100% verified) | REPAIR (1 retry) | REFUSE (unsafe).</text>
-      <text x="24" y="46" font-size="10" font-weight="500" fill="#94A3B8">Pre-flight input firewall &amp; post-generation secret scrubber.</text>
+      <circle cx="110" cy="0" r="5" fill="#06B6D4"/>
+      <text x="122" y="4" font-size="11" font-weight="600" fill="#94A3B8">Classifier</text>
+
+      <circle cx="200" cy="0" r="5" fill="#F59E0B"/>
+      <text x="212" y="4" font-size="11" font-weight="600" fill="#94A3B8">Fast Branches</text>
+
+      <circle cx="310" cy="0" r="5" fill="#F97316"/>
+      <text x="322" y="4" font-size="11" font-weight="600" fill="#94A3B8">Catalog Tools</text>
+
+      <circle cx="430" cy="0" r="5" fill="#10B981"/>
+      <text x="442" y="4" font-size="11" font-weight="600" fill="#94A3B8">Hybrid Search</text>
+
+      <circle cx="560" cy="0" r="5" fill="#A855F7"/>
+      <text x="572" y="4" font-size="11" font-weight="600" fill="#94A3B8">Grounded Gen</text>
+
+      <circle cx="680" cy="0" r="5" fill="#14B8A6"/>
+      <text x="692" y="4" font-size="11" font-weight="600" fill="#94A3B8">Fact Validation</text>
+
+      <circle cx="800" cy="0" r="5" fill="#FBBF24"/>
+      <text x="812" y="4" font-size="11" font-weight="600" fill="#94A3B8">Repair Loop (1x)</text>
     </g>
   </g>
 </svg>

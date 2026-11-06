@@ -1,161 +1,109 @@
-import asyncio
+"""
+LLM client factory: builds a cloud (Azure/OpenAI-compatible) or local (Ollama)
+chat model per the frontend's cloud/local toggle (site/index.html model-btn).
+
+Per-request state (which backend the user asked for, which one actually ran)
+is held in contextvars rather than plain module globals — this file is
+imported once per process, but api.py's /chat handler runs one call per HTTP
+request, often concurrently; a plain global would leak one request's model
+choice into another's response under load.
+"""
 import contextvars
 import logging
 import threading
-from typing import Any, Optional
+from typing import Optional
+
 from langchain_openai import ChatOpenAI
 
 from app.config import settings
 
 logger = logging.getLogger("app.llm.client")
 
-# ── Context Var for Request-level Model Selection ────────────
-_current_model_choice: contextvars.ContextVar[Optional[str]] = contextvars.ContextVar(
-    "current_model_choice", default=None
-)
+_model_choice: contextvars.ContextVar[str] = contextvars.ContextVar("model_choice", default="cloud")
+_actual_backend: contextvars.ContextVar[Optional[str]] = contextvars.ContextVar("actual_backend", default=None)
 
-# ── Context Var tracking what backend actually served the last get_llm() call in
-# this request. Needed because a request that asked for "cloud" can be silently
-# downgraded to local (missing/placeholder API key) — callers (api.py) must be able
-# to report the model that truly answered, not just echo back what was requested.
-_actual_backend_used: contextvars.ContextVar[Optional[str]] = contextvars.ContextVar(
-    "actual_backend_used", default=None
-)
+_LOCAL_ALIASES = {
+    "local", "ollama", "qwen", "qwen2.5", "qwen2.5:3b", "local-gpu", "gpu",
+    "deepseek", "deepseek-r1", "deepseek-r1:7b", "deepseek-r1-7b", "r1"
+}
+_local_slot = threading.Semaphore(settings.LOCAL_LLM_MAX_CONCURRENT)
 
-_warned_missing_key = False
+
+def set_current_model_choice(choice: str) -> None:
+    _model_choice.set("local" if (choice or "").lower().strip() in _LOCAL_ALIASES else "cloud")
+
+
+def get_current_model_choice() -> str:
+    return _model_choice.get()
 
 
 def get_actual_backend_used() -> Optional[str]:
-    """'cloud', 'local', or None if get_llm() hasn't been called yet this request."""
-    return _actual_backend_used.get()
-
-# ── Concurrency & Resource Protection for 4GB VRAM ───────────
-# Strictly serialize concurrent threads executing on the local Ollama instance with re-entrant lock
-_local_thread_lock = threading.RLock()
-_local_async_semaphores: dict[asyncio.AbstractEventLoop, asyncio.Semaphore] = {}
-_sem_lock = threading.Lock()
+    return _actual_backend.get()
 
 
-def _get_async_semaphore() -> asyncio.Semaphore:
-    """Get or create an asyncio semaphore for the current event loop."""
-    try:
-        loop = asyncio.get_running_loop()
-    except RuntimeError:
-        loop = asyncio.new_event_loop()
-    with _sem_lock:
-        if loop not in _local_async_semaphores:
-            _local_async_semaphores[loop] = asyncio.Semaphore(max(1, settings.LLM_MAX_CONCURRENT_REQUESTS))
-        return _local_async_semaphores[loop]
+def _mark_backend_used(backend: str) -> None:
+    _actual_backend.set(backend)
 
 
-class LocalConcurrencyGuardedChatOpenAI(ChatOpenAI):
+def _build_cloud_client(temperature: float, reasoning_effort: Optional[str] = None) -> ChatOpenAI:
+    return ChatOpenAI(
+        api_key=settings.LLM_API_KEY,
+        base_url=settings.LLM_BASE_URL,
+        model=settings.LLM_MODEL,
+        temperature=temperature,
+        max_tokens=2500,
+        timeout=settings.LLM_TIMEOUT,
+        reasoning_effort=reasoning_effort,
+    )
+
+
+def _build_local_client(temperature: float) -> ChatOpenAI:
+    return ChatOpenAI(
+        api_key=settings.LOCAL_LLM_API_KEY,
+        base_url=settings.LOCAL_LLM_BASE_URL,
+        model=settings.LOCAL_LLM_MODEL,
+        temperature=temperature,
+        max_tokens=600,
+        max_retries=1,
+        timeout=120.0,
+        extra_body={"options": {"num_ctx": 4096, "num_predict": 600}},
+    )
+
+
+def get_chat_model(temperature: float = 0.2, reasoning_effort: Optional[str] = None) -> ChatOpenAI:
+    """Return a chat model for the requested backend, honoring the frontend's
+    cloud/local toggle, with a logged downgrade to local if no cloud key is set.
+
+    reasoning_effort only applies to the cloud (gpt-5-family, reasoning) model —
+    it's ignored for local models. Pass a real effort ("minimal"/"low"/...),
+    not "none": on this Azure deployment "none" does NOT unlock a non-default
+    `temperature` the way langchain-openai's client-side check assumes — the
+    server still rejects temperature=0.0 with reasoning_effort="none" (HTTP
+    400), so `temperature` stays a no-op for gpt-5-family here regardless.
     """
-    ChatOpenAI wrapper that enforces thread synchronization
-    when executing local Ollama inference on RTX 4050 (4GB VRAM).
-    """
-    is_local_endpoint: bool = False
+    requested = get_current_model_choice()
 
-    def invoke(self, *args: Any, **kwargs: Any) -> Any:
-        if self.is_local_endpoint:
-            with _local_thread_lock:
-                return super().invoke(*args, **kwargs)
-        return super().invoke(*args, **kwargs)
+    if requested == "cloud" and not settings.LLM_API_KEY:
+        logger.warning("Cloud model requested but LLM_API_KEY is not set — falling back to local model.")
+        requested = "local"
 
-    async def ainvoke(self, *args: Any, **kwargs: Any) -> Any:
-        if self.is_local_endpoint:
-            sem = _get_async_semaphore()
-            async with sem:
-                return await super().ainvoke(*args, **kwargs)
-        return await super().ainvoke(*args, **kwargs)
+    _mark_backend_used(requested)
+    if requested == "local":
+        return _build_local_client(temperature)
+    return _build_cloud_client(temperature, reasoning_effort=reasoning_effort)
 
 
-def set_current_model_choice(model_choice: Optional[str]) -> None:
-    """Set model choice for the current async/request context ('cloud' or 'local')."""
-    _current_model_choice.set(model_choice)
+class local_llm_slot:
+    """Context manager serializing calls to the local model so a small GPU
+    isn't asked to run more generations at once than it can hold in VRAM.
+    No-op for the cloud backend."""
 
+    def __enter__(self):
+        if get_current_model_choice() == "local":
+            _local_slot.acquire()
+        return self
 
-def get_current_model_choice() -> Optional[str]:
-    """Get active model choice from context."""
-    return _current_model_choice.get()
-
-
-def get_llm(
-    timeout: float = 45.0,
-    max_tokens: Optional[int] = None,
-    temperature: float = 0.0,
-    model_choice: Optional[str] = None,
-) -> ChatOpenAI:
-    """
-    Get configured ChatOpenAI client.
-    Supports dynamically selecting between Cloud LLM (OpenAI / Azure) and Local LLM (Ollama / RTX 4050).
-    Enforces hardware protection and single-concurrency queueing for local inference.
-    """
-    choice = (model_choice or get_current_model_choice() or "cloud").lower().strip()
-
-    if choice in ("local", "ollama", "qwen", "qwen2.5", "qwen2.5:3b", "local-gpu", "gpu"):
-        # Local Ollama endpoint — explicitly requested, not a fallback.
-        _actual_backend_used.set("local")
-        effective_timeout = max(timeout, settings.LOCAL_LLM_TIMEOUT)
-        effective_tokens = min(max_tokens, 768) if max_tokens is not None else 512
-        kwargs = {
-            "model": settings.LOCAL_LLM_MODEL,
-            "temperature": temperature,
-            "api_key": settings.LOCAL_LLM_API_KEY,
-            "base_url": settings.LOCAL_LLM_BASE_URL,
-            "timeout": effective_timeout,
-            "max_retries": settings.MAX_RETRIES,
-            "max_tokens": effective_tokens,
-            "is_local_endpoint": True,
-        }
-        return LocalConcurrencyGuardedChatOpenAI(**kwargs)
-
-    # Cloud LLM endpoint
-    api_key = settings.LLM_API_KEY
-    if not api_key or "your_api_key_here" in api_key.lower() or "placeholder" in api_key.lower():
-        # Fallback to local if cloud key is not set — this is a real behavior change
-        # (a materially weaker model answers) so it must be loud, not a log line the
-        # caller can miss. get_actual_backend_used() lets api.py report the truth.
-        global _warned_missing_key
-        if not _warned_missing_key:
-            logger.warning(
-                "LLM_API_KEY is missing/placeholder — cloud model requests are being "
-                "silently served by the local model (%s) instead of %s. Set a real "
-                "LLM_API_KEY to restore cloud responses.",
-                settings.LOCAL_LLM_MODEL, settings.LLM_MODEL,
-            )
-            _warned_missing_key = True
-        _actual_backend_used.set("local")
-        kwargs = {
-            "model": settings.LOCAL_LLM_MODEL,
-            "temperature": temperature,
-            "api_key": settings.LOCAL_LLM_API_KEY,
-            "base_url": settings.LOCAL_LLM_BASE_URL,
-            "timeout": max(timeout, settings.LOCAL_LLM_TIMEOUT),
-            "max_retries": settings.MAX_RETRIES,
-            "max_tokens": min(max_tokens, 768) if max_tokens is not None else 512,
-            "is_local_endpoint": True,
-        }
-        return LocalConcurrencyGuardedChatOpenAI(**kwargs)
-
-    _actual_backend_used.set("cloud")
-    kwargs = {
-        "model": settings.LLM_MODEL,
-        "temperature": temperature,
-        "api_key": api_key,
-        "base_url": settings.LLM_BASE_URL,
-        "timeout": timeout,
-        "max_retries": settings.MAX_RETRIES,
-        "is_local_endpoint": False,
-    }
-    # For reasoning models (e.g. gpt-5-mini, o-series), reasoning tokens consume part of max_tokens.
-    # Ensure minimum token headroom so reasoning does not exhaust the token budget before output generation.
-    is_reasoning_model = any(m in settings.LLM_MODEL.lower() for m in ["gpt-5", "o1", "o3", "o4", "reasoning"])
-    if max_tokens is not None:
-        if is_reasoning_model:
-            kwargs["max_tokens"] = max(max_tokens, 4096)
-        else:
-            kwargs["max_tokens"] = max_tokens
-    elif is_reasoning_model:
-        kwargs["max_tokens"] = 4096
-
-    return LocalConcurrencyGuardedChatOpenAI(**kwargs)
+    def __exit__(self, *exc_info):
+        if get_current_model_choice() == "local":
+            _local_slot.release()
+        return False

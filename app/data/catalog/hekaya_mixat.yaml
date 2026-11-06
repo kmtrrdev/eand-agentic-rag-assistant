@@ -1,0 +1,204 @@
+family: hekaya_mixat
+family_name_en: "Hekaya Mixat"
+family_name_ar: "حكاية مكسات"
+category: mobile
+tax_type: prepaid
+default_ussd: "*319#"
+family_description_en: "Hekaya Mixat is e& Egypt's monthly prepaid mix bundle line: a single monthly quota of \"Mix\" units usable for calls or mobile internet, renewable via *319#, with unused units rolling over on renewal (if renewed on/before the due date; late renewal forfeits leftover Mixes; this month's bundle is consumed before rolled-over Mixes). Conversion rates: 1 Mix = 1 call minute or 1 SMS on the e& network; 5 Mixes = 1 call minute or 1 SMS to other local networks; 1 Mix = 2 MB for social apps (Facebook, Messenger, Instagram, Snapchat, X/Twitter, WhatsApp, TikTok); 1 Mix = 1 MB for other apps/websites. Every tier includes a favorite number billed at 0.5 Mix/minute instead of a full Mix."
+family_description_ar: "حكاية مكسات هي باقات الشهرية للدفع المسبق من اتصالات مصر: رصيد شهري واحد من وحدات \"المكس\" يُستخدم في المكالمات أو الإنترنت، يتجدد عبر *319#، مع ترحيل الوحدات غير المستخدمة عند التجديد (فقط عند التجديد في الموعد أو قبله؛ التجديد المتأخر يُفقد الرصيد المتبقي؛ يُستهلك رصيد الشهر الحالي قبل الرصيد المُرحَّل). معدلات التحويل: 1 مكس = دقيقة مكالمة أو رسالة واحدة داخل شبكة اتصالات مصر؛ 5 مكسات = دقيقة مكالمة أو رسالة واحدة لباقي الشبكات؛ 1 مكس = 2 ميجابايت لتطبيقات التواصل (فيسبوك، ماسنجر، انستجرام، سناب شات، إكس/تويتر، واتساب، تيك توك)؛ 1 مكس = 1 ميجابايت لباقي التطبيقات والمواقع. كل باقة تتضمن رقماً مفضلاً بسعر 0.5 مكس/دقيقة بدلاً من مكس كامل."
+
+tiers:
+  - id: hekaya_mixat_52
+    name_en: "Hekaya Mixat 52"
+    name_ar: "حكاية مكسات 52"
+    price_egp: 52
+    ussd_code: "*319*45#"
+    quota_units: 1900
+    quota_label_en: "1,900 Mix units"
+    quota_label_ar: "1,900 وحدة مكس"
+    validity_days: 30
+    family_lines: 0
+    family_lines_note_en: "No family lines on this tier."
+    family_lines_note_ar: "لا يشمل خطوط عائلة."
+    coins_on_renewal: 104
+    favorite_numbers: 1
+    description_en: "1,900 Mix units for calls and mobile internet, 1 favorite number (0.5 Mix/min), Facebook & WhatsApp capped at 200 MB under Fair Usage Policy, VIU + Twist Music + Shahid Mobile included, 104 Coins on renewal via *319*45#."
+    description_ar: "1,900 وحدة مكس للمكالمات والإنترنت، رقم مفضل واحد (0.5 مكس/دقيقة)، فيسبوك وواتساب محدودان بـ 200 ميجا حسب سياسة الاستخدام العادل، مع VIU وTwist Music وShahid Mobile، 104 كوينز عند التجديد عبر *319*45#."
+    perks_en: "1 favorite number (0.5 Mix/min) + FB/WhatsApp up to 200MB FUP + VIU + Twist Music + Shahid Mobile + rollover on-time renewal + 104 Coins"
+    perks_ar: "رقم مفضل واحد (0.5 مكس/دقيقة) + فيسبوك/واتساب حتى 200 ميجا FUP + VIU + Twist Music + Shahid Mobile + ترحيل عند التجديد في الموعد + 104 كوينز"
+    source: "e& Egypt Hekaya Mixat Portfolio"
+
+  - id: hekaya_mixat_69
+    name_en: "Hekaya Mixat 69"
+    name_ar: "حكاية مكسات 69"
+    price_egp: 69
+    ussd_code: "*319*60#"
+    quota_units: 2800
+    quota_label_en: "2,800 Mix units"
+    quota_label_ar: "2,800 وحدة مكس"
+    validity_days: 30
+    family_lines: 0
+    family_lines_note_en: "No family lines on this tier."
+    family_lines_note_ar: "لا يشمل خطوط عائلة."
+    coins_on_renewal: 138
+    favorite_numbers: 1
+    description_en: "2,800 Mix units for calls and data, 1 favorite number (0.5 Mix/min), Facebook & WhatsApp capped at 200 MB under Fair Usage Policy, VIU + Twist Music + Shahid Mobile included, 138 Coins on renewal via *319*60#."
+    description_ar: "2,800 وحدة مكس للمكالمات والإنترنت، رقم مفضل واحد (0.5 مكس/دقيقة)، فيسبوك وواتساب محدودان بـ 200 ميجا حسب سياسة الاستخدام العادل، مع VIU وTwist Music وShahid Mobile، 138 كوينز عند التجديد عبر *319*60#."
+    perks_en: "1 favorite number (0.5 Mix/min) + FB/WhatsApp up to 200MB FUP + VIU + Twist Music + Shahid Mobile + rollover on-time renewal + 138 Coins"
+    perks_ar: "رقم مفضل واحد (0.5 مكس/دقيقة) + فيسبوك/واتساب حتى 200 ميجا FUP + VIU + Twist Music + Shahid Mobile + ترحيل عند التجديد في الموعد + 138 كوينز"
+    source: "e& Egypt Hekaya Mixat Portfolio"
+
+  - id: hekaya_mixat_92
+    name_en: "Hekaya Mixat 92"
+    name_ar: "حكاية مكسات 92"
+    price_egp: 92
+    ussd_code: "*319*80#"
+    quota_units: 3750
+    quota_label_en: "3,750 Mix units"
+    quota_label_ar: "3,750 وحدة مكس"
+    validity_days: 30
+    family_lines: 1
+    family_lines_note_en: "1 family line (allocated as 10%, 25%, or 50% of the primary Mix bundle; no fixed minute allocation)."
+    family_lines_note_ar: "خط عائلة واحد (يُخصَّص كنسبة 10% أو 25% أو 50% من رصيد المكس الأساسي؛ بدون تخصيص دقائق ثابت)."
+    coins_on_renewal: 184
+    favorite_numbers: 2
+    description_en: "3,750 Mix units + 1 family line, 2 favorite numbers (0.5 Mix/min), Facebook & WhatsApp available throughout validity (no FUP cap), VIU + Twist Music + Twist TV + Shahid Mobile included, 184 Coins on renewal via *319*80#."
+    description_ar: "3,750 وحدة مكس + خط عائلة واحد، رقمان مفضلان (0.5 مكس/دقيقة)، فيسبوك وواتساب متاحان طوال الصلاحية بدون سقف استخدام، مع VIU وTwist Music وTwist TV وShahid Mobile، 184 كوينز عند التجديد عبر *319*80#."
+    perks_en: "1 family line + 2 favorite numbers + FB/WhatsApp unmetered + VIU + Twist Music/TV + Shahid Mobile + rollover + 184 Coins"
+    perks_ar: "خط عائلة واحد + رقمان مفضلان + فيسبوك/واتساب بدون حدود + VIU + Twist Music/TV + Shahid Mobile + ترحيل الوحدات + 184 كوينز"
+    source: "e& Egypt Hekaya Mixat Portfolio"
+
+  - id: hekaya_mixat_120
+    name_en: "Hekaya Mixat 120"
+    name_ar: "حكاية مكسات 120"
+    price_egp: 120
+    ussd_code: "*319*105#"
+    quota_units: 5375
+    quota_label_en: "5,375 Mix units"
+    quota_label_ar: "5,375 وحدة مكس"
+    validity_days: 30
+    family_lines: 1
+    family_lines_note_en: "1 family line (allocated as 10%, 25%, or 50% of the primary Mix bundle; no fixed minute allocation)."
+    family_lines_note_ar: "خط عائلة واحد (يُخصَّص كنسبة 10% أو 25% أو 50% من رصيد المكس الأساسي؛ بدون تخصيص دقائق ثابت)."
+    coins_on_renewal: 240
+    favorite_numbers: 2
+    description_en: "5,375 Mix units + 1 family line, 2 favorite numbers (0.5 Mix/min), Facebook & WhatsApp available throughout validity (no FUP cap), VIU + Twist Music + Twist TV + Starzplay + Shahid Mobile included, 240 Coins on renewal via *319*105#."
+    description_ar: "5,375 وحدة مكس + خط عائلة واحد، رقمان مفضلان (0.5 مكس/دقيقة)، فيسبوك وواتساب متاحان طوال الصلاحية بدون سقف استخدام، مع VIU وTwist Music وTwist TV وStarzplay وShahid Mobile، 240 كوينز عند التجديد عبر *319*105#."
+    perks_en: "1 family line + 2 favorite numbers + FB/WhatsApp unmetered + VIU + Twist Music/TV + Starzplay + Shahid Mobile + rollover + 240 Coins"
+    perks_ar: "خط عائلة واحد + رقمان مفضلان + فيسبوك/واتساب بدون حدود + VIU + Twist Music/TV + Starzplay + Shahid Mobile + ترحيل الوحدات + 240 كوينز"
+    source: "e& Egypt Hekaya Mixat Portfolio"
+
+  - id: hekaya_mixat_180
+    name_en: "Hekaya Mixat 180"
+    name_ar: "حكاية مكسات 180"
+    price_egp: 180
+    ussd_code: "*319*155#"
+    quota_units: 9350
+    quota_label_en: "9,350 Mix units"
+    quota_label_ar: "9,350 وحدة مكس"
+    validity_days: 30
+    family_lines: 2
+    family_lines_note_en: "2 family lines (allocated as 10%, 25%, or 50% of the primary Mix bundle; no fixed minute allocation)."
+    family_lines_note_ar: "خطا عائلة (يُخصَّصان كنسبة 10% أو 25% أو 50% من رصيد المكس الأساسي؛ بدون تخصيص دقائق ثابت)."
+    coins_on_renewal: 360
+    favorite_numbers: 3
+    home_internet_redemption_en: "Eligible to redeem 100 GB of home internet for 5,800 Mixes (70 GB available all day + 30 GB available from 3:00 AM to 10:00 AM)."
+    home_internet_redemption_ar: "يمكن استبدال 5,800 مكس بـ 100 جيجابايت إنترنت منزلي (70 جيجا متاحة طوال اليوم + 30 جيجا متاحة من 3:00 صباحاً حتى 10:00 صباحاً)."
+    description_en: "9,350 Mix units + 2 family lines, 3 favorite numbers (0.5 Mix/min), Facebook & WhatsApp available throughout validity, VIU + Twist Music/TV + Starzplay + Shahid Mobile included, home internet redemption eligible (100 GB for 5,800 Mixes: 70 GB all-day + 30 GB from 3-10 AM), 360 Coins on renewal via *319*155#."
+    description_ar: "9,350 وحدة مكس + خطا عائلة، 3 أرقام مفضلة (0.5 مكس/دقيقة)، فيسبوك وواتساب متاحان طوال الصلاحية، مع VIU وTwist Music/TV وStarzplay وShahid Mobile، مؤهلة لاستبدال إنترنت منزلي (100 جيجا مقابل 5,800 مكس: 70 جيجا طوال اليوم + 30 جيجا من 3-10 صباحاً)، 360 كوينز عند التجديد عبر *319*155#."
+    perks_en: "2 family lines + 3 favorite numbers + FB/WhatsApp unmetered + VIU + Twist Music/TV + Starzplay + Shahid Mobile + home internet redemption + rollover + 360 Coins"
+    perks_ar: "خطا عائلة + 3 أرقام مفضلة + فيسبوك/واتساب بدون حدود + VIU + Twist Music/TV + Starzplay + Shahid Mobile + استبدال إنترنت منزلي + ترحيل الوحدات + 360 كوينز"
+    source: "e& Egypt Hekaya Mixat Portfolio"
+
+  - id: hekaya_mixat_270
+    name_en: "Hekaya Mixat 270"
+    name_ar: "حكاية مكسات 270"
+    price_egp: 270
+    ussd_code: "*319*235#"
+    quota_units: 15400
+    quota_label_en: "15,400 Mix units"
+    quota_label_ar: "15,400 وحدة مكس"
+    validity_days: 30
+    family_lines: 3
+    family_lines_note_en: "3 family lines (allocated as 10%, 25%, or 50% of the primary Mix bundle; no fixed minute allocation)."
+    family_lines_note_ar: "3 خطوط عائلة (تُخصَّص كنسبة 10% أو 25% أو 50% من رصيد المكس الأساسي؛ بدون تخصيص دقائق ثابت)."
+    coins_on_renewal: 540
+    favorite_numbers: 3
+    home_internet_redemption_en: "Eligible to redeem 100 GB for 5,800 Mixes (70 GB all-day + 30 GB from 3-10 AM), or 150 GB for 7,000 Mixes (120 GB all-day + 30 GB from 3-10 AM)."
+    home_internet_redemption_ar: "يمكن استبدال 5,800 مكس بـ 100 جيجا (70 جيجا طوال اليوم + 30 جيجا من 3-10 صباحاً)، أو 7,000 مكس بـ 150 جيجا (120 جيجا طوال اليوم + 30 جيجا من 3-10 صباحاً) إنترنت منزلي."
+    description_en: "15,400 Mix units + 3 family lines, 3 favorite numbers (0.5 Mix/min), Facebook & WhatsApp available throughout validity, VIU + Twist Music/TV + Starzplay + Shahid Mobile included, home internet redemption eligible (up to 150 GB), 540 Coins on renewal via *319*235#."
+    description_ar: "15,400 وحدة مكس + 3 خطوط عائلة، 3 أرقام مفضلة (0.5 مكس/دقيقة)، فيسبوك وواتساب متاحان طوال الصلاحية، مع VIU وTwist Music/TV وStarzplay وShahid Mobile، مؤهلة لاستبدال إنترنت منزلي (حتى 150 جيجا)، 540 كوينز عند التجديد عبر *319*235#."
+    perks_en: "3 family lines + 3 favorite numbers + FB/WhatsApp unmetered + VIU + Twist Music/TV + Starzplay + Shahid Mobile + home internet redemption (up to 150 GB) + rollover + 540 Coins"
+    perks_ar: "3 خطوط عائلة + 3 أرقام مفضلة + فيسبوك/واتساب بدون حدود + VIU + Twist Music/TV + Starzplay + Shahid Mobile + استبدال إنترنت منزلي (حتى 150 جيجا) + ترحيل الوحدات + 540 كوينز"
+    source: "e& Egypt Hekaya Mixat Portfolio"
+
+  - id: hekaya_mini_recharge_19
+    name_en: "Hekaya Mini Recharge 19"
+    name_ar: "شحنة حكاية ميني 19"
+    price_egp: 19
+    ussd_code: "*556*9*RechargeCode#"
+    quota_units: 400
+    quota_label_en: "400 Mixes (13.3 EGP usable credit) + Facebook & WhatsApp"
+    quota_label_ar: "400 مكس (رصيد قابل للاستخدام 13.3 جنيه) + فيسبوك وواتساب"
+    validity_days: 6
+    description_en: "Standalone Hekaya Mini recharge: 400 Mixes (13.3 EGP usable credit) plus Facebook & WhatsApp, 6-day validity. Recharge with code *556*9*RechargeCode#, renew via *319#. (Note: this same 400-Mix value is also granted for free, embedded, when buying Aqwa Card 19 — see aqwa_card_19 — which uses the separate Aqwa Card USSD *811# purchase flow.)"
+    description_ar: "شحنة حكاية ميني مستقلة: 400 مكس (رصيد قابل للاستخدام 13.3 جنيه) بالإضافة إلى فيسبوك وواتساب، صلاحية 6 أيام. الشحن بالكود *556*9*RechargeCode#، والتجديد عبر *319#. (ملاحظة: نفس قيمة الـ400 مكس تُمنح أيضاً مجاناً كميزة مدمجة عند شراء أقوى كارت 19 — راجع aqwa_card_19 — التي تستخدم كود أقوى كارت المنفصل *811#.)"
+    perks_en: "Standalone recharge, distinct USSD path from the Aqwa Card-embedded version"
+    perks_ar: "شحنة مستقلة، بمسار USSD مختلف عن النسخة المدمجة مع أقوى كارت"
+    source: "HekayaMixat.pdf"
+
+  - id: hekaya_mini_recharge_22.5
+    name_en: "Hekaya Mini Recharge 22.5"
+    name_ar: "شحنة حكاية ميني 22.5"
+    price_egp: 22.5
+    ussd_code: "*556*9*RechargeCode#"
+    quota_units: 525
+    quota_label_en: "525 Mixes (15.75 EGP usable credit) + Facebook & WhatsApp"
+    quota_label_ar: "525 مكس (رصيد قابل للاستخدام 15.75 جنيه) + فيسبوك وواتساب"
+    validity_days: 7
+    description_en: "Standalone Hekaya Mini recharge: 525 Mixes (15.75 EGP usable credit) plus Facebook & WhatsApp, 7-day validity. Recharge with code *556*9*RechargeCode#, renew via *319#. (Note: this same 525-Mix value is also granted for free, embedded, when buying Aqwa Card 22.5 — see aqwa_card_22.5 — which uses the separate Aqwa Card USSD *811# purchase flow.)"
+    description_ar: "شحنة حكاية ميني مستقلة: 525 مكس (رصيد قابل للاستخدام 15.75 جنيه) بالإضافة إلى فيسبوك وواتساب، صلاحية 7 أيام. الشحن بالكود *556*9*RechargeCode#، والتجديد عبر *319#. (ملاحظة: نفس قيمة الـ525 مكس تُمنح أيضاً مجاناً كميزة مدمجة عند شراء أقوى كارت 22.5 — راجع aqwa_card_22.5 — التي تستخدم كود أقوى كارت المنفصل *811#.)"
+    perks_en: "Standalone recharge, distinct USSD path from the Aqwa Card-embedded version"
+    perks_ar: "شحنة مستقلة، بمسار USSD مختلف عن النسخة المدمجة مع أقوى كارت"
+    source: "HekayaMixat.pdf"
+
+  - id: hekaya_mini_recharge_30
+    name_en: "Hekaya Mini Recharge 30"
+    name_ar: "شحنة حكاية ميني 30"
+    price_egp: 30
+    ussd_code: "*556*9*RechargeCode#"
+    quota_units: 700
+    quota_label_en: "700 Mixes (21 EGP usable credit) + Facebook & WhatsApp"
+    quota_label_ar: "700 مكس (رصيد قابل للاستخدام 21 جنيه) + فيسبوك وواتساب"
+    validity_days: 10
+    description_en: "Standalone Hekaya Mini recharge: 700 Mixes (21 EGP usable credit) plus Facebook & WhatsApp, 10-day validity. Recharge with code *556*9*RechargeCode#, renew via *319#. (Note: this same 700-Mix value is also granted for free, embedded, when buying Aqwa Card 30 — see aqwa_card_30 — which uses the separate Aqwa Card USSD *811# purchase flow.)"
+    description_ar: "شحنة حكاية ميني مستقلة: 700 مكس (رصيد قابل للاستخدام 21 جنيه) بالإضافة إلى فيسبوك وواتساب، صلاحية 10 أيام. الشحن بالكود *556*9*RechargeCode#، والتجديد عبر *319#. (ملاحظة: نفس قيمة الـ700 مكس تُمنح أيضاً مجاناً كميزة مدمجة عند شراء أقوى كارت 30 — راجع aqwa_card_30 — التي تستخدم كود أقوى كارت المنفصل *811#.)"
+    perks_en: "Standalone recharge, distinct USSD path from the Aqwa Card-embedded version"
+    perks_ar: "شحنة مستقلة، بمسار USSD مختلف عن النسخة المدمجة مع أقوى كارت"
+    source: "HekayaMixat.pdf"
+
+# Legacy tier system replaced by the tiers above. Kept only as a fact the
+# assistant can use to explain why an old price a customer remembers no
+# longer applies — never offered as a current, purchasable option.
+legacy_tiers_deprecated:
+  note_en: "An older Hekaya Mixat pricing generation (35/50/65/100/150/200 EGP) existed before the current 52/69/92/120/180/270 EGP tiers and is no longer sold."
+  note_ar: "كان هناك جيل أسعار أقدم لحكاية مكسات (35/50/65/100/150/200 جنيه) قبل الأسعار الحالية (52/69/92/120/180/270 جنيه)، ولم يعد متاحاً للبيع."
+  prices_egp: [35, 50, 65, 100, 150, 200]
+
+terms_and_conditions:
+  - en: "A minute or SMS to a network other than e& Egypt costs 5 Mixes instead of 1 Mix."
+    ar: "الدقيقة أو الرسالة لغير شبكة اتصالات مصر تكلف 5 مكسات بدلاً من مكس واحد."
+  - en: "Out-of-bundle overage rate once Mixes are exhausted: 19 piasters per minute or MB, until renewal or an add-on purchase."
+    ar: "سعر تجاوز الباقة بعد استهلاك المكسات: 19 قرشاً لكل دقيقة أو ميجابايت، حتى التجديد أو شراء إضافة."
+  - en: "A customer who runs out of Mixes can renew early by dialing *807#, instead of waiting for the normal renewal date."
+    ar: "يمكن للعميل الذي استهلك مكساته التجديد مبكراً بالاتصال بـ *807#، بدلاً من انتظار موعد التجديد المعتاد."
+  - en: "A weekly renewal option is available via *809# (*809*1#, *809*2#, or *809*3# for 1, 2, or 3 weeks) as an alternative to the full monthly renewal."
+    ar: "يتوفر خيار تجديد أسبوعي عبر *809# (*809*1# أو *809*2# أو *809*3# لأسبوع أو أسبوعين أو 3 أسابيع) كبديل للتجديد الشهري الكامل."
+  - en: "A 50% lifetime discount is available for customers with special needs across all Hekaya Mixat bundles."
+    ar: "يتوفر خصم 50% مدى الحياة لعملاء ذوي الاحتياجات الخاصة على جميع باقات حكاية مكسات."
+  - en: "Calls to short/hotline numbers (16XXX, 19XXX, 15XXX) are billed at 30 piasters/minute, except 16399 (standard rates) and 16528 (10 piasters/minute)."
+    ar: "المكالمات لأرقام الخط الساخن القصيرة (16XXX، 19XXX، 15XXX) تُحاسَب بـ30 قرشاً/دقيقة، ما عدا 16399 (بالسعر العادي) و16528 (10 قروش/دقيقة)."
+  - en: "If a customer attempts to renew without sufficient balance, they get a 2-day grace window after recharging to complete the renewal; otherwise they must re-subscribe via USSD."
+    ar: "إذا حاول العميل التجديد برصيد غير كافٍ، يحصل على فترة سماح يومين بعد الشحن لإتمام التجديد؛ وإلا يجب إعادة الاشتراك عبر USSD."
+  - en: "Useful Hekaya Mixat USSD codes: *011# (best-plan discovery), *304# (international calling for Hekaya Mixat users), *3333# (promotions/balance/migration), *808# (check internet usage), *806# (minute cap management)."
+    ar: "أكواد USSD مفيدة لحكاية مكسات: *011# (اكتشاف أفضل باقة)، *304# (المكالمات الدولية لعملاء حكاية مكسات)، *3333# (العروض/الرصيد/التنقل بين الباقات)، *808# (فحص استهلاك الإنترنت)، *806# (إدارة سقف الدقائق)."

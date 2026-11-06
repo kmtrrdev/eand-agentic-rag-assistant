@@ -4,10 +4,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>e& Egypt | Connecting What Matters</title>
-<link rel="stylesheet" href="assets/style.css?v=10">
-<script src="assets/theme.js?v=10"></script>
-<script src="assets/translations.js?v=10"></script>
-<script src="assets/lang.js?v=10"></script>
+<link rel="stylesheet" href="assets/style.css?v=20260908_chatbot_v1">
+<script src="assets/theme.js?v=20260905_rich_v4"></script>
+<script src="assets/translations.js?v=20260905_rich_v4"></script>
+<script src="assets/lang.js?v=20260905_rich_v4"></script>
 </head>
 
 <body>
@@ -21,8 +21,10 @@
     <nav class="nav">
       <a href="index.html" class="active" data-i18n="nav.home">Home</a>
       <a href="services.html" data-i18n="nav.services">Services</a>
+      <a href="packages.html" data-i18n="nav.packages">Packages</a>
       <a href="about.html" data-i18n="nav.about">About</a>
       <a href="contact.html" data-i18n="nav.contact">Contact</a>
+      <a href="chatbot.html" data-i18n="nav.chatbot">AI Assistant</a>
     </nav>
     <div class="header-actions">
       <button id="lang-toggle" class="lang-toggle" aria-label="Switch language">
@@ -65,12 +67,12 @@
       <p class="lead" data-i18n="home.lead">Home internet, mobile plans, and business solutions — all in one place. And ask the e& chatbot anytime for an instant answer, no waiting required.</p>
       <div class="hero-cta">
         <a href="services.html" class="btn btn-primary" data-i18n="home.ctaPrimary">Explore Plans</a>
-        <a href="#chat" class="btn btn-outline open-chat" data-i18n="home.ctaSecondary">Ask the Chatbot</a>
+        <a href="chatbot.html" class="btn btn-outline" data-i18n="home.ctaSecondary">Ask the Chatbot</a>
       </div>
       <div class="hero-stats">
         <div class="stat"><b data-i18n="home.stat1n">40M+</b><span data-i18n="home.stat1s">customers in Egypt</span></div>
         <div class="stat"><b data-i18n="home.stat2n">24/7</b><span data-i18n="home.stat2s">smart support</span></div>
-        <div class="stat"><b data-i18n="home.stat3n">5</b><span data-i18n="home.stat3s">internet plan tiers</span></div>
+        <div class="stat"><b data-i18n="home.stat3n">83</b><span data-i18n="home.stat3s">live packages across 7 product lines</span></div>
       </div>
     </div>
     <div class="hero-visual">
@@ -91,8 +93,8 @@
         <div class="icon">
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 8.5a15 15 0 0 1 20 0M5.5 12a10 10 0 0 1 13 0M9 15.5a5 5 0 0 1 6 0"></path><circle cx="12" cy="19" r="1" fill="currentColor"></circle></svg>
         </div>
-        <h3 data-i18n="home.card1h">Home Internet (Hekaya)</h3>
-        <p data-i18n="home.card1p">Speeds up to 1 Gbps, fast installation, and coverage that keeps expanding across the country.</p>
+        <h3 data-i18n="home.card1h">Hekaya Internet</h3>
+        <p data-i18n="home.card1p">Prepaid mobile data bundles from 46 to 600 EGP — up to 50 GB, bonus app subscriptions, and cashback on unused data.</p>
       </div>
       <div class="card">
         <div class="icon">
@@ -131,8 +133,19 @@
       <span class="n">03</span>
       <div><h4 data-i18n="home.row3h">Available around the clock</h4><p data-i18n="home.row3p">No waiting on hold or standing in line — ask anytime.</p></div>
     </div>
+
+    <div class="architecture-card" style="margin-top:40px;">
+      <div class="architecture-card-header">
+        <span class="badge" data-i18n="about.archEyebrow">Agentic AI Architecture</span>
+        <a href="about.html#architecture" class="btn btn-outline" style="padding:6px 14px; font-size:13px;" data-i18n="about.archOpen">🔍 Open Full Diagram</a>
+      </div>
+      <div class="architecture-img-wrap" style="padding:18px;">
+        <img src="assets/agentic_rag_graph.svg" alt="e& Egypt Agentic LangGraph Architecture" class="architecture-img" style="max-height:550px;">
+      </div>
+    </div>
   </div>
 </section>
+
 
 <footer class="site-footer">
   <div class="container">
@@ -185,7 +198,7 @@
       </button>
       <button type="button" class="model-btn" data-model="local">
         <span class="icon">⚡</span>
-        <span data-i18n="chat.modelLocal">Local GPU (Qwen 3B)</span>
+        <span data-i18n="chat.modelLocal">Local GPU (DeepSeek-R1 7B)</span>
       </button>
     </div>
   </div>
@@ -200,7 +213,6 @@
   </form>
 </div>
 
-<script src="assets/chat.js?v=20260830_final_svg_sync"></script>
+<script src="assets/chat.js?v=20260908_anim_v2"></script>
 </body>
 </html>
-

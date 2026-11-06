@@ -1,0 +1,124 @@
+{
+  "description": "Bilingual grounded evaluation dataset for RAGAS metrics (Faithfulness, Answer Relevancy, Context Recall). Each item contains the user question, ground truth answer, and expected catalog contexts.",
+  "cases": [
+    {
+      "id": "RAGAS-001",
+      "language": "ar",
+      "question": "ما هي مميزات وسعر باقة حكاية مكسات 92 وكود التفعيل؟",
+      "ground_truth": "باقة حكاية مكسات 92 سعرها 92 جنيه شهرياً قبل الضريبة (131.43 جنيه رصيد شحن). تمنح 4,000 مكس شهرياً، مع خط عائلة إضافي، و500 دقيقة مجانية للعائلة. كود الاشتراك والتفعيل هو *319# أو *319*92#.",
+      "expected_contexts": [
+        "Hekaya Mixat 92 provides 4,000 monthly mixes for 92 EGP pre-tax.",
+        "Activation USSD code for Hekaya Mixat 92 is *319# or *319*92#.",
+        "Includes 1 extra family line and 500 intra-family minutes."
+      ]
+    },
+    {
+      "id": "RAGAS-002",
+      "language": "en",
+      "question": "What is the price, allowance, and USSD code for Super Connect 165?",
+      "ground_truth": "Super Connect 165 costs 165 EGP pre-tax (235.71 EGP recharge after tax). It offers 24,000 MBs (or up to 48,000 MBs on social and streaming platforms) for 30 days. The activation dial code is *566# or *566*165#.",
+      "expected_contexts": [
+        "Super Connect 165 provides 24,000 MBs for general browsing or 48,000 Super Megas for social and streaming.",
+        "Pre-tax price is 165 EGP with validity of 30 days. Dial code is *566#."
+      ]
+    },
+    {
+      "id": "RAGAS-003",
+      "language": "ar",
+      "question": "كام سعر وباقة إمرالد 1725 وما هي نسبة الضريبة المضافة عليها؟",
+      "ground_truth": "باقة إمرالد 1725 سعرها الأساسي 1725 جنيه شهرياً. يضاف عليها ضريبة الجدول 8% وضريبة القيمة المضافة 14% (إجمالي 22%) بالإضافة إلى 10 جنيه رسم تنمية موارد الدولة، ليصبح الإجمالي المطلوب 2,114.50 جنيه شهرياً.",
+      "expected_contexts": [
+        "Emerald 1725 base price is 1725 EGP.",
+        "Postpaid Emerald tax is 8% schedule tax + 14% VAT (22% combined) plus 10 EGP monthly development fee, giving 2114.5 EGP total."
+      ]
+    },
+    {
+      "id": "RAGAS-004",
+      "language": "en",
+      "question": "What benefits and hotel discounts come with Emerald 780?",
+      "ground_truth": "Emerald 780 offers 25 GB local mobile internet, 4,500 local minutes, 2,000 SMS, 2 extra family lines with 10,000 intra-family minutes, 450 Emerald Points, 3,375 entertainment E-Coins, and a 10% hotel discount via GTO.",
+      "expected_contexts": [
+        "Emerald 780 includes 25 GB internet, 4500 local minutes, 2000 SMS, and 2 extra family lines.",
+        "Emerald customers enjoy a 10% GTO hotel discount and lifestyle privileges."
+      ]
+    },
+    {
+      "id": "RAGAS-005",
+      "language": "ar",
+      "question": "عايز كارت أقوى شحن بـ 19 جنيه، بيديني ايه وصلاحيته كام يوم؟",
+      "ground_truth": "كارت أقوى 19 جنيه يمنح 900 دقيقة ومكسات صالحة لمدة 10 أيام. كود الشحن والتفعيل هو *811#.",
+      "expected_contexts": [
+        "Aqwa Card 19 gives 900 mixes/units valid for 10 days.",
+        "Activation and recharge dial code is *811#."
+      ]
+    },
+    {
+      "id": "RAGAS-006",
+      "language": "en",
+      "question": "How much data does DataLine 100GB give for 4G routers and how do I subscribe?",
+      "ground_truth": "DataLine 100GB provides 100 GB of high-speed data for 4G home routers and MiFi devices at 340 EGP pre-tax for 30 days. You can subscribe via USSD *130# or by visiting an e& Egypt store.",
+      "expected_contexts": [
+        "DataLine 100GB is designed for 4G routers and MiFi with 100 GB allowance.",
+        "Subscription dial code is *130# or through store."
+      ]
+    },
+    {
+      "id": "RAGAS-007",
+      "language": "ar",
+      "question": "كيف يتم حساب ضريبة كروت الشحن في اتصالات مصر؟",
+      "ground_truth": "ضريبة كروت الشحن المدفوعة مقدماً (Prepaid) تبلغ نسبتها الفعلية 42.857% (معامل الضرب 1.42857). للحصول على رصيد صافي 100 جنيه يجب شحن كارت بقيمة 143 جنيه تقريباً.",
+      "expected_contexts": [
+        "Prepaid recharge effective tax rate is 42.857% with multiplier 1.42857.",
+        "Recharge card calculation: Required payment = Desired balance * 1.42857."
+      ]
+    },
+    {
+      "id": "RAGAS-008",
+      "language": "en",
+      "question": "Can unused mobile internet roll over to the next month on Emerald?",
+      "ground_truth": "Yes, Emerald features 'Internet Flexibility' (Internet Worthy) which allows rollover of unused local internet quota to the following month under package rollover conditions.",
+      "expected_contexts": [
+        "Emerald includes Internet Worthy (Internet Flexibility) allowing unused quota rollover to next billing cycle."
+      ]
+    },
+    {
+      "id": "RAGAS-009",
+      "language": "ar",
+      "question": "ايه هي باقة أهلاً بالثانية وكيف يتم احتساب تكلفتها؟",
+      "ground_truth": "نظام أهلاً بالثانية يحاسب بالثانية من أول ثانية: 3 مليمات لكل ثانية ليلاً من 12 منتصف الليل حتى 6 صباحاً، و4 مليمات لكل ثانية نهاراً من 6 صباحاً حتى 12 منتصف الليل. للتحويل اتصل بـ *339#.",
+      "expected_contexts": [
+        "Ahlan by the Second charges 3 milliemes/second night (12am-6am) and 4 milliemes/second day (6am-12am).",
+        "Migration USSD is *339#."
+      ]
+    },
+    {
+      "id": "RAGAS-010",
+      "language": "en",
+      "question": "What is the monthly quota and price for Hekaya Internet 270?",
+      "ground_truth": "Hekaya Internet 270 costs 270 EGP pre-tax per month (385.71 EGP recharge) and delivers 40,000 MBs (Super Megas) for high-speed mobile internet. Dial *319*2# to activate.",
+      "expected_contexts": [
+        "Hekaya Internet 270 gives 40,000 MBs for 270 EGP pre-tax.",
+        "USSD activation code is *319*2#."
+      ]
+    },
+    {
+      "id": "RAGAS-011",
+      "language": "ar",
+      "question": "هل يمكن لعملاء إمرالد دخول صالات كبار الزوار في المطارات؟",
+      "ground_truth": "نعم، يتمتع عملاء باقات إمرالد العليا (Emerald 1725 و Emerald 3450) بميزة الدخول المجاني لصالات كبار الزوار في المطارات الدولية والمحلية المعتمدة.",
+      "expected_contexts": [
+        "Emerald exclusive privileges include international and domestic airport lounge access for high tiers."
+      ]
+    },
+    {
+      "id": "RAGAS-012",
+      "language": "en",
+      "question": "How do I subscribe to an Emerald plan? Can I activate it via USSD code?",
+      "ground_truth": "No, Emerald is a postpaid contract program and cannot be self-activated via USSD dial codes. Subscription and plan changes must be done by calling customer service (111) or visiting an official e& Egypt branch.",
+      "expected_contexts": [
+        "Emerald postpaid plans do not support USSD self-activation.",
+        "Subscription requires contacting 111 or visiting an official e& Egypt store."
+      ]
+    }
+  ]
+}

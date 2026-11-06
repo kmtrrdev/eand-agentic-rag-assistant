@@ -2,36 +2,34 @@
 # e& Egypt Agentic Knowledge Base - Core Dependencies
 # ============================================================
 # Install: pip install -r requirements.txt
-#
-# Notes:
-#   - Cross-encoder reranker (optional): already included via sentence-transformers
-#   - Evaluation deps (RAGAS, Garak): see requirements-eval.txt / requirements-redteam.txt
+# Dev/test extra: pip install pytest
 # ============================================================
 
-# LangChain ecosystem
+# LangChain / LangGraph
 langgraph>=0.2.0
-langchain>=0.3.0
+langchain-core>=0.3.0
 langchain-openai>=0.2.0
 langchain-huggingface>=0.1.0
-langchain-community>=0.3.0
-langchain-text-splitters>=0.3.0
 langchain-chroma>=0.1.0
-langchain-core>=0.3.0
 
 # Vector store
 chromadb>=0.5.0
 
-# OpenAI SDK (used by langchain-openai)
+# OpenAI-compatible SDK (used by langchain-openai for both cloud and local/Ollama)
 openai>=1.40.0
 
-# Embeddings + Cross-Encoder Reranker
+# Embeddings + cross-encoder reranker
 sentence-transformers>=3.0.0
 
 # Sparse retrieval
 rank_bm25>=0.2.2
 
-# PDF loading
-pypdf>=4.0.0
+# MCP server exposing RAG search + telecom tools (app/mcp/server.py) and the
+# agent's own agentic tool-calling for open-ended questions (app/agent/nodes/generate_node.py)
+mcp>=2.0.0
+
+# Catalog data files (app/data/catalog/*.yaml)
+pyyaml>=6.0.0
 
 # Web framework
 fastapi>=0.115.0

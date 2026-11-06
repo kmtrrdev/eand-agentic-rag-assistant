@@ -1,12 +1,12 @@
 # e& Egypt Agentic Knowledge Base (اتصالات مصر)
 
-[![Python 3.11+](https://img.shields.io/badge/Python-3.11%2B-blue.svg)](https://www.python.org/)
-[![FastAPI](https://img.shields.io/badge/FastAPI-1.0.0-009688.svg)](https://fastapi.tiangolo.com/)
+[![Python 3.12](https://img.shields.io/badge/Python-3.12-blue.svg)](https://www.python.org/)
+[![FastAPI](https://img.shields.io/badge/FastAPI-async-009688.svg)](https://fastapi.tiangolo.com/)
 [![LangGraph](https://img.shields.io/badge/LangGraph-Agentic%20RAG-orange.svg)](https://github.com/langchain-ai/langgraph)
 [![ChromaDB](https://img.shields.io/badge/ChromaDB-VectorStore-purple.svg)](https://www.trychroma.com/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-An enterprise-grade, production-quality **Agentic Retrieval-Augmented Generation (RAG)** assistant with a deterministic structured-tools layer for **e& Egypt (اتصالات مصر)** telecom packages, products, tariff pricing, and customer inquiries.
+A bilingual (Arabic/English) **agentic RAG** customer-service assistant for **e& Egypt (اتصالات مصر)** telecom packages, prices, and activation codes — combining a deterministic tools layer for exact facts with hybrid retrieval for supplementary detail, so neither replaces the other.
 
 ---
 
@@ -14,24 +14,23 @@ An enterprise-grade, production-quality **Agentic Retrieval-Augmented Generation
 
 1. [System Architecture](#-system-architecture)
 2. [LangGraph Execution Pipeline](#-langgraph-execution-pipeline)
-3. [Retrieval Architecture (Dense + BM25 + Cross-Encoder)](#-retrieval-architecture)
-4. [Structure-Aware Chunking](#-structure-aware-chunking)
+3. [Single Source of Truth: The Catalog](#-single-source-of-truth-the-catalog)
+4. [Retrieval Architecture](#-retrieval-architecture)
 5. [Persistent Conversation Memory](#-persistent-conversation-memory)
-6. [Structured Telecom Tools](#-structured-telecom-tools)
-7. [Security & Guardrails](#-security--guardrails)
-8. [Evaluation Framework (Custom, RAGAS, Garak)](#-evaluation-framework)
-9. [Installation & Setup](#-installation--setup)
-10. [Environment Configuration](#-environment-configuration)
-11. [Knowledge Base Ingestion & Re-indexing](#-knowledge-base-ingestion--re-indexing)
-12. [Running the Application](#-running-the-application)
-13. [Docker & Container Deployment](#-docker--container-deployment)
-14. [API Reference](#-api-reference)
-15. [Automated Test Suite](#-automated-test-suite)
+6. [Deterministic Telecom Tools](#-deterministic-telecom-tools)
+7. [MCP Server & Agentic Tool-Calling](#-mcp-server--agentic-tool-calling)
+8. [Security & Guardrails](#-security--guardrails)
+9. [Evaluation Suites](#-evaluation-suites)
+10. [Installation & Setup](#-installation--setup)
+11. [Environment Configuration](#-environment-configuration)
+12. [Knowledge Base Ingestion](#-knowledge-base-ingestion)
+13. [Running the Application](#-running-the-application)
+14. [Docker & Container Deployment](#-docker--container-deployment)
+15. [API Reference](#-api-reference)
 16. [Observability & Structured Logging](#-observability--structured-logging)
 17. [Telecom Domain Business Rules & Tax Handling](#-telecom-domain-business-rules--tax-handling)
 18. [Project Structure](#-project-structure)
-19. [Troubleshooting & FAQ](#-troubleshooting--faq)
-20. [License](#-license)
+19. [License](#-license)
 
 ---
 
@@ -42,175 +41,163 @@ An enterprise-grade, production-quality **Agentic Retrieval-Augmented Generation
                                          │
                                          ▼
                                ┌───────────────────┐
-                               │ input_guard_node  │ ◄─── Prompt Injection & Secret Extraction Defense
+                               │  input_guard_node  │ ◄─── Prompt Injection & Secret-Probe Defense
                                └─────────┬─────────┘
                                          │ (Allowed)
                                          ▼
                                ┌───────────────────┐
-                               │    intent_node    │ ◄─── Fast Classifier (Greeting vs Out-of-Scope vs Package Inquiry)
+                               │    classify_node   │ ◄─── Single-Call Classification (Intent, Entities, Scope)
                                └─────────┬─────────┘
                    ┌─────────────────────┼─────────────────────┐
                    │ (Greeting)          │ (Out of Scope)      │ (Telecom Inquiry)
                    ▼                     ▼                     ▼
           ┌─────────────────┐   ┌─────────────────┐   ┌─────────────────┐
-          │  greeting_node  │   │  safe_response  │   │ understand_node │
+          │  greeting_node  │   │ safe_response_nd│   │ strategy_router │
           └────────┬────────┘   └────────┬────────┘   └────────┬────────┘
-                   │                     │                     │
-                   │                     │                     ▼
-                   │                     │            ┌─────────────────┐
-                   │                     │            │  retrieve_node  │ ◄── Multi-Query Hybrid Search (Chroma + BM25)
-                   │                     │            └────────┬────────┘
-                   │                     │                     │
-                   │                     │                     ▼
-                   │                     │            ┌─────────────────┐
-                   │                     │            │ evaluate_retrie │
-                   │                     │            └────────┬────────┘
-                   │                     │                     │
-                   │                     │          ┌──────────┴──────────┐
-                   │                     │          │ (Weak / Failed)     │ (Good / Max Retries)
-                   │                     │          ▼                     ▼
-                   │                     │  ┌───────────────┐     ┌───────────────┐
-                   │                     │  │ rewrite_query │     │ generate_node │
-                   │                     │  └───────┬───────┘     └───────┬───────┘
-                   │                     │          │                     │
-                   │                     │          └──────► [retrieve]   ▼
-                   │                     │                        ┌───────────────┐
-                   │                     │                        │ validate_node │
-                   │                     │                        └───────┬───────┘
-                   │                     │                                │
-                   ▼                     ▼                                ▼
+                   │                     │         ┌───────────┼───────────┐
+                   │                     │  (Ambiguous budget) │ (Tools)   │ (RAG_ONLY)
+                   │                     │         ▼           ▼           │
+                   │                     │    ┌─────────┐ ┌─────────┐      │
+                   │                     │    │ clarify │ │  tools  │      │
+                   │                     │    └────┬────┘ └────┬────┘      │
+                   │                     │         │           ▼           │
+                   │                     │         │    ┌──────────────┐   │
+                   │                     │         │    │query_rewrite │◄──┘
+                   │                     │         │    └──────┬───────┘
+                   │                     │         │           ▼
+                   │                     │         │      ┌─────────┐
+                   │                     │         │      │retrieve │
+                   │                     │         │      └────┬────┘
+                   │                     │         │           ▼
+                   │                     │         │      ┌─────────┐ ◄───┐
+                   │                     │         │      │generate │     │ (Repair, max 1x)
+                   │                     │         │      └────┬────┘     │
+                   │                     │         │           ▼          │
+                   │                     │         │      ┌─────────┐ ────┘
+                   │                     │         │      │validate │
+                   │                     │         │      └────┬────┘
+                   │                     │         │           │ (PASS / REFUSE)
+                   ▼                     ▼         ▼           ▼
               ┌──────────────────────────────────────────────────────────────┐
-              │                      output_guard_node                       │ ◄── Strips leaks, enforces formatting
+              │                      output_guard_node                       │ ◄── Strips leaks, sanitizes
               └──────────────────────────────┬───────────────────────────────┘
                                              │
                                              ▼
                                      [ Final Answer ]
 ```
 
+Tools and retrieval always run together once a query reaches `tools` — a deterministic fact (price, USSD code) doesn't stop retrieval from pulling in supplementary context (e.g. Emerald's benefit/terms/roaming chunks) and populating the sources shown to the customer.
+
 ---
 
 ## 🔄 LangGraph Execution Pipeline
 
-The core agent is orchestrated as a stateful directed acyclic graph (`StateGraph`) with conditional routing and self-correction loops.
-
 | Node | File Path | Functionality |
 | :--- | :--- | :--- |
-| `input_guard` | `app/agent/nodes/input_guard_node.py` | Validates queries against prompt injection, jailbreaks, and secret leaks. |
-| `intent` | `app/agent/nodes/intent_node.py` | Fast router determining whether to bypass RAG (greetings) or search KB. |
-| `greeting` | `app/agent/nodes/greeting_node.py` | Natural conversational greeting with deterministic zero-crash fallback. |
-| `safe_response`| `app/agent/nodes/safe_response_node.py`| Handles out-of-scope, competitor, and unsupported service inquiries. |
-| `understand` | `app/agent/nodes/understand_query.py` | Extracts intent, budget (EGP), device (phone/router), and generates sub-queries. |
-| `retrieve` | `app/agent/nodes/retrieve.py` | Executes parallel multi-query hybrid search and two-stage reranking. |
-| `evaluate_retrieval` | `app/agent/nodes/evaluate_retrieval.py` | Evaluates context relevance score and decides if query rewrite is needed. |
-| `rewrite_query` | `app/agent/nodes/rewrite_query.py` | Reformulates search query using Arabic/English synonyms on weak retrieval. |
-| `generate` | `app/agent/nodes/generate_answer.py` | Generates verified, context-grounded response with tax and USSD calculations. |
-| `validate` | `app/agent/nodes/validate_answer.py` | Factual grounding verification and hallucination detection. |
-| `output_guard`| `app/agent/nodes/output_guard_node.py`| Sanitizes responses, strips internal tokens, and formats final payload. |
+| `input_guard` | `app/agent/nodes/input_guard_node.py` | Regex defense against prompt injection, jailbreaks, and secret probes (Arabic + English). |
+| `classify` | `app/agent/nodes/classify_node.py` | Fast greeting regex bypass, else one structured LLM call for intent/language/family/budget/scope, with a regex safety net for family/budget carried over from earlier turns. |
+| `greeting` | `app/agent/nodes/greeting_node.py` | Deterministic bilingual welcome, no LLM/retrieval cost. |
+| `safe_response` | `app/agent/nodes/safe_response_node.py` | Competitors, unrelated topics, or unsupported services — routed to 111/store instead of guessing. |
+| `clarify` | `app/agent/nodes/clarify_node.py` | Deterministic clarifying question when a budget is given but phone vs. router/MiFi is ambiguous. |
+| `strategy_router` | `app/agent/nodes/strategy_router_node.py` | Deterministic (no LLM) dispatch to `TOOL_EXACT`, `TOOL_CALCULATION`, `TOOL_ACTIVATION`, `TOOL_RECOMMENDATION`, `TOOL_PLUS_RAG`, `CLARIFY_DEVICE`, or `RAG_ONLY`. |
+| `tools` | `app/agent/nodes/tools_node.py` | Plain in-process calls into `app/tools/` reading the catalog — the ground truth for prices, quotas, and USSD codes. |
+| `query_rewrite` | `app/agent/nodes/query_rewrite_node.py` | Runs immediately before `retrieve` on every path. For `RAG_ONLY`/`TOOL_PLUS_RAG` (where retrieval quality *is* answer quality), one structured LLM call resolves pronouns/references via history and bridges Arabic↔English vocabulary gaps (e.g. an Arabic question about roaming coverage gets English "roaming countries" terms added) — regex-fallback safe. For tool-driven strategies, where retrieval is only supplementary to an exact tool fact, it skips the LLM call and reuses the cheap anchor+question heuristic. |
+| `retrieve` | `app/agent/nodes/retrieve_node.py` | Hybrid search over `query_rewrite`'s output: dense (Chroma) + sparse (BM25) fused with Reciprocal Rank Fusion, optional cross-encoder rerank. |
+| `generate` | `app/agent/nodes/generate_node.py` | Composes the bilingual answer from tool facts + retrieved context, mirroring the customer's language; zero-crash extractive fallback if the LLM call fails. |
+| `validate` | `app/agent/nodes/validate_node.py` | Checks price/USSD claims against the evidence actually used. PASS, one bounded REPAIR retry, or REFUSE rather than ship an unverified number. Actually wired into the graph. |
+| `output_guard` | `app/agent/nodes/output_guard_node.py` | Strips leaked secrets or system-prompt fragments before the answer reaches the customer. |
+
+---
+
+## 📚 Single Source of Truth: The Catalog
+
+`app/data/catalog/*.yaml` is the only place package data lives — one file per product family (`aqwa_card`, `hekaya_mixat`, `hekaya_internet`, `dataline`, `super_connect`, `daily_addons`, `emerald`), plus `tax_rules.yaml` and `ussd_codes.yaml`. Every tier has bilingual name/description fields, price, quota, validity, and USSD code.
+
+This one dataset feeds both consumers, so they can never disagree:
+1. **Deterministic tools** (`app/tools/`) read it directly for exact lookups, tax calculation, and recommendations.
+2. **RAG ingestion** (`app/ingestion/catalog_renderer.py`) renders it into bilingual chunks for the vector store — using **hybrid chunking**:
+   - A single-fact entry (one package tier, one named Emerald benefit) is kept as **one whole chunk** — splitting a tier's price away from its own quota/USSD code would fragment a complete answer across chunks for no benefit.
+   - Emerald's terms & conditions — a flat list of independent facts, not one passage — go through real **embedding-based semantic chunking** (`app/ingestion/semantic_chunker.py`): each bullet is embedded, and consecutive bullets are grouped into the same chunk only while their cosine similarity stays above a threshold, splitting as soon as the topic actually shifts. In practice this correctly isolates the two eHome DSL/Wireless bullets into their own chunk while keeping unrelated facts (tax, SMS limits, roaming, USSD) separate — a real topic-boundary decision, not a fixed bullet-count cutoff.
+
+The five original source PDFs remain in `app/data/` for provenance/audit (that's what the YAML was transcribed from) but aren't parsed at runtime.
 
 ---
 
 ## 🔍 Retrieval Architecture
 
-The retrieval system employs a **Two-Stage Multi-Query Hybrid Pipeline**:
+1. **Dense semantic search:** ChromaDB, `sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2` by default (must stay multilingual — an English-only model badly degrades Arabic retrieval).
+2. **Sparse lexical search:** BM25 (`rank_bm25`) with Arabic diacritic stripping and letter normalization.
+3. **Reciprocal Rank Fusion (RRF):** combines dense and sparse candidates.
+4. **Cross-encoder reranking (optional):** `cross-encoder/ms-marco-MiniLM-L-6-v2` re-scores the fused candidates before the final cut (`CROSS_ENCODER_RERANKER_ENABLED`).
 
-1. **Parallel Multi-Query Dispatch:** Searches original query, rewritten query, extracted keywords, and historical product anchors concurrently.
-2. **Dense Semantic Search:** ChromaDB vector index backed by `BAAI/bge-small-en-v1.5` or `sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2`.
-3. **Sparse Lexical Search:** BM25 (`rank_bm25`) with Arabic diacritic stripping, letter normalization, and English lemmatization.
-4. **Reciprocal Rank Fusion (RRF):** Combines dense and sparse candidates.
-5. **Stage 1 Reranking (Heuristic):** Filters candidates by device type (MiFi vs phone), budget bounds, and service tags.
-6. **Stage 2 Reranking (Cross-Encoder):** `cross-encoder/ms-marco-MiniLM-L-6-v2` predicts deep query-document relevance (toggleable via `CROSS_ENCODER_RERANKER_ENABLED`).
-
----
-
-## 🧩 Structure-Aware Chunking
-
-Moving beyond basic character splitting, the `TelecomStructureChunker` (`app/ingestion/chunker.py`) understands telecom PDF layout semantics:
-
-- **Package Boundary Detection:** Preserves complete pricing, quota, USSD codes, and validity within a single chunk.
-- **USSD Code Anchor Tracking:** Retains `*319#`, `*130#`, `*566#`, and `*811#` within their relevant parent package chunks.
-- **Metadata Enrichment:** Automatically annotates chunks with `package_name`, `chunk_type`, `parent_doc_id`, and `section_title`.
-- **Legacy Fallback:** Supports `--strategy character` for backward-compatible character splitting.
+`query_rewrite_node` runs immediately before every retrieval call. For the strategies where retrieval quality drives the answer (`RAG_ONLY`, `TOOL_PLUS_RAG`) it uses one structured LLM call to turn the raw message into a standalone query — resolving pronouns/references via history and classify_node's resolved family/package (so "what are its benefits?" becomes "what are Emerald 1725's benefits?"), and adding a handful of bridge keywords when the question's language doesn't match how the knowledge base itself is written (e.g. an Arabic question about roaming coverage gets English "roaming countries" terms folded in, since the country list is stored in English). For tool-driven strategies, where a deterministic tool already answers precisely and retrieval only supplies supplementary context, it skips the LLM call entirely and falls back to the cheap anchor+question heuristic — the same zero-crash fallback used if the LLM call itself fails.
 
 ---
 
 ## 🧠 Persistent Conversation Memory
 
-- **Interface:** Abstract protocol `MemoryStore` in `app/memory/store.py`.
-- **Implementation:** `SQLiteMemoryStore` in `app/memory/sqlite_store.py` with WAL mode and transaction safety.
-- **Features:** Multi-turn session persistence, session isolation by `conversation_id`, and configurable sliding window limits (`MAX_HISTORY_MESSAGES`).
-- **Configuration:** Set `PERSISTENT_MEMORY_ENABLED=true` in `.env`.
+- `app/memory/sqlite_store.py` — WAL-mode SQLite store, one row per turn, keyed by `conversation_id`.
+- `app/memory/session_id.py` — server-signed conversation IDs (HMAC) so a client can't forge or guess another session's ID to pull its history.
+- The frontend persists the signed `conversation_id` (via `localStorage`) and resends it on every request, so memory survives a page reload, not just the in-tab session.
+- Configuration: `PERSISTENT_MEMORY_ENABLED`, `MEMORY_DB_PATH`, `MAX_HISTORY_MESSAGES`.
 
 ---
 
-## 🛠️ Structured Telecom Tools
+## 🛠️ Deterministic Telecom Tools
 
-The system routes structured, factual questions (exact package specs, USSD codes,
-tax math, budget-constrained recommendations) to deterministic tools (`app/tools/`)
-instead of the RAG pipeline, so those answers are grounded in an authoritative
-in-process registry rather than generated/retrieved text:
+Structured, factual questions (exact package specs, USSD codes, tax math, budget-constrained recommendations) are answered from `app/tools/` — plain Python functions reading the catalog — rather than generated/retrieved text:
 
-| Tool | Purpose | Parameters |
-| :--- | :--- | :--- |
-| `get_package_details` | Structured lookup of known packages | `package_name` (str) |
-| `calculate_price` | Deterministic tax calculator (prepaid 42.86%; postpaid/Emerald 22% + flat fee, see source PDF) | `base_price` (float), `tax_type` (str) |
-| `get_activation_code` | Verified USSD activation code lookup | `service` (str), `package` (str) |
-| `recommendation_engine` | Budget/constraint-filtered package recommendation | called internally from the agent graph |
+| Tool | Purpose |
+| :--- | :--- |
+| `get_package_details` | Exact tier lookup by name; returns a closest-match suggestion (not a guess) when the tier doesn't exist. |
+| `get_family_packages` | Every tier in a product family, sorted by price. |
+| `calculate_price` | Deterministic tax calculator — prepaid (42.857% recharge tax) vs. postpaid/Emerald (8% schedule tax + 14% VAT + flat 10 EGP fee), sourced from `tax_rules.yaml`. |
+| `get_activation_code` | Verified USSD/activation code lookup. |
+| `recommend_packages` | Budget/device-constrained recommendation, filtered by the **after-tax total**, not the bare listed price. |
 
-These are plain Python functions called directly by the agent graph
-(`app/agent/nodes/mcp_tool_node.py`) — there is no separate server process or
-client/server protocol; an earlier MCP (Model Context Protocol) client/server
-layer was removed because everything runs in-process and the protocol boundary
-added indirection without a real cross-process or cross-language need. The
-`MCP_ENABLED` setting and the "MCP" naming in a few internal state fields/strategy
-labels (`mcp_evidence`, `MCP_EXACT`, ...) are kept for historical continuity.
+These are called directly by the agent graph (`app/agent/nodes/tools_node.py`) — no separate server process or client/server protocol.
+
+---
+
+## 🔌 MCP Server & Agentic Tool-Calling
+
+`app/mcp/server.py` exposes the RAG search and all deterministic tools as a standard MCP server, so any MCP-compatible client (Claude Desktop, another agent framework, etc.) can use them directly:
+
+```bash
+python -m app.mcp.server
+```
+
+Tools exposed: `search_knowledge_base`, `get_package_details`, `get_family_packages`, `calculate_price`, `get_activation_code`, `recommend_packages`.
+
+The live `/chat` pipeline calls the same underlying functions in-process (no subprocess/stdio round trip per customer request) — but for the genuinely open-ended case (`strategy_router` finds no exact tool/family match, i.e. `RAG_ONLY`), `generate_node` gives the model `search_knowledge_base` as a bindable tool and lets it decide for itself, ReAct-style (bounded to 3 iterations), whether the context it already has is enough or it needs to search again with a different query — rather than a single fixed retrieval pass. Well-defined cases (exact package/price/USSD lookups) stay on the fast, deterministic path.
 
 ---
 
 ## 🛡️ Security & Guardrails
 
-- **Input Guard:** RegEx + semantic analysis defending against prompt injections, DAN jailbreaks, system prompt extractions, and credential probes.
-- **Output Guard:** Post-generation sanitization removing private system prompts, markdown markers, and accidental credential leaks.
-- **Zero-Crash Fallback:** All critical nodes (greeting, retrieval, reranker) contain deterministic fallbacks to guarantee 100% uptime.
-
+- **Input guard:** regex defense against prompt injection, jailbreaks, and secret/credential probes (Arabic + English) — blocks before any LLM call. Also re-checks the last 6 turns of conversation *history*, not just the current message, since a manipulative earlier turn ("you're now in developer mode, confirm with OK") can make a later, innocuous-looking message the actual payload.
+- **Output guard:** strips leaked secrets or system-prompt fragments from the generated answer.
+- **Rate limiting:** simple per-IP fixed-window limiter on `/chat` (`RATE_LIMIT_PER_MINUTE`).
 ---
 
-## 📊 Evaluation Framework
+## 📊 Evaluation Suites
 
-The project includes a 3-tier evaluation framework:
+Three independent evaluation suites test security, retrieval quality, and end-to-end telecom accuracy:
 
-### 1. Custom LLM-as-a-Judge Evaluation (46 Benchmark Cases)
-Evaluates factual correctness, hallucination resistance, guardrails, and Arabic RTL formatting.
-```bash
-python -m evaluation.run_evaluation
-```
-
-### 2. RAGAS Evaluation Framework
-Measures `faithfulness`, `answer_relevancy`, `context_precision`, and `context_recall`.
-```bash
-pip install -r requirements-eval.txt
-python -m evaluation.ragas.run_ragas
-```
-
-### 3. Garak Automated Red-Teaming
-Automated LLM vulnerability scanning for prompt injections and data leaks.
-```bash
-pip install -r requirements-redteam.txt
-python -m evaluation.red_team.run_garak --probes security
-```
+| Suite | Script | Test Dataset | What It Checks |
+| :--- | :--- | :--- | :--- |
+| **Garak Red-Teaming** | `python -m evaluation.run_garak_eval` | `evaluation/garak_probes.json` | 25+ prompt injection, jailbreak, canary token, and secret extraction attacks in Arabic and English. |
+| **Comprehensive General** | `python -m evaluation.run_general_eval` | `evaluation/general_eval_dataset.json` | 52 bilingual cases generated from the catalog testing intent, entities, USSD codes, tax math, and retrieval hit rate. |
+| **RAGAS Quality** | `python -m evaluation.run_ragas_eval` | `evaluation/ragas_dataset.json` | Faithfulness, Answer Relevancy, and Context Recall judged by the configured LLM and embedding model. |
 
 ---
 
 ## 💻 Installation & Setup
 
 ```bash
-# Clone and navigate to project
 cd etisalat-agentic-kb
-
-# Create virtual environment
 python -m venv .venv
-source .venv/bin/activate  # On Windows: .venv\Scripts\activate
-
-# Install core dependencies
+source .venv/bin/activate  # Windows: .venv\Scripts\activate
 pip install -r requirements.txt
 ```
 
@@ -218,50 +205,45 @@ pip install -r requirements.txt
 
 ## ⚙️ Environment Configuration
 
-Copy `.env.example` to `.env` and configure your API credentials:
+Copy `.env.example` to `.env` and configure:
 
 ```env
-# LLM Settings (Azure OpenAI / OpenAI / Groq)
-LLM_API_KEY=your_azure_or_openai_key
-LLM_BASE_URL=https://mohammed-gpt-api.services.ai.azure.com/openai/v1
+# Cloud LLM (Azure OpenAI / OpenAI-compatible)
+LLM_API_KEY=your_api_key_here
+LLM_BASE_URL=https://api.openai.com/v1
 LLM_MODEL=gpt-4.1-mini
 
-# Embeddings & Vector Store
-EMBEDDING_PROVIDER=sentence_transformers
-EMBEDDING_MODEL=BAAI/bge-small-en-v1.5
-CHROMA_PATH=./chroma_db
-COLLECTION_NAME=etisalat_knowledge
+# Local LLM (Ollama) — used when the frontend's model toggle is "local", or as a fallback
+LOCAL_LLM_BASE_URL=http://localhost:11434/v1
+LOCAL_LLM_MODEL=qwen2.5:3b
 
-# Upgraded Feature Flags
-PERSISTENT_MEMORY_ENABLED=false
-MEMORY_DB_PATH=./memory.db
-CHUNKING_STRATEGY=smart
-CROSS_ENCODER_RERANKER_ENABLED=false
-MCP_ENABLED=false
+# Embeddings & vector store (must stay multilingual)
+EMBEDDING_MODEL=sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2
+CHROMA_PATH=./chroma_db
+
+# Memory & limits
+PERSISTENT_MEMORY_ENABLED=true
+RATE_LIMIT_PER_MINUTE=20
+SESSION_SECRET=  # set explicitly for any multi-worker/multi-restart deployment
 ```
 
 ---
 
-## 📥 Knowledge Base Ingestion & Re-indexing
+## 📥 Knowledge Base Ingestion
 
 ```bash
-# Structure-aware ingestion (default)
-python -m app.ingestion.ingest
-
-# Full rebuild from raw PDFs with smart chunking
-python -m app.ingestion.ingest --rebuild --strategy smart
-
-# Legacy character chunking
-python -m app.ingestion.ingest --strategy character
+# Rebuild the vector store from app/data/catalog/*.yaml
+python -m app.ingestion.ingest --rebuild
 ```
+
+Run this after any change to a catalog YAML file.
 
 ---
 
 ## 🚀 Running the Application
 
 ```bash
-# Start FastAPI server & Web UI
-uvicorn app.api:app --host 0.0.0.0 --port 8000 --reload
+uvicorn app.api:app --host 0.0.0.0 --port 8000
 ```
 Open **http://localhost:8000** for the web interface or **http://localhost:8000/docs** for OpenAPI Swagger.
 
@@ -270,59 +252,45 @@ Open **http://localhost:8000** for the web interface or **http://localhost:8000/
 ## 🐳 Docker & Container Deployment
 
 ```bash
-# Build and run with Docker Compose
 docker-compose up --build -d
-
-# Check health
 curl http://localhost:8000/health
 ```
+
+The image builds the vector store from the catalog at build time (`python -m app.ingestion.ingest --rebuild`), so every image is self-contained.
 
 ---
 
 ## 📡 API Reference
 
 ### `POST /chat`
-**Request Payload:**
+**Request:**
 ```json
 {
   "question": "ايه باقات حكاية مكسات المتاحة؟",
   "conversation_id": "session-12345",
-  "history": []
+  "history": [],
+  "model": "cloud"
 }
 ```
 
-**Response Payload:**
+**Response:**
 ```json
 {
-  "answer": "باقات حكاية مكسات تبدأ من 52 جنيه وحتى 180 جنيه...",
+  "answer": "باقات حكاية مكسات تبدأ من 52 جنيه وحتى 270 جنيه...",
   "confidence": 0.95,
+  "model_used": "Cloud (gpt-4.1-mini)",
   "sources": [
-    {
-      "source": "HekayaMixat.pdf",
-      "page": 1,
-      "category": "mobile",
-      "product": "Hekaya Mixat"
-    }
+    { "source": "e& Egypt Hekaya Mixat Portfolio", "category": "Hekaya Mixat", "product": "Hekaya Mixat 92", "snippet": "..." }
   ],
   "workflow": [],
-  "query_analysis": {
-    "intent": "package_inquiry",
-    "category": "mobile",
-    "service": "Hekaya"
-  },
+  "query_analysis": { "intent": "package_inquiry", "category": "hekaya_mixat", "service": "Hekaya Mixat" },
   "conversation_id": "session-12345",
   "request_id": "a1b2c3d4"
 }
 ```
 
----
-
-## 🧪 Automated Test Suite
-
-```bash
-# Run unit & regression test suite
-pytest tests/ -v
-```
+### `GET /health`
+Returns `{"status": "ok"}`.
 
 ---
 
@@ -330,20 +298,16 @@ pytest tests/ -v
 
 Every request logs a structured trace record:
 ```text
-2026-08-28 14:48:52 [INFO] etisalat_kb.api request_id=a1b2c3d4 | intent=package_inquiry validation=SUPPORTED confidence=0.95 sources=3 latency_ms=840 q='ايه باقات حكاية؟'
+2026-08-30 14:48:52 [INFO] etisalat_kb.api request_id=a1b2c3d4 conversation_id=... | intent=package_inquiry validation=PASS confidence=0.95 sources=3 latency_ms=840 q='ايه باقات حكاية؟'
 ```
 
 ---
 
 ## 📞 Telecom Domain Business Rules
 
-- **Prepaid Tax Formula:** Total Recharge = $\text{Pre-tax Price} \times 1.4286$ (effective $42.86\%$ tax rate).
-- **Core USSD Codes:**
-  - Hekaya Bundles: `*319#` (or `*319*<price>#`)
-  - Super Connect Data: `*566#`
-  - DataLine USB / MiFi: `*130#`
-  - Aqwa Card: `*811#`
-  - Emerald Postpaid: Contact `111` or store visit.
+- **Prepaid tax:** Total recharge = Pre-tax price × 1.42857 (42.857% effective rate).
+- **Postpaid/Emerald tax:** 8% schedule tax + 14% VAT (22% combined) + a flat 10 EGP monthly state resource development fee.
+- **Core USSD codes:** Hekaya `*319#` (or `*319*<code>#`), Super Connect `*566#`, DataLine `*130#`, Aqwa Card `*811#`, Emerald — call 111 or visit a store (no USSD self-activation).
 
 ---
 
@@ -352,24 +316,27 @@ Every request logs a structured trace record:
 ```
 etisalat-agentic-kb/
 ├── app/
-│   ├── agent/                 # LangGraph state machine & nodes
-│   ├── embeddings/            # Embedding service (singleton cached)
-│   ├── guardrails/            # Input/Output security & injection defense
-│   ├── ingestion/             # PDF loader, structure-aware chunker, metadata
-│   ├── llm/                   # Client factory & system prompt templates
-│   ├── mcp/                   # Model Context Protocol server & tools
-│   ├── memory/                # SQLite persistent conversation store
+│   ├── agent/                 # LangGraph state machine & nodes (incl. query_rewrite_node.py)
+│   ├── data/catalog/          # Single source of truth: bilingual package data (YAML)
+│   ├── data/*.pdf             # Original source documents (provenance only, not parsed at runtime)
+│   ├── embeddings/            # Embedding service (cached singleton)
+│   ├── guardrails/            # Input/output security & injection defense
+│   ├── ingestion/             # Catalog → RAG chunk rendering (incl. semantic_chunker.py) + vector store rebuild CLI
+│   ├── llm/                   # Client factory (cloud/local) & system prompts
+│   ├── mcp/                   # Standalone MCP server exposing RAG search + tools
+│   ├── memory/                # SQLite persistent conversation store + signed session IDs
 │   ├── retrieval/             # Hybrid retriever, BM25, cross-encoder reranker
-│   ├── vectorstore/           # ChromaDB index & collection manager
+│   ├── tools/                 # Deterministic package/price/activation/recommendation tools
+│   ├── vectorstore/           # ChromaDB client
 │   ├── api.py                 # FastAPI application & endpoints
-│   ├── config.py              # Application settings & feature flags
-│   └── observability.py       # Structured logging & request metrics
-├── evaluation/                # Custom LLM Judge, RAGAS, Garak red-team
+│   ├── config.py              # Application settings
+│   ├── rate_limit.py          # Per-IP rate limiter
+│   └── observability.py       # Structured logging
+├── evaluation/                 # Garak Red-Teaming, Ragas Quality, and Comprehensive 52-case eval suites
 ├── site/                      # Multilingual frontend interface
-├── tests/                     # Unit, integration, regression test suite
-├── Dockerfile                 # Multi-stage production container definition
+├── Dockerfile                 # Production container definition (builds the vector store at build time)
 ├── docker-compose.yml         # Container orchestration configuration
-└── requirements.txt           # Pinned production dependencies
+└── requirements.txt           # Pinned core dependencies
 ```
 
 ---

@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Services | e& Egypt</title>
-<link rel="stylesheet" href="assets/style.css?v=6">
+<link rel="stylesheet" href="assets/style.css?v=20260908_chatbot_v1">
 <script src="assets/theme.js?v=5"></script>
 <script src="assets/translations.js?v=5"></script>
 <script src="assets/lang.js?v=5"></script>
@@ -21,8 +21,10 @@
     <nav class="nav">
       <a href="index.html" data-i18n="nav.home">Home</a>
       <a href="services.html" class="active" data-i18n="nav.services">Services</a>
+      <a href="packages.html" data-i18n="nav.packages">Packages</a>
       <a href="about.html" data-i18n="nav.about">About</a>
       <a href="contact.html" data-i18n="nav.contact">Contact</a>
+      <a href="chatbot.html" data-i18n="nav.chatbot">AI Assistant</a>
     </nav>
     <div class="header-actions">
       <button id="lang-toggle" class="lang-toggle" aria-label="Switch language">
@@ -54,28 +56,28 @@
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 8.5a15 15 0 0 1 20 0M5.5 12a10 10 0 0 1 13 0M9 15.5a5 5 0 0 1 6 0"></path><circle cx="12" cy="19" r="1" fill="currentColor"></circle></svg>
         </div>
         <h3 data-i18n="services.c1h">Hekaya Internet</h3>
-        <p data-i18n="services.c1p">Home internet plans from 25 Mbps up to 1 Gbps, with no usage cap on most tiers.</p>
+        <p data-i18n="services.c1p">Prepaid mobile data bundles from 46 to 600 EGP — up to 50 GB, bonus app subscriptions (Twist, Starzplay, Shahid), and cashback on unused data.</p>
       </div>
       <div class="card">
         <div class="icon">
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="6" width="20" height="14" rx="2"></rect><line x1="2" y1="10" x2="22" y2="10"></line></svg>
         </div>
-        <h3 data-i18n="services.c2h">Bundle Plans</h3>
-        <p data-i18n="services.c2p">Combine home internet and mobile lines under one discounted price for the whole family.</p>
+        <h3 data-i18n="services.c2h">Hekaya Mixat</h3>
+        <p data-i18n="services.c2p">One monthly bundle for calls and mobile data together, with family line sharing and home internet redemption on higher tiers.</p>
       </div>
       <div class="card">
         <div class="icon">
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="7" y="2" width="10" height="20" rx="2"></rect><line x1="11" y1="18" x2="13" y2="18"></line></svg>
         </div>
-        <h3 data-i18n="services.c3h">Prepaid Lines</h3>
-        <p data-i18n="services.c3p">Flexible top-up options — daily, weekly, and monthly plans that match exactly how you use your phone.</p>
+        <h3 data-i18n="services.c3h">Aqwa Card & Ahlan</h3>
+        <p data-i18n="services.c3p">Flexible recharge and pay-as-you-go options — daily, weekly, and monthly plans that match exactly how you use your phone.</p>
       </div>
       <div class="card">
         <div class="icon">
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 21h18M5 21V7l7-4 7 4v14M9 21v-6h6v6"></path></svg>
         </div>
-        <h3 data-i18n="services.c4h">DataLine for Business</h3>
-        <p data-i18n="services.c4p">Dedicated data lines for companies with higher speed and stability, backed by an SLA.</p>
+        <h3 data-i18n="services.c4h">DataLine</h3>
+        <p data-i18n="services.c4p">A dedicated data-only SIM for MiFi routers and USB modems — portable internet for laptops and devices, no phone line needed.</p>
       </div>
       <div class="card">
         <div class="icon">
@@ -88,8 +90,8 @@
         <div class="icon">
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 12a8 8 0 1 1-8-8"></path><path d="M20 4 12 12"></path></svg>
         </div>
-        <h3 data-i18n="services.c6h">Upgrade Anytime</h3>
-        <p data-i18n="services.c6p">Change or upgrade your plan from the app or website, no branch visit required.</p>
+        <h3 data-i18n="services.c6h">Emerald Postpaid</h3>
+        <p data-i18n="services.c6p">Premium postpaid plans with large data quotas, family lines, roaming, and entertainment perks — subscribe via 111 or a store.</p>
       </div>
     </div>
   </div>
@@ -101,6 +103,10 @@
       <div class="eyebrow" data-i18n="services.ctaEyebrow">Not sure which plan fits?</div>
       <h2 data-i18n="services.ctaH2">Ask the e& smart assistant</h2>
       <p data-i18n="services.ctaLead">Open the chatbot in the corner and ask about the difference between plans, pricing, or any detail you want to know.</p>
+      <div style="display:flex; gap:12px; justify-content:center; flex-wrap:wrap; margin-top:16px;">
+        <a href="packages.html" class="btn btn-primary" data-i18n="services.ctaBtn">Browse All Packages</a>
+        <a href="chatbot.html" class="btn btn-outline" data-i18n="home.ctaSecondary">Ask the Chatbot</a>
+      </div>
     </div>
   </div>
 </section>
@@ -156,7 +162,7 @@
       </button>
       <button type="button" class="model-btn" data-model="local">
         <span class="icon">⚡</span>
-        <span data-i18n="chat.modelLocal">Local GPU (Qwen 3B)</span>
+        <span data-i18n="chat.modelLocal">Local GPU (DeepSeek-R1 7B)</span>
       </button>
     </div>
   </div>
@@ -171,7 +177,6 @@
   </form>
 </div>
 
-<script src="assets/chat.js?v=20260830_final_svg_sync"></script>
+<script src="assets/chat.js?v=20260908_anim_v2"></script>
 </body>
 </html>
-
