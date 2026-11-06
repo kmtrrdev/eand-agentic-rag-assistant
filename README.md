@@ -184,11 +184,13 @@ The live `/chat` pipeline calls the same underlying functions in-process (no sub
 
 Three independent evaluation suites test security, retrieval quality, and end-to-end telecom accuracy:
 
-| Suite | Script | Test Dataset | What It Checks |
-| :--- | :--- | :--- | :--- |
-| **Garak Red-Teaming** | `python -m evaluation.run_garak_eval` | `evaluation/garak_probes.json` | 25+ prompt injection, jailbreak, canary token, and secret extraction attacks in Arabic and English. |
-| **Comprehensive General** | `python -m evaluation.run_general_eval` | `evaluation/general_eval_dataset.json` | 52 bilingual cases generated from the catalog testing intent, entities, USSD codes, tax math, and retrieval hit rate. |
-| **RAGAS Quality** | `python -m evaluation.run_ragas_eval` | `evaluation/ragas_dataset.json` | Faithfulness, Answer Relevancy, and Context Recall judged by the configured LLM and embedding model. |
+| Suite | Script | Test Dataset | What It Checks | Latest Result |
+| :--- | :--- | :--- | :--- | :--- |
+| **Garak-style Red-Teaming** | `python -m evaluation.run_garak_eval` | `evaluation/garak_probes.json` | 25 hand-written prompt injection, jailbreak, secret extraction, competitor and domain-abuse probes in Arabic and English. | 25/25 refused (most stopped by the pattern-based input guard) |
+| **Comprehensive General** | `python -m evaluation.run_general_eval` | `evaluation/general_eval_dataset.json` | 28 bilingual cases generated from the catalog testing intent, entities, USSD codes, tax math, and retrieval hit rate. | 25 pass, 3 partial, 0 fail (89.3%) |
+| **RAGAS Quality** | `python -m evaluation.run_ragas_eval` | `evaluation/ragas_dataset.json` | Faithfulness, Answer Relevancy, and Context Recall on 12 questions, judged by the configured LLM and embedding model. | 0.95 / 0.93 / 0.96 |
+
+**Limitations:** the RAGAS judge is the same model family that generates the answers, and all test sets are small and built from the same catalog the assistant retrieves from — treat the numbers as regression checks, not benchmark scores. The red-teaming probes were written by the same author as the guardrail patterns; this is not a run of the `garak` tool itself.
 
 ---
 
@@ -332,7 +334,7 @@ etisalat-agentic-kb/
 │   ├── config.py              # Application settings
 │   ├── rate_limit.py          # Per-IP rate limiter
 │   └── observability.py       # Structured logging
-├── evaluation/                 # Garak Red-Teaming, Ragas Quality, and Comprehensive 52-case eval suites
+├── evaluation/                 # Garak-style red-teaming (25 probes), RAGAS (12 questions) and general (28 cases) eval suites
 ├── site/                      # Multilingual frontend interface
 ├── Dockerfile                 # Production container definition (builds the vector store at build time)
 ├── docker-compose.yml         # Container orchestration configuration
